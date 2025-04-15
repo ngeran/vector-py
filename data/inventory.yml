@@ -1,0 +1,34 @@
+- location: BASEMENT
+  routers:
+    - host_name: "MLRDCIENGDJRX01"
+      ip_address: "172.27.200.200"
+      vendor: "JUNIPER"
+      platform: "SRX320"
+    - host_name: "MLRDCIENGDJRX02"
+      ip_address: "172.27.200.201"
+      vendor: "JUNIPER"
+      platform: "SRX210H"
+- location: DC1
+  switches:
+    - host_name: "DC1DCIBGMPJEX01"
+      ip_address: "172.27.200.202"
+      vendor: "JUNIPER"
+      platform: "EX4600"
+    - host_name: "DC1DCIBGMPJEX02"
+      ip_address: "172.27.200.203"
+      vendor: "JUNIPER"
+      platform: "EX4600"
+  routers:
+    - host_name: "DC1MX480PE-1"
+      ip_address: "172.27.200.204"
+      vendor: "JUNIPER"
+      platform: "MX480"
+    - host_name: "DC1MX480PE-2"
+      ip_address: "172.27.200.205"
+      vendor: "JUNIPER"
+      platform: "MX480"
+  firewalls:
+    - host_name: "DC1DCI206BPFW1A"
+      ip_address: "172.27.200.206"
+      vendor: "PALO ALTO"
+      platform: "PA220"

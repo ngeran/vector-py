@@ -1,0 +1,40 @@
+username: admin
+password: manolis1
+interval: 300
+tables:
+  - inet.0
+  - inet.3
+  - mpls.0
+hosts:
+  - host_name: MLRDCIENGJRX01
+    ip_address: 172.27.200.200
+    interfaces:
+      - name: ge-0/0/3
+        ip_address: 172.27.201.1/24
+        description: "To MLRDCIENGJRX02"
+      - name: ge-0/0/4
+        vlan_tagging: true
+        vlans:
+          - vlan_id: 100
+        ip_address: 172.27.202.1/24
+    bgp:
+      local_as: 65001
+      peers:
+        - peer_ip: 172.27.202.2
+          peer_as: 65002
+  - host_name: MLRDCIENGDJRX02
+    ip_address: 172.27.200.201
+    interfaces:
+      - name: ge-0/0/3
+        ip_address: 172.27.201.2/24
+        description: "To MLRDCIENGJRX01"
+      - name: ge-0/0/4
+        vlan_tagging: true
+        vlans:
+          - vlan_id: 100
+        ip_address: 172.27.202.2/24
+    bgp:
+      local_as: 65002
+      peers:
+        - peer_ip: 172.27.202.1
+          peer_as: 65001

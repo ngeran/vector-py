@@ -1,3 +1,4 @@
+# /home/nikos/github/ngeran/vectautomation/scripts/ping_actions.py
 import os
 from datetime import datetime
 from contextlib import contextmanager
@@ -40,7 +41,6 @@ def ping_hosts(username, password, host_ips, hosts, connect_to_hosts, disconnect
                     continue
                 target_host = host_lookup.get(target_ip, target_ip)
                 try:
-                    # Enforce 5-second timeout for ping
                     with timeout(5):
                         ping_result = dev.rpc.cli(f"ping {target_ip} count 4", format='text')
                     ping_output = ping_result.text
@@ -69,7 +69,7 @@ def ping_hosts(username, password, host_ips, hosts, connect_to_hosts, disconnect
 
     except KeyboardInterrupt:
         print("Ping action interrupted by user.")
-        raise  # Re-raise to allow higher-level handling
+        raise
     finally:
         if connections:
             disconnect_from_hosts(connections)

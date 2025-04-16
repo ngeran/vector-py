@@ -1,11 +1,10 @@
-# /home/nikos/github/ngeran/vectautomation/scripts/junos_actions.py
 from jnpr.junos.utils.config import Config
 from jnpr.junos.exception import ConfigLoadError, CommitError
 from jnpr.junos import Device
 import logging
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.CRITICAL)  # Suppress Config logs
+logger.setLevel(logging.CRITICAL)
 
 def configure_device(dev: Device, config_text: str, host_name: str, host_ip: str) -> bool:
     """

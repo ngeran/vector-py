@@ -1,3 +1,4 @@
+# /home/nikos/github/ngeran/vectautomation/scripts/interface_actions.py
 from jinja2 import Environment, FileSystemLoader
 import os
 from scripts.junos_actions import configure_device
@@ -23,12 +24,15 @@ def configure_interfaces(username, password, host_ips, hosts, connect_to_hosts, 
                 print(f"No interfaces defined for {host.get('host_name', host_ip)} ({host_ip}), skipping.")
                 continue
 
-            config_data = {
-                'interfaces': host['interfaces'],
-                'host_name': host['host_name']
-            }
-            config_text = template.render(**config_data)
-            configure_device(dev, config_text, host['host_name'], host_ip)
+            try:
+                config_data = {
+                    'interfaces': host['interfaces'],
+                    'host_name': host['host_name']
+                }
+                config_text = template.render(**config_data)
+                configure_device(dev, config_text, host['host_name'], host_ip)
+            except Exception as error:
+                print(f"Failed to render or apply configuration for {host['host_name']} ({host_ip}): {error}")
 
     except KeyboardInterrupt:
         print("Interface configuration interrupted by user.")

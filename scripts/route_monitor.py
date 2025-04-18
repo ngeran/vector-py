@@ -67,49 +67,54 @@ def print_route_table(hosts: List[Dict], route_summary: Dict, changes: Dict):
             if change['flapped']:
                 print("  Flapped prefixes:", ", ".join(sorted(change['flapped'])))
 
-def monitor_routes(username: str, password: str, host_ips: List[str], hosts: List[Dict], interval: int = 60):
+def monitor_routes(username: str, password: str, host_ips: List[str], hosts: List[Dict], interval: int = 60, single_check: bool = False):
     """Monitor routing tables for changes."""
     tables = ['inet.0', 'inet.3', 'mpls.0']
     previous_routes: Dict[str, Dict[str, List[Dict]]] = {ip: {t: [] for t in tables} for ip in host_ips}
 
+    def check_routes():
+        connections = connect_to_hosts(username, password, host_ips)
+        if not connections:
+            print("No devices connected.")
+            return
+
+        route_summary: Dict[str, Dict[str, int]] = {}
+        changes: Dict[str, Dict[str, Set[str]]] = {}
+
+        for dev in connections:
+            ip = dev.hostname
+            route_summary[ip] = {'BGP': 0, 'OSPF': 0, 'LDP': 0, 'MPLS': 0}
+            changes[ip] = {'added': set(), 'removed': set(), 'flapped': set()}
+
+            for table in tables:
+                current_routes = get_routes(dev, table)
+                for route in current_routes:
+                    route_summary[ip][route['protocol']] += 1
+
+                # Compare with previous routes
+                added, removed, flapped = compare_routes(previous_routes[ip][table], current_routes)
+                changes[ip]['added'].update(added)
+                changes[ip]['removed'].update(removed)
+                changes[ip]['flapped'].update(flapped)
+                previous_routes[ip][table] = current_routes
+
+        # Print table and changes
+        print_route_table(hosts, route_summary, changes)
+
+        disconnect_from_hosts(connections)
+
     try:
-        while True:
-            connections = connect_to_hosts(username, password, host_ips)
-            if not connections:
-                print("No devices connected. Retrying in", interval, "seconds.")
+        if single_check:
+            check_routes()
+        else:
+            while True:
+                check_routes()
+                print(f"\nWaiting {interval} seconds for next check...")
                 time.sleep(interval)
-                continue
-
-            route_summary: Dict[str, Dict[str, int]] = {}
-            changes: Dict[str, Dict[str, Set[str]]] = {}
-
-            for dev in connections:
-                ip = dev.hostname
-                route_summary[ip] = {'BGP': 0, 'OSPF': 0, 'LDP': 0, 'MPLS': 0}
-                changes[ip] = {'added': set(), 'removed': set(), 'flapped': set()}
-
-                for table in tables:
-                    current_routes = get_routes(dev, table)
-                    for route in current_routes:
-                        route_summary[ip][route['protocol']] += 1
-
-                    # Compare with previous routes
-                    added, removed, flapped = compare_routes(previous_routes[ip][table], current_routes)
-                    changes[ip]['added'].update(added)
-                    changes[ip]['removed'].update(removed)
-                    changes[ip]['flapped'].update(flapped)
-                    previous_routes[ip][table] = current_routes
-
-            # Print table and changes
-            print_route_table(hosts, route_summary, changes)
-
-            disconnect_from_hosts(connections)
-            print(f"\nWaiting {interval} seconds for next check...")
-            time.sleep(interval)
 
     except KeyboardInterrupt:
         print("Monitoring stopped by user.")
-        if connections:
+        if 'connections' in locals():
             disconnect_from_hosts(connections)
 
 def main():

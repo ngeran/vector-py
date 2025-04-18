@@ -3,7 +3,5 @@ actions:
     function: scripts.diagnostic_actions.ping_hosts
   - name: interfaces
     function: scripts.interface_actions.configure_interfaces
-  - name: bgp_verification
-    function: scripts.diagnostic_actions.bgp_verification
   - name: route_monitor
     function: scripts.route_monitor.monitor_routes

@@ -45,5 +45,5 @@ tables:
 - inet.0
 - inet.3
 - mpls.0
-template: ping
+template: route_monitor
 username: admin

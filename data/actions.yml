@@ -1,0 +1,13 @@
+actions:
+  - name: ping
+    display_name: Ping Hosts
+    template_file: null
+  - name: interfaces
+    display_name: Configure Interfaces
+    template_file: interface_template.j2
+  - name: bgp_verification
+    display_name: Verify BGP Neighbors
+    template_file: null
+  - name: route_monitor
+    display_name: Monitor Routing Tables
+    template_file: null

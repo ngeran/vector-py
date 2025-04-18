@@ -1,42 +1,30 @@
-# /home/nikos/github/ngeran/vectautomation/scripts/interface_actions.py
+from typing import List, Dict
+from jnpr.junos import Device
+from jnpr.junos.utils.config import Config
 from jinja2 import Environment, FileSystemLoader
 import os
-from scripts.junos_actions import configure_device
 
-def configure_interfaces(username, password, host_ips, hosts, connect_to_hosts, disconnect_from_hosts):
-    """Configure interfaces on devices based on hosts_data.yml."""
-    template_dir = os.path.join(os.path.dirname(__file__), '../templates')
-    env = Environment(loader=FileSystemLoader(template_dir))
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def configure_interfaces(username: str, password: str, host_ips: List[str], hosts: List[Dict], single_check: bool = False):
+    """Configure interfaces using Jinja2 template."""
+    env = Environment(loader=FileSystemLoader(os.path.join(SCRIPT_DIR, '../templates')))
     template = env.get_template('interface_template.j2')
 
-    connections = []
-    try:
-        connections = connect_to_hosts(username, password, host_ips)
-        if not connections:
-            print("No devices connected for interface configuration.")
-            return
+    for host in hosts:  # Iterate over list
+        host_name = host['host_name']
+        ip = host['ip_address']
+        interfaces = host.get('interfaces', [])  # Expect interfaces in hosts_data.yml
 
-        host_lookup = {h['ip_address']: h for h in hosts}
-        for dev in connections:
-            host_ip = dev.hostname
-            host = host_lookup.get(host_ip)
-            if not host or 'interfaces' not in host:
-                print(f"No interfaces defined for {host.get('host_name', host_ip)} ({host_ip}), skipping.")
-                continue
-
-            try:
-                config_data = {
-                    'interfaces': host['interfaces'],
-                    'host_name': host['host_name']
-                }
+        try:
+            with Device(host=ip, user=username, password=password) as dev:
+                config_data = {'interfaces': interfaces}
                 config_text = template.render(**config_data)
-                configure_device(dev, config_text, host['host_name'], host_ip)
-            except Exception as error:
-                print(f"Failed to render or apply configuration for {host['host_name']} ({host_ip}): {error}")
+                print(f"Config for {host_name} ({ip}):\n{config_text}")
 
-    except KeyboardInterrupt:
-        print("Interface configuration interrupted by user.")
-        raise
-    finally:
-        if connections:
-            disconnect_from_hosts(connections)
+                with Config(dev, mode='exclusive') as cu:
+                    cu.load(config_text, format='text')
+                    cu.commit()
+                print(f"Interface configured on {host_name} ({ip})")
+        except Exception as e:
+            print(f"Failed to configure {host_name} ({ip}): {e}")

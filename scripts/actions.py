@@ -1,5 +1,6 @@
 import os
 import importlib
+import sys
 from scripts.utils import load_yaml_file
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -12,6 +13,11 @@ def get_action_map():
     if not action_map_data or 'actions' not in action_map_data:
         print("Failed to load action_map.yml or no actions defined.")
         return {}
+
+    # Ensure scripts/ is in sys.path
+    scripts_dir = os.path.dirname(SCRIPT_DIR)
+    if scripts_dir not in sys.path:
+        sys.path.append(scripts_dir)
 
     action_map = {}
     for action in action_map_data['actions']:
@@ -32,6 +38,7 @@ def get_action_map():
             action_map[action_name] = function
         except (ImportError, AttributeError) as error:
             print(f"Failed to load function {function_path} for action {action_name}: {error}")
+            print(f"Available modules in scripts/: {[f[:-3] for f in os.listdir(SCRIPT_DIR) if f.endswith('.py')]}")
 
     return action_map
 
@@ -70,6 +77,7 @@ def execute_actions(
                 hosts=hosts,
                 single_check=True  # For route_monitor to run one cycle
             )
+            print(f"Completed action: {action}")
 
     except Exception as error:
         print(f"Error executing action {action}: {error}")

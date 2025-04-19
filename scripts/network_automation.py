@@ -1,4 +1,3 @@
-# /home/nikos/github/ngeran/vectautomation/scripts/network_automation.py
 import os
 import yaml
 from scripts.utils import merge_host_data, load_yaml_file

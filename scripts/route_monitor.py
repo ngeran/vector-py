@@ -23,6 +23,7 @@ def get_routes(dev: Device, table: str) -> List[Dict]:
                     'protocol': protocol,
                     'next_hop': route.findtext('rt-entry/nh/to') or 'N/A'
                 })
+        print(f"Fetched {len(route_list)} routes from {dev.hostname} for table {table}")
         return route_list
     except RpcError as error:
         print(f"Failed to fetch routes from {dev.hostname} for table {table}: {error}")
@@ -67,8 +68,13 @@ def print_route_table(hosts: List[Dict], route_summary: Dict, changes: Dict):
             if change['flapped']:
                 print("  Flapped prefixes:", ", ".join(sorted(change['flapped'])))
 
-def monitor_routes(username: str, password: str, host_ips: List[str], hosts: List[Dict], interval: int = 60, single_check: bool = False):
+def monitor_routes(username: str, password: str, host_ips: List[str], hosts: List[Dict], single_check: bool = False):
     """Monitor routing tables for changes."""
+    # Filter host_ips to only those in hosts
+    valid_ips = [host['ip_address'] for host in hosts]
+    host_ips = [ip for ip in host_ips if ip in valid_ips]
+    print(f"Monitoring routes for IPs: {host_ips}")
+
     tables = ['inet.0', 'inet.3', 'mpls.0']
     previous_routes: Dict[str, Dict[str, List[Dict]]] = {ip: {t: [] for t in tables} for ip in host_ips}
 
@@ -107,6 +113,7 @@ def monitor_routes(username: str, password: str, host_ips: List[str], hosts: Lis
         if single_check:
             check_routes()
         else:
+            interval = hosts_data.get('interval', 60)
             while True:
                 check_routes()
                 print(f"\nWaiting {interval} seconds for next check...")

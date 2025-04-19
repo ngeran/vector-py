@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from contextlib import contextmanager
 import signal
+from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
 
 # Timeout context for RPC calls
 @contextmanager
@@ -15,7 +16,7 @@ def timeout(seconds):
     finally:
         signal.alarm(0)
 
-def ping_hosts(username, password, host_ips, hosts, connect_to_hosts, disconnect_from_hosts, single_check: bool = False):
+def ping_hosts(username, password, host_ips, hosts, connect_to_hosts=connect_to_hosts, disconnect_from_hosts=disconnect_from_hosts, single_check: bool = False):
     """Verify reachability by pinging hosts from each device and generate a report."""
     report_dir = os.path.join(os.path.dirname(__file__), '../reports')
     os.makedirs(report_dir, exist_ok=True)

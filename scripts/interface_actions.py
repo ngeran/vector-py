@@ -1,6 +1,7 @@
 from typing import List, Dict
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
+from jnpr.junos.exception import CommitError
 from jinja2 import Environment, FileSystemLoader
 import os
 
@@ -11,9 +12,16 @@ def configure_interfaces(username: str, password: str, host_ips: List[str], host
     env = Environment(loader=FileSystemLoader(os.path.join(SCRIPT_DIR, '../templates')))
     template = env.get_template('interface_template.j2')
 
-    for host in hosts:  # Iterate over list
+    # Filter host_ips to only those in hosts
+    valid_ips = [host['ip_address'] for host in hosts]
+    host_ips = [ip for ip in host_ips if ip in valid_ips]
+    print(f"Configuring interfaces for IPs: {host_ips}")
+
+    for host in hosts:
         host_name = host['host_name']
         ip = host['ip_address']
+        if ip not in host_ips:
+            continue
         interfaces = host.get('interfaces', [])  # Expect interfaces in hosts_data.yml
 
         try:
@@ -26,5 +34,8 @@ def configure_interfaces(username: str, password: str, host_ips: List[str], host
                     cu.load(config_text, format='text')
                     cu.commit()
                 print(f"Interface configured on {host_name} ({ip})")
+        except CommitError as e:
+            print(f"CommitError for {host_name} ({ip}): {e}")
+            print(f"Full error details: {e.__dict__}")
         except Exception as e:
             print(f"Failed to configure {host_name} ({ip}): {e}")

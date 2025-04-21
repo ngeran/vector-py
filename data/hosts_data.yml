@@ -38,5 +38,5 @@ hosts:
 interval: 60
 password: manolis1
 template: ping
-template_file: interface_template.j2
+template_file: templates/interface_template.j2
 username: admin

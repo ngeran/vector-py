@@ -1,49 +1,40 @@
-hosts:
-- bgp:
-    local_as: 65001
-    peers:
-    - peer_as: 65002
-      peer_ip: 172.27.202.2
-  host_name: MLRDCIENGJRX01
-  interfaces:
-  - description: To MLRDCIENGJRX02
-    ip_address: 172.27.201.1/24
-    name: ge-0/0/3
-  - description: VLAN interface
-    name: ge-0/0/4
-    vlans:
-    - ip_address: 172.27.202.1/24
-      unit: 100
-      vlan_id: 100
-    - ip_address: 172.27.203.1/24
-      unit: 200
-      vlan_id: 200
-  ip_address: 172.27.200.200
-- bgp:
-    local_as: 65002
-    peers:
-    - peer_as: 65001
-      peer_ip: 172.27.202.1
-  host_name: MLRDCIENGJRX02
-  interfaces:
-  - description: To MLRDCIENGJRX01
-    ip_address: 172.27.201.2/24
-    name: ge-0/0/3
-  - description: VLAN interface
-    name: ge-0/0/4
-    vlans:
-    - ip_address: 172.27.202.2/24
-      unit: 100
-      vlan_id: 100
-    - ip_address: 172.27.203.2/24
-      unit: 200
-      vlan_id: 200
-  ip_address: 172.27.200.201
-interval: 300
-password: manolis1
-tables:
-- inet.0
-- inet.3
-- mpls.0
-template: route_monitor
 username: admin
+password: manolis1
+interval: 60
+hosts:
+  - host_name: MLRDCIENGJRX01
+    ip_address: 172.27.200.200
+    interfaces:
+      - name: ge-0/0/3
+        description: "To MLRDCIENGJRX02"
+        vlans:
+          - unit: 0
+            ip_address: 172.27.201.1/24
+      - name: ge-0/0/4
+        description: "VLAN interface"
+        flexible-vlan-tagging: true
+        vlans:
+          - unit: 100
+            vlan_id: 100
+            ip_address: 172.27.202.1/24
+          - unit: 200
+            vlan_id: 200
+            ip_address: 172.27.203.1/24
+  - host_name: MLRDCIENGJRX02
+    ip_address: 172.27.200.201
+    interfaces:
+      - name: ge-0/0/3
+        description: "To MLRDCIENGJRX01"
+        vlans:
+          - unit: 0
+            ip_address: 172.27.201.2/24
+      - name: ge-0/0/4
+        description: "VLAN interface"
+        flexible-vlan-tagging: true
+        vlans:
+          - unit: 100
+            vlan_id: 100
+            ip_address: 172.27.202.2/24
+          - unit: 200
+            vlan_id: 200
+            ip_address: 172.27.203.2/24

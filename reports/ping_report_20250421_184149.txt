@@ -1,0 +1,8 @@
+Ping Verification Report - 20250421_184149
+==================================================
+
+Reachable:
+  - MLRDCIENGJRX01 (172.27.200.200) can reach MLRDCIENGJRX02 (172.27.200.201)
+
+Unreachable:
+  - MLRDCIENGJRX02 (172.27.200.201) ping to 172.27.200.200 failed: 'bool' object has no attribute 'text'

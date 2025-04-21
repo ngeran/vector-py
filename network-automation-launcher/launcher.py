@@ -2,11 +2,33 @@ import os
 import subprocess
 import yaml
 import logging
+from logging.handlers import RotatingFileHandler
 from typing import List, Dict
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Ensure log directory exists
+log_dir = "/home/nikos/github/network-automation-launcher"
+os.makedirs(log_dir, exist_ok=True)
+
+# Console handler (WARNING and above)
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.WARNING)
+console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(console_formatter)
+
+# File handler (INFO and above)
+log_file = os.path.join(log_dir, "network_automation.log")
+file_handler = RotatingFileHandler(log_file, maxBytes=10*1024*1024, backupCount=5)
+file_handler.setLevel(logging.INFO)
+file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(file_formatter)
+
+# Add handlers
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
 
 # Path to the vector-py project
 VECTOR_PY_DIR = "/home/nikos/github/ngeran/vector-py"
@@ -79,11 +101,19 @@ def execute_main_py(choice: int):
             text=True,
             capture_output=True,
             cwd=VECTOR_PY_DIR,
-            timeout=60  # Terminate after 60 seconds
+            timeout=60
         )
-        print(process.stdout)
+        # Filter out menu and INFO logs from stdout
+        output_lines = [
+            line for line in process.stdout.split('\n')
+            if not (line.startswith(('Select an action:', '---', '| Option', 'Enter your choice')) or 'INFO:' in line)
+        ]
+        print('\n'.join(output_lines))
+        # Log stderr only for WARNING and ERROR
         if process.stderr:
-            logger.error(f"main.py errors: {process.stderr}")
+            stderr_lines = [line for line in process.stderr.split('\n') if 'WARNING' in line or 'ERROR' in line]
+            if stderr_lines:
+                logger.error(f"main.py errors: {''.join(stderr_lines)}")
         if process.returncode != 0:
             logger.error(f"main.py exited with code {process.returncode}")
     except subprocess.TimeoutExpired:

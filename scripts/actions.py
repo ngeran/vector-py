@@ -41,7 +41,7 @@ def execute_actions(
                     hosts=hosts,
                     connect_to_hosts=connect_to_hosts,
                     disconnect_from_hosts=disconnect_from_hosts,
-                    connections=connections  # Pass connections to action
+                    connections=connections
                 )
                 logger.info(f"Completed action: {action}")
             else:

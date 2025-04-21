@@ -5,12 +5,46 @@ from scripts.actions import execute_actions
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
 from scripts.utils import load_yaml_file
 import logging
+from logging.handlers import RotatingFileHandler
 import sys
+import termios
 
+# Setup logging
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger.setLevel(logging.INFO)
+
+# Ensure log directory exists
+log_dir = "/home/nikos/github/ngeran/vector-py"
+os.makedirs(log_dir, exist_ok=True)
+
+# Console handler (WARNING and above)
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.WARNING)
+console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(console_formatter)
+
+# File handler (INFO and above)
+log_file = os.path.join(log_dir, "network_automation.log")
+file_handler = RotatingFileHandler(log_file, maxBytes=10*1024*1024, backupCount=5)
+file_handler.setLevel(logging.INFO)
+file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(file_formatter)
+
+# Add handlers
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+
+# Suppress ncclient logs
+logging.getLogger("ncclient").setLevel(logging.WARNING)
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def is_interactive():
+    """Check if the script is running interactively (connected to a terminal)."""
+    try:
+        return os.isatty(sys.stdin.fileno())
+    except (AttributeError, termios.error):
+        return False
 
 def display_menu(actions: List[Dict]):
     """Display the action selection menu."""
@@ -66,10 +100,13 @@ def main():
         logger.error("No hosts defined in hosts_data.yml.")
         sys.exit(1)
 
-    # Read choice from stdin (piped from launcher.py)
-    display_menu(actions)  # For logging/debugging
+    # Only display menu if running interactively
+    if is_interactive():
+        display_menu(actions)
+
+    # Read choice from stdin (piped from launcher.py or interactive)
     try:
-        choice = sys.stdin.read().strip()
+        choice = sys.stdin.read().strip() if not is_interactive() else input(f"Enter your choice (1-{len(actions)}): ")
         logger.info(f"Received choice: {choice}")
         choice = int(choice)
         if 1 <= choice <= len(actions):

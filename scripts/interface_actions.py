@@ -60,10 +60,17 @@ def configure_interfaces(
                     'other_host': host_lookup.get(host_ips[1] if dev.hostname == host_ips[0] else host_ips[0], 'other'),
                     'ip_suffix': '1' if dev.hostname == host_ips[0] else '2'
                 }
+                logger.info(f"Template vars for {hostname}: {template_vars}")
 
                 # Render template
                 config_data = template.render(**template_vars)
+                logger.info(f"Rendered config for {hostname}:\n{config_data}")
                 print(f"Config for {hostname} ({dev.hostname}):\n{config_data}")
+
+                if not config_data.strip():
+                    logger.error(f"Empty configuration for {hostname}")
+                    print(f"Empty configuration for {hostname}")
+                    continue
 
                 # Apply configuration
                 config = Config(dev)

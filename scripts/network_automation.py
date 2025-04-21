@@ -5,6 +5,7 @@ from scripts.actions import execute_actions
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
 from scripts.utils import load_yaml_file
 import logging
+import sys
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -65,36 +66,36 @@ def main():
         logger.error("No hosts defined in hosts_data.yml.")
         return
 
-    while True:
-        display_menu(actions)
-        try:
-            choice = input(f"Enter your choice (1-{len(actions)}): ")
-            choice = int(choice)
-            if 1 <= choice <= len(actions):
-                action = actions[choice - 1]
-                template_file = action.get('template_file')
-                action_name = action.get('name')
-                if update_hosts_data(template_file):
-                    execute_actions(
-                        actions=[action_name],
-                        username=username,
-                        password=password,
-                        host_ips=host_ips,
-                        hosts=hosts,
-                        connect_to_hosts=connect_to_hosts,
-                        disconnect_from_hosts=disconnect_from_hosts
-                    )
-                else:
-                    logger.error("Failed to update hosts_data.yml. Aborting.")
-                    print("Failed to update hosts_data.yml. Aborting.")
+    # Read choice from stdin (piped from launcher.py)
+    try:
+        choice = sys.stdin.read().strip()
+        choice = int(choice)
+        if 1 <= choice <= len(actions):
+            action = actions[choice - 1]
+            template_file = action.get('template_file')
+            action_name = action.get('name')
+            if update_hosts_data(template_file):
+                execute_actions(
+                    actions=[action_name],
+                    username=username,
+                    password=password,
+                    host_ips=host_ips,
+                    hosts=hosts,
+                    connect_to_hosts=connect_to_hosts,
+                    disconnect_from_hosts=disconnect_from_hosts
+                )
             else:
-                print(f"Invalid choice. Please select between 1 and {len(actions)}.")
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-        except KeyboardInterrupt:
-            logger.info("Exiting automation.")
-            print("\nExiting automation.")
-            break
+                logger.error("Failed to update hosts_data.yml. Aborting.")
+                print("Failed to update hosts_data.yml. Aborting.")
+        else:
+            logger.error(f"Invalid choice: {choice}. Must be between 1 and {len(actions)}.")
+            print(f"Invalid choice: {choice}. Please select between 1 and {len(actions)}.")
+    except ValueError:
+        logger.error(f"Invalid input: {choice}. Must be a number.")
+        print("Invalid input. Please enter a number.")
+    except Exception as e:
+        logger.error(f"Error during execution: {e}")
+        print(f"Error during execution: {e}")
 
 if __name__ == "__main__":
     main()

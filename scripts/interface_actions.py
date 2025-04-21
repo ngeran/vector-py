@@ -25,6 +25,8 @@ def configure_interfaces(
     hosts_data_file = os.path.join(os.path.dirname(__file__), '../data/hosts_data.yml')
     hosts_data = load_yaml_file(hosts_data_file)
     template_file = hosts_data.get('template_file', 'templates/interface_template.j2')
+    logger.info(f"Using template_file: {template_file}")
+
     template_dir = os.path.join(os.path.dirname(__file__), '../')
     template_path = os.path.join(template_dir, template_file)
 

@@ -28,7 +28,6 @@ def ping_hosts(username, password, host_ips, hosts, connect_to_hosts=connect_to_
             print("No devices connected for ping verification.")
             return
 
-        # Only ping between successfully connected devices
         connected_ips = [dev.hostname for dev in connections]
         host_lookup = {h['ip_address']: h['host_name'] for h in hosts}
         reachable = []

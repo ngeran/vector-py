@@ -1,41 +1,88 @@
+import os
+import logging
 from typing import List, Dict
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
 from jnpr.junos.exception import CommitError
 from jinja2 import Environment, FileSystemLoader
-import os
+from scripts.utils import load_yaml_file
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+logger = logging.getLogger(__name__)
 
-def configure_interfaces(username: str, password: str, host_ips: List[str], hosts: List[Dict], single_check: bool = False):
-    """Configure interfaces using Jinja2 template."""
-    env = Environment(loader=FileSystemLoader(os.path.join(SCRIPT_DIR, '../templates')))
-    template = env.get_template('interface_template.j2')
+def configure_interfaces(
+    username: str,
+    password: str,
+    host_ips: List[str],
+    hosts: List[Dict],
+    connect_to_hosts: callable,
+    disconnect_from_hosts: callable,
+    connections: List[Device] = None
+):
+    """Configure interfaces on devices using a Jinja2 template."""
+    logger.info("Starting configure_interfaces")
 
-    # Filter host_ips to only those in hosts
-    valid_ips = [host['ip_address'] for host in hosts]
-    host_ips = [ip for ip in host_ips if ip in valid_ips]
-    print(f"Configuring interfaces for IPs: {host_ips}")
+    # Load template file from hosts_data.yml
+    hosts_data_file = os.path.join(os.path.dirname(__file__), '../data/hosts_data.yml')
+    hosts_data = load_yaml_file(hosts_data_file)
+    template_file = hosts_data.get('template_file', 'templates/interface_template.j2')
+    template_dir = os.path.join(os.path.dirname(__file__), '../')
+    template_path = os.path.join(template_dir, template_file)
 
-    for host in hosts:
-        host_name = host['host_name']
-        ip = host['ip_address']
-        if ip not in host_ips:
-            continue
-        interfaces = host.get('interfaces', [])  # Expect interfaces in hosts_data.yml
+    if not os.path.exists(template_path):
+        logger.error(f"Template file not found: {template_path}")
+        print(f"Template file not found: {template_path}")
+        return
 
-        try:
-            with Device(host=ip, user=username, password=password) as dev:
-                config_data = {'interfaces': interfaces}
-                config_text = template.render(**config_data)
-                print(f"Config for {host_name} ({ip}):\n{config_text}")
+    try:
+        # Use provided connections
+        if connections is None:
+            logger.info("No connections provided, creating new connections")
+            connections = connect_to_hosts(username, password, host_ips)
+        if not connections:
+            logger.error("No devices connected for interface configuration")
+            print("No devices connected for interface configuration.")
+            return
 
-                with Config(dev, mode='exclusive') as cu:
-                    cu.load(config_text, format='text')
-                    cu.commit()
-                print(f"Interface configured on {host_name} ({ip})")
-        except CommitError as e:
-            print(f"CommitError for {host_name} ({ip}): {e}")
-            print(f"Full error details: {e.__dict__}")
-        except Exception as e:
-            print(f"Failed to configure {host_name} ({ip}): {e}")
+        host_lookup = {h['ip_address']: h['host_name'] for h in hosts}
+        print(f"Configuring interfaces for IPs: {host_ips}")
+
+        # Setup Jinja2 environment
+        env = Environment(loader=FileSystemLoader(template_dir))
+        template = env.get_template(template_file)
+
+        for dev in connections:
+            hostname = host_lookup.get(dev.hostname, dev.hostname)
+            try:
+                # Prepare template variables
+                template_vars = {
+                    'other_host': host_lookup.get(host_ips[1] if dev.hostname == host_ips[0] else host_ips[0], 'other'),
+                    'ip_suffix': '1' if dev.hostname == host_ips[0] else '2'
+                }
+
+                # Render template
+                config_data = template.render(**template_vars)
+                print(f"Config for {hostname} ({dev.hostname}):\n{config_data}")
+
+                # Apply configuration
+                config = Config(dev)
+                config.load(config_data, format='text')
+                config.commit_check()
+                config.commit()
+
+                logger.info(f"Interface configured on {hostname} ({dev.hostname})")
+                print(f"Interface configured on {hostname} ({dev.hostname})")
+
+            except CommitError as e:
+                logger.error(f"Commit error on {hostname} ({dev.hostname}): {e}")
+                print(f"Commit error on {hostname} ({dev.hostname}): {e}")
+            except Exception as e:
+                logger.error(f"Failed to configure interfaces on {hostname} ({dev.hostname}): {e}")
+                print(f"Failed to configure interfaces on {hostname} ({dev.hostname}): {e}")
+
+    except Exception as e:
+        logger.error(f"Error in configure_interfaces: {e}")
+        print(f"Error in configure_interfaces: {e}")
+    finally:
+        # Rely on actions.py to disconnect
+        pass
+    logger.info("Finished configure_interfaces")

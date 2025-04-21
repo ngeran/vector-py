@@ -51,12 +51,12 @@ def main():
     actions = actions_data.get('actions', [])
     if not actions:
         logger.error("No actions defined in actions.yml.")
-        return
+        sys.exit(1)
 
     hosts_data = load_yaml_file(hosts_data_file)
     if not hosts_data:
         logger.error("Failed to load hosts_data.yml.")
-        return
+        sys.exit(1)
 
     username = hosts_data.get('username')
     password = hosts_data.get('password')
@@ -64,11 +64,13 @@ def main():
     host_ips = [host['ip_address'] for host in hosts]
     if not host_ips:
         logger.error("No hosts defined in hosts_data.yml.")
-        return
+        sys.exit(1)
 
     # Read choice from stdin (piped from launcher.py)
+    display_menu(actions)  # For logging/debugging
     try:
         choice = sys.stdin.read().strip()
+        logger.info(f"Received choice: {choice}")
         choice = int(choice)
         if 1 <= choice <= len(actions):
             action = actions[choice - 1]
@@ -87,15 +89,19 @@ def main():
             else:
                 logger.error("Failed to update hosts_data.yml. Aborting.")
                 print("Failed to update hosts_data.yml. Aborting.")
+                sys.exit(1)
         else:
             logger.error(f"Invalid choice: {choice}. Must be between 1 and {len(actions)}.")
             print(f"Invalid choice: {choice}. Please select between 1 and {len(actions)}.")
+            sys.exit(1)
     except ValueError:
         logger.error(f"Invalid input: {choice}. Must be a number.")
         print("Invalid input. Please enter a number.")
+        sys.exit(1)
     except Exception as e:
         logger.error(f"Error during execution: {e}")
         print(f"Error during execution: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

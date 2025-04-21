@@ -1,46 +1,35 @@
-# /home/nikos/github/ngeran/vectautomation/scripts/connect_to_hosts.py
 from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
-from typing import List
 import logging
 
-# Suppress all ncclient logs, including DEBUG
-logging.getLogger('ncclient').setLevel(logging.CRITICAL)
-logging.getLogger('ncclient.transport.ssh').propagate = False
-logging.getLogger('ncclient.operations').propagate = False
+logger = logging.getLogger(__name__)
 
-def connect_to_hosts(username: str, password: str, host_ips: List[str]) -> List[Device]:
-    """Connect to all Junos hosts listed in the provided list of host IPs."""
+def connect_to_hosts(username: str, password: str, host_ips: list) -> list:
+    """Connect to a list of hosts and return the connections."""
+    logger.info(f"Connecting to hosts: {host_ips}")
     connections = []
-    try:
-        for host_ip in host_ips:
-            try:
-                dev = Device(
-                    host=host_ip,
-                    user=username,
-                    password=password,
-                    port=22,
-                    timeout=10,
-                    gather_facts=False  # Disable facts to reduce NETCONF chatter
-                )
-                dev.open()
-                print(f"Connected to {host_ip}")
-                connections.append(dev)
-            except ConnectError as error:
-                print(f"Failed to connect to {host_ip}: {error} (connection issue)")
-            except Exception as error:
-                print(f"Failed to connect to {host_ip}: {error} (unexpected error)")
-        return connections
-    except KeyboardInterrupt:
-        print("Connection attempt interrupted by user.")
-        disconnect_from_hosts(connections)
-        return []
+    for ip in host_ips:
+        try:
+            dev = Device(host=ip, user=username, password=password)
+            dev.open()
+            connections.append(dev)
+            logger.info(f"Connected to {ip}")
+            print(f"Connected to {ip}")
+        except ConnectError as e:
+            logger.error(f"Failed to connect to {ip}: {e}")
+            print(f"Failed to connect to {ip}: {e}")
+    logger.info(f"Returning {len(connections)} connections")
+    return connections
 
-def disconnect_from_hosts(connections: List[Device]):
-    """Close all connections to the hosts."""
+def disconnect_from_hosts(connections: list):
+    """Disconnect from all hosts."""
+    logger.info(f"Disconnecting from {len(connections)} connections")
     for dev in connections:
         try:
+            ip = dev.hostname
             dev.close()
-            print(f"Disconnected from {dev.hostname} ({dev._hostname})")
+            logger.info(f"Disconnected from {ip}")
+            print(f"Disconnected from {ip} ({ip})")
         except Exception as e:
-            print(f"Error disconnecting from {dev._hostname}: {e}")
+            logger.error(f"Failed to disconnect from {ip}: {e}")
+            print(f"Failed to disconnect from {ip}: {e}")

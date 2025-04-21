@@ -22,6 +22,7 @@ def execute_actions(
     disconnect_from_hosts: Callable
 ):
     """Execute the specified actions."""
+    logger.info(f"Starting execute_actions with actions: {actions}")
     connections = []
     try:
         connections = connect_to_hosts(username, password, host_ips)
@@ -50,3 +51,4 @@ def execute_actions(
     finally:
         if connections:
             disconnect_from_hosts(connections)
+    logger.info("Finished execute_actions")

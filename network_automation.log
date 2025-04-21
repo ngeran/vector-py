@@ -4,3 +4,6 @@
 2025-04-21 18:53:39,308 - INFO - Received choice: 3
 2025-04-21 18:53:39,311 - INFO - Updated hosts_data.yml with template: none
 2025-04-21 18:53:53,666 - INFO - Action completed, exiting
+2025-04-21 19:10:57,685 - INFO - Received choice: 3
+2025-04-21 19:10:57,687 - INFO - Updated hosts_data.yml with template: none
+2025-04-21 19:11:12,521 - INFO - Action completed, exiting

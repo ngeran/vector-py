@@ -28,6 +28,7 @@ def execute_actions(
         connections = connect_to_hosts(username, password, host_ips)
         if not connections:
             logger.error("No devices connected for actions")
+            print("No devices connected for actions.")
             return
 
         for action in actions:
@@ -46,10 +47,13 @@ def execute_actions(
                 logger.info(f"Completed action: {action}")
             else:
                 logger.error(f"Unknown action: {action}")
+                print(f"Unknown action: {action}")
 
     except Exception as e:
         logger.error(f"Error during action execution: {e}")
+        print(f"Error during action execution: {e}")
     finally:
         if connections:
             disconnect_from_hosts(connections)
+            logger.info("All connections closed")
     logger.info("Finished execute_actions")

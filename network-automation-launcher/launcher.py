@@ -92,7 +92,7 @@ def execute_main_py(choice: int):
     """Execute main.py with the selected choice."""
     if not os.path.exists(MAIN_PY):
         logger.error(f"main.py not found at {MAIN_PY}")
-        return
+        return False
     try:
         logger.info(f"Executing main.py with choice {choice}")
         process = subprocess.run(
@@ -116,12 +116,16 @@ def execute_main_py(choice: int):
                 logger.error(f"main.py errors: {''.join(stderr_lines)}")
         if process.returncode != 0:
             logger.error(f"main.py exited with code {process.returncode}")
+            return False
+        return True
     except subprocess.TimeoutExpired:
         logger.error("main.py timed out after 60 seconds")
         print("main.py timed out after 60 seconds")
+        return False
     except Exception as e:
         logger.error(f"Error executing main.py: {e}")
         print(f"Error executing main.py: {e}")
+        return False
 
 def main():
     """Main function for the launcher."""
@@ -138,28 +142,30 @@ def main():
         logger.error("No actions defined in actions.yml")
         return
 
-    while True:
-        display_menu(actions)
-        try:
-            choice = input(f"Enter your choice (1-{len(actions)}): ")
-            choice = int(choice)
-            if 1 <= choice <= len(actions):
-                action = actions[choice - 1]
-                template_file = action.get('template_file')
-                action_name = action.get('name')
-                if update_hosts_data(template_file, action_name):
-                    execute_main_py(choice)
+    display_menu(actions)
+    try:
+        choice = input(f"Enter your choice (1-{len(actions)}): ")
+        choice = int(choice)
+        if 1 <= choice <= len(actions):
+            action = actions[choice - 1]
+            template_file = action.get('template_file')
+            action_name = action.get('name')
+            if update_hosts_data(template_file, action_name):
+                if execute_main_py(choice):
+                    logger.info("Action completed successfully")
                 else:
-                    logger.error("Failed to update hosts_data.yml. Aborting")
-                    print("Failed to update hosts_data.yml. Aborting.")
+                    logger.error("Action failed or encountered an error")
+                    print("Action failed or encountered an error.")
             else:
-                print(f"Invalid choice. Please select between 1 and {len(actions)}.")
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-        except KeyboardInterrupt:
-            logger.info("Exiting launcher")
-            print("\nExiting launcher.")
-            break
+                logger.error("Failed to update hosts_data.yml. Aborting")
+                print("Failed to update hosts_data.yml. Aborting.")
+        else:
+            print(f"Invalid choice. Please select between 1 and {len(actions)}.")
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+    except KeyboardInterrupt:
+        logger.info("Exiting launcher")
+        print("\nExiting launcher.")
 
 if __name__ == "__main__":
     main()

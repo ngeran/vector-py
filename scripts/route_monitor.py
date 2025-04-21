@@ -21,7 +21,7 @@ def monitor_routes(
     os.makedirs(report_dir, exist_ok=True)
 
     try:
-        # Use provided connections if available; otherwise, connect
+        # Use provided connections
         if connections is None:
             logger.info("No connections provided, creating new connections")
             connections = connect_to_hosts(username, password, host_ips)
@@ -36,24 +36,24 @@ def monitor_routes(
         for dev in connections:
             hostname = host_lookup.get(dev.hostname, dev.hostname)
             try:
-                # Fetch routing tables
-                inet0_routes = dev.rpc.get_route_information(table='inet.0', format='text')
-                inet3_routes = dev.rpc.get_route_information(table='inet.3', format='text')
-                mpls_routes = dev.rpc.get_route_information(table='mpls.0', format='text')
+                # Fetch routing tables (XML by default)
+                inet0_routes = dev.rpc.get_route_information(table='inet.0')
+                inet3_routes = dev.rpc.get_route_information(table='inet.3')
+                mpls_routes = dev.rpc.get_route_information(table='mpls.0')
 
-                # Parse route counts (simplified, adjust based on actual output)
-                inet0_count = len(inet0_routes.xpath('//route-table/rt'))
-                inet3_count = len(inet3_routes.xpath('//route-table/rt'))
-                mpls_count = len(mpls_routes.xpath('//route-table/rt'))
+                # Parse route counts
+                inet0_count = len(inet0_routes.xpath('.//rt'))
+                inet3_count = len(inet3_routes.xpath('.//rt'))
+                mpls_count = len(mpls_routes.xpath('.//rt'))
 
-                # Fetch protocol-specific counts (example, adjust as needed)
-                bgp_summary = dev.rpc.get_bgp_summary_information(format='text')
-                ospf_neighbors = dev.rpc.get_ospf_neighbor_information(format='text')
-                ldp_sessions = dev.rpc.get_ldp_session_information(format='text')
+                # Fetch protocol-specific counts
+                bgp_summary = dev.rpc.get_bgp_summary_information()
+                ospf_neighbors = dev.rpc.get_ospf_neighbor_information()
+                ldp_sessions = dev.rpc.get_ldp_session_information()
 
-                bgp_count = len(bgp_summary.xpath('//bgp-peer'))
-                ospf_count = len(ospf_neighbors.xpath('//ospf-neighbor'))
-                ldp_count = len(ldp_sessions.xpath('//ldp-session'))
+                bgp_count = len(bgp_summary.xpath('.//bgp-peer'))
+                ospf_count = len(ospf_neighbors.xpath('.//ospf-neighbor'))
+                ldp_count = len(ldp_sessions.xpath('.//ldp-session'))
 
                 summary.append({
                     'host': hostname,
@@ -66,11 +66,13 @@ def monitor_routes(
                     'flapped': 0
                 })
 
-                print(f"Fetched routes from {dev.hostname} for tables inet.0, inet.3, mpls.0")
+                print(f"Fetched {inet0_count} routes from {hostname} ({dev.hostname}) for table inet.0")
+                print(f"Fetched {inet3_count} routes from {hostname} ({dev.hostname}) for table inet.3")
+                print(f"Fetched {mpls_count} routes from {hostname} ({dev.hostname}) for table mpls.0")
 
             except Exception as e:
-                logger.error(f"Failed to fetch routes from {dev.hostname}: {e}")
-                print(f"Failed to fetch routes from {dev.hostname}: {e}")
+                logger.error(f"Failed to fetch routes from {hostname} ({dev.hostname}): {e}")
+                print(f"Failed to fetch routes from {hostname} ({dev.hostname}): {e}")
 
         # Generate report
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -91,6 +93,6 @@ def monitor_routes(
         logger.error(f"Error in monitor_routes: {e}")
         print(f"Error in monitor_routes: {e}")
     finally:
-        if connections and not disconnect_from_hosts.__name__ == 'noop':
-            disconnect_from_hosts(connections)
+        # Rely on actions.py to disconnect
+        pass
     logger.info("Finished monitor_routes")

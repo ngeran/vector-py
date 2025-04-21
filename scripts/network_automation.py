@@ -1,101 +1,100 @@
 import os
 import yaml
-from scripts.utils import merge_host_data, load_yaml_file
-from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
+from typing import List, Dict
 from scripts.actions import execute_actions
+from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
+from scripts.utils import load_yaml_file
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-def update_hosts_data_template(template: str, hosts_data_file: str):
-    """Update the template field in hosts_data.yml."""
-    try:
-        with open(hosts_data_file, 'r') as f:
-            data = yaml.safe_load(f) or {}
-
-        data['template'] = template
-
-        with open(hosts_data_file, 'w') as f:
-            yaml.safe_dump(data, f, default_flow_style=False)
-
-        print(f"Updated hosts_data.yml with template: {template}")
-    except Exception as error:
-        print(f"Failed to update hosts_data.yml: {error}")
-        raise
-
-def prompt_user_for_template(actions: list):
-    """Prompt user to select an action from actions.yml and return the template name."""
-    if not actions:
-        print("No actions defined in actions.yml.")
-        raise ValueError("Empty actions list")
-
-    # Create simple ASCII table
+def display_menu(actions: List[Dict]):
+    """Display the action selection menu."""
     print("\nSelect an action:")
     print("-" * 40)
     print("| Option | Action                  |")
     print("-" * 40)
-    for idx, action in enumerate(actions, 1):
-        print(f"| {idx:<6} | {action['display_name']:<23} |")
+    for i, action in enumerate(actions, 1):
+        print(f"| {i:<6} | {action['display_name']:<22} |")
     print("-" * 40)
 
-    valid_choices = [str(idx) for idx in range(1, len(actions) + 1)]
-    while True:
-        choice = input(f"Enter your choice (1-{len(actions)}): ").strip()
-        if choice in valid_choices:
-            return actions[int(choice) - 1]['name']
-        print(f"Invalid choice. Please enter a number between 1 and {len(actions)}.")
+def update_hosts_data(template_file: str):
+    """Update hosts_data.yml with the selected template file."""
+    hosts_data_file = os.path.join(SCRIPT_DIR, "../data/hosts_data.yml")
+    hosts_data = load_yaml_file(hosts_data_file)
+    if not hosts_data:
+        logger.error("Failed to load hosts_data.yml.")
+        return False
+    if template_file:
+        hosts_data['template_file'] = template_file
+    else:
+        hosts_data.pop('template_file', None)
+    try:
+        with open(hosts_data_file, 'w') as f:
+            yaml.safe_dump(hosts_data, f)
+        logger.info(f"Updated hosts_data.yml with template: {template_file or 'none'}")
+        return True
+    except Exception as e:
+        logger.error(f"Error updating hosts_data.yml: {e}")
+        return False
 
 def main():
-    """Execute the action specified by user input in hosts_data.yml."""
-    try:
-        inventory_file = os.path.join(SCRIPT_DIR, "../data/inventory.yml")
-        hosts_data_file = os.path.join(SCRIPT_DIR, "../data/hosts_data.yml")
-        actions_file = os.path.join(SCRIPT_DIR, "../data/actions.yml")
+    """Main function for network automation."""
+    actions_file = os.path.join(SCRIPT_DIR, "../data/actions.yml")
+    hosts_data_file = os.path.join(SCRIPT_DIR, "../data/hosts_data.yml")
 
-        # Load actions.yml
-        actions_data = load_yaml_file(actions_file)
-        actions = actions_data.get('actions', [])
-        if not actions:
-            print("No actions defined in actions.yml.")
-            return
-
-        # Prompt user and update template
-        template = prompt_user_for_template(actions)
-        update_hosts_data_template(template, hosts_data_file)
-
-        merged_data = merge_host_data(inventory_file, hosts_data_file)
-        if not merged_data:
-            print("Failed to load or merge data. Exiting.")
-            return
-
-        hosts_data = load_yaml_file(hosts_data_file)
-        valid_templates = [action['name'] for action in actions]
-
-        if template not in valid_templates:
-            print(f"Invalid template '{template}' in hosts_data.yml. Valid templates are:", valid_templates)
-            return
-
-        username = merged_data['username']
-        password = merged_data['password']
-        hosts = merged_data['hosts']
-        host_ips = [host['ip_address'] for host in hosts_data.get('hosts', [])]
-
-        execute_actions(
-            actions=[template],
-            username=username,
-            password=password,
-            host_ips=host_ips,
-            hosts=hosts,
-            connect_to_hosts=connect_to_hosts,
-            disconnect_from_hosts=disconnect_from_hosts
-        )
-
-        print(f"Completed action: {template}")
-
-    except KeyboardInterrupt:
-        print("Script interrupted by user.")
+    actions_data = load_yaml_file(actions_file)
+    actions = actions_data.get('actions', [])
+    if not actions:
+        logger.error("No actions defined in actions.yml.")
         return
-    except Exception as error:
-        print(f"Error during execution: {error}")
+
+    hosts_data = load_yaml_file(hosts_data_file)
+    if not hosts_data:
+        logger.error("Failed to load hosts_data.yml.")
+        return
+
+    username = hosts_data.get('username')
+    password = hosts_data.get('password')
+    hosts = hosts_data.get('hosts', [])
+    host_ips = [host['ip_address'] for host in hosts]
+    if not host_ips:
+        logger.error("No hosts defined in hosts_data.yml.")
+        return
+
+    while True:
+        display_menu(actions)
+        try:
+            choice = input(f"Enter your choice (1-{len(actions)}): ")
+            choice = int(choice)
+            if 1 <= choice <= len(actions):
+                action = actions[choice - 1]
+                template_file = action.get('template_file')
+                action_name = action.get('name')
+                if update_hosts_data(template_file):
+                    execute_actions(
+                        actions=[action_name],
+                        username=username,
+                        password=password,
+                        host_ips=host_ips,
+                        hosts=hosts,
+                        connect_to_hosts=connect_to_hosts,
+                        disconnect_from_hosts=disconnect_from_hosts
+                    )
+                else:
+                    logger.error("Failed to update hosts_data.yml. Aborting.")
+                    print("Failed to update hosts_data.yml. Aborting.")
+            else:
+                print(f"Invalid choice. Please select between 1 and {len(actions)}.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+        except KeyboardInterrupt:
+            logger.info("Exiting automation.")
+            print("\nExiting automation.")
+            break
 
 if __name__ == "__main__":
     main()

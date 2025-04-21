@@ -1,7 +1,12 @@
 import os
 import subprocess
 import yaml
+import logging
 from typing import List, Dict
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 # Path to the vector-py project
 VECTOR_PY_DIR = "/home/nikos/github/ngeran/vector-py"
@@ -11,11 +16,19 @@ MAIN_PY = os.path.join(VECTOR_PY_DIR, "main.py")
 
 def load_yaml_file(file_path: str) -> Dict:
     """Load a YAML file and return its contents."""
+    if not os.path.exists(file_path):
+        logger.error(f"YAML file not found: {file_path}")
+        return {}
     try:
         with open(file_path, 'r') as f:
-            return yaml.safe_load(f) or {}
+            data = yaml.safe_load(f)
+            if data is None:
+                logger.error(f"YAML file {file_path} is empty or invalid")
+                return {}
+            logger.info(f"Loaded YAML file: {file_path}")
+            return data
     except Exception as e:
-        print(f"Error loading {file_path}: {e}")
+        logger.error(f"Error loading YAML file {file_path}: {e}")
         return {}
 
 def display_menu(actions: List[Dict]):
@@ -28,26 +41,38 @@ def display_menu(actions: List[Dict]):
         print(f"| {i:<6} | {action['display_name']:<22} |")
     print("-" * 40)
 
-def update_hosts_data(template_file: str):
+def update_hosts_data(template_file: str, action_name: str):
     """Update hosts_data.yml with the selected template file."""
+    if not os.path.exists(HOSTS_DATA_FILE):
+        logger.error(f"hosts_data.yml not found at {HOSTS_DATA_FILE}")
+        return False
     hosts_data = load_yaml_file(HOSTS_DATA_FILE)
     if not hosts_data:
-        print("Failed to load hosts_data.yml.")
+        logger.error("Failed to load hosts_data.yml")
         return False
-    hosts_data['template_file'] = template_file
+    if template_file:
+        hosts_data['template_file'] = template_file
+    else:
+        hosts_data.pop('template_file', None)  # Remove if no template
     try:
         with open(HOSTS_DATA_FILE, 'w') as f:
             yaml.safe_dump(hosts_data, f)
-        print(f"Updated hosts_data.yml with template: {template_file}")
+        logger.info(f"Updated hosts_data.yml with template: {template_file or 'none'} for action: {action_name}")
         return True
+    except PermissionError as e:
+        logger.error(f"Permission denied writing to {HOSTS_DATA_FILE}: {e}")
+        return False
     except Exception as e:
-        print(f"Error updating hosts_data.yml: {e}")
+        logger.error(f"Error updating {HOSTS_DATA_FILE}: {e}")
         return False
 
 def execute_main_py(choice: int):
     """Execute main.py with the selected choice."""
+    if not os.path.exists(MAIN_PY):
+        logger.error(f"main.py not found at {MAIN_PY}")
+        return
     try:
-        # Run main.py and pass the choice via stdin
+        logger.info(f"Executing main.py with choice {choice}")
         process = subprocess.run(
             ["python", MAIN_PY],
             input=str(choice),
@@ -57,38 +82,47 @@ def execute_main_py(choice: int):
         )
         print(process.stdout)
         if process.stderr:
-            print(f"Errors: {process.stderr}")
+            logger.error(f"main.py errors: {process.stderr}")
         if process.returncode != 0:
-            print(f"main.py exited with code {process.returncode}")
+            logger.error(f"main.py exited with code {process.returncode}")
     except Exception as e:
-        print(f"Error executing main.py: {e}")
+        logger.error(f"Error executing main.py: {e}")
 
 def main():
     """Main function for the launcher."""
+    logger.info("Starting network automation launcher")
+
+    if not os.path.exists(ACTIONS_FILE):
+        logger.error(f"actions.yml not found at {ACTIONS_FILE}")
+        return
+
     actions_data = load_yaml_file(ACTIONS_FILE)
     actions = actions_data.get('actions', [])
 
     if not actions:
-        print("No actions defined in actions.yml.")
+        logger.error("No actions defined in actions.yml")
         return
 
     while True:
         display_menu(actions)
-        choice = input(f"Enter your choice (1-{len(actions)}): ")
         try:
+            choice = input(f"Enter your choice (1-{len(actions)}): ")
             choice = int(choice)
             if 1 <= choice <= len(actions):
                 action = actions[choice - 1]
                 template_file = action.get('template_file')
-                if template_file and update_hosts_data(action['name']):
+                action_name = action.get('name')
+                if update_hosts_data(template_file, action_name):
                     execute_main_py(choice)
                 else:
+                    logger.error("Failed to update hosts_data.yml. Aborting")
                     print("Failed to update hosts_data.yml. Aborting.")
             else:
                 print(f"Invalid choice. Please select between 1 and {len(actions)}.")
         except ValueError:
             print("Invalid input. Please enter a number.")
         except KeyboardInterrupt:
+            logger.info("Exiting launcher")
             print("\nExiting launcher.")
             break
 

@@ -94,6 +94,8 @@ def main():
             logger.error(f"Invalid choice: {choice}. Must be between 1 and {len(actions)}.")
             print(f"Invalid choice: {choice}. Please select between 1 and {len(actions)}.")
             sys.exit(1)
+        logger.info("Action completed, exiting")
+        sys.exit(0)  # Explicitly exit after success
     except ValueError:
         logger.error(f"Invalid input: {choice}. Must be a number.")
         print("Invalid input. Please enter a number.")

@@ -2,7 +2,11 @@ import os
 from datetime import datetime
 from contextlib import contextmanager
 import signal
-from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
+import logging
+from typing import List
+from jnpr.junos import Device
+
+logger = logging.getLogger(__name__)
 
 # Timeout context for RPC calls
 @contextmanager
@@ -16,15 +20,30 @@ def timeout(seconds):
     finally:
         signal.alarm(0)
 
-def ping_hosts(username, password, host_ips, hosts, connect_to_hosts=connect_to_hosts, disconnect_from_hosts=disconnect_from_hosts, single_check: bool = False):
+def ping_hosts(
+    username: str,
+    password: str,
+    host_ips: List[str],
+    hosts: List[dict],
+    connect_to_hosts: callable,
+    disconnect_from_hosts: callable,
+    connections: List[Device] = None,
+    single_check: bool = False
+):
     """Verify reachability by pinging hosts from each device and generate a report."""
+    logger.info("Starting ping_hosts")
     report_dir = os.path.join(os.path.dirname(__file__), '../reports')
     os.makedirs(report_dir, exist_ok=True)
 
-    connections = []
+    local_connections = []
     try:
-        connections = connect_to_hosts(username, password, host_ips)
+        # Use provided connections if available; otherwise, connect
+        if connections is None:
+            logger.info("No connections provided, creating new connections")
+            connections = connect_to_hosts(username, password, host_ips)
+            local_connections = connections
         if not connections:
+            logger.error("No devices connected for ping verification")
             print("No devices connected for ping verification.")
             return
 
@@ -64,11 +83,18 @@ def ping_hosts(username, password, host_ips, hosts, connect_to_hosts=connect_to_
         report_file = os.path.join(report_dir, f"ping_report_{timestamp}.txt")
         with open(report_file, 'w') as f:
             f.write(report)
+        logger.info(f"Ping report saved to {report_file}")
         print(f"Ping report saved to {report_file}")
 
     except KeyboardInterrupt:
+        logger.info("Ping action interrupted by user")
         print("Ping action interrupted by user.")
         raise
+    except Exception as e:
+        logger.error(f"Error in ping_hosts: {e}")
+        print(f"Error in ping_hosts: {e}")
     finally:
-        if connections:
-            disconnect_from_hosts(connections)
+        if local_connections:
+            logger.info("Disconnecting local connections")
+            disconnect_from_hosts(local_connections)
+    logger.info("Finished ping_hosts")

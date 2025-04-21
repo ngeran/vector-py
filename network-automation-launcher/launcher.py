@@ -53,7 +53,7 @@ def update_hosts_data(template_file: str, action_name: str):
     if template_file:
         hosts_data['template_file'] = template_file
     else:
-        hosts_data.pop('template_file', None)  # Remove if no template
+        hosts_data.pop('template_file', None)
     try:
         with open(HOSTS_DATA_FILE, 'w') as f:
             yaml.safe_dump(hosts_data, f)
@@ -78,15 +78,20 @@ def execute_main_py(choice: int):
             input=str(choice),
             text=True,
             capture_output=True,
-            cwd=VECTOR_PY_DIR
+            cwd=VECTOR_PY_DIR,
+            timeout=60  # Terminate after 60 seconds
         )
         print(process.stdout)
         if process.stderr:
             logger.error(f"main.py errors: {process.stderr}")
         if process.returncode != 0:
             logger.error(f"main.py exited with code {process.returncode}")
+    except subprocess.TimeoutExpired:
+        logger.error("main.py timed out after 60 seconds")
+        print("main.py timed out after 60 seconds")
     except Exception as e:
         logger.error(f"Error executing main.py: {e}")
+        print(f"Error executing main.py: {e}")
 
 def main():
     """Main function for the launcher."""

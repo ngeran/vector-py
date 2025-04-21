@@ -40,7 +40,8 @@ def execute_actions(
                     host_ips=host_ips,
                     hosts=hosts,
                     connect_to_hosts=connect_to_hosts,
-                    disconnect_from_hosts=disconnect_from_hosts
+                    disconnect_from_hosts=disconnect_from_hosts,
+                    connections=connections  # Pass connections to action
                 )
                 logger.info(f"Completed action: {action}")
             else:

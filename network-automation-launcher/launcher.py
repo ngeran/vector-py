@@ -1,10 +1,18 @@
+import os
+import sys
 import logging
 from scripts.network_automation import display_menu, load_yaml_file
 from scripts.git_operations import git_commit_and_push
 
+# Add vector-py directory to sys.path
+VECTOR_PY_DIR = os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py")
+if VECTOR_PY_DIR not in sys.path:
+    sys.path.insert(0, VECTOR_PY_DIR)
+
+
 # Configure logging
 logging.basicConfig(
-    filename='/home/nikos/github/ngeran/vector-py/network_automation.log',
+    filename=os.path.join(VECTOR_PY_DIR, 'network_automation.log'),
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
@@ -14,7 +22,7 @@ def main():
     """Main function to run the network automation launcher."""
     try:
         # Load actions from actions.yml
-        actions_file = '/home/nikos/github/ngeran/vector-py/data/actions.yml'
+        actions_file = os.path.join(VECTOR_PY_DIR, 'data/actions.yml')
         actions_data = load_yaml_file(actions_file)
         actions = actions_data.get('actions', [])
 
@@ -57,7 +65,7 @@ def main():
                 "templates/interface_template.j2",
                 "data/git_config.yml"
             ]
-            repo_path = "/home/nikos/github/ngeran/vector-py"
+            repo_path = VECTOR_PY_DIR
             logger.info(f"Preparing to push to GitHub for action: {action_name}")
 
             # Commit and push
@@ -70,10 +78,9 @@ def main():
                 print(f"Git push failed for action: {action_name}")
                 return
 
-        # Execute locally if mode is 1 or after successful push
+        # Execute locally
         if mode_choice == '1':
             logger.info(f"Executing action {action_name} locally")
-            # Import and run network_automation.main with selected action
             from scripts.network_automation import main as network_main
             network_main(action_name=action_name)
 

@@ -46,3 +46,12 @@
 2025-04-22 18:10:25,465 - INFO - Received choice: 2
 2025-04-22 18:10:25,468 - INFO - Updated hosts_data.yml with template: templates/interface_template.j2
 2025-04-22 18:10:40,661 - INFO - Action completed, exiting
+2025-04-22 18:21:21,994 - INFO - Received choice: 1
+2025-04-22 18:21:21,996 - INFO - Updated hosts_data.yml with template: none
+2025-04-22 18:21:43,747 - INFO - Action completed, exiting
+2025-04-22 18:21:48,098 - INFO - Received choice: 3
+2025-04-22 18:21:48,100 - INFO - Updated hosts_data.yml with template: none
+2025-04-22 18:22:04,315 - INFO - Action completed, exiting
+2025-04-22 18:22:14,058 - INFO - Received choice: 2
+2025-04-22 18:22:14,061 - INFO - Updated hosts_data.yml with template: templates/interface_template.j2
+2025-04-22 18:22:29,105 - INFO - Action completed, exiting

@@ -60,10 +60,13 @@ def main():
                 "scripts/route_monitor.py",
                 "scripts/utils.py",
                 "scripts/main.py",
+                "scripts/junos_actions.py",
                 "data/hosts_data.yml",
                 "data/actions.yml",
-                "templates/interface_template.j2",
-                "data/git_config.yml"
+                "data/action_map.yml",
+                "data/inventory.yml",
+                "data/git_config.yml",
+                "templates/interface_template.j2"
             ]
             repo_path = VECTOR_PY_DIR
             logger.info(f"Preparing to push to GitHub for action: {action_name}")

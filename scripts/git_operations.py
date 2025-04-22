@@ -95,9 +95,12 @@ if __name__ == "__main__":
         "scripts/route_monitor.py",
         "scripts/utils.py",
         "scripts/main.py",
+        "scripts/junos_actions.py",
         "data/hosts_data.yml",
         "data/actions.yml",
-        "templates/interface_template.j2",
-        "data/git_config.yml"
+        "data/action_map.yml",
+        "data/inventory.yml",
+        "data/git_config.yml",
+        "templates/interface_template.j2"
     ]
     git_commit_and_push(repo_path, action_name, files_to_commit)

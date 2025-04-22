@@ -25,3 +25,24 @@
 2025-04-21 19:37:30,010 - INFO - Received choice: 2
 2025-04-21 19:37:30,013 - INFO - Updated hosts_data.yml with template: templates/interface_template.j2
 2025-04-21 19:37:44,884 - INFO - Action completed, exiting
+2025-04-21 19:43:20,558 - INFO - Received choice: 1
+2025-04-21 19:43:20,560 - INFO - Updated hosts_data.yml with template: none
+2025-04-21 19:43:42,620 - INFO - Action completed, exiting
+2025-04-21 19:43:53,231 - INFO - Received choice: 2
+2025-04-21 19:43:53,233 - INFO - Updated hosts_data.yml with template: templates/interface_template.j2
+2025-04-21 19:44:08,110 - INFO - Action completed, exiting
+2025-04-21 19:44:25,150 - INFO - Received choice: 3
+2025-04-21 19:44:25,152 - INFO - Updated hosts_data.yml with template: none
+2025-04-21 19:44:42,756 - INFO - Action completed, exiting
+2025-04-21 19:48:18,569 - INFO - Received choice: 2
+2025-04-21 19:48:18,571 - INFO - Updated hosts_data.yml with template: templates/interface_template.j2
+2025-04-21 19:48:33,984 - INFO - Action completed, exiting
+2025-04-22 18:09:24,310 - INFO - Received choice: 1
+2025-04-22 18:09:24,313 - INFO - Updated hosts_data.yml with template: none
+2025-04-22 18:09:49,142 - INFO - Action completed, exiting
+2025-04-22 18:09:58,345 - INFO - Received choice: 3
+2025-04-22 18:09:58,347 - INFO - Updated hosts_data.yml with template: none
+2025-04-22 18:10:14,347 - INFO - Action completed, exiting
+2025-04-22 18:10:25,465 - INFO - Received choice: 2
+2025-04-22 18:10:25,468 - INFO - Updated hosts_data.yml with template: templates/interface_template.j2
+2025-04-22 18:10:40,661 - INFO - Action completed, exiting

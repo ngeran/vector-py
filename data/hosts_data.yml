@@ -37,6 +37,4 @@ hosts:
   ip_address: 172.27.200.201
 interval: 60
 password: manolis1
-template: ping
-template_file: templates/interface_template.j2
 username: admin

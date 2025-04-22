@@ -35,6 +35,14 @@ def configure_interfaces(
         print(f"Template file not found: {template_path}")
         return
 
+    # Verify template content
+    with open(template_path, 'r') as f:
+        template_content = f.read()
+    if not template_content.strip():
+        logger.error(f"Template file is empty: {template_path}")
+        print(f"Template file is empty: {template_path}")
+        return
+
     try:
         # Use provided connections
         if connections is None:
@@ -55,10 +63,16 @@ def configure_interfaces(
         for dev in connections:
             hostname = host_lookup.get(dev.hostname, dev.hostname)
             try:
+                # Find the host data for the current device
+                host_data = next((h for h in hosts if h['ip_address'] == dev.hostname), None)
+                if not host_data or 'interfaces' not in host_data:
+                    logger.error(f"No interface data for {hostname} ({dev.hostname})")
+                    print(f"No interface data for {hostname} ({dev.hostname})")
+                    continue
+
                 # Prepare template variables
                 template_vars = {
-                    'other_host': host_lookup.get(host_ips[1] if dev.hostname == host_ips[0] else host_ips[0], 'other'),
-                    'ip_suffix': '1' if dev.hostname == host_ips[0] else '2'
+                    'interfaces': host_data['interfaces']
                 }
                 logger.info(f"Template vars for {hostname}: {template_vars}")
 

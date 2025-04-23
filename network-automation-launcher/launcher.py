@@ -1,14 +1,20 @@
 import os
 import sys
 import logging
-from scripts.network_automation import display_menu, load_yaml_file
-from scripts.git_operations import git_commit_and_push
+
+# Debug sys.path
+print("Initial sys.path:", sys.path)
 
 # Add vector-py directory to sys.path
 VECTOR_PY_DIR = os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py")
 if VECTOR_PY_DIR not in sys.path:
     sys.path.insert(0, VECTOR_PY_DIR)
+    print(f"Added {VECTOR_PY_DIR} to sys.path")
 
+print("Updated sys.path:", sys.path)
+
+from scripts.network_automation import display_menu, load_yaml_file
+from scripts.git_operations import git_commit_and_push
 
 # Configure logging
 logging.basicConfig(
@@ -28,9 +34,9 @@ def main():
 
         # Display menu and get user choice
         choice = display_menu(actions)
-        if not choice:
-            logger.error("Invalid action choice")
-            print("Invalid choice. Exiting.")
+        if choice is None or choice not in range(1, len(actions) + 1):
+            logger.error("Failed to get valid action choice")
+            print("Failed to select a valid action. Exiting.")
             return
 
         selected_action = actions[choice - 1]
@@ -38,14 +44,27 @@ def main():
         logger.info(f"Selected action: {action_name}")
 
         # Prompt for local execution or GitHub push
-        print("\nChoose execution mode:")
-        print("1. Execute locally")
-        print("2. Push to GitHub")
-        mode_choice = input("Enter your choice (1-2): ").strip()
-
-        if mode_choice not in ['1', '2']:
-            logger.error(f"Invalid execution mode: {mode_choice}")
-            print("Invalid choice. Exiting.")
+        max_retries = 5
+        retries = 0
+        while retries < max_retries:
+            print("\nChoose execution mode:")
+            print("1. Execute locally")
+            print("2. Push to GitHub")
+            try:
+                mode_choice = input("Enter your choice (1-2): ").strip()
+                logger.info(f"Raw mode input received: '{mode_choice}'")
+                if mode_choice in ['1', '2']:
+                    break
+                logger.error(f"Invalid execution mode: {mode_choice}")
+                print("Invalid choice. Please enter 1 or 2")
+                retries += 1
+            except EOFError:
+                logger.error("EOF received for mode choice")
+                print("Input interrupted. Please enter 1 or 2")
+                retries += 1
+        else:
+            logger.error(f"Max retries ({max_retries}) reached for mode choice")
+            print("Too many invalid attempts. Exiting.")
             return
 
         if mode_choice == '2':

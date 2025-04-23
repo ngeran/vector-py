@@ -1,0 +1,17 @@
+2025-04-23 15:54:15,272 - INFO - Loaded YAML file: /home/nikos/github/ngeran/vector-py/data/actions.yml
+2025-04-23 15:54:24,520 - INFO - Raw input received: '1'
+2025-04-23 15:54:24,520 - INFO - Valid choice selected: 1
+2025-04-23 15:54:24,520 - INFO - Selected action: ping
+2025-04-23 15:54:37,721 - INFO - Executing action ping locally
+2025-04-23 15:54:37,721 - INFO - Executing action: ping
+2025-04-23 15:54:37,796 - ERROR - Error in main: cannot import name 'perform_action' from 'scripts.actions' (/home/nikos/github/ngeran/vector-py/scripts/actions.py)
+2025-04-23 15:54:37,796 - ERROR - Error in launcher: cannot import name 'perform_action' from 'scripts.actions' (/home/nikos/github/ngeran/vector-py/scripts/actions.py)
+2025-04-23 15:55:54,583 - INFO - Loaded YAML file: /home/nikos/github/ngeran/vector-py/data/actions.yml
+2025-04-23 15:55:57,672 - INFO - Raw input received: '1'
+2025-04-23 15:55:57,672 - INFO - Valid choice selected: 1
+2025-04-23 15:55:57,673 - INFO - Selected action: ping
+2025-04-23 15:56:00,324 - INFO - Raw mode input received: '1'
+2025-04-23 15:56:00,324 - INFO - Executing action ping locally
+2025-04-23 15:56:00,324 - INFO - Executing action: ping
+2025-04-23 15:56:00,399 - ERROR - Error in main: cannot import name 'perform_action' from 'scripts.actions' (/home/nikos/github/ngeran/vector-py/scripts/actions.py)
+2025-04-23 15:56:00,399 - ERROR - Error in launcher: cannot import name 'perform_action' from 'scripts.actions' (/home/nikos/github/ngeran/vector-py/scripts/actions.py)

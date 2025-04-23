@@ -1,5 +1,6 @@
 import logging
 import yaml
+from .actions import ping_hosts, configure_interfaces, monitor_routes
 
 # Configure logging
 logging.basicConfig(
@@ -46,6 +47,8 @@ def display_menu(actions):
             retries += 1
     logger.error(f"Max retries ({max_retries}) reached in display_menu")
     print("Too many invalid attempts. Exiting.")
+    return None
+
 def load_yaml_file(file_path):
     """Load and return the contents of a YAML file."""
     try:
@@ -61,15 +64,28 @@ def main(action_name=None):
     """Main function to execute network automation actions."""
     try:
         logger.info(f"Executing action: {action_name}")
-        # Placeholder for your main logic (e.g., connect to hosts, perform actions)
-        # Replace with your actual implementation
-        if action_name:
-            # Example: Map action_name to a function in actions.py
-            from .actions import perform_action
-            perform_action(action_name)
-        else:
+        if not action_name:
             logger.error("No action name provided")
             print("Error: No action name provided")
+            return
+
+        # Map action names to functions
+        action_map = {
+            'ping': ping_hosts,
+            'interfaces': configure_interfaces,
+            'route_monitor': monitor_routes
+        }
+
+        action_func = action_map.get(action_name)
+        if not action_func:
+            logger.error(f"Unknown action: {action_name}")
+            print(f"Error: Unknown action {action_name}")
+            return
+
+        # Execute the action
+        action_func()
+        logger.info(f"Completed action: {action_name}")
+
     except Exception as e:
         logger.error(f"Error in main: {e}")
         raise

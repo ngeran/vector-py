@@ -19,6 +19,7 @@ def connect_to_hosts(host: Union[str, List[str]], username: str, password: str) 
     for h in hosts:
         try:
             logger.info(f"Connecting to host {h} with username {username}")
+            print(f"DEBUG (connect): Attempting to connect to: {h} with user: {username}") # Added debug print
             dev = Device(host=h, user=username, password=password)
             dev.open()
             logger.info(f"Connected to {h}")

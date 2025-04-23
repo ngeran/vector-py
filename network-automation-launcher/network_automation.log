@@ -131,3 +131,35 @@ b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:
 2025-04-23 18:04:36,855 - INFO - Connected to 172.27.200.200
 2025-04-23 18:04:36,855 - ERROR - Error in ping_hosts: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
 2025-04-23 18:04:36,855 - ERROR - Error in main: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 18:08:49,555 - INFO - Raw input received: '1'
+2025-04-23 18:08:49,556 - INFO - Valid choice selected: 1
+2025-04-23 18:08:49,556 - INFO - Selected action: ping
+2025-04-23 18:08:53,218 - INFO - Raw mode input received: '1'
+2025-04-23 18:08:53,218 - INFO - Executing action ping locally
+2025-04-23 18:08:53,218 - INFO - Executing action: ping
+2025-04-23 18:08:53,221 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 18:08:53,221 - INFO - Starting ping action (wrapper)
+2025-04-23 18:08:53,221 - INFO - Starting ping_hosts
+2025-04-23 18:08:53,221 - INFO - No connections provided, creating new connections
+2025-04-23 18:08:53,221 - INFO - Connecting to host admin with username manolis1
+2025-04-23 18:08:53,242 - ERROR - Failed to connect to admin: ConnectUnknownHostError(admin)
+2025-04-23 18:08:53,242 - ERROR - Error in ping_hosts: ConnectUnknownHostError(admin)
+2025-04-23 18:08:53,242 - INFO - Finished ping_hosts
+2025-04-23 18:08:53,242 - INFO - Ping action wrapper completed
+2025-04-23 18:08:53,242 - INFO - Completed action: ping
+2025-04-23 18:18:31,672 - INFO - Raw input received: '1'
+2025-04-23 18:18:31,672 - INFO - Valid choice selected: 1
+2025-04-23 18:18:31,673 - INFO - Selected action: ping
+2025-04-23 18:18:33,833 - INFO - Raw mode input received: '1'
+2025-04-23 18:18:33,833 - INFO - Executing action ping locally
+2025-04-23 18:18:33,833 - INFO - Executing action: ping
+2025-04-23 18:18:33,836 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 18:18:33,836 - INFO - Starting ping action (wrapper)
+2025-04-23 18:18:33,836 - INFO - Starting ping_hosts
+2025-04-23 18:18:33,836 - INFO - No connections provided, creating new connections
+2025-04-23 18:18:33,836 - INFO - Connecting to host admin with username manolis1
+2025-04-23 18:18:33,868 - ERROR - Failed to connect to admin: ConnectUnknownHostError(admin)
+2025-04-23 18:18:33,868 - ERROR - Error in ping_hosts: ConnectUnknownHostError(admin)
+2025-04-23 18:18:33,868 - INFO - Finished ping_hosts
+2025-04-23 18:18:33,868 - INFO - Ping action wrapper completed
+2025-04-23 18:18:33,868 - INFO - Completed action: ping

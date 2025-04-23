@@ -1,9 +1,9 @@
 import logging
 import os
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
-from scripts.diagnostic_actions import ping_hosts as diag_ping_hosts  # Rename to avoid shadowing
+from scripts.diagnostic_actions import ping_hosts as diag_ping_hosts
 from scripts.interface_actions import configure_interfaces as configure_interface
-from scripts.route_monitor import monitor_routes
+from scripts.route_monitor import monitor_routes # Import the function directly
 from scripts.utils import load_yaml_file
 from jnpr.junos import Device
 from typing import List, Dict, Callable
@@ -76,18 +76,15 @@ def monitor_routes(username: str, password: str, host_ips: List[str], hosts: Lis
         logger.info("Starting route_monitor action")
         if connections is None:
             connections = []
-            for host in host_ips:
-                conn_list = connect_to_hosts(host, username, password)
-                if conn_list:
-                    connections.extend(conn_list)
+            connections = connect_to_hosts(host_ips, username, password) # Connect to all hosts at once
 
-        monitor_routes(
+        monitor_routes(  # Call the function from route_monitor.py
             username=username,
             password=password,
             host_ips=host_ips,
             hosts=hosts,
-            connect_to_hosts=connect_to_hosts,
-            disconnect_from_hosts=disconnect_from_hosts,
+            connect_to_hosts=connect_to_hosts, # Pass these
+            disconnect_from_hosts=disconnect_from_hosts, # Pass these
             connections=connections
         )
         disconnect_from_hosts(connections)

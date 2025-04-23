@@ -1,108 +1,93 @@
-import os
-from datetime import datetime
 import logging
-from typing import List, Dict
+import os
+from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
+from scripts.diagnostic_actions import ping_hosts as diag_ping_hosts
+from scripts.interface_actions import configure_interfaces as configure_interface
+from scripts.route_monitor import monitor_routes # Import the function directly
+from scripts.utils import load_yaml_file
 from jnpr.junos import Device
-from jnpr.junos.exception import ConnectError # Import ConnectError
+from typing import List, Dict, Callable
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='network_automation.log'
+)
 logger = logging.getLogger(__name__)
 
-def monitor_routes(
-    username: str,
-    password: str,
-    host_ips: List[str],
-    hosts: List[Dict],
-    connect_to_hosts: callable,
-    disconnect_from_hosts: callable,
-    connections: List[Device] = None
-):
-    """Monitor routing tables on devices and generate a summary report."""
-    logger.info("Starting monitor_routes")
-    report_dir = os.path.join(os.path.dirname(__file__), '../reports')
-    os.makedirs(report_dir, exist_ok=True)
-
-    local_connections = [] # Keep track of connections made here
+def get_hosts():
+    """Load hosts from hosts_data.yml."""
     try:
-        # Use provided connections
-        if connections is None:
-            logger.info("No connections provided, creating new connections")
-            try:
-                connections = connect_to_hosts(host_ips, username, password)  # Connect to all hosts
-                local_connections = connections # Store connections made in this function
-            except ConnectError as e:
-                logger.error(f"Failed to connect to hosts: {e}")
-                print(f"Failed to connect to hosts: {e}")
-                return  # IMPORTANT: Exit if connection fails
-
-        if not connections:
-            logger.error("No devices connected for route monitoring")
-            print("No devices connected for route monitoring.")
-            return
-
-        host_lookup = {h['ip_address']: h['host_name'] for h in hosts}
-        summary = []
-
-        for dev in connections:
-            hostname = host_lookup.get(dev.hostname, dev.hostname)
-            try:
-                # Fetch routing tables (XML by default)
-                inet0_routes = dev.rpc.get_route_information(table='inet.0')
-                inet3_routes = dev.rpc.get_route_information(table='inet.3')
-                mpls_routes = dev.rpc.get_route_information(table='mpls.0')
-
-                # Parse route counts
-                inet0_count = len(inet0_routes.xpath('.//rt'))
-                inet3_count = len(inet3_routes.xpath('.//rt'))
-                mpls_count = len(mpls_routes.xpath('.//rt'))
-
-                # Fetch protocol-specific counts
-                bgp_summary = dev.rpc.get_bgp_summary_information()
-                ospf_neighbors = dev.rpc.get_ospf_neighbor_information()
-                ldp_sessions = dev.rpc.get_ldp_session_information()
-
-                bgp_count = len(bgp_summary.xpath('.//bgp-peer'))
-                ospf_count = len(ospf_neighbors.xpath('.//ospf-neighbor'))
-                ldp_count = len(ldp_sessions.xpath('.//ldp-session'))
-
-                summary.append({
-                    'host': hostname,
-                    'bgp': bgp_count,
-                    'ospf': ospf_count,
-                    'ldp': ldp_count,
-                    'mpls': mpls_count,
-                    'added': 0,  # Placeholder, update with actual logic
-                    'removed': 0,
-                    'flapped': 0
-                })
-
-                print(f"Fetched {inet0_count} routes from {hostname} ({dev.hostname}) for table inet.0")
-                print(f"Fetched {inet3_count} routes from {hostname} ({dev.hostname}) for table inet.3")
-                print(f"Fetched {mpls_count} routes from {hostname} ({dev.hostname}) for table mpls.0")
-
-            except Exception as e:
-                logger.error(f"Failed to fetch routes from {hostname} ({dev.hostname}): {e}")
-                print(f"Failed to fetch routes from {hostname} ({dev.hostname}): {e}")
-
-        # Generate report
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        report = f"Routing Table Summary - {timestamp}\n{'-'*80}\n"
-        report += "| Host            | BGP    | OSPF   | LDP    | MPLS   | Added | Removed | Flapped |\n"
-        report += "|----------------|--------|--------|--------|--------|-------|---------|---------|\n"
-        for entry in summary:
-            report += f"| {entry['host']:<13} | {entry['bgp']:<6} | {entry['ospf']:<6} | {entry['ldp']:<6} | {entry['mpls']:<6} | {entry['added']:<5} | {entry['removed']:<7} | {entry['flapped']:<7} |\n"
-        report += "-" * 80 + "\n"
-
-        report_file = os.path.join(report_dir, f"route_monitor_{timestamp}.txt")
-        with open(report_file, 'w') as f:
-            f.write(report)
-        logger.info(f"Route monitor report saved to {report_file}")
-        print(f"Route monitor report saved to {report_file}")
-
+        vector_py_dir = os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py")
+        hosts_file = os.path.join(vector_py_dir, 'data/hosts_data.yml')
+        hosts_data = load_yaml_file(hosts_file)
+        hosts = hosts_data.get('hosts', [])
+        host_ips = [host['ip_address'] for host in hosts]
+        print(f"DEBUG: host_ips = {host_ips}")  # Debugging line
+        username = hosts_data.get('username', 'admin')
+        password = hosts_data.get('password', 'password')
+        logger.info(f"Loaded hosts: {host_ips}, username: {username}")
+        return host_ips, hosts, username, password
     except Exception as e:
-        logger.error(f"Error in monitor_routes: {e}")
-        print(f"Error in monitor_routes: {e}")
-        raise  # Re-raise the exception to be caught in actions.py
-    finally:
-        if local_connections: # Disconnect only connections made in this function
-           disconnect_from_hosts(local_connections)
-        logger.info("Finished monitor_routes")
+        logger.error(f"Error loading hosts: {e}")
+        raise
+
+def ping_hosts(username: str, password: str, host_ips: List[str], hosts: List[Dict],
+              connect_to_hosts: Callable, disconnect_from_hosts: Callable):
+    """Wrapper for the actual ping_hosts implementation in diagnostic_actions.py"""
+    try:
+        logger.info("Starting ping action (wrapper)")
+        diag_ping_hosts(
+            username=username,
+            password=password,
+            host_ips=host_ips,
+            hosts=hosts,
+            connect_to_hosts=connect_to_hosts,
+            disconnect_from_hosts=disconnect_from_hosts
+        )
+        logger.info("Ping action wrapper completed")
+    except Exception as e:
+        logger.error(f"Error in ping_hosts wrapper: {e}")
+        raise
+
+def configure_interfaces(username: str, password: str, host_ips: List[str], hosts: List[Dict], template_file: str = None):
+    """Configure interfaces on all hosts."""
+    try:
+        logger.info("Starting interfaces action")
+        connections = []
+        for host in host_ips:
+            conn_list = connect_to_hosts(host, username, password)
+            if conn_list:
+                connections.extend(conn_list)
+                host_data = next(h for h in hosts if h['ip_address'] == host)
+                configure_interface(conn_list[0], host_data.get('interfaces', []), template_file)
+                logger.info(f"Interfaces configured for {host}")
+        disconnect_from_hosts(connections)
+        logger.info("Interfaces action completed")
+    except Exception as e:
+        logger.error(f"Error in configure_interfaces: {e}")
+        raise
+
+def run_monitor_routes_action(username: str, password: str, host_ips: List[str], hosts: List[Dict],
+                              connect_to_hosts: Callable, disconnect_from_hosts: Callable, connections: List[Device] = None):
+    """Orchestrates the route monitoring action."""
+    try:
+        logger.info("Starting route_monitor action (orchestrator)")
+        if connections is None:
+            connections = connect_to_hosts(host_ips, username, password)
+
+        monitor_routes(  # Call the function from route_monitor.py
+            username=username,
+            password=password,
+            host_ips=host_ips,
+            hosts=hosts,
+            connect_to_hosts=connect_to_hosts,
+            disconnect_from_hosts=disconnect_from_hosts,
+            connections=connections
+        )
+        disconnect_from_hosts(connections)
+        logger.info("Route_monitor action orchestrator completed")
+    except Exception as e:
+        logger.error(f"Error in route_monitor orchestrator: {e}")
+        raise

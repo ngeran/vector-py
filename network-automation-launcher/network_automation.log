@@ -4181,3 +4181,1995 @@ b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns
 2025-04-23 18:42:31,164 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
 2025-04-23 18:42:31,164 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
 2025-04-23 18:42:31,164 - ERROR - Error in main: maximum recursion depth exceeded
+2025-04-23 18:44:32,298 - INFO - Raw input received: '3'
+2025-04-23 18:44:32,299 - INFO - Valid choice selected: 3
+2025-04-23 18:44:32,299 - INFO - Selected action: route_monitor
+2025-04-23 18:44:36,595 - INFO - Raw mode input received: '1'
+2025-04-23 18:44:36,595 - INFO - Executing action route_monitor locally
+2025-04-23 18:44:36,596 - INFO - Executing action: route_monitor
+2025-04-23 18:44:36,598 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,598 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,599 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,600 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,601 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,602 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,603 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,604 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,605 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - INFO - Starting route_monitor action
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,606 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,607 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,608 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,609 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,610 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,611 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,612 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,613 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in monitor_routes: maximum recursion depth exceeded
+2025-04-23 18:44:36,614 - ERROR - Error in main: maximum recursion depth exceeded
+2025-04-23 18:58:45,690 - INFO - Raw input received: '3'
+2025-04-23 18:58:45,690 - INFO - Valid choice selected: 3
+2025-04-23 18:58:45,690 - INFO - Selected action: route_monitor
+2025-04-23 18:58:47,846 - INFO - Raw mode input received: '1'
+2025-04-23 18:58:47,846 - INFO - Executing action route_monitor locally
+2025-04-23 18:58:47,846 - INFO - Executing action: route_monitor
+2025-04-23 18:58:47,849 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 18:58:47,849 - ERROR - Error in main: name 'monitor_routes' is not defined
+2025-04-23 19:00:24,207 - INFO - Raw input received: '3'
+2025-04-23 19:00:24,207 - INFO - Valid choice selected: 3
+2025-04-23 19:00:24,207 - INFO - Selected action: route_monitor
+2025-04-23 19:00:26,516 - INFO - Raw mode input received: '1'
+2025-04-23 19:00:26,517 - INFO - Executing action route_monitor locally
+2025-04-23 19:00:26,517 - INFO - Executing action: route_monitor
+2025-04-23 19:00:26,519 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 19:00:26,519 - ERROR - Error in main: name 'monitor_routes' is not defined

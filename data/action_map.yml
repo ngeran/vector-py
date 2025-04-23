@@ -4,4 +4,4 @@ actions:
   - name: interfaces
     function: scripts.interface_actions.configure_interfaces
   - name: route_monitor
-    function: scripts.route_monitor.monitor_routes
+    function: scripts.actions.run_monitor_routes_action

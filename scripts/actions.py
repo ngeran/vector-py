@@ -3,10 +3,10 @@ import os
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
 from scripts.diagnostic_actions import ping_hosts as diag_ping_hosts
 from scripts.interface_actions import configure_interfaces as configure_interface
-from scripts.route_monitor import monitor_routes # Import the function directly
 from scripts.utils import load_yaml_file
 from jnpr.junos import Device
 from typing import List, Dict, Callable
+import importlib
 
 # Configure logging
 logging.basicConfig(
@@ -69,26 +69,28 @@ def configure_interfaces(username: str, password: str, host_ips: List[str], host
         logger.error(f"Error in configure_interfaces: {e}")
         raise
 
-def monitor_routes(username: str, password: str, host_ips: List[str], hosts: List[Dict],
-                   connect_to_hosts: Callable, disconnect_from_hosts: Callable, connections: List[Device] = None):
-    """Monitor routing tables on all hosts."""
+def run_monitor_routes_action(username: str, password: str, host_ips: List[str], hosts: List[Dict],
+                              connect_to_hosts: Callable, disconnect_from_hosts: Callable, connections: List[Device] = None):
+    """Orchestrates the route monitoring action."""
     try:
-        logger.info("Starting route_monitor action")
+        logger.info("Starting route_monitor action (orchestrator)")
         if connections is None:
-            connections = []
-            connections = connect_to_hosts(host_ips, username, password) # Connect to all hosts at once
+            connections = connect_to_hosts(host_ips, username, password)
 
-        monitor_routes(  # Call the function from route_monitor.py
+        route_monitor_module = importlib.import_module("scripts.route_monitor")
+        monitor_routes_func = getattr(route_monitor_module, "monitor_routes")
+
+        monitor_routes_func(  # Call the function using getattr
             username=username,
             password=password,
             host_ips=host_ips,
             hosts=hosts,
-            connect_to_hosts=connect_to_hosts, # Pass these
-            disconnect_from_hosts=disconnect_from_hosts, # Pass these
+            connect_to_hosts=connect_to_hosts,
+            disconnect_from_hosts=disconnect_from_hosts,
             connections=connections
         )
         disconnect_from_hosts(connections)
-        logger.info("Route_monitor action completed")
+        logger.info("Route_monitor action orchestrator completed")
     except Exception as e:
-        logger.error(f"Error in monitor_routes: {e}")
+        logger.error(f"Error in route_monitor orchestrator: {e}")
         raise

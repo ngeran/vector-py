@@ -1,6 +1,6 @@
 import logging
 import os
-from scripts.actions import ping_hosts, configure_interfaces, monitor_routes, get_hosts
+from scripts.actions import ping_hosts, configure_interfaces, get_hosts
 from scripts.utils import load_yaml_file
 
 # Configure logging

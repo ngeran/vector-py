@@ -1,6 +1,7 @@
 import logging
-import yaml
-from .actions import ping_hosts, configure_interfaces, monitor_routes
+import os
+from scripts.actions import ping_hosts, configure_interfaces, monitor_routes, get_hosts
+from scripts.utils import load_yaml_file
 
 # Configure logging
 logging.basicConfig(
@@ -17,7 +18,8 @@ def display_menu(actions):
     print("| Option | Action                  |")
     print("----------------------------------------")
     for i, action in enumerate(actions, 1):
-        print(f"| {i:<6} | {action['name']:<22} |")
+        display_name = action.get('display_name', action['name'])
+        print(f"| {i:<6} | {display_name:<22} |")
     print("----------------------------------------")
     max_retries = 5
     retries = 0
@@ -49,17 +51,6 @@ def display_menu(actions):
     print("Too many invalid attempts. Exiting.")
     return None
 
-def load_yaml_file(file_path):
-    """Load and return the contents of a YAML file."""
-    try:
-        with open(file_path, 'r') as file:
-            data = yaml.safe_load(file)
-        logger.info(f"Loaded YAML file: {file_path}")
-        return data
-    except Exception as e:
-        logger.error(f"Error loading YAML file {file_path}: {e}")
-        raise
-
 def main(action_name=None):
     """Main function to execute network automation actions."""
     try:
@@ -69,11 +60,35 @@ def main(action_name=None):
             print("Error: No action name provided")
             return
 
+        # Load actions to get template_file
+        actions_file = os.path.join(os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"), 'data/actions.yml')
+        actions_data = load_yaml_file(actions_file)
+        action_info = next((a for a in actions_data.get('actions', []) if a['name'] == action_name), {})
+
+        # Get hosts data
+        host_ips, hosts, username, password = get_hosts()
+
         # Map action names to functions
         action_map = {
-            'ping': ping_hosts,
-            'interfaces': configure_interfaces,
-            'route_monitor': monitor_routes
+            'ping': lambda: ping_hosts(
+                username=username,
+                password=password,
+                host_ips=host_ips,
+                hosts=hosts
+            ),
+            'interfaces': lambda: configure_interfaces(
+                username=username,
+                password=password,
+                host_ips=host_ips,
+                hosts=hosts,
+                template_file=action_info.get('template_file')
+            ),
+            'route_monitor': lambda: monitor_routes(
+                username=username,
+                password=password,
+                host_ips=host_ips,
+                hosts=hosts
+            )
         }
 
         action_func = action_map.get(action_name)
@@ -88,7 +103,7 @@ def main(action_name=None):
 
     except Exception as e:
         logger.error(f"Error in main: {e}")
-        raise
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()

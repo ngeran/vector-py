@@ -15,3 +15,39 @@
 2025-04-23 15:56:00,324 - INFO - Executing action: ping
 2025-04-23 15:56:00,399 - ERROR - Error in main: cannot import name 'perform_action' from 'scripts.actions' (/home/nikos/github/ngeran/vector-py/scripts/actions.py)
 2025-04-23 15:56:00,399 - ERROR - Error in launcher: cannot import name 'perform_action' from 'scripts.actions' (/home/nikos/github/ngeran/vector-py/scripts/actions.py)
+2025-04-23 17:22:14,728 - INFO - Loaded YAML file: /home/nikos/github/ngeran/vector-py/data/actions.yml
+2025-04-23 17:22:16,564 - INFO - Raw input received: '1'
+2025-04-23 17:22:16,564 - INFO - Valid choice selected: 1
+2025-04-23 17:22:16,564 - INFO - Selected action: ping
+2025-04-23 17:22:21,928 - INFO - Raw mode input received: '1'
+2025-04-23 17:22:21,928 - INFO - Executing action ping locally
+2025-04-23 17:22:21,928 - INFO - Executing action: ping
+2025-04-23 17:22:21,929 - INFO - Loaded YAML file: /home/nikos/github/ngeran/vector-py/data/actions.yml
+2025-04-23 17:22:21,929 - INFO - Starting ping action
+2025-04-23 17:22:21,930 - INFO - Loaded YAML file: /home/nikos/github/ngeran/vector-py/data/hosts_data.yml
+2025-04-23 17:22:21,930 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 17:22:21,930 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-23 17:22:22,822 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-23 17:22:23,807 - INFO - Authentication (password) successful!
+2025-04-23 17:22:23,876 - INFO - [host 172.27.200.200 session 0x7f6ff74b2060] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-23 17:22:28,032 - INFO - [host 172.27.200.200 session 0x7f6ff74b2060] Received message from host
+2025-04-23 17:22:28,032 - INFO - [host 172.27.200.200 session-id 60222] initialized: session-id=60222 | server_capabilities=<dict_keyiterator object at 0x7f6ff6f0f150>
+2025-04-23 17:22:28,032 - INFO - Connected to 172.27.200.200
+2025-04-23 17:22:28,032 - ERROR - Error in ping_hosts: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 17:22:28,032 - ERROR - Error in main: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 17:22:28,032 - ERROR - Error in launcher: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 17:26:40,424 - INFO - Loaded YAML file: /home/nikos/github/ngeran/vector-py/data/actions.yml
+2025-04-23 17:26:42,268 - INFO - Raw input received: '1'
+2025-04-23 17:26:42,268 - INFO - Valid choice selected: 1
+2025-04-23 17:26:42,268 - INFO - Selected action: ping
+2025-04-23 17:26:45,498 - INFO - Raw mode input received: '1'
+2025-04-23 17:26:45,498 - INFO - Executing action ping locally
+2025-04-23 17:26:45,498 - INFO - Executing action: ping
+2025-04-23 17:26:45,498 - INFO - Loaded YAML file: /home/nikos/github/ngeran/vector-py/data/actions.yml
+2025-04-23 17:26:45,500 - INFO - Loaded YAML file: /home/nikos/github/ngeran/vector-py/data/hosts_data.yml
+2025-04-23 17:26:45,500 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 17:26:45,500 - INFO - Starting ping action
+2025-04-23 17:26:45,500 - ERROR - Error in ping_hosts: 'username'
+2025-04-23 17:26:45,500 - ERROR - Error in main: 'username'
+2025-04-23 17:26:45,500 - ERROR - Error in launcher: 'username'

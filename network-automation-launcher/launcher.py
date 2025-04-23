@@ -78,13 +78,9 @@ def main():
                 "scripts/diagnostic_actions.py",
                 "scripts/route_monitor.py",
                 "scripts/utils.py",
-                "scripts/main.py",
                 "scripts/junos_actions.py",
                 "data/hosts_data.yml",
                 "data/actions.yml",
-                "data/action_map.yml",
-                "data/inventory.yml",
-                "data/git_config.yml",
                 "templates/interface_template.j2"
             ]
             repo_path = VECTOR_PY_DIR

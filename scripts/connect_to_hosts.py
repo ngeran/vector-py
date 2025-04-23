@@ -1,24 +1,32 @@
+import logging
 from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
-import logging
+from typing import List, Union
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='network_automation.log'
+)
 logger = logging.getLogger(__name__)
 
-def connect_to_hosts(username: str, password: str, host_ips: list) -> list:
-    """Connect to a list of hosts and return the connections."""
-    logger.info(f"Connecting to hosts: {host_ips}")
+def connect_to_hosts(host: Union[str, List[str]], username: str, password: str) -> List[Device]:
+    """Connect to one or more Juniper devices and return the connection objects."""
+    # Ensure host is a list
+    hosts = [host] if isinstance(host, str) else host
     connections = []
-    for ip in host_ips:
+    for h in hosts:
         try:
-            dev = Device(host=ip, user=username, password=password)
+            logger.info(f"Connecting to host {h} with username {username}")
+            dev = Device(host=h, user=username, password=password)
             dev.open()
+            logger.info(f"Connected to {h}")
             connections.append(dev)
-            logger.info(f"Connected to {ip}")
-            print(f"Connected to {ip}")
         except ConnectError as e:
-            logger.error(f"Failed to connect to {ip}: {e}")
-            print(f"Failed to connect to {ip}: {e}")
-    logger.info(f"Returning {len(connections)} connections")
+            logger.error(f"Failed to connect to {h}: {e}")
+            print(f"Failed to connect to {h}: {e}")
+            raise
     return connections
 
 def disconnect_from_hosts(connections: list):

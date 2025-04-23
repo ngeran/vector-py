@@ -68,13 +68,19 @@ def main(action_name=None):
         # Get hosts data
         host_ips, hosts, username, password = get_hosts()
 
+        # Import connect_to_hosts and disconnect_from_hosts here
+        from scripts.connect_to_hosts import connect_to_hosts
+        from scripts.actions import disconnect_from_hosts
+
         # Map action names to functions
         action_map = {
             'ping': lambda: ping_hosts(
                 username=username,
                 password=password,
                 host_ips=host_ips,
-                hosts=hosts
+                hosts=hosts,
+                connect_to_hosts=connect_to_hosts,  # Pass connect_to_hosts
+                disconnect_from_hosts=disconnect_from_hosts # Pass disconnect_from_hosts
             ),
             'interfaces': lambda: configure_interfaces(
                 username=username,
@@ -87,7 +93,10 @@ def main(action_name=None):
                 username=username,
                 password=password,
                 host_ips=host_ips,
-                hosts=hosts
+                hosts=hosts,
+                connect_to_hosts=connect_to_hosts,
+                disconnect_from_hosts=disconnect_from_hosts,
+                connections=[] # You might need to adjust how connections are handled here
             )
         }
 
@@ -104,6 +113,3 @@ def main(action_name=None):
     except Exception as e:
         logger.error(f"Error in main: {e}")
         print(f"Error: {e}")
-
-if __name__ == "__main__":
-    main()

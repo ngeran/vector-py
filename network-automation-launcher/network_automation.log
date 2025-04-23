@@ -51,3 +51,83 @@ b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:
 2025-04-23 17:26:45,500 - ERROR - Error in ping_hosts: 'username'
 2025-04-23 17:26:45,500 - ERROR - Error in main: 'username'
 2025-04-23 17:26:45,500 - ERROR - Error in launcher: 'username'
+2025-04-23 17:46:40,824 - INFO - Raw input received: '1'
+2025-04-23 17:46:40,824 - INFO - Valid choice selected: 1
+2025-04-23 17:46:40,824 - INFO - Selected action: ping
+2025-04-23 17:46:44,782 - INFO - Raw mode input received: '1'
+2025-04-23 17:46:44,782 - INFO - Executing action ping locally
+2025-04-23 17:46:44,782 - INFO - Executing action: ping
+2025-04-23 17:46:44,784 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 17:46:44,784 - INFO - Starting ping action
+2025-04-23 17:46:44,784 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-23 17:46:45,952 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-23 17:46:46,802 - INFO - Authentication (password) successful!
+2025-04-23 17:46:46,949 - INFO - [host 172.27.200.200 session 0x7fe40ffd4980] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-23 17:46:50,957 - INFO - [host 172.27.200.200 session 0x7fe40ffd4980] Received message from host
+2025-04-23 17:46:50,957 - INFO - [host 172.27.200.200 session-id 61171] initialized: session-id=61171 | server_capabilities=<dict_keyiterator object at 0x7fe40fd2b330>
+2025-04-23 17:46:50,957 - INFO - Connected to 172.27.200.200
+2025-04-23 17:46:50,957 - ERROR - Error in ping_hosts: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 17:46:50,957 - ERROR - Error in main: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 17:59:07,706 - INFO - Raw input received: '1'
+2025-04-23 17:59:07,707 - INFO - Valid choice selected: 1
+2025-04-23 17:59:07,707 - INFO - Selected action: ping
+2025-04-23 17:59:11,723 - INFO - Raw mode input received: '1'
+2025-04-23 17:59:11,723 - INFO - Executing action ping locally
+2025-04-23 17:59:11,723 - INFO - Executing action: ping
+2025-04-23 17:59:11,725 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 17:59:11,726 - ERROR - Error in main: ping_hosts() got an unexpected keyword argument 'connect_to_hosts'
+2025-04-23 18:01:18,478 - INFO - Raw input received: '1'
+2025-04-23 18:01:18,478 - INFO - Valid choice selected: 1
+2025-04-23 18:01:18,478 - INFO - Selected action: ping
+2025-04-23 18:01:23,131 - INFO - Raw mode input received: '1'
+2025-04-23 18:01:23,131 - INFO - Executing action ping locally
+2025-04-23 18:01:23,131 - INFO - Executing action: ping
+2025-04-23 18:01:23,133 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 18:01:23,133 - INFO - Starting ping action
+2025-04-23 18:01:23,133 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-23 18:01:23,938 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-23 18:01:24,859 - INFO - Authentication (password) successful!
+2025-04-23 18:01:24,924 - INFO - [host 172.27.200.200 session 0x7f9648b62330] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-23 18:01:29,057 - INFO - [host 172.27.200.200 session 0x7f9648b62330] Received message from host
+2025-04-23 18:01:29,058 - INFO - [host 172.27.200.200 session-id 61740] initialized: session-id=61740 | server_capabilities=<dict_keyiterator object at 0x7f96489d71f0>
+2025-04-23 18:01:29,058 - INFO - Connected to 172.27.200.200
+2025-04-23 18:01:29,058 - ERROR - Error in ping_hosts: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 18:01:29,058 - ERROR - Error in main: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 18:03:37,240 - INFO - Raw input received: '1'
+2025-04-23 18:03:37,241 - INFO - Valid choice selected: 1
+2025-04-23 18:03:37,241 - INFO - Selected action: ping
+2025-04-23 18:03:38,659 - INFO - Raw mode input received: '1'
+2025-04-23 18:03:38,659 - INFO - Executing action ping locally
+2025-04-23 18:03:38,659 - INFO - Executing action: ping
+2025-04-23 18:03:38,661 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 18:03:38,661 - INFO - Starting ping action
+2025-04-23 18:03:38,661 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-23 18:03:39,409 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-23 18:03:40,392 - INFO - Authentication (password) successful!
+2025-04-23 18:03:40,468 - INFO - [host 172.27.200.200 session 0x7f340e492d20] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-23 18:03:44,449 - INFO - [host 172.27.200.200 session 0x7f340e492d20] Received message from host
+2025-04-23 18:03:44,450 - INFO - [host 172.27.200.200 session-id 61838] initialized: session-id=61838 | server_capabilities=<dict_keyiterator object at 0x7f340e1c7150>
+2025-04-23 18:03:44,450 - INFO - Connected to 172.27.200.200
+2025-04-23 18:03:44,450 - ERROR - Error in ping_hosts: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 18:03:44,450 - ERROR - Error in main: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 18:04:29,097 - INFO - Raw input received: '1'
+2025-04-23 18:04:29,097 - INFO - Valid choice selected: 1
+2025-04-23 18:04:29,097 - INFO - Selected action: ping
+2025-04-23 18:04:30,425 - INFO - Raw mode input received: '1'
+2025-04-23 18:04:30,425 - INFO - Executing action ping locally
+2025-04-23 18:04:30,425 - INFO - Executing action: ping
+2025-04-23 18:04:30,427 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-23 18:04:30,427 - INFO - Starting ping action
+2025-04-23 18:04:30,427 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-23 18:04:31,223 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-23 18:04:32,246 - INFO - Authentication (password) successful!
+2025-04-23 18:04:32,303 - INFO - [host 172.27.200.200 session 0x7f2ec2ffccb0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-23 18:04:36,855 - INFO - [host 172.27.200.200 session 0x7f2ec2ffccb0] Received message from host
+2025-04-23 18:04:36,855 - INFO - [host 172.27.200.200 session-id 61876] initialized: session-id=61876 | server_capabilities=<dict_keyiterator object at 0x7f2ec2fe7240>
+2025-04-23 18:04:36,855 - INFO - Connected to 172.27.200.200
+2025-04-23 18:04:36,855 - ERROR - Error in ping_hosts: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-23 18:04:36,855 - ERROR - Error in main: ping_hosts() missing 5 required positional arguments: 'password', 'host_ips', 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'

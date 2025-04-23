@@ -1,12 +1,13 @@
 import logging
 import os
 from scripts.connect_to_hosts import connect_to_hosts
-from scripts.diagnostic_actions import ping_hosts as ping_host
+# Note: We don't need to import disconnect_from_hosts here anymore
+from scripts.diagnostic_actions import ping_hosts as ping_host  # Renamed to avoid conflict
 from scripts.interface_actions import configure_interfaces as configure_interface
 from scripts.route_monitor import monitor_routes
 from scripts.utils import load_yaml_file
 from jnpr.junos import Device
-from typing import List, Dict
+from typing import List, Dict, Callable
 
 # Configure logging
 logging.basicConfig(
@@ -41,7 +42,8 @@ def disconnect_from_hosts(connections: List[Device]):
         except Exception as e:
             logger.error(f"Error disconnecting from {conn.host}: {e}")
 
-def ping_hosts(username: str, password: str, host_ips: List[str], hosts: List[Dict]):
+def ping_hosts(username: str, password: str, host_ips: List[str], hosts: List[Dict],
+               connect_to_hosts: Callable, disconnect_from_hosts: Callable):
     """Execute ping action on all hosts."""
     try:
         logger.info("Starting ping action")
@@ -51,7 +53,7 @@ def ping_hosts(username: str, password: str, host_ips: List[str], hosts: List[Di
             if conn_list:
                 conn = conn_list[0]
                 connections.append(conn)
-                result = ping_host(conn)
+                result = ping_host(conn) # Using the imported ping_host function
                 logger.info(f"Ping result for {host}: {result}")
         disconnect_from_hosts(connections)
         logger.info("Ping action completed")
@@ -78,11 +80,12 @@ def configure_interfaces(username: str, password: str, host_ips: List[str], host
         logger.error(f"Error in configure_interfaces: {e}")
         raise
 
-def monitor_routes(username: str, password: str, host_ips: List[str], hosts: List[Dict]):
+def monitor_routes(username: str, password: str, host_ips: List[str], hosts: List[Dict],
+                   connect_to_hosts: Callable, disconnect_from_hosts: Callable, connections: List[Device]):
     """Monitor routing tables on all hosts."""
     try:
         logger.info("Starting route_monitor action")
-        connections = connect_to_hosts(host_ips, username, password)
+        # The connect_to_hosts is likely called within the monitor_routes function
         monitor_routes(
             username=username,
             password=password,

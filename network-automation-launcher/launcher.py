@@ -2,24 +2,28 @@ import sys
 import os
 import logging
 
-# Set the project directory and add it to sys.path
+# Set the project directory and add it to sys.path before imports
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if project_dir not in sys.path:
     sys.path.insert(0, project_dir)
-logger = logging.getLogger(__name__)
-logger.info(f"sys.path: {sys.path}")
 
-# Imports after sys.path modification
-from scripts.network_automation import main as network_automation_main
-from scripts.utils import load_yaml_file
-from scripts.code_upgrade import code_upgrade
-
-# Configure logging
+# Configure logging early for debugging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     filename=os.path.join(project_dir, 'network_automation.log')
 )
+logger = logging.getLogger(__name__)
+logger.info(f"sys.path: {sys.path}")
+
+# Module-level imports at the top
+try:
+    from scripts.network_automation import main as network_automation_main
+    from scripts.utils import load_yaml_file
+    from scripts.code_upgrade import code_upgrade
+except ImportError as e:
+    logger.error(f"Import error: {e}")
+    raise
 
 def display_menu(actions):
     """Display a menu of actions and return the user's choice."""
@@ -57,6 +61,10 @@ def display_menu(actions):
             logger.error("EOF received during input")
             print(f"Input interrupted. Please enter a number between 1 and {len(actions)}")
             retries += 1
+        except KeyboardInterrupt:
+            logger.info("Program interrupted by user (Ctrl+C)")
+            print("\nProgram interrupted by user. Exiting.")
+            sys.exit(0)
     logger.error(f"Max retries ({max_retries}) reached in display_menu")
     print("Too many invalid attempts. Exiting.")
     return None
@@ -82,6 +90,10 @@ def display_execution_mode_menu():
             logger.error("EOF received during execution mode input")
             print("Input interrupted. Please enter 1 or 2.")
             retries += 1
+        except KeyboardInterrupt:
+            logger.info("Program interrupted by user (Ctrl+C)")
+            print("\nProgram interrupted by user. Exiting.")
+            sys.exit(0)
     logger.error(f"Max retries ({max_retries}) reached in display_execution_mode_menu")
     print("Too many invalid attempts. Exiting.")
     return None
@@ -116,6 +128,10 @@ def main():
             logger.info(f"Pushing action {action_name} to GitHub")
             print("GitHub push not implemented yet.")
 
+    except KeyboardInterrupt:
+        logger.info("Program interrupted by user (Ctrl+C)")
+        print("\nProgram interrupted by user. Exiting.")
+        sys.exit(0)
     except Exception as e:
         logger.error(f"Error in launcher: {e}")
         print(f"Error: {e}")

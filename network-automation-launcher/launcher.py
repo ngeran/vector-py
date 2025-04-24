@@ -1,106 +1,120 @@
-import os
 import sys
+import os
 import logging
 
-# Debug sys.path
-print("Initial sys.path:", sys.path)
+# Set the project directory and add it to sys.path
+project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if project_dir not in sys.path:
+    sys.path.insert(0, project_dir)
+logger = logging.getLogger(__name__)
+logger.info(f"sys.path: {sys.path}")
 
-# Add vector-py directory to sys.path
-VECTOR_PY_DIR = os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py")
-if VECTOR_PY_DIR not in sys.path:
-    sys.path.insert(0, VECTOR_PY_DIR)
-    print(f"Added {VECTOR_PY_DIR} to sys.path")
-
-print("Updated sys.path:", sys.path)
-
-from scripts.network_automation import display_menu, load_yaml_file
-from scripts.git_operations import git_commit_and_push
+# Imports after sys.path modification
+from scripts.network_automation import main as network_automation_main
+from scripts.utils import load_yaml_file
+from scripts.code_upgrade import code_upgrade
 
 # Configure logging
 logging.basicConfig(
-    filename=os.path.join(VECTOR_PY_DIR, 'network_automation.log'),
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename=os.path.join(project_dir, 'network_automation.log')
 )
-logger = logging.getLogger(__name__)
+
+def display_menu(actions):
+    """Display a menu of actions and return the user's choice."""
+    print("Select an action:")
+    print("----------------------------------------")
+    print("| Option | Action                  |")
+    print("----------------------------------------")
+    for i, action in enumerate(actions, 1):
+        display_name = action.get('display_name', action['name'])
+        print(f"| {i:<6} | {display_name:<22} |")
+    print("----------------------------------------")
+    max_retries = 5
+    retries = 0
+    while retries < max_retries:
+        try:
+            raw_input = input(f"Enter your choice (1-{len(actions)}): ").strip()
+            logger.info(f"Raw input received: '{raw_input}'")
+            if not raw_input:
+                logger.error("Empty input received")
+                print(f"Invalid choice. Please enter a number between 1 and {len(actions)}")
+                retries += 1
+                continue
+            choice = int(raw_input)
+            if 1 <= choice <= len(actions):
+                logger.info(f"Valid choice selected: {choice}")
+                return choice
+            logger.error(f"Choice out of range: {choice}")
+            print(f"Invalid choice. Please enter a number between 1 and {len(actions)}")
+            retries += 1
+        except ValueError:
+            logger.error(f"Non-numeric input: '{raw_input}'")
+            print(f"Invalid choice. Please enter a number between 1 and {len(actions)}")
+            retries += 1
+        except EOFError:
+            logger.error("EOF received during input")
+            print(f"Input interrupted. Please enter a number between 1 and {len(actions)}")
+            retries += 1
+    logger.error(f"Max retries ({max_retries}) reached in display_menu")
+    print("Too many invalid attempts. Exiting.")
+    return None
+
+def display_execution_mode_menu():
+    """Display execution mode menu and return the user's choice."""
+    print("\nChoose execution mode:")
+    print("1. Execute locally")
+    print("2. Push to GitHub")
+    max_retries = 5
+    retries = 0
+    while retries < max_retries:
+        try:
+            choice = input("Enter your choice (1-2): ").strip()
+            logger.info(f"Raw mode input received: '{choice}'")
+            if choice in ['1', '2']:
+                logger.info(f"Valid execution mode selected: {choice}")
+                return int(choice)
+            logger.error(f"Invalid execution mode: {choice}")
+            print("Invalid choice. Please enter 1 or 2.")
+            retries += 1
+        except EOFError:
+            logger.error("EOF received during execution mode input")
+            print("Input interrupted. Please enter 1 or 2.")
+            retries += 1
+    logger.error(f"Max retries ({max_retries}) reached in display_execution_mode_menu")
+    print("Too many invalid attempts. Exiting.")
+    return None
 
 def main():
-    """Main function to run the network automation launcher."""
+    """Main function to launch network automation tasks."""
     try:
-        # Load actions from actions.yml
-        actions_file = os.path.join(VECTOR_PY_DIR, 'data/actions.yml')
-        actions_data = load_yaml_file(actions_file)
-        actions = actions_data.get('actions', [])
+        actions_file = os.path.join(project_dir, 'data/action_map.yml')
+        actions = load_yaml_file(actions_file).get('actions', [])
 
-        # Display menu and get user choice
         choice = display_menu(actions)
-        if choice is None or choice not in range(1, len(actions) + 1):
-            logger.error("Failed to get valid action choice")
-            print("Failed to select a valid action. Exiting.")
+        if choice is None:
+            logger.error("No valid action selected")
             return
 
         selected_action = actions[choice - 1]
         action_name = selected_action['name']
         logger.info(f"Selected action: {action_name}")
 
-        # Prompt for local execution or GitHub push
-        max_retries = 5
-        retries = 0
-        while retries < max_retries:
-            print("\nChoose execution mode:")
-            print("1. Execute locally")
-            print("2. Push to GitHub")
-            try:
-                mode_choice = input("Enter your choice (1-2): ").strip()
-                logger.info(f"Raw mode input received: '{mode_choice}'")
-                if mode_choice in ['1', '2']:
-                    break
-                logger.error(f"Invalid execution mode: {mode_choice}")
-                print("Invalid choice. Please enter 1 or 2")
-                retries += 1
-            except EOFError:
-                logger.error("EOF received for mode choice")
-                print("Input interrupted. Please enter 1 or 2")
-                retries += 1
-        else:
-            logger.error(f"Max retries ({max_retries}) reached for mode choice")
-            print("Too many invalid attempts. Exiting.")
+        execution_mode = display_execution_mode_menu()
+        if execution_mode is None:
+            logger.error("No valid execution mode selected")
             return
 
-        if mode_choice == '2':
-            # Files to commit
-            files_to_commit = [
-                "scripts/launcher.py",
-                "scripts/network_automation.py",
-                "scripts/connect_to_hosts.py",
-                "scripts/actions.py",
-                "scripts/interface_actions.py",
-                "scripts/diagnostic_actions.py",
-                "scripts/route_monitor.py",
-                "scripts/utils.py",
-                "scripts/junos_actions.py",
-                "data/hosts_data.yml",
-                "data/actions.yml",
-                "templates/interface_template.j2"
-            ]
-            repo_path = VECTOR_PY_DIR
-            logger.info(f"Preparing to push to GitHub for action: {action_name}")
-
-            # Commit and push
-            success = git_commit_and_push(repo_path, action_name, files_to_commit)
-            if success:
-                logger.info(f"Git push completed for action: {action_name}")
-                print(f"Code pushed to GitHub for action: {action_name}")
-            else:
-                logger.error(f"Git push failed for action: {action_name}")
-                print(f"Git push failed for action: {action_name}")
-                return
-
-        # Execute locally
-        if mode_choice == '1':
+        if execution_mode == 1:
             logger.info(f"Executing action {action_name} locally")
-            from scripts.network_automation import main as network_main
-            network_main(action_name=action_name)
+            if action_name == 'code_upgrade':
+                code_upgrade()
+            else:
+                network_automation_main(action_name)
+        else:
+            logger.info(f"Pushing action {action_name} to GitHub")
+            print("GitHub push not implemented yet.")
 
     except Exception as e:
         logger.error(f"Error in launcher: {e}")

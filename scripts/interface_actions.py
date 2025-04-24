@@ -47,7 +47,7 @@ def configure_interfaces(
         # Use provided connections
         if connections is None:
             logger.info("No connections provided, creating new connections")
-            connections = connect_to_hosts(username, password, host_ips)
+            connections = connect_to_hosts(host_ips, username, password)
         if not connections:
             logger.error("No devices connected for interface configuration")
             print("No devices connected for interface configuration.")

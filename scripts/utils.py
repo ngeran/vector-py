@@ -1,4 +1,5 @@
 import yaml
+import os
 from typing import Dict, List, Optional
 import logging
 
@@ -19,6 +20,16 @@ def load_yaml_file(file_path: str) -> Optional[Dict]:
     except Exception as error:
         logger.error(f"Unexpected error loading {file_path}: {error}")
         return None
+
+def save_yaml_file(file_path: str, data: dict) -> None:
+    """Save data to a YAML file."""
+    try:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, 'w') as f:
+            yaml.safe_dump(data, f, default_flow_style=False)
+    except Exception as e:
+        raise Exception(f"Error saving {file_path}: {e}")
+
 
 def flatten_inventory(inventory: List[Dict]) -> List[Dict]:
     """Flatten inventory.yml into a list of hosts from switches, routers, and firewalls."""

@@ -1,6 +1,7 @@
 import logging
 import os
-from scripts.actions import ping_hosts, configure_interfaces, get_hosts
+from scripts.actions import ping_hosts, get_hosts, run_monitor_routes_action
+from scripts.interface_actions import configure_interfaces as configure_interface
 from scripts.utils import load_yaml_file
 
 # Configure logging
@@ -79,24 +80,25 @@ def main(action_name=None):
                 password=password,
                 host_ips=host_ips,
                 hosts=hosts,
-                connect_to_hosts=connect_to_hosts,  # Pass connect_to_hosts
-                disconnect_from_hosts=disconnect_from_hosts # Pass disconnect_from_hosts
+                connect_to_hosts=connect_to_hosts,
+                disconnect_from_hosts=disconnect_from_hosts
             ),
-            'interfaces': lambda: configure_interfaces(
-                username=username,
-                password=password,
-                host_ips=host_ips,
-                hosts=hosts,
-                template_file=action_info.get('template_file')
-            ),
-            'route_monitor': lambda: monitor_routes(
+            'interfaces': lambda: configure_interface(
                 username=username,
                 password=password,
                 host_ips=host_ips,
                 hosts=hosts,
                 connect_to_hosts=connect_to_hosts,
                 disconnect_from_hosts=disconnect_from_hosts,
-                connections=[] # You might need to adjust how connections are handled here
+                connections=None
+            ),
+            'route_monitor': lambda: run_monitor_routes_action(
+                username=username,
+                password=password,
+                host_ips=host_ips,
+                hosts=hosts,
+                connect_to_hosts=connect_to_hosts,
+                disconnect_from_hosts=disconnect_from_hosts
             )
         }
 
@@ -113,3 +115,6 @@ def main(action_name=None):
     except Exception as e:
         logger.error(f"Error in main: {e}")
         print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()

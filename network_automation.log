@@ -67,3 +67,1082 @@
 2025-04-23 16:09:34,061 - INFO - Executing action: ping
 2025-04-23 16:09:34,136 - ERROR - Error in main: cannot import name 'perform_action' from 'scripts.actions' (/home/nikos/github/ngeran/vector-py/scripts/actions.py)
 2025-04-23 16:09:34,136 - ERROR - Error in launcher: cannot import name 'perform_action' from 'scripts.actions' (/home/nikos/github/ngeran/vector-py/scripts/actions.py)
+2025-04-24 17:43:03,696 - INFO - Raw input received: '1'
+2025-04-24 17:43:03,698 - INFO - Valid choice selected: 1
+2025-04-24 17:43:03,698 - INFO - Selected action: ping
+2025-04-24 17:43:07,081 - INFO - Raw mode input received: '1'
+2025-04-24 17:43:07,082 - INFO - Executing action ping locally
+2025-04-24 17:43:07,082 - INFO - Executing action: ping
+2025-04-24 17:43:07,082 - INFO - DEBUG: Entering get_hosts
+2025-04-24 17:43:07,085 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 17:43:07,085 - INFO - Starting ping action (wrapper)
+2025-04-24 17:43:07,085 - INFO - Starting ping_hosts
+2025-04-24 17:43:07,085 - INFO - No connections provided, creating new connections
+2025-04-24 17:43:07,085 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 17:43:08,095 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 17:43:08,923 - INFO - Authentication (password) successful!
+2025-04-24 17:43:09,150 - INFO - [host 172.27.200.200 session 0x7f3b64409ca0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 17:43:13,256 - INFO - [host 172.27.200.200 session 0x7f3b64409ca0] Received message from host
+2025-04-24 17:43:13,256 - INFO - [host 172.27.200.200 session-id 6720] initialized: session-id=6720 | server_capabilities=<dict_keyiterator object at 0x7f3b64277650>
+2025-04-24 17:43:13,256 - INFO - Connected to 172.27.200.200
+2025-04-24 17:43:13,257 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 17:43:14,440 - INFO - Connected (version 2.0, client OpenSSH_6.9)
+2025-04-24 17:43:15,661 - INFO - Authentication (password) successful!
+2025-04-24 17:43:15,975 - INFO - [host 172.27.200.201 session 0x7f3b6426e030] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 17:43:22,988 - INFO - [host 172.27.200.201 session 0x7f3b6426e030] Received message from host
+2025-04-24 17:43:22,988 - INFO - [host 172.27.200.201 session-id 1636] initialized: session-id=1636 | server_capabilities=<dict_keyiterator object at 0x7f3b64277790>
+2025-04-24 17:43:22,988 - INFO - Connected to 172.27.200.201
+2025-04-24 17:43:22,988 - INFO - [host 172.27.200.200 session-id 6720] Requesting 'ExecuteRpc'
+2025-04-24 17:43:23,088 - INFO - [host 172.27.200.200 session-id 6720] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:495abded-7024-46e8-83c1-8be5f9ed24e9"><command format="text">ping 172.27.200.201 count 4</command></nc:rpc>]]>]]>'
+2025-04-24 17:43:27,886 - INFO - [host 172.27.200.200 session-id 6720] Received message from host
+2025-04-24 17:43:27,887 - INFO - [host 172.27.200.201 session-id 1636] Requesting 'ExecuteRpc'
+2025-04-24 17:43:27,905 - INFO - [host 172.27.200.201 session-id 1636] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:14f08fb7-4ed5-4941-8602-9c65dbba39e7"><command format="text">ping 172.27.200.200 count 4</command></nc:rpc>]]>]]>'
+2025-04-24 17:43:31,699 - INFO - [host 172.27.200.201 session-id 1636] Received message from host
+2025-04-24 17:43:31,700 - INFO - Ping report saved to /home/nikos/github/ngeran/vector-py/scripts/../reports/ping_report_20250424_174331.txt
+2025-04-24 17:43:31,700 - INFO - Disconnecting local connections
+2025-04-24 17:43:31,700 - INFO - Disconnecting from 2 connections
+2025-04-24 17:43:31,700 - INFO - [host 172.27.200.200 session-id 6720] Requesting 'CloseSession'
+2025-04-24 17:43:31,701 - INFO - [host 172.27.200.200 session-id 6720] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:d7ab33cd-993c-4091-950a-fe4ec2a9cc63"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 17:43:31,735 - INFO - [host 172.27.200.200 session-id 6720] Received message from host
+2025-04-24 17:43:31,735 - INFO - Disconnected from 172.27.200.200
+2025-04-24 17:43:31,735 - INFO - [host 172.27.200.201 session-id 1636] Requesting 'CloseSession'
+2025-04-24 17:43:31,800 - INFO - [host 172.27.200.201 session-id 1636] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:bfb4b6da-7e00-4bc5-93db-b682052931b2"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 17:43:31,931 - INFO - [host 172.27.200.201 session-id 1636] Received message from host
+2025-04-24 17:43:31,932 - INFO - Disconnected from 172.27.200.201
+2025-04-24 17:43:31,932 - INFO - Finished ping_hosts
+2025-04-24 17:43:31,932 - INFO - Ping action wrapper completed
+2025-04-24 17:43:31,932 - INFO - Completed action: ping
+2025-04-24 17:43:45,247 - INFO - Raw input received: '3'
+2025-04-24 17:43:45,247 - INFO - Valid choice selected: 3
+2025-04-24 17:43:45,247 - INFO - Selected action: route_monitor
+2025-04-24 17:43:47,268 - INFO - Raw mode input received: '1'
+2025-04-24 17:43:47,268 - INFO - Executing action route_monitor locally
+2025-04-24 17:43:47,268 - INFO - Executing action: route_monitor
+2025-04-24 17:43:47,269 - INFO - DEBUG: Entering get_hosts
+2025-04-24 17:43:47,270 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 17:43:47,270 - INFO - Starting route_monitor action (orchestrator)
+2025-04-24 17:43:47,270 - INFO - DEBUG: Using provided connections: 0
+2025-04-24 17:43:47,270 - INFO - DEBUG: Passing connections to perform_route_monitoring
+2025-04-24 17:43:47,270 - INFO - Starting monitor_routes
+2025-04-24 17:43:47,270 - ERROR - No devices connected for route monitoring
+2025-04-24 17:43:47,270 - INFO - Finished monitor_routes
+2025-04-24 17:43:47,270 - INFO - Disconnecting from 0 connections
+2025-04-24 17:43:47,270 - INFO - Route_monitor action orchestrator completed
+2025-04-24 17:43:47,270 - INFO - Completed action: route_monitor
+2025-04-24 17:50:42,446 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 17:50:43,298 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 17:50:44,639 - INFO - Authentication (password) successful!
+2025-04-24 17:50:44,731 - INFO - [host 172.27.200.200 session 0x7fbb56e54cb0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 17:50:48,917 - INFO - [host 172.27.200.200 session 0x7fbb56e54cb0] Received message from host
+2025-04-24 17:50:48,917 - INFO - [host 172.27.200.200 session-id 7022] initialized: session-id=7022 | server_capabilities=<dict_keyiterator object at 0x7fbb5697dad0>
+2025-04-24 17:50:48,918 - INFO - Connected to 172.27.200.200
+2025-04-24 17:50:48,918 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 17:50:49,198 - INFO - Connected (version 2.0, client OpenSSH_6.9)
+2025-04-24 17:50:50,311 - INFO - Authentication (password) successful!
+2025-04-24 17:50:50,369 - INFO - [host 172.27.200.201 session 0x7fbb58b459d0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 17:50:57,334 - INFO - [host 172.27.200.201 session 0x7fbb58b459d0] Received message from host
+2025-04-24 17:50:57,334 - INFO - [host 172.27.200.201 session-id 1649] initialized: session-id=1649 | server_capabilities=<dict_keyiterator object at 0x7fbb5697de90>
+2025-04-24 17:50:57,334 - INFO - Connected to 172.27.200.201
+2025-04-24 17:51:16,406 - INFO - Raw input received: '3'
+2025-04-24 17:51:16,406 - INFO - Valid choice selected: 3
+2025-04-24 17:51:16,406 - INFO - Selected action: route_monitor
+2025-04-24 17:51:17,791 - INFO - Raw mode input received: '1'
+2025-04-24 17:51:17,791 - INFO - Executing action route_monitor locally
+2025-04-24 17:51:17,791 - INFO - Executing action: route_monitor
+2025-04-24 17:51:17,792 - INFO - DEBUG: Entering get_hosts
+2025-04-24 17:51:17,794 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 17:51:17,794 - INFO - Starting route_monitor action (orchestrator)
+2025-04-24 17:51:17,794 - INFO - DEBUG: Using provided connections: 0
+2025-04-24 17:51:17,794 - INFO - DEBUG: Passing connections to perform_route_monitoring
+2025-04-24 17:51:17,794 - INFO - Starting monitor_routes
+2025-04-24 17:51:17,794 - ERROR - No devices connected for route monitoring
+2025-04-24 17:51:17,794 - INFO - Finished monitor_routes
+2025-04-24 17:51:17,794 - INFO - Disconnecting from 0 connections
+2025-04-24 17:51:17,794 - INFO - Route_monitor action orchestrator completed
+2025-04-24 17:51:17,794 - INFO - Completed action: route_monitor
+2025-04-24 17:55:38,703 - INFO - Raw input received: '3'
+2025-04-24 17:55:38,703 - INFO - Valid choice selected: 3
+2025-04-24 17:55:38,703 - INFO - Selected action: route_monitor
+2025-04-24 17:55:40,295 - INFO - Raw mode input received: '1'
+2025-04-24 17:55:40,295 - INFO - Executing action route_monitor locally
+2025-04-24 17:55:40,295 - INFO - Executing action: route_monitor
+2025-04-24 17:55:40,296 - INFO - DEBUG: Entering get_hosts
+2025-04-24 17:55:40,297 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 17:55:40,297 - INFO - Starting route_monitor action (orchestrator)
+2025-04-24 17:55:40,297 - INFO - DEBUG: Calling connect_to_hosts with hosts ['172.27.200.200', '172.27.200.201'], username admin
+2025-04-24 17:55:40,297 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 17:55:41,009 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 17:55:42,007 - INFO - Authentication (password) successful!
+2025-04-24 17:55:42,061 - INFO - [host 172.27.200.200 session 0x7f5e4fdddd00] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 17:55:46,475 - INFO - [host 172.27.200.200 session 0x7f5e4fdddd00] Received message from host
+2025-04-24 17:55:46,475 - INFO - [host 172.27.200.200 session-id 7219] initialized: session-id=7219 | server_capabilities=<dict_keyiterator object at 0x7f5e4fe776f0>
+2025-04-24 17:55:46,476 - INFO - Connected to 172.27.200.200
+2025-04-24 17:55:46,476 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 17:55:46,749 - INFO - Connected (version 2.0, client OpenSSH_6.9)
+2025-04-24 17:55:47,763 - INFO - Authentication (password) successful!
+2025-04-24 17:55:47,836 - INFO - [host 172.27.200.201 session 0x7f5e4fe4bbf0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 17:55:54,896 - INFO - [host 172.27.200.201 session 0x7f5e4fe4bbf0] Received message from host
+2025-04-24 17:55:54,896 - INFO - [host 172.27.200.201 session-id 1657] initialized: session-id=1657 | server_capabilities=<dict_keyiterator object at 0x7f5e4fe77830>
+2025-04-24 17:55:54,896 - INFO - Connected to 172.27.200.201
+2025-04-24 17:55:54,896 - INFO - DEBUG: connect_to_hosts returned 2 connections
+2025-04-24 17:55:54,896 - INFO - DEBUG: Passing connections to perform_route_monitoring
+2025-04-24 17:55:54,896 - INFO - Starting monitor_routes
+2025-04-24 17:55:54,897 - INFO - [host 172.27.200.200 session-id 7219] Requesting 'ExecuteRpc'
+2025-04-24 17:55:54,909 - INFO - [host 172.27.200.200 session-id 7219] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:ed7606f9-ce62-4337-8c3b-cf716bc3b3ca"><get-route-information><table>inet.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 17:55:54,952 - INFO - [host 172.27.200.200 session-id 7219] Received message from host
+2025-04-24 17:55:54,953 - INFO - [host 172.27.200.200 session-id 7219] Requesting 'ExecuteRpc'
+2025-04-24 17:55:55,053 - INFO - [host 172.27.200.200 session-id 7219] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:dee39af2-9331-4c24-94e7-afe360dd2c7d"><get-route-information><table>inet.3</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 17:55:55,110 - INFO - [host 172.27.200.200 session-id 7219] Received message from host
+2025-04-24 17:55:55,111 - INFO - [host 172.27.200.200 session-id 7219] Requesting 'ExecuteRpc'
+2025-04-24 17:55:55,211 - INFO - [host 172.27.200.200 session-id 7219] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:a3069fdb-ba1b-4a34-9529-364451bd082d"><get-route-information><table>mpls.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 17:55:55,355 - INFO - [host 172.27.200.200 session-id 7219] Received message from host
+2025-04-24 17:55:55,356 - INFO - [host 172.27.200.200 session-id 7219] Requesting 'ExecuteRpc'
+2025-04-24 17:55:55,456 - INFO - [host 172.27.200.200 session-id 7219] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:4841ece5-d5c4-450f-8e81-d16ad2ef32d8"><get-bgp-summary-information/></nc:rpc>]]>]]>'
+2025-04-24 17:55:55,563 - INFO - [host 172.27.200.200 session-id 7219] Received message from host
+2025-04-24 17:55:55,564 - INFO - [host 172.27.200.200 session-id 7219] Requesting 'ExecuteRpc'
+2025-04-24 17:55:55,664 - INFO - [host 172.27.200.200 session-id 7219] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:f561dbd2-ae40-42f9-9300-3b5d41afdedc"><get-ospf-neighbor-information/></nc:rpc>]]>]]>'
+2025-04-24 17:55:55,769 - INFO - [host 172.27.200.200 session-id 7219] Received message from host
+2025-04-24 17:55:55,770 - INFO - [host 172.27.200.200 session-id 7219] Requesting 'ExecuteRpc'
+2025-04-24 17:55:55,869 - INFO - [host 172.27.200.200 session-id 7219] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:6203c5fb-5bf0-495e-94b6-975d3c329cbd"><get-ldp-session-information/></nc:rpc>]]>]]>'
+2025-04-24 17:55:55,976 - INFO - [host 172.27.200.200 session-id 7219] Received message from host
+2025-04-24 17:55:55,977 - INFO - [host 172.27.200.201 session-id 1657] Requesting 'ExecuteRpc'
+2025-04-24 17:55:55,999 - INFO - [host 172.27.200.201 session-id 1657] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:dcd7df85-7ac9-49ad-8c6f-c76eda3f21da"><get-route-information><table>inet.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 17:55:56,256 - INFO - [host 172.27.200.201 session-id 1657] Received message from host
+2025-04-24 17:55:56,257 - INFO - [host 172.27.200.201 session-id 1657] Requesting 'ExecuteRpc'
+2025-04-24 17:55:56,357 - INFO - [host 172.27.200.201 session-id 1657] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:6407b149-f1c6-469d-91a4-ad6b0c6869f2"><get-route-information><table>inet.3</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 17:55:56,509 - INFO - [host 172.27.200.201 session-id 1657] Received message from host
+2025-04-24 17:55:56,509 - INFO - [host 172.27.200.201 session-id 1657] Requesting 'ExecuteRpc'
+2025-04-24 17:55:56,609 - INFO - [host 172.27.200.201 session-id 1657] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:d4538dc4-838c-4b85-9f0a-0107981f6128"><get-route-information><table>mpls.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 17:55:56,713 - INFO - [host 172.27.200.201 session-id 1657] Received message from host
+2025-04-24 17:55:56,714 - INFO - [host 172.27.200.201 session-id 1657] Requesting 'ExecuteRpc'
+2025-04-24 17:55:56,813 - INFO - [host 172.27.200.201 session-id 1657] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:9086284a-9951-41d6-96d9-320f090c571c"><get-bgp-summary-information/></nc:rpc>]]>]]>'
+2025-04-24 17:55:56,983 - INFO - [host 172.27.200.201 session-id 1657] Received message from host
+2025-04-24 17:55:56,983 - INFO - [host 172.27.200.201 session-id 1657] Requesting 'ExecuteRpc'
+2025-04-24 17:55:57,083 - INFO - [host 172.27.200.201 session-id 1657] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:d523a086-d46d-4731-a65c-84860047f10c"><get-ospf-neighbor-information/></nc:rpc>]]>]]>'
+2025-04-24 17:55:57,259 - INFO - [host 172.27.200.201 session-id 1657] Received message from host
+2025-04-24 17:55:57,260 - INFO - [host 172.27.200.201 session-id 1657] Requesting 'ExecuteRpc'
+2025-04-24 17:55:57,360 - INFO - [host 172.27.200.201 session-id 1657] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:85ffa88d-0315-4ac4-a3ea-0644b31fd044"><get-ldp-session-information/></nc:rpc>]]>]]>'
+2025-04-24 17:55:57,462 - INFO - [host 172.27.200.201 session-id 1657] Received message from host
+2025-04-24 17:55:57,463 - INFO - Route monitor report saved to /home/nikos/github/ngeran/vector-py/scripts/../reports/route_monitor_20250424_175557.txt
+2025-04-24 17:55:57,463 - INFO - Finished monitor_routes
+2025-04-24 17:55:57,463 - INFO - Disconnecting from 2 connections
+2025-04-24 17:55:57,463 - INFO - [host 172.27.200.200 session-id 7219] Requesting 'CloseSession'
+2025-04-24 17:55:57,481 - INFO - [host 172.27.200.200 session-id 7219] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:0581c4ce-b5c2-437d-a2cc-c1dd63ffef52"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 17:55:57,508 - INFO - [host 172.27.200.200 session-id 7219] Received message from host
+2025-04-24 17:55:57,509 - INFO - Disconnected from 172.27.200.200
+2025-04-24 17:55:57,509 - INFO - [host 172.27.200.201 session-id 1657] Requesting 'CloseSession'
+2025-04-24 17:55:57,563 - INFO - [host 172.27.200.201 session-id 1657] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:d9ba7766-dd9e-44a9-90c6-79b8452671fc"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 17:55:57,733 - INFO - [host 172.27.200.201 session-id 1657] Received message from host
+2025-04-24 17:55:57,734 - INFO - Disconnected from 172.27.200.201
+2025-04-24 17:55:57,734 - INFO - Route_monitor action orchestrator completed
+2025-04-24 17:55:57,734 - INFO - Completed action: route_monitor
+2025-04-24 17:57:36,151 - INFO - Raw input received: '1'
+2025-04-24 17:57:36,152 - INFO - Valid choice selected: 1
+2025-04-24 17:57:36,152 - INFO - Selected action: ping
+2025-04-24 17:57:40,178 - INFO - Raw mode input received: '2'
+2025-04-24 17:57:40,178 - INFO - Preparing to push to GitHub for action: ping
+2025-04-24 17:57:40,178 - INFO - Starting git_commit_and_push for action: ping
+2025-04-24 17:57:40,184 - ERROR - Error in launcher: 'git'
+2025-04-24 17:57:49,674 - INFO - Raw input received: '2'
+2025-04-24 17:57:49,675 - INFO - Valid choice selected: 2
+2025-04-24 17:57:49,675 - INFO - Selected action: interfaces
+2025-04-24 17:57:54,106 - INFO - Raw mode input received: '1'
+2025-04-24 17:57:54,107 - INFO - Executing action interfaces locally
+2025-04-24 17:57:54,107 - INFO - Executing action: interfaces
+2025-04-24 17:57:54,107 - INFO - DEBUG: Entering get_hosts
+2025-04-24 17:57:54,109 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 17:57:54,109 - INFO - Starting interfaces action
+2025-04-24 17:57:54,109 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 17:57:54,866 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 17:57:55,935 - INFO - Authentication (password) successful!
+2025-04-24 17:57:55,990 - INFO - [host 172.27.200.200 session 0x7f196d179970] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 17:58:00,037 - INFO - [host 172.27.200.200 session 0x7f196d179970] Received message from host
+2025-04-24 17:58:00,037 - INFO - [host 172.27.200.200 session-id 7318] initialized: session-id=7318 | server_capabilities=<dict_keyiterator object at 0x7f196d06f600>
+2025-04-24 17:58:00,037 - INFO - Connected to 172.27.200.200
+2025-04-24 17:58:00,037 - ERROR - Error in configure_interfaces: configure_interfaces() missing 3 required positional arguments: 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-24 17:58:00,037 - ERROR - Error in main: configure_interfaces() missing 3 required positional arguments: 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-24 18:00:58,134 - INFO - Raw input received: '2'
+2025-04-24 18:00:58,134 - INFO - Valid choice selected: 2
+2025-04-24 18:00:58,134 - INFO - Selected action: interfaces
+2025-04-24 18:00:58,707 - INFO - Raw mode input received: '1'
+2025-04-24 18:00:58,707 - INFO - Executing action interfaces locally
+2025-04-24 18:00:58,707 - INFO - Executing action: interfaces
+2025-04-24 18:00:58,708 - INFO - DEBUG: Entering get_hosts
+2025-04-24 18:00:58,709 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 18:00:58,710 - INFO - Starting interfaces action
+2025-04-24 18:00:58,710 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 18:00:59,569 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 18:01:00,463 - INFO - Authentication (password) successful!
+2025-04-24 18:01:00,515 - INFO - [host 172.27.200.200 session 0x7f60a137c2f0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 18:01:04,625 - INFO - [host 172.27.200.200 session 0x7f60a137c2f0] Received message from host
+2025-04-24 18:01:04,626 - INFO - [host 172.27.200.200 session-id 7445] initialized: session-id=7445 | server_capabilities=<dict_keyiterator object at 0x7f60a0603740>
+2025-04-24 18:01:04,626 - INFO - Connected to 172.27.200.200
+2025-04-24 18:01:04,626 - ERROR - Error in configure_interfaces: configure_interfaces() missing 3 required positional arguments: 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-24 18:01:04,626 - ERROR - Error in main: configure_interfaces() missing 3 required positional arguments: 'hosts', 'connect_to_hosts', and 'disconnect_from_hosts'
+2025-04-24 18:05:46,481 - INFO - Raw input received: '2'
+2025-04-24 18:05:46,481 - INFO - Valid choice selected: 2
+2025-04-24 18:05:46,481 - INFO - Selected action: interfaces
+2025-04-24 18:05:49,161 - INFO - Raw mode input received: '1'
+2025-04-24 18:05:49,161 - INFO - Executing action interfaces locally
+2025-04-24 18:05:49,161 - INFO - Executing action: interfaces
+2025-04-24 18:05:49,162 - INFO - DEBUG: Entering get_hosts
+2025-04-24 18:05:49,163 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 18:05:49,163 - INFO - Starting configure_interfaces
+2025-04-24 18:05:49,165 - INFO - Using template_file: templates/interface_template.j2
+2025-04-24 18:05:49,170 - INFO - No connections provided, creating new connections
+2025-04-24 18:05:49,170 - INFO - Connecting to host admin with username manolis1
+2025-04-24 18:05:49,212 - ERROR - Failed to connect to admin: ConnectUnknownHostError(admin)
+2025-04-24 18:05:49,212 - ERROR - No connections established to any hosts
+2025-04-24 18:05:49,212 - ERROR - No devices connected for interface configuration
+2025-04-24 18:05:49,212 - INFO - Completed action: interfaces
+2025-04-24 18:08:38,939 - INFO - Raw input received: '2'
+2025-04-24 18:08:38,939 - INFO - Valid choice selected: 2
+2025-04-24 18:08:38,939 - INFO - Selected action: interfaces
+2025-04-24 18:08:43,249 - INFO - Raw mode input received: '1'
+2025-04-24 18:08:43,249 - INFO - Executing action interfaces locally
+2025-04-24 18:08:43,249 - INFO - Executing action: interfaces
+2025-04-24 18:08:43,250 - INFO - DEBUG: Entering get_hosts
+2025-04-24 18:08:43,251 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 18:08:43,251 - INFO - Starting configure_interfaces
+2025-04-24 18:08:43,252 - INFO - Using template_file: templates/interface_template.j2
+2025-04-24 18:08:43,252 - INFO - No connections provided, creating new connections
+2025-04-24 18:08:43,252 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 18:08:44,016 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 18:08:45,034 - INFO - Authentication (password) successful!
+2025-04-24 18:08:45,103 - INFO - [host 172.27.200.200 session 0x7fd04f1dab70] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 18:08:49,238 - INFO - [host 172.27.200.200 session 0x7fd04f1dab70] Received message from host
+2025-04-24 18:08:49,239 - INFO - [host 172.27.200.200 session-id 7742] initialized: session-id=7742 | server_capabilities=<dict_keyiterator object at 0x7fd04f073650>
+2025-04-24 18:08:49,239 - INFO - Connected to 172.27.200.200
+2025-04-24 18:08:49,239 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 18:08:49,517 - INFO - Connected (version 2.0, client OpenSSH_6.9)
+2025-04-24 18:08:50,385 - INFO - Authentication (password) successful!
+2025-04-24 18:08:50,467 - INFO - [host 172.27.200.201 session 0x7fd04f06e6f0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 18:08:57,445 - INFO - [host 172.27.200.201 session 0x7fd04f06e6f0] Received message from host
+2025-04-24 18:08:57,445 - INFO - [host 172.27.200.201 session-id 1671] initialized: session-id=1671 | server_capabilities=<dict_keyiterator object at 0x7fd04f073790>
+2025-04-24 18:08:57,445 - INFO - Connected to 172.27.200.201
+2025-04-24 18:08:57,449 - INFO - Template vars for MLRDCIENGJRX01: {'interfaces': [{'description': 'To MLRDCIENGJRX02', 'name': 'ge-0/0/3', 'vlans': [{'ip_address': '172.27.201.1/24', 'unit': 0}]}, {'description': 'VLAN interface', 'flexible-vlan-tagging': True, 'name': 'ge-0/0/4', 'vlans': [{'ip_address': '172.27.202.1/24', 'unit': 100, 'vlan_id': 100}, {'ip_address': '172.27.203.1/24', 'unit': 200, 'vlan_id': 200}]}]}
+2025-04-24 18:08:57,449 - INFO - Rendered config for MLRDCIENGJRX01:
+interfaces {
+
+    ge-0/0/3 {
+        
+        description "To MLRDCIENGJRX02";
+        
+        
+            
+                
+                    unit 0 {
+                        family inet {
+                            address 172.27.201.1/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+    ge-0/0/4 {
+        
+        description "VLAN interface";
+        
+        
+            
+                
+                    flexible-vlan-tagging;
+                    unit 100 {
+                        vlan-id 100;
+                        family inet {
+                            address 172.27.202.1/24;
+                        }
+                    }
+                
+            
+                
+                    flexible-vlan-tagging;
+                    unit 200 {
+                        vlan-id 200;
+                        family inet {
+                            address 172.27.203.1/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+}
+2025-04-24 18:08:57,449 - INFO - [host 172.27.200.200 session-id 7742] Requesting 'ExecuteRpc'
+2025-04-24 18:08:57,471 - INFO - [host 172.27.200.200 session-id 7742] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:e9f83654-64e2-490a-bc83-ab38054f0df2"><load-configuration format="text" action="replace"><configuration-text>interfaces {\n\n    ge-0/0/3 {\n        \n        description "To MLRDCIENGJRX02";\n        \n        \n            \n                \n                    unit 0 {\n                        family inet {\n                            address 172.27.201.1/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n    ge-0/0/4 {\n        \n        description "VLAN interface";\n        \n        \n            \n                \n                    flexible-vlan-tagging;\n                    unit 100 {\n                        vlan-id 100;\n                        family inet {\n                            address 172.27.202.1/24;\n                        }\n                    }\n                \n            \n                \n                    flexible-vlan-tagging;\n                    unit 200 {\n                        vlan-id 200;\n                        family inet {\n                            address 172.27.203.1/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n}</configuration-text></load-configuration></nc:rpc>]]>]]>'
+2025-04-24 18:08:57,514 - INFO - [host 172.27.200.200 session-id 7742] Received message from host
+2025-04-24 18:08:57,514 - INFO - [host 172.27.200.200 session-id 7742] Requesting 'ExecuteRpc'
+2025-04-24 18:08:57,614 - INFO - [host 172.27.200.200 session-id 7742] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:4a635415-38ac-4b17-b81b-d36147fa23a6"><commit-configuration><check/></commit-configuration></nc:rpc>]]>]]>'
+2025-04-24 18:09:02,562 - INFO - [host 172.27.200.200 session-id 7742] Received message from host
+2025-04-24 18:09:02,563 - INFO - [host 172.27.200.200 session-id 7742] Requesting 'ExecuteRpc'
+2025-04-24 18:09:02,663 - INFO - [host 172.27.200.200 session-id 7742] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:07cd8ca9-2ea1-4ac7-8996-034f0f644672"><commit-configuration/></nc:rpc>]]>]]>'
+2025-04-24 18:09:09,309 - INFO - [host 172.27.200.200 session-id 7742] Received message from host
+2025-04-24 18:09:09,309 - INFO - Interface configured on MLRDCIENGJRX01 (172.27.200.200)
+2025-04-24 18:09:09,309 - INFO - Template vars for MLRDCIENGJRX02: {'interfaces': [{'description': 'To MLRDCIENGJRX01', 'name': 'ge-0/0/3', 'vlans': [{'ip_address': '172.27.201.2/24', 'unit': 0}]}, {'description': 'VLAN interface', 'flexible-vlan-tagging': True, 'name': 'ge-0/0/4', 'vlans': [{'ip_address': '172.27.202.2/24', 'unit': 100, 'vlan_id': 100}, {'ip_address': '172.27.203.2/24', 'unit': 200, 'vlan_id': 200}]}]}
+2025-04-24 18:09:09,309 - INFO - Rendered config for MLRDCIENGJRX02:
+interfaces {
+
+    ge-0/0/3 {
+        
+        description "To MLRDCIENGJRX01";
+        
+        
+            
+                
+                    unit 0 {
+                        family inet {
+                            address 172.27.201.2/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+    ge-0/0/4 {
+        
+        description "VLAN interface";
+        
+        
+            
+                
+                    flexible-vlan-tagging;
+                    unit 100 {
+                        vlan-id 100;
+                        family inet {
+                            address 172.27.202.2/24;
+                        }
+                    }
+                
+            
+                
+                    flexible-vlan-tagging;
+                    unit 200 {
+                        vlan-id 200;
+                        family inet {
+                            address 172.27.203.2/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+}
+2025-04-24 18:09:09,310 - INFO - [host 172.27.200.201 session-id 1671] Requesting 'ExecuteRpc'
+2025-04-24 18:09:09,392 - INFO - [host 172.27.200.201 session-id 1671] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:cc7f843d-0223-43f0-a69c-b1822e6e96ad"><load-configuration format="text" action="replace"><configuration-text>interfaces {\n\n    ge-0/0/3 {\n        \n        description "To MLRDCIENGJRX01";\n        \n        \n            \n                \n                    unit 0 {\n                        family inet {\n                            address 172.27.201.2/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n    ge-0/0/4 {\n        \n        description "VLAN interface";\n        \n        \n            \n                \n                    flexible-vlan-tagging;\n                    unit 100 {\n                        vlan-id 100;\n                        family inet {\n                            address 172.27.202.2/24;\n                        }\n                    }\n                \n            \n                \n                    flexible-vlan-tagging;\n                    unit 200 {\n                        vlan-id 200;\n                        family inet {\n                            address 172.27.203.2/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n}</configuration-text></load-configuration></nc:rpc>]]>]]>'
+2025-04-24 18:09:09,489 - INFO - [host 172.27.200.201 session-id 1671] Received message from host
+2025-04-24 18:09:09,490 - INFO - [host 172.27.200.201 session-id 1671] Requesting 'ExecuteRpc'
+2025-04-24 18:09:09,590 - INFO - [host 172.27.200.201 session-id 1671] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:4797f575-6859-4f2b-b7df-13ca761248ba"><commit-configuration><check/></commit-configuration></nc:rpc>]]>]]>'
+2025-04-24 18:09:11,561 - INFO - [host 172.27.200.201 session-id 1671] Received message from host
+2025-04-24 18:09:11,562 - INFO - [host 172.27.200.201 session-id 1671] Requesting 'ExecuteRpc'
+2025-04-24 18:09:11,662 - INFO - [host 172.27.200.201 session-id 1671] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:13574c49-2162-4077-bf46-8d347ae0992b"><commit-configuration/></nc:rpc>]]>]]>'
+2025-04-24 18:09:23,133 - INFO - [host 172.27.200.201 session-id 1671] Received message from host
+2025-04-24 18:09:23,133 - INFO - Interface configured on MLRDCIENGJRX02 (172.27.200.201)
+2025-04-24 18:09:23,133 - INFO - Finished configure_interfaces
+2025-04-24 18:09:23,133 - INFO - Completed action: interfaces
+2025-04-24 18:09:35,391 - INFO - Raw input received: '1'
+2025-04-24 18:09:35,392 - INFO - Valid choice selected: 1
+2025-04-24 18:09:35,392 - INFO - Selected action: ping
+2025-04-24 18:09:36,397 - INFO - Raw mode input received: '1'
+2025-04-24 18:09:36,397 - INFO - Executing action ping locally
+2025-04-24 18:09:36,398 - INFO - Executing action: ping
+2025-04-24 18:09:36,398 - INFO - DEBUG: Entering get_hosts
+2025-04-24 18:09:36,400 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 18:09:36,400 - INFO - Starting ping action (wrapper)
+2025-04-24 18:09:36,400 - INFO - Starting ping_hosts
+2025-04-24 18:09:36,400 - INFO - No connections provided, creating new connections
+2025-04-24 18:09:36,400 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 18:09:37,141 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 18:09:37,984 - INFO - Authentication (password) successful!
+2025-04-24 18:09:38,092 - INFO - [host 172.27.200.200 session 0x7f21fa644890] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 18:09:42,281 - INFO - [host 172.27.200.200 session 0x7f21fa644890] Received message from host
+2025-04-24 18:09:42,282 - INFO - [host 172.27.200.200 session-id 7810] initialized: session-id=7810 | server_capabilities=<dict_keyiterator object at 0x7f21fa3c3470>
+2025-04-24 18:09:42,282 - INFO - Connected to 172.27.200.200
+2025-04-24 18:09:42,282 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 18:09:42,640 - INFO - Connected (version 2.0, client OpenSSH_6.9)
+2025-04-24 18:09:43,403 - INFO - Authentication (password) successful!
+2025-04-24 18:09:43,467 - INFO - [host 172.27.200.201 session 0x7f21fa3b6540] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 18:09:50,307 - INFO - [host 172.27.200.201 session 0x7f21fa3b6540] Received message from host
+2025-04-24 18:09:50,308 - INFO - [host 172.27.200.201 session-id 1690] initialized: session-id=1690 | server_capabilities=<dict_keyiterator object at 0x7f21fa3c35b0>
+2025-04-24 18:09:50,308 - INFO - Connected to 172.27.200.201
+2025-04-24 18:09:50,308 - INFO - [host 172.27.200.200 session-id 7810] Requesting 'ExecuteRpc'
+2025-04-24 18:09:50,314 - INFO - [host 172.27.200.200 session-id 7810] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:59b9eff9-68df-4750-a107-b9005625903e"><command format="text">ping 172.27.200.201 count 4</command></nc:rpc>]]>]]>'
+2025-04-24 18:09:54,041 - INFO - [host 172.27.200.200 session-id 7810] Received message from host
+2025-04-24 18:09:54,042 - INFO - [host 172.27.200.201 session-id 1690] Requesting 'ExecuteRpc'
+2025-04-24 18:09:54,123 - INFO - [host 172.27.200.201 session-id 1690] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:032527ce-86b2-4a70-8dd9-ed7702c2db02"><command format="text">ping 172.27.200.200 count 4</command></nc:rpc>]]>]]>'
+2025-04-24 18:09:57,736 - INFO - [host 172.27.200.201 session-id 1690] Received message from host
+2025-04-24 18:09:57,737 - INFO - Ping report saved to /home/nikos/github/ngeran/vector-py/scripts/../reports/ping_report_20250424_180957.txt
+2025-04-24 18:09:57,737 - INFO - Disconnecting local connections
+2025-04-24 18:09:57,737 - INFO - Disconnecting from 2 connections
+2025-04-24 18:09:57,737 - INFO - [host 172.27.200.200 session-id 7810] Requesting 'CloseSession'
+2025-04-24 18:09:57,753 - INFO - [host 172.27.200.200 session-id 7810] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:9dc6fe6b-2ee8-4930-a239-299843a1fdd3"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 18:09:57,787 - INFO - [host 172.27.200.200 session-id 7810] Received message from host
+2025-04-24 18:09:57,788 - INFO - Disconnected from 172.27.200.200
+2025-04-24 18:09:57,788 - INFO - [host 172.27.200.201 session-id 1690] Requesting 'CloseSession'
+2025-04-24 18:09:57,836 - INFO - [host 172.27.200.201 session-id 1690] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:12b12903-b87f-47ec-b1d7-9a75b9698a53"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 18:09:57,854 - INFO - [host 172.27.200.201 session-id 1690] Received message from host
+2025-04-24 18:09:57,855 - INFO - Disconnected from 172.27.200.201
+2025-04-24 18:09:57,855 - INFO - Finished ping_hosts
+2025-04-24 18:09:57,855 - INFO - Ping action wrapper completed
+2025-04-24 18:09:57,855 - INFO - Completed action: ping
+2025-04-24 18:10:04,768 - INFO - Raw input received: '3'
+2025-04-24 18:10:04,768 - INFO - Valid choice selected: 3
+2025-04-24 18:10:04,768 - INFO - Selected action: route_monitor
+2025-04-24 18:10:05,720 - INFO - Raw mode input received: '1'
+2025-04-24 18:10:05,720 - INFO - Executing action route_monitor locally
+2025-04-24 18:10:05,720 - INFO - Executing action: route_monitor
+2025-04-24 18:10:05,720 - INFO - DEBUG: Entering get_hosts
+2025-04-24 18:10:05,722 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 18:10:05,722 - INFO - Starting route_monitor action (orchestrator)
+2025-04-24 18:10:05,722 - INFO - DEBUG: Calling connect_to_hosts with hosts ['172.27.200.200', '172.27.200.201'], username admin
+2025-04-24 18:10:05,722 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 18:10:06,549 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 18:10:07,471 - INFO - Authentication (password) successful!
+2025-04-24 18:10:07,537 - INFO - [host 172.27.200.200 session 0x7f54fad0ce60] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 18:10:11,742 - INFO - [host 172.27.200.200 session 0x7f54fad0ce60] Received message from host
+2025-04-24 18:10:11,742 - INFO - [host 172.27.200.200 session-id 7841] initialized: session-id=7841 | server_capabilities=<dict_keyiterator object at 0x7f54fa807510>
+2025-04-24 18:10:11,742 - INFO - Connected to 172.27.200.200
+2025-04-24 18:10:11,742 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 18:10:12,032 - INFO - Connected (version 2.0, client OpenSSH_6.9)
+2025-04-24 18:10:13,359 - INFO - Authentication (password) successful!
+2025-04-24 18:10:13,420 - INFO - [host 172.27.200.201 session 0x7f54fa7fa060] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 18:10:20,374 - INFO - [host 172.27.200.201 session 0x7f54fa7fa060] Received message from host
+2025-04-24 18:10:20,375 - INFO - [host 172.27.200.201 session-id 1697] initialized: session-id=1697 | server_capabilities=<dict_keyiterator object at 0x7f54fa807650>
+2025-04-24 18:10:20,375 - INFO - Connected to 172.27.200.201
+2025-04-24 18:10:20,375 - INFO - DEBUG: connect_to_hosts returned 2 connections
+2025-04-24 18:10:20,375 - INFO - DEBUG: Passing connections to perform_route_monitoring
+2025-04-24 18:10:20,375 - INFO - Starting monitor_routes
+2025-04-24 18:10:20,375 - INFO - [host 172.27.200.200 session-id 7841] Requesting 'ExecuteRpc'
+2025-04-24 18:10:20,376 - INFO - [host 172.27.200.200 session-id 7841] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:cc2fa7c2-63de-45f9-9a80-ce8de90acd3a"><get-route-information><table>inet.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 18:10:20,453 - INFO - [host 172.27.200.200 session-id 7841] Received message from host
+2025-04-24 18:10:20,454 - INFO - [host 172.27.200.200 session-id 7841] Requesting 'ExecuteRpc'
+2025-04-24 18:10:20,554 - INFO - [host 172.27.200.200 session-id 7841] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:10247340-be11-4feb-a768-4f29b088d728"><get-route-information><table>inet.3</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 18:10:20,570 - INFO - [host 172.27.200.200 session-id 7841] Received message from host
+2025-04-24 18:10:20,570 - INFO - [host 172.27.200.200 session-id 7841] Requesting 'ExecuteRpc'
+2025-04-24 18:10:20,670 - INFO - [host 172.27.200.200 session-id 7841] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:fe07b91a-ec6c-4167-b162-3e40b9ccd83a"><get-route-information><table>mpls.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 18:10:20,685 - INFO - [host 172.27.200.200 session-id 7841] Received message from host
+2025-04-24 18:10:20,686 - INFO - [host 172.27.200.200 session-id 7841] Requesting 'ExecuteRpc'
+2025-04-24 18:10:20,786 - INFO - [host 172.27.200.200 session-id 7841] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:ead462a5-c068-4b65-b8fc-0006a96500d4"><get-bgp-summary-information/></nc:rpc>]]>]]>'
+2025-04-24 18:10:20,799 - INFO - [host 172.27.200.200 session-id 7841] Received message from host
+2025-04-24 18:10:20,799 - INFO - [host 172.27.200.200 session-id 7841] Requesting 'ExecuteRpc'
+2025-04-24 18:10:20,899 - INFO - [host 172.27.200.200 session-id 7841] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:2ffa461f-b80b-41f8-b9c7-b7563297a91f"><get-ospf-neighbor-information/></nc:rpc>]]>]]>'
+2025-04-24 18:10:20,914 - INFO - [host 172.27.200.200 session-id 7841] Received message from host
+2025-04-24 18:10:20,915 - INFO - [host 172.27.200.200 session-id 7841] Requesting 'ExecuteRpc'
+2025-04-24 18:10:21,015 - INFO - [host 172.27.200.200 session-id 7841] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:0e218885-bf9a-4a8f-ae63-63ee24cb23f3"><get-ldp-session-information/></nc:rpc>]]>]]>'
+2025-04-24 18:10:21,033 - INFO - [host 172.27.200.200 session-id 7841] Received message from host
+2025-04-24 18:10:21,033 - INFO - [host 172.27.200.201 session-id 1697] Requesting 'ExecuteRpc'
+2025-04-24 18:10:21,077 - INFO - [host 172.27.200.201 session-id 1697] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:b2a00aa6-2628-42d1-ab8c-9fa6483d973d"><get-route-information><table>inet.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 18:10:21,334 - INFO - [host 172.27.200.201 session-id 1697] Received message from host
+2025-04-24 18:10:21,335 - INFO - [host 172.27.200.201 session-id 1697] Requesting 'ExecuteRpc'
+2025-04-24 18:10:21,435 - INFO - [host 172.27.200.201 session-id 1697] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:122af2c5-aada-4f13-9535-da4fbed073d3"><get-route-information><table>inet.3</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 18:10:21,477 - INFO - [host 172.27.200.201 session-id 1697] Received message from host
+2025-04-24 18:10:21,477 - INFO - [host 172.27.200.201 session-id 1697] Requesting 'ExecuteRpc'
+2025-04-24 18:10:21,577 - INFO - [host 172.27.200.201 session-id 1697] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:e24d83b0-c4d7-41f5-a4f3-395f2a2876bf"><get-route-information><table>mpls.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 18:10:21,635 - INFO - [host 172.27.200.201 session-id 1697] Received message from host
+2025-04-24 18:10:21,635 - INFO - [host 172.27.200.201 session-id 1697] Requesting 'ExecuteRpc'
+2025-04-24 18:10:21,735 - INFO - [host 172.27.200.201 session-id 1697] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:65916a12-2fda-45c1-b326-43e5145eb623"><get-bgp-summary-information/></nc:rpc>]]>]]>'
+2025-04-24 18:10:21,764 - INFO - [host 172.27.200.201 session-id 1697] Received message from host
+2025-04-24 18:10:21,764 - INFO - [host 172.27.200.201 session-id 1697] Requesting 'ExecuteRpc'
+2025-04-24 18:10:21,864 - INFO - [host 172.27.200.201 session-id 1697] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:21eeb04c-2b5b-4642-bb4c-903683064e02"><get-ospf-neighbor-information/></nc:rpc>]]>]]>'
+2025-04-24 18:10:21,892 - INFO - [host 172.27.200.201 session-id 1697] Received message from host
+2025-04-24 18:10:21,893 - INFO - [host 172.27.200.201 session-id 1697] Requesting 'ExecuteRpc'
+2025-04-24 18:10:21,993 - INFO - [host 172.27.200.201 session-id 1697] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:6141dfbc-e0f1-423e-897a-8676df601d9c"><get-ldp-session-information/></nc:rpc>]]>]]>'
+2025-04-24 18:10:22,036 - INFO - [host 172.27.200.201 session-id 1697] Received message from host
+2025-04-24 18:10:22,037 - INFO - Route monitor report saved to /home/nikos/github/ngeran/vector-py/scripts/../reports/route_monitor_20250424_181022.txt
+2025-04-24 18:10:22,037 - INFO - Finished monitor_routes
+2025-04-24 18:10:22,037 - INFO - Disconnecting from 2 connections
+2025-04-24 18:10:22,037 - INFO - [host 172.27.200.200 session-id 7841] Requesting 'CloseSession'
+2025-04-24 18:10:22,136 - INFO - [host 172.27.200.200 session-id 7841] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:01d49983-ab44-4940-a9fc-1ca38d3bfc68"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 18:10:22,166 - INFO - [host 172.27.200.200 session-id 7841] Received message from host
+2025-04-24 18:10:22,166 - INFO - Disconnected from 172.27.200.200
+2025-04-24 18:10:22,166 - INFO - [host 172.27.200.201 session-id 1697] Requesting 'CloseSession'
+2025-04-24 18:10:22,237 - INFO - [host 172.27.200.201 session-id 1697] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:80de4ae6-88b7-4eae-ab11-7fbf1792e46e"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 18:10:22,258 - INFO - [host 172.27.200.201 session-id 1697] Received message from host
+2025-04-24 18:10:22,258 - INFO - Disconnected from 172.27.200.201
+2025-04-24 18:10:22,258 - INFO - Route_monitor action orchestrator completed
+2025-04-24 18:10:22,258 - INFO - Completed action: route_monitor
+2025-04-24 19:05:42,321 - INFO - Raw input received: '4'
+2025-04-24 19:05:42,321 - INFO - Valid choice selected: 4
+2025-04-24 19:05:42,321 - INFO - Selected action: code_upgrade
+2025-04-24 19:05:47,289 - INFO - Raw mode input received: '1'
+2025-04-24 19:05:47,289 - INFO - Valid execution mode selected: 1
+2025-04-24 19:05:47,289 - INFO - Executing action code_upgrade locally
+2025-04-24 19:05:47,289 - INFO - Starting code_upgrade action
+2025-04-24 19:05:47,290 - INFO - Loaded products: ['EX4600', 'EX4400', 'SRX320', 'SRX210H']
+2025-04-24 19:06:02,345 - INFO - Raw product input received: '4'
+2025-04-24 19:06:02,345 - INFO - Valid product choice selected: 4
+2025-04-24 19:06:02,346 - INFO - Selected product: SRX210H
+2025-04-24 19:06:17,117 - INFO - Raw release input received: '1'
+2025-04-24 19:06:17,117 - INFO - Valid release choice selected: 1
+2025-04-24 19:06:17,117 - INFO - Selected release: 12.3X48-D105
+2025-04-24 19:06:24,204 - INFO - User chose to read from file: n
+2025-04-24 19:06:37,236 - INFO - Added host IP: 172.27.200.201
+2025-04-24 19:06:46,608 - INFO - Saved hosts to /home/nikos/github/ngeran/vector-py/data/upgrade_hosts.yml: ['172.27.200.201']
+2025-04-24 19:06:46,608 - INFO - Host IPs: ['172.27.200.201']
+2025-04-24 19:07:00,790 - INFO - Received credentials - username: admin
+2025-04-24 19:07:00,790 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 19:07:01,098 - INFO - Connected (version 2.0, client OpenSSH_6.9)
+2025-04-24 19:07:02,096 - INFO - Authentication (password) successful!
+2025-04-24 19:07:02,199 - INFO - [host 172.27.200.201 session 0x7fbd131181a0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 19:07:09,050 - INFO - [host 172.27.200.201 session 0x7fbd131181a0] Received message from host
+2025-04-24 19:07:09,050 - INFO - [host 172.27.200.201 session-id 1741] initialized: session-id=1741 | server_capabilities=<dict_keyiterator object at 0x7fbd12ef4450>
+2025-04-24 19:07:09,050 - INFO - Connected to 172.27.200.201
+2025-04-24 19:07:09,050 - INFO - Starting upgrade on 172.27.200.201
+2025-04-24 19:07:09,050 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'ExecuteRpc'
+2025-04-24 19:07:09,150 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:2198ab97-b492-4092-90a4-2a1a83aaf8a1"><command>show version invoke-on all-routing-engines</command></nc:rpc>]]>]]>'
+2025-04-24 19:07:09,351 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:09,352 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'ExecuteRpc'
+2025-04-24 19:07:09,451 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:4419fc56-a1fe-402e-b15f-a76fbdf1205b"><file-show><filename>/usr/share/cevo/cevo_version</filename></file-show></nc:rpc>]]>]]>'
+2025-04-24 19:07:09,593 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:09,594 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'ExecuteRpc'
+2025-04-24 19:07:09,694 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:f323c6e9-9cb7-4c42-9c0a-06942a5a096e"><get-interface-information><routing-instance>__juniper_private1__</routing-instance><terse/></get-interface-information></nc:rpc>]]>]]>'
+2025-04-24 19:07:11,781 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:11,782 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'ExecuteRpc'
+2025-04-24 19:07:11,882 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:239d0650-67ff-446b-9125-6a6701899018"><file-show><filename>/etc/hosts.junos</filename></file-show></nc:rpc>]]>]]>'
+2025-04-24 19:07:14,995 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:14,997 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'ExecuteRpc'
+2025-04-24 19:07:15,095 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:018af134-3cd0-458c-9833-9d41f457cb57"><get-chassis-cluster-status/></nc:rpc>]]>]]>'
+2025-04-24 19:07:15,194 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:15,194 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'ExecuteRpc'
+2025-04-24 19:07:15,295 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:06f7a59e-9f48-4382-b5b0-4eb1093bb76f"><get-route-engine-information/></nc:rpc>]]>]]>'
+2025-04-24 19:07:15,409 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:15,409 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'ExecuteRpc'
+2025-04-24 19:07:15,509 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:ca84b299-5ba3-44c0-8a3f-0cdf213255d8"><get-virtual-chassis-information/></nc:rpc>]]>]]>'
+2025-04-24 19:07:15,552 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:15,552 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'ExecuteRpc'
+2025-04-24 19:07:15,652 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:ee2f8155-b26e-4b1a-a396-2f4f07eb2ee6"><request-package-checks-pending-install/></nc:rpc>]]>]]>'
+2025-04-24 19:07:15,697 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:15,698 - INFO - Upgrade successful on 172.27.200.201
+2025-04-24 19:07:15,698 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'ExecuteRpc'
+2025-04-24 19:07:15,798 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:c0be0ecb-58cb-4a07-a88e-6cb3896f16ee"><request-reboot><in>0</in></request-reboot></nc:rpc>]]>]]>'
+2025-04-24 19:07:16,136 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:16,137 - INFO - Rebooted 172.27.200.201 after upgrade
+2025-04-24 19:07:16,137 - INFO - Disconnecting from 1 connections
+2025-04-24 19:07:16,137 - INFO - [host 172.27.200.201 session-id 1741] Requesting 'CloseSession'
+2025-04-24 19:07:16,236 - INFO - [host 172.27.200.201 session-id 1741] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:6a37e759-3367-433d-a045-dcd70b61d014"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 19:07:16,276 - INFO - [host 172.27.200.201 session-id 1741] Received message from host
+2025-04-24 19:07:16,276 - INFO - Disconnected from 172.27.200.201
+2025-04-24 19:07:16,276 - INFO - Code upgrade action completed
+2025-04-24 19:07:49,528 - INFO - Raw input received: '1'
+2025-04-24 19:07:49,529 - INFO - Valid choice selected: 1
+2025-04-24 19:07:49,529 - INFO - Selected action: ping
+2025-04-24 19:07:51,131 - INFO - Raw mode input received: '1'
+2025-04-24 19:07:51,131 - INFO - Valid execution mode selected: 1
+2025-04-24 19:07:51,131 - INFO - Executing action ping locally
+2025-04-24 19:07:51,131 - INFO - Executing action: ping
+2025-04-24 19:07:51,131 - INFO - DEBUG: Entering get_hosts
+2025-04-24 19:07:51,133 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 19:07:51,133 - INFO - Starting ping action (wrapper)
+2025-04-24 19:07:51,133 - INFO - Starting ping_hosts
+2025-04-24 19:07:51,133 - INFO - No connections provided, creating new connections
+2025-04-24 19:07:51,133 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 19:07:52,002 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 19:07:53,059 - INFO - Authentication (password) successful!
+2025-04-24 19:07:53,156 - INFO - [host 172.27.200.200 session 0x7f6f39125ee0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 19:07:57,153 - INFO - [host 172.27.200.200 session 0x7f6f39125ee0] Received message from host
+2025-04-24 19:07:57,154 - INFO - [host 172.27.200.200 session-id 10075] initialized: session-id=10075 | server_capabilities=<dict_keyiterator object at 0x7f6f389784a0>
+2025-04-24 19:07:57,154 - INFO - Connected to 172.27.200.200
+2025-04-24 19:07:57,154 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 19:08:11,417 - ERROR - Failed to connect to 172.27.200.201: ConnectTimeoutError(172.27.200.201)
+2025-04-24 19:08:11,418 - INFO - Ping report saved to /home/nikos/github/ngeran/vector-py/scripts/../reports/ping_report_20250424_190811.txt
+2025-04-24 19:08:11,418 - INFO - Disconnecting local connections
+2025-04-24 19:08:11,418 - INFO - Disconnecting from 1 connections
+2025-04-24 19:08:11,418 - INFO - [host 172.27.200.200 session-id 10075] Requesting 'CloseSession'
+2025-04-24 19:08:11,507 - INFO - [host 172.27.200.200 session-id 10075] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:5ba50c77-f302-4f0f-8f90-9e5735dc9c8e"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 19:08:11,571 - INFO - [host 172.27.200.200 session-id 10075] Received message from host
+2025-04-24 19:08:11,571 - INFO - Disconnected from 172.27.200.200
+2025-04-24 19:08:11,571 - INFO - Finished ping_hosts
+2025-04-24 19:08:11,571 - INFO - Ping action wrapper completed
+2025-04-24 19:08:11,572 - INFO - Completed action: ping
+2025-04-24 19:08:21,093 - INFO - Raw input received: '2'
+2025-04-24 19:08:21,093 - INFO - Valid choice selected: 2
+2025-04-24 19:08:21,093 - INFO - Selected action: interfaces
+2025-04-24 19:08:22,629 - INFO - Raw mode input received: '1'
+2025-04-24 19:08:22,629 - INFO - Valid execution mode selected: 1
+2025-04-24 19:08:22,629 - INFO - Executing action interfaces locally
+2025-04-24 19:08:22,629 - INFO - Executing action: interfaces
+2025-04-24 19:08:22,629 - INFO - DEBUG: Entering get_hosts
+2025-04-24 19:08:22,631 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 19:08:22,631 - INFO - Starting configure_interfaces
+2025-04-24 19:08:22,632 - INFO - Using template_file: templates/interface_template.j2
+2025-04-24 19:08:22,632 - INFO - No connections provided, creating new connections
+2025-04-24 19:08:22,632 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 19:08:23,468 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 19:08:24,577 - INFO - Authentication (password) successful!
+2025-04-24 19:08:24,633 - INFO - [host 172.27.200.200 session 0x7fd669b02570] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 19:08:28,808 - INFO - [host 172.27.200.200 session 0x7fd669b02570] Received message from host
+2025-04-24 19:08:28,808 - INFO - [host 172.27.200.200 session-id 10101] initialized: session-id=10101 | server_capabilities=<dict_keyiterator object at 0x7fd669108590>
+2025-04-24 19:08:28,808 - INFO - Connected to 172.27.200.200
+2025-04-24 19:08:28,809 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 19:08:31,897 - ERROR - Failed to connect to 172.27.200.201: ConnectTimeoutError(172.27.200.201)
+2025-04-24 19:08:31,901 - INFO - Template vars for MLRDCIENGJRX01: {'interfaces': [{'description': 'To MLRDCIENGJRX02', 'name': 'ge-0/0/3', 'vlans': [{'ip_address': '172.27.201.1/24', 'unit': 0}]}, {'description': 'VLAN interface', 'flexible-vlan-tagging': True, 'name': 'ge-0/0/4', 'vlans': [{'ip_address': '172.27.202.1/24', 'unit': 100, 'vlan_id': 100}, {'ip_address': '172.27.203.1/24', 'unit': 200, 'vlan_id': 200}]}]}
+2025-04-24 19:08:31,901 - INFO - Rendered config for MLRDCIENGJRX01:
+interfaces {
+
+    ge-0/0/3 {
+        
+        description "To MLRDCIENGJRX02";
+        
+        
+            
+                
+                    unit 0 {
+                        family inet {
+                            address 172.27.201.1/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+    ge-0/0/4 {
+        
+        description "VLAN interface";
+        
+        
+            
+                
+                    flexible-vlan-tagging;
+                    unit 100 {
+                        vlan-id 100;
+                        family inet {
+                            address 172.27.202.1/24;
+                        }
+                    }
+                
+            
+                
+                    flexible-vlan-tagging;
+                    unit 200 {
+                        vlan-id 200;
+                        family inet {
+                            address 172.27.203.1/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+}
+2025-04-24 19:08:31,901 - INFO - [host 172.27.200.200 session-id 10101] Requesting 'ExecuteRpc'
+2025-04-24 19:08:31,921 - INFO - [host 172.27.200.200 session-id 10101] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:5b3c1137-1438-4715-b1c4-8085f60b95c2"><load-configuration format="text" action="replace"><configuration-text>interfaces {\n\n    ge-0/0/3 {\n        \n        description "To MLRDCIENGJRX02";\n        \n        \n            \n                \n                    unit 0 {\n                        family inet {\n                            address 172.27.201.1/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n    ge-0/0/4 {\n        \n        description "VLAN interface";\n        \n        \n            \n                \n                    flexible-vlan-tagging;\n                    unit 100 {\n                        vlan-id 100;\n                        family inet {\n                            address 172.27.202.1/24;\n                        }\n                    }\n                \n            \n                \n                    flexible-vlan-tagging;\n                    unit 200 {\n                        vlan-id 200;\n                        family inet {\n                            address 172.27.203.1/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n}</configuration-text></load-configuration></nc:rpc>]]>]]>'
+2025-04-24 19:08:32,156 - INFO - [host 172.27.200.200 session-id 10101] Received message from host
+2025-04-24 19:08:32,157 - INFO - [host 172.27.200.200 session-id 10101] Requesting 'ExecuteRpc'
+2025-04-24 19:08:32,256 - INFO - [host 172.27.200.200 session-id 10101] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:4bce66e8-d8c2-455d-bc72-90facf1bfbb6"><commit-configuration><check/></commit-configuration></nc:rpc>]]>]]>'
+2025-04-24 19:08:37,123 - INFO - [host 172.27.200.200 session-id 10101] Received message from host
+2025-04-24 19:08:37,124 - INFO - [host 172.27.200.200 session-id 10101] Requesting 'ExecuteRpc'
+2025-04-24 19:08:37,223 - INFO - [host 172.27.200.200 session-id 10101] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:3ac93763-d199-4424-b945-c22a3318c88f"><commit-configuration/></nc:rpc>]]>]]>'
+2025-04-24 19:08:44,112 - INFO - [host 172.27.200.200 session-id 10101] Received message from host
+2025-04-24 19:08:44,113 - INFO - Interface configured on MLRDCIENGJRX01 (172.27.200.200)
+2025-04-24 19:08:44,113 - INFO - Finished configure_interfaces
+2025-04-24 19:08:44,113 - INFO - Completed action: interfaces
+2025-04-24 19:08:54,779 - INFO - Raw input received: '3'
+2025-04-24 19:08:54,779 - INFO - Valid choice selected: 3
+2025-04-24 19:08:54,779 - INFO - Selected action: route_monitor
+2025-04-24 19:08:56,237 - INFO - Raw mode input received: '1'
+2025-04-24 19:08:56,237 - INFO - Valid execution mode selected: 1
+2025-04-24 19:08:56,237 - INFO - Executing action route_monitor locally
+2025-04-24 19:08:56,237 - INFO - Executing action: route_monitor
+2025-04-24 19:08:56,238 - INFO - DEBUG: Entering get_hosts
+2025-04-24 19:08:56,239 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 19:08:56,239 - INFO - Starting route_monitor action (orchestrator)
+2025-04-24 19:08:56,239 - INFO - DEBUG: Calling connect_to_hosts with hosts ['172.27.200.200', '172.27.200.201'], username admin
+2025-04-24 19:08:56,239 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 19:08:57,177 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 19:08:58,264 - INFO - Authentication (password) successful!
+2025-04-24 19:08:58,316 - INFO - [host 172.27.200.200 session 0x7f3f7208a150] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 19:09:02,450 - INFO - [host 172.27.200.200 session 0x7f3f7208a150] Received message from host
+2025-04-24 19:09:02,450 - INFO - [host 172.27.200.200 session-id 10155] initialized: session-id=10155 | server_capabilities=<dict_keyiterator object at 0x7f3f720e44f0>
+2025-04-24 19:09:02,450 - INFO - Connected to 172.27.200.200
+2025-04-24 19:09:02,450 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 19:09:05,561 - ERROR - Failed to connect to 172.27.200.201: ConnectTimeoutError(172.27.200.201)
+2025-04-24 19:09:05,561 - INFO - DEBUG: connect_to_hosts returned 1 connections
+2025-04-24 19:09:05,561 - INFO - DEBUG: Passing connections to perform_route_monitoring
+2025-04-24 19:09:05,562 - INFO - Starting monitor_routes
+2025-04-24 19:09:05,562 - INFO - [host 172.27.200.200 session-id 10155] Requesting 'ExecuteRpc'
+2025-04-24 19:09:05,662 - INFO - [host 172.27.200.200 session-id 10155] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:90a43323-54f0-43d1-b97b-fef152fb231b"><get-route-information><table>inet.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 19:09:05,941 - INFO - [host 172.27.200.200 session-id 10155] Received message from host
+2025-04-24 19:09:05,942 - INFO - [host 172.27.200.200 session-id 10155] Requesting 'ExecuteRpc'
+2025-04-24 19:09:06,042 - INFO - [host 172.27.200.200 session-id 10155] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:a3f396c7-99fc-4f4b-a1ef-16033d89aa57"><get-route-information><table>inet.3</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 19:09:06,162 - INFO - [host 172.27.200.200 session-id 10155] Received message from host
+2025-04-24 19:09:06,163 - INFO - [host 172.27.200.200 session-id 10155] Requesting 'ExecuteRpc'
+2025-04-24 19:09:06,263 - INFO - [host 172.27.200.200 session-id 10155] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:2258479d-c20b-470d-8c5b-25810878a5a3"><get-route-information><table>mpls.0</table></get-route-information></nc:rpc>]]>]]>'
+2025-04-24 19:09:06,406 - INFO - [host 172.27.200.200 session-id 10155] Received message from host
+2025-04-24 19:09:06,406 - INFO - [host 172.27.200.200 session-id 10155] Requesting 'ExecuteRpc'
+2025-04-24 19:09:06,506 - INFO - [host 172.27.200.200 session-id 10155] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:b21e082c-6222-4f5f-ab38-86133c77ff00"><get-bgp-summary-information/></nc:rpc>]]>]]>'
+2025-04-24 19:09:06,612 - INFO - [host 172.27.200.200 session-id 10155] Received message from host
+2025-04-24 19:09:06,612 - INFO - [host 172.27.200.200 session-id 10155] Requesting 'ExecuteRpc'
+2025-04-24 19:09:06,712 - INFO - [host 172.27.200.200 session-id 10155] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:70fa9b20-b364-4711-bd3f-c847de700ec0"><get-ospf-neighbor-information/></nc:rpc>]]>]]>'
+2025-04-24 19:09:06,880 - INFO - [host 172.27.200.200 session-id 10155] Received message from host
+2025-04-24 19:09:06,881 - INFO - [host 172.27.200.200 session-id 10155] Requesting 'ExecuteRpc'
+2025-04-24 19:09:06,981 - INFO - [host 172.27.200.200 session-id 10155] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:0350f836-2073-4ac3-a830-4bed951e4f81"><get-ldp-session-information/></nc:rpc>]]>]]>'
+2025-04-24 19:09:07,166 - INFO - [host 172.27.200.200 session-id 10155] Received message from host
+2025-04-24 19:09:07,166 - INFO - Route monitor report saved to /home/nikos/github/ngeran/vector-py/scripts/../reports/route_monitor_20250424_190907.txt
+2025-04-24 19:09:07,166 - INFO - Finished monitor_routes
+2025-04-24 19:09:07,166 - INFO - Disconnecting from 1 connections
+2025-04-24 19:09:07,167 - INFO - [host 172.27.200.200 session-id 10155] Requesting 'CloseSession'
+2025-04-24 19:09:07,266 - INFO - [host 172.27.200.200 session-id 10155] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:6acd9f7d-7910-43c8-96d1-19cbcf9ac466"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 19:09:07,423 - INFO - [host 172.27.200.200 session-id 10155] Received message from host
+2025-04-24 19:09:07,424 - INFO - Disconnected from 172.27.200.200
+2025-04-24 19:09:07,424 - INFO - Route_monitor action orchestrator completed
+2025-04-24 19:09:07,424 - INFO - Completed action: route_monitor
+2025-04-24 19:13:21,688 - INFO - sys.path: ['/home/nikos/github/ngeran/vector-py', '/home/nikos/github/ngeran/vector-py/network-automation-launcher', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python312.zip', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/lib-dynload', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/site-packages', '/nix/store/j5xprw4y675sh3rrgnrbdwm3rpgl0lw2-python3-3.12.9-env/lib/python3.12/site-packages']
+2025-04-24 19:13:23,251 - INFO - Raw input received: '1'
+2025-04-24 19:13:23,251 - INFO - Valid choice selected: 1
+2025-04-24 19:13:23,251 - INFO - Selected action: ping
+2025-04-24 19:13:26,704 - INFO - Raw mode input received: '1'
+2025-04-24 19:13:26,704 - INFO - Valid execution mode selected: 1
+2025-04-24 19:13:26,704 - INFO - Executing action ping locally
+2025-04-24 19:13:26,704 - INFO - Executing action: ping
+2025-04-24 19:13:26,705 - INFO - DEBUG: Entering get_hosts
+2025-04-24 19:13:26,706 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 19:13:26,706 - INFO - Starting ping action (wrapper)
+2025-04-24 19:13:26,706 - INFO - Starting ping_hosts
+2025-04-24 19:13:26,707 - INFO - No connections provided, creating new connections
+2025-04-24 19:13:26,707 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 19:13:27,414 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 19:13:28,551 - INFO - Authentication (password) successful!
+2025-04-24 19:13:28,783 - INFO - [host 172.27.200.200 session 0x7f3854b86210] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 19:13:32,713 - INFO - [host 172.27.200.200 session 0x7f3854b86210] Received message from host
+2025-04-24 19:13:32,714 - INFO - [host 172.27.200.200 session-id 10342] initialized: session-id=10342 | server_capabilities=<dict_keyiterator object at 0x7f3854bc44a0>
+2025-04-24 19:13:32,714 - INFO - Connected to 172.27.200.200
+2025-04-24 19:13:32,714 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 19:13:35,769 - ERROR - Failed to connect to 172.27.200.201: ConnectTimeoutError(172.27.200.201)
+2025-04-24 19:13:35,770 - INFO - Ping report saved to /home/nikos/github/ngeran/vector-py/scripts/../reports/ping_report_20250424_191335.txt
+2025-04-24 19:13:35,770 - INFO - Disconnecting local connections
+2025-04-24 19:13:35,770 - INFO - Disconnecting from 1 connections
+2025-04-24 19:13:35,770 - INFO - [host 172.27.200.200 session-id 10342] Requesting 'CloseSession'
+2025-04-24 19:13:35,823 - INFO - [host 172.27.200.200 session-id 10342] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:5b74828b-b190-42f7-b5a7-9c76636432a7"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 19:13:35,844 - INFO - [host 172.27.200.200 session-id 10342] Received message from host
+2025-04-24 19:13:35,845 - INFO - Disconnected from 172.27.200.200
+2025-04-24 19:13:35,845 - INFO - Finished ping_hosts
+2025-04-24 19:13:35,845 - INFO - Ping action wrapper completed
+2025-04-24 19:13:35,845 - INFO - Completed action: ping
+2025-04-24 19:15:19,396 - INFO - sys.path: ['/home/nikos/github/ngeran/vector-py', '/home/nikos/github/ngeran/vector-py/network-automation-launcher', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python312.zip', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/lib-dynload', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/site-packages', '/nix/store/j5xprw4y675sh3rrgnrbdwm3rpgl0lw2-python3-3.12.9-env/lib/python3.12/site-packages']
+2025-04-24 19:15:22,439 - INFO - Raw input received: '2'
+2025-04-24 19:15:22,439 - INFO - Valid choice selected: 2
+2025-04-24 19:15:22,439 - INFO - Selected action: interfaces
+2025-04-24 19:15:23,984 - INFO - Raw mode input received: '1'
+2025-04-24 19:15:23,984 - INFO - Valid execution mode selected: 1
+2025-04-24 19:15:23,984 - INFO - Executing action interfaces locally
+2025-04-24 19:15:23,984 - INFO - Executing action: interfaces
+2025-04-24 19:15:23,984 - INFO - DEBUG: Entering get_hosts
+2025-04-24 19:15:23,986 - INFO - Loaded hosts: ['172.27.200.200', '172.27.200.201'], username: admin
+2025-04-24 19:15:23,986 - INFO - Starting configure_interfaces
+2025-04-24 19:15:23,987 - INFO - Using template_file: templates/interface_template.j2
+2025-04-24 19:15:23,988 - INFO - No connections provided, creating new connections
+2025-04-24 19:15:23,988 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 19:15:24,948 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 19:15:26,107 - INFO - Authentication (password) successful!
+2025-04-24 19:15:26,191 - INFO - [host 172.27.200.200 session 0x7fa84c6ae900] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 19:15:30,437 - INFO - [host 172.27.200.200 session 0x7fa84c6ae900] Received message from host
+2025-04-24 19:15:30,438 - INFO - [host 172.27.200.200 session-id 10421] initialized: session-id=10421 | server_capabilities=<dict_keyiterator object at 0x7fa84c6ec4f0>
+2025-04-24 19:15:30,438 - INFO - Connected to 172.27.200.200
+2025-04-24 19:15:30,438 - INFO - Connecting to host 172.27.200.201 with username admin
+2025-04-24 19:15:32,504 - INFO - Connected (version 2.0, client OpenSSH_6.9)
+2025-04-24 19:15:33,404 - INFO - Authentication (password) successful!
+2025-04-24 19:15:33,507 - INFO - [host 172.27.200.201 session 0x7fa84c6cd340] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 19:15:40,733 - INFO - [host 172.27.200.201 session 0x7fa84c6cd340] Received message from host
+2025-04-24 19:15:40,733 - INFO - [host 172.27.200.201 session-id 1489] initialized: session-id=1489 | server_capabilities=<dict_keyiterator object at 0x7fa84c6ec8b0>
+2025-04-24 19:15:40,733 - INFO - Connected to 172.27.200.201
+2025-04-24 19:15:40,736 - INFO - Template vars for MLRDCIENGJRX01: {'interfaces': [{'description': 'To MLRDCIENGJRX02', 'name': 'ge-0/0/3', 'vlans': [{'ip_address': '172.27.201.1/24', 'unit': 0}]}, {'description': 'VLAN interface', 'flexible-vlan-tagging': True, 'name': 'ge-0/0/4', 'vlans': [{'ip_address': '172.27.202.1/24', 'unit': 100, 'vlan_id': 100}, {'ip_address': '172.27.203.1/24', 'unit': 200, 'vlan_id': 200}]}]}
+2025-04-24 19:15:40,736 - INFO - Rendered config for MLRDCIENGJRX01:
+interfaces {
+
+    ge-0/0/3 {
+        
+        description "To MLRDCIENGJRX02";
+        
+        
+            
+                
+                    unit 0 {
+                        family inet {
+                            address 172.27.201.1/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+    ge-0/0/4 {
+        
+        description "VLAN interface";
+        
+        
+            
+                
+                    flexible-vlan-tagging;
+                    unit 100 {
+                        vlan-id 100;
+                        family inet {
+                            address 172.27.202.1/24;
+                        }
+                    }
+                
+            
+                
+                    flexible-vlan-tagging;
+                    unit 200 {
+                        vlan-id 200;
+                        family inet {
+                            address 172.27.203.1/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+}
+2025-04-24 19:15:40,736 - INFO - [host 172.27.200.200 session-id 10421] Requesting 'ExecuteRpc'
+2025-04-24 19:15:40,777 - INFO - [host 172.27.200.200 session-id 10421] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:fd37a0f7-7057-461c-8f9d-e420b685cc05"><load-configuration format="text" action="replace"><configuration-text>interfaces {\n\n    ge-0/0/3 {\n        \n        description "To MLRDCIENGJRX02";\n        \n        \n            \n                \n                    unit 0 {\n                        family inet {\n                            address 172.27.201.1/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n    ge-0/0/4 {\n        \n        description "VLAN interface";\n        \n        \n            \n                \n                    flexible-vlan-tagging;\n                    unit 100 {\n                        vlan-id 100;\n                        family inet {\n                            address 172.27.202.1/24;\n                        }\n                    }\n                \n            \n                \n                    flexible-vlan-tagging;\n                    unit 200 {\n                        vlan-id 200;\n                        family inet {\n                            address 172.27.203.1/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n}</configuration-text></load-configuration></nc:rpc>]]>]]>'
+2025-04-24 19:15:40,811 - INFO - [host 172.27.200.200 session-id 10421] Received message from host
+2025-04-24 19:15:40,812 - INFO - [host 172.27.200.200 session-id 10421] Requesting 'ExecuteRpc'
+2025-04-24 19:15:40,911 - INFO - [host 172.27.200.200 session-id 10421] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:ae57b3d6-7a04-4005-8841-8b9a0b99308e"><commit-configuration><check/></commit-configuration></nc:rpc>]]>]]>'
+2025-04-24 19:15:46,234 - INFO - [host 172.27.200.200 session-id 10421] Received message from host
+2025-04-24 19:15:46,234 - INFO - [host 172.27.200.200 session-id 10421] Requesting 'ExecuteRpc'
+2025-04-24 19:15:46,334 - INFO - [host 172.27.200.200 session-id 10421] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:c21f27b3-37f3-4a30-b667-40c8c3de0c24"><commit-configuration/></nc:rpc>]]>]]>'
+2025-04-24 19:15:53,213 - INFO - [host 172.27.200.200 session-id 10421] Received message from host
+2025-04-24 19:15:53,214 - INFO - Interface configured on MLRDCIENGJRX01 (172.27.200.200)
+2025-04-24 19:15:53,214 - INFO - Template vars for MLRDCIENGJRX02: {'interfaces': [{'description': 'To MLRDCIENGJRX01', 'name': 'ge-0/0/3', 'vlans': [{'ip_address': '172.27.201.2/24', 'unit': 0}]}, {'description': 'VLAN interface', 'flexible-vlan-tagging': True, 'name': 'ge-0/0/4', 'vlans': [{'ip_address': '172.27.202.2/24', 'unit': 100, 'vlan_id': 100}, {'ip_address': '172.27.203.2/24', 'unit': 200, 'vlan_id': 200}]}]}
+2025-04-24 19:15:53,214 - INFO - Rendered config for MLRDCIENGJRX02:
+interfaces {
+
+    ge-0/0/3 {
+        
+        description "To MLRDCIENGJRX01";
+        
+        
+            
+                
+                    unit 0 {
+                        family inet {
+                            address 172.27.201.2/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+    ge-0/0/4 {
+        
+        description "VLAN interface";
+        
+        
+            
+                
+                    flexible-vlan-tagging;
+                    unit 100 {
+                        vlan-id 100;
+                        family inet {
+                            address 172.27.202.2/24;
+                        }
+                    }
+                
+            
+                
+                    flexible-vlan-tagging;
+                    unit 200 {
+                        vlan-id 200;
+                        family inet {
+                            address 172.27.203.2/24;
+                        }
+                    }
+                
+            
+        
+    }
+
+}
+2025-04-24 19:15:53,214 - INFO - [host 172.27.200.201 session-id 1489] Requesting 'ExecuteRpc'
+2025-04-24 19:15:53,280 - INFO - [host 172.27.200.201 session-id 1489] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:f961428f-13e3-49ea-8599-251839970393"><load-configuration format="text" action="replace"><configuration-text>interfaces {\n\n    ge-0/0/3 {\n        \n        description "To MLRDCIENGJRX01";\n        \n        \n            \n                \n                    unit 0 {\n                        family inet {\n                            address 172.27.201.2/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n    ge-0/0/4 {\n        \n        description "VLAN interface";\n        \n        \n            \n                \n                    flexible-vlan-tagging;\n                    unit 100 {\n                        vlan-id 100;\n                        family inet {\n                            address 172.27.202.2/24;\n                        }\n                    }\n                \n            \n                \n                    flexible-vlan-tagging;\n                    unit 200 {\n                        vlan-id 200;\n                        family inet {\n                            address 172.27.203.2/24;\n                        }\n                    }\n                \n            \n        \n    }\n\n}</configuration-text></load-configuration></nc:rpc>]]>]]>'
+2025-04-24 19:15:53,445 - INFO - [host 172.27.200.201 session-id 1489] Received message from host
+2025-04-24 19:15:53,445 - INFO - [host 172.27.200.201 session-id 1489] Requesting 'ExecuteRpc'
+2025-04-24 19:15:53,545 - INFO - [host 172.27.200.201 session-id 1489] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:63830091-8da3-4756-bb4b-f53934efc1ef"><commit-configuration><check/></commit-configuration></nc:rpc>]]>]]>'
+2025-04-24 19:15:55,545 - INFO - [host 172.27.200.201 session-id 1489] Received message from host
+2025-04-24 19:15:55,546 - INFO - [host 172.27.200.201 session-id 1489] Requesting 'ExecuteRpc'
+2025-04-24 19:15:55,646 - INFO - [host 172.27.200.201 session-id 1489] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:f6ba1497-3534-415b-8e53-dc57eaf80c9f"><commit-configuration/></nc:rpc>]]>]]>'
+2025-04-24 19:16:07,321 - INFO - [host 172.27.200.201 session-id 1489] Received message from host
+2025-04-24 19:16:07,322 - INFO - Interface configured on MLRDCIENGJRX02 (172.27.200.201)
+2025-04-24 19:16:07,322 - INFO - Finished configure_interfaces
+2025-04-24 19:16:07,322 - INFO - Completed action: interfaces
+2025-04-24 19:16:10,551 - INFO - sys.path: ['/home/nikos/github/ngeran/vector-py', '/home/nikos/github/ngeran/vector-py/network-automation-launcher', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python312.zip', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/lib-dynload', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/site-packages', '/nix/store/j5xprw4y675sh3rrgnrbdwm3rpgl0lw2-python3-3.12.9-env/lib/python3.12/site-packages']
+2025-04-24 19:35:45,639 - INFO - sys.path: ['/home/nikos/github/ngeran/vector-py', '/home/nikos/github/ngeran/vector-py/network-automation-launcher', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python312.zip', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/lib-dynload', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/site-packages', '/nix/store/j5xprw4y675sh3rrgnrbdwm3rpgl0lw2-python3-3.12.9-env/lib/python3.12/site-packages']
+2025-04-24 19:35:49,290 - INFO - Raw input received: '4'
+2025-04-24 19:35:49,290 - INFO - Valid choice selected: 4
+2025-04-24 19:35:49,290 - INFO - Selected action: code_upgrade
+2025-04-24 19:35:51,038 - INFO - Raw mode input received: '1'
+2025-04-24 19:35:51,038 - INFO - Valid execution mode selected: 1
+2025-04-24 19:35:51,038 - INFO - Executing action code_upgrade locally
+2025-04-24 19:35:51,038 - INFO - Starting code_upgrade action
+2025-04-24 19:35:51,039 - INFO - Loaded products: ['EX4600', 'EX4400', 'SRX320', 'SRX210H']
+2025-04-24 19:35:55,965 - INFO - Raw product input received: '3'
+2025-04-24 19:35:55,965 - INFO - Valid product choice selected: 3
+2025-04-24 19:35:55,965 - INFO - Selected product: SRX320
+2025-04-24 19:35:58,764 - INFO - Raw release input received: '1'
+2025-04-24 19:35:58,764 - INFO - Valid release choice selected: 1
+2025-04-24 19:35:58,764 - INFO - Selected release: 23.4R2-S3
+2025-04-24 19:36:05,205 - INFO - User chose to read from file: n
+2025-04-24 19:36:14,573 - INFO - Added host IP: 172.27.200.200
+2025-04-24 19:36:15,818 - INFO - Saved hosts to /home/nikos/github/ngeran/vector-py/data/upgrade_hosts.yml: ['172.27.200.200']
+2025-04-24 19:36:15,818 - INFO - Host IPs: ['172.27.200.200']
+2025-04-24 19:36:24,174 - INFO - Received credentials - username: admin
+2025-04-24 19:36:24,174 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 19:36:25,068 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 19:36:25,951 - INFO - Authentication (password) failed.
+2025-04-24 19:36:25,951 - ERROR - Failed to connect to 172.27.200.200: ConnectAuthError(172.27.200.200)
+2025-04-24 19:36:25,957 - ERROR - No connections established to any hosts
+2025-04-24 19:36:25,957 - ERROR - No devices connected for code upgrade
+2025-04-24 19:36:56,335 - INFO - sys.path: ['/home/nikos/github/ngeran/vector-py', '/home/nikos/github/ngeran/vector-py/network-automation-launcher', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python312.zip', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/lib-dynload', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/site-packages', '/nix/store/j5xprw4y675sh3rrgnrbdwm3rpgl0lw2-python3-3.12.9-env/lib/python3.12/site-packages']
+2025-04-24 19:36:58,383 - INFO - Raw input received: '4'
+2025-04-24 19:36:58,383 - INFO - Valid choice selected: 4
+2025-04-24 19:36:58,383 - INFO - Selected action: code_upgrade
+2025-04-24 19:37:01,191 - INFO - Raw mode input received: '1'
+2025-04-24 19:37:01,191 - INFO - Valid execution mode selected: 1
+2025-04-24 19:37:01,191 - INFO - Executing action code_upgrade locally
+2025-04-24 19:37:01,191 - INFO - Starting code_upgrade action
+2025-04-24 19:37:01,192 - INFO - Loaded products: ['EX4600', 'EX4400', 'SRX320', 'SRX210H']
+2025-04-24 19:37:04,114 - INFO - Raw product input received: '3'
+2025-04-24 19:37:04,114 - INFO - Valid product choice selected: 3
+2025-04-24 19:37:04,114 - INFO - Selected product: SRX320
+2025-04-24 19:37:05,563 - INFO - Raw release input received: '1'
+2025-04-24 19:37:05,563 - INFO - Valid release choice selected: 1
+2025-04-24 19:37:05,563 - INFO - Selected release: 23.4R2-S3
+2025-04-24 19:37:08,501 - INFO - User chose to read from file: n
+2025-04-24 19:37:14,902 - INFO - Added host IP: 172.27.200.200
+2025-04-24 19:37:17,325 - INFO - Saved hosts to /home/nikos/github/ngeran/vector-py/data/upgrade_hosts.yml: ['172.27.200.200']
+2025-04-24 19:37:17,325 - INFO - Host IPs: ['172.27.200.200']
+2025-04-24 19:37:26,282 - INFO - Received credentials - username: admin
+2025-04-24 19:37:26,282 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-24 19:37:27,266 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 19:37:28,554 - INFO - Authentication (password) successful!
+2025-04-24 19:37:28,617 - INFO - [host 172.27.200.200 session 0x7f2261eca5a0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 19:37:32,827 - INFO - [host 172.27.200.200 session 0x7f2261eca5a0] Received message from host
+2025-04-24 19:37:32,827 - INFO - [host 172.27.200.200 session-id 11307] initialized: session-id=11307 | server_capabilities=<dict_keyiterator object at 0x7f2261c9cc70>
+2025-04-24 19:37:32,833 - INFO - Connected to 172.27.200.200
+2025-04-24 19:37:33,577 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-24 19:37:34,613 - INFO - Authentication (password) successful!
+2025-04-24 19:37:34,681 - INFO - [host 172.27.200.200 session 0x7f2261c88f80] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-24 19:37:38,746 - INFO - [host 172.27.200.200 session 0x7f2261c88f80] Received message from host
+2025-04-24 19:37:38,746 - INFO - [host 172.27.200.200 session-id 11318] initialized: session-id=11318 | server_capabilities=<dict_keyiterator object at 0x7f2261c9d030>
+2025-04-24 19:37:38,748 - INFO - [host 172.27.200.200 session-id 11318] Requesting 'ExecuteRpc'
+2025-04-24 19:37:38,847 - INFO - [host 172.27.200.200 session-id 11318] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:b043ebd4-0bf8-4f43-bdcc-5d56af71e514"><command format="text">show interfaces terse</command></nc:rpc>]]>]]>'
+2025-04-24 19:37:40,876 - INFO - [host 172.27.200.200 session-id 11318] Received message from host
+2025-04-24 19:37:40,876 - INFO - Captured interface status for 172.27.200.200
+2025-04-24 19:37:40,876 - INFO - [host 172.27.200.200 session-id 11318] Requesting 'CloseSession'
+2025-04-24 19:37:40,976 - INFO - [host 172.27.200.200 session-id 11318] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:112d61cc-247c-4897-87e3-d2274f2ef83a"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-24 19:37:40,987 - INFO - [host 172.27.200.200 session-id 11318] Received message from host
+2025-04-24 19:37:40,987 - INFO - BGP not configured on 172.27.200.200
+2025-04-24 19:37:40,987 - INFO - OSPF not configured on 172.27.200.200
+2025-04-24 19:37:40,987 - ERROR - Error capturing state for 172.27.200.200: ConnectClosedError(172.27.200.200)
+2025-04-24 19:37:40,987 - INFO - Pre-upgrade state captured for 172.27.200.200
+2025-04-24 19:37:40,987 - INFO - Starting upgrade on 172.27.200.200
+2025-04-24 19:37:40,987 - ERROR - Error upgrading 172.27.200.200: argument of type 'NoneType' is not iterable
+2025-04-24 19:37:40,988 - INFO - Saved state data to /home/nikos/github/ngeran/vector-py/reports/upgrade_state_20250424_193732.json
+2025-04-24 19:37:40,988 - INFO - Disconnecting from 1 connections
+2025-04-24 19:37:40,988 - INFO - Disconnected from 172.27.200.200
+2025-04-24 19:37:40,988 - INFO - Code upgrade action completed

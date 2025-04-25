@@ -11,5 +11,5 @@ products:
         release: 23.4R2-S3
         os: junos-srxsme-23.4R2-S3.9.tgz
       - product: SRX210H
-        release: 12.3X48-D105
-        os: junos-srxsme-12.3X48-D105.4-domestic.tgz
+        release: 12.1X46-D86
+        os: junos-srxsme-12.1X46-D86-domestic.tgz

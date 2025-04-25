@@ -1,12 +1,10 @@
 import os
 import logging
-import json
-from datetime import datetime
+import time
 from typing import List, Dict
 from jnpr.junos import Device
-from jnpr.junos.utils.sw import SW
 from jnpr.junos.exception import ConnectError
-from scripts.utils import load_yaml_file, save_yaml_file, capture_device_state, compare_states
+from scripts.utils import load_yaml_file, save_yaml_file
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
 
 logger = logging.getLogger(__name__)
@@ -24,7 +22,7 @@ def display_products(products: List[Dict]) -> int:
     retries = 0
     while retries < max_retries:
         try:
-            choice = input(f"Enter your choice (1-{len(products)}): ").strip()
+            choice = input(f"Select a product (1-{len(products)}): ").strip()
             logger.info(f"Raw product input received: '{choice}'")
             if not choice:
                 logger.error("Empty input received")
@@ -68,7 +66,7 @@ def display_releases(product: Dict) -> str:
     retries = 0
     while retries < max_retries:
         try:
-            choice = input(f"Enter your choice (1-{len(releases)}): ").strip()
+            choice = input(f"Select a release (1-{len(releases)}): ").strip()
             logger.info(f"Raw release input received: '{choice}'")
             if not choice:
                 logger.error("Empty input received")
@@ -103,12 +101,11 @@ def get_host_ips() -> List[str]:
     host_ips = []
     upgrade_hosts_file = os.path.join(os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"), 'data/upgrade_hosts.yml')
 
-    print("\nDo you want to read hosts from upgrade_hosts.yml? (y/n)")
     try:
-        use_file = input().strip().lower()
-        logger.info(f"User chose to read from file: {use_file}")
+        choice = input("Read hosts from upgrade_hosts.yml? (y/n): ").strip().lower()
+        logger.info(f"User chose to read from file: {choice}")
 
-        if use_file == 'y' and os.path.exists(upgrade_hosts_file):
+        if choice == 'y' and os.path.exists(upgrade_hosts_file):
             try:
                 hosts_data = load_yaml_file(upgrade_hosts_file)
                 host_ips = hosts_data.get('hosts', [])
@@ -119,8 +116,7 @@ def get_host_ips() -> List[str]:
                 print(f"Error reading {upgrade_hosts_file}: {e}")
 
         while True:
-            print("\nEnter a host IP (or press Enter to finish):")
-            ip = input().strip()
+            ip = input("Enter a host IP (or press Enter to finish): ").strip()
             if not ip:
                 break
             if '.' in ip and all(part.isdigit() for part in ip.split('.')):
@@ -148,10 +144,8 @@ def get_host_ips() -> List[str]:
 def get_credentials() -> tuple:
     """Prompt user for username and password."""
     try:
-        print("\nEnter username:")
-        username = input().strip()
-        print("Enter password:")
-        password = input().strip()
+        username = input("Username: ").strip()
+        password = input("Password: ").strip()
         logger.info(f"Received credentials - username: {username}")
         return username, password
     except KeyboardInterrupt:
@@ -159,15 +153,94 @@ def get_credentials() -> tuple:
         print("\nProgram interrupted by user. Exiting.")
         return "", ""
 
+def probe_device(dev: Device, hostname: str, username: str, password: str) -> bool:
+    """Probe the device to check if it's reachable and responsive."""
+    print(f"Probing device {hostname}...")
+    logger.info(f"Probing device {hostname}")
+    try:
+        if not dev.connected:
+            dev = Device(host=hostname, user=username, password=password)
+            dev.open(timeout=300)
+        with dev:
+            dev.cli("show version", warning=False)
+        print(f"Device {hostname} is reachable and responsive.")
+        logger.info(f"Device {hostname} is reachable and responsive")
+        return True
+    except (ConnectError, Exception) as e:
+        print(f"Failed to probe {hostname}: {e}")
+        logger.error(f"Failed to probe {hostname}: {e}")
+        return False
+
+def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
+    """Check if the upgrade image exists on the device."""
+    try:
+        with dev:
+            image_name = image_path.split('/')[-1]
+            result = dev.cli("file list /var/tmp/", warning=False)
+            if image_name in result.split():
+                logger.info(f"Image {image_path} found on {hostname}")
+                print(f"Image {image_path} found on {hostname}")
+                return True
+            else:
+                logger.error(f"Image {image_path} not found on {hostname}")
+                print(f"Error: Image {image_path} not found on {hostname}")
+                return False
+    except Exception as e:
+        logger.error(f"Error checking image on {hostname}: {e}")
+        print(f"Error checking image on {hostname}: {e}")
+        return False
+
+def check_disk_space(dev: Device, hostname: str) -> bool:
+    """Check if the device has sufficient disk space for the upgrade."""
+    try:
+        with dev:
+            result = dev.cli("show system storage", warning=False)
+            for line in result.splitlines():
+                if "/var/tmp" in line:
+                    fields = line.split()
+                    available_space = int(fields[3])  # Available space in KB
+                    if available_space < 100000:  # Require at least 100 MB
+                        logger.error(f"Insufficient disk space on {hostname}: {available_space} KB available")
+                        print(f"Error: Insufficient disk space on {hostname}: {available_space} KB available")
+                        return False
+            logger.info(f"Sufficient disk space on {hostname}")
+            print(f"Sufficient disk space on {hostname}")
+            return True
+    except Exception as e:
+        logger.error(f"Error checking disk space on {hostname}: {e}")
+        print(f"Error checking disk space on {hostname}: {e}")
+        return False
+
+def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
+    """Check if there is a pending install on the device."""
+    try:
+        with dev:
+            dev.timeout = 300  # Set timeout for this command
+            result = dev.cli(f"request system software add {image_path} validate", warning=False)
+            if "There is already an install pending" in result or "Another package installation in progress" in result:
+                logger.error(f"Pending install detected on {hostname}")
+                print(f"Error: Pending install detected on {hostname}. Please run 'request system reboot' to complete or 'request system software rollback' to cancel.")
+                return True
+            return False
+    except Exception as e:
+        logger.warning(f"Could not check pending install on {hostname}: {e}. Proceeding with caution.")
+        print(f"Warning: Could not check pending install on {hostname}: {e}. Proceeding with caution.")
+        return False
+
 def code_upgrade():
-    """Perform code upgrade on selected devices and capture state."""
+    """Perform code upgrade on selected devices with probing and user messages."""
+    upgrade_status = []
     try:
         logger.info("Starting code_upgrade action")
-        print("DEBUG: Starting code_upgrade")
+        print("Starting code upgrade process...")
 
         # Load upgrade_data.yml
         upgrade_data_file = os.path.join(os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"), 'data/upgrade_data.yml')
         upgrade_data = load_yaml_file(upgrade_data_file)
+        if not upgrade_data:
+            logger.error("Failed to load upgrade_data.yml")
+            print("Error: Failed to load upgrade_data.yml")
+            return
         products = upgrade_data.get('products', [])[0].get('switches', [])
         logger.info(f"Loaded products: {[p['product'] for p in products]}")
 
@@ -176,9 +249,9 @@ def code_upgrade():
         if product_idx is None:
             logger.error("No product selected")
             return
-
         selected_product = products[product_idx]
         logger.info(f"Selected product: {selected_product['product']}")
+        print(f"Selected product: {selected_product['product']}")
 
         # Display release menu
         selected_release = display_releases(selected_product)
@@ -186,6 +259,7 @@ def code_upgrade():
             logger.error("No release selected")
             return
         logger.info(f"Selected release: {selected_release}")
+        print(f"Selected release: {selected_release}")
 
         # Get host IPs
         host_ips = get_host_ips()
@@ -194,6 +268,7 @@ def code_upgrade():
             print("Error: No host IPs provided")
             return
         logger.info(f"Host IPs: {host_ips}")
+        print(f"Hosts to upgrade: {host_ips}")
 
         # Get credentials
         username, password = get_credentials()
@@ -203,96 +278,150 @@ def code_upgrade():
             return
 
         # Connect to hosts
+        print("Connecting to devices...")
         connections = connect_to_hosts(host_ips, username, password)
         if not connections:
             logger.error("No devices connected for code upgrade")
-            print("No devices connected for code upgrade")
+            print("Error: No devices connected for code upgrade")
             return
-
-        # Prepare state storage
-        state_data = {}
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        state_file = os.path.join(os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"), f'reports/upgrade_state_{timestamp}.json')
-        os.makedirs(os.path.dirname(state_file), exist_ok=True)
-
-        # Capture pre-upgrade state
-        for dev in connections:
-            hostname = dev.hostname
-            state_data[hostname] = {'pre_upgrade': capture_device_state(dev, hostname)}
-            logger.info(f"Pre-upgrade state captured for {hostname}")
+        logger.info(f"Connected to devices: {[dev.hostname for dev in connections]}")
 
         # Perform upgrade
         image_path = f"/var/tmp/{selected_product['os']}"
         for dev in connections:
             hostname = dev.hostname
+            status = {'hostname': hostname, 'success': False, 'error': None}
             try:
+                # Increase command timeout
+                dev.timeout = 300  # Set timeout for CLI commands
+
+                # Probe device before upgrade
+                if not probe_device(dev, hostname, username, password):
+                    logger.error(f"Skipping upgrade for {hostname} due to probe failure")
+                    print(f"Skipping upgrade for {hostname} due to probe failure")
+                    status['error'] = "Probe failure"
+                    upgrade_status.append(status)
+                    continue
+
+                # Check if image exists
+                if not check_image_exists(dev, image_path, hostname):
+                    logger.error(f"Skipping upgrade for {hostname} due to missing image")
+                    print(f"Skipping upgrade for {hostname} due to missing image")
+                    status['error'] = "Missing image"
+                    upgrade_status.append(status)
+                    continue
+
+                # Check disk space
+                if not check_disk_space(dev, hostname):
+                    logger.error(f"Skipping upgrade for {hostname} due to insufficient disk space")
+                    print(f"Skipping upgrade for {hostname} due to insufficient disk space")
+                    status['error'] = "Insufficient disk space"
+                    upgrade_status.append(status)
+                    continue
+
+                # Check for pending install
+                if check_pending_install(dev, image_path, hostname):
+                    logger.error(f"Skipping upgrade for {hostname} due to pending install")
+                    print(f"Skipping upgrade for {hostname} due to pending install")
+                    status['error'] = "Pending install"
+                    upgrade_status.append(status)
+                    continue
+
+                # Perform upgrade
                 logger.info(f"Starting upgrade on {hostname}")
-                print(f"DEBUG: Upgrading {hostname} with {image_path}")
-                sw = SW(dev)
-                result = sw.install(package=image_path, validate=True, progress=True)
-                if result:
-                    logger.info(f"Upgrade successful on {hostname}")
-                    print(f"Upgrade successful on {hostname}")
-                    # Reboot device
-                    sw.reboot()
-                    logger.info(f"Rebooted {hostname} after upgrade")
-                    print(f"Rebooted {hostname} after upgrade")
-                else:
-                    logger.error(f"Upgrade failed on {hostname}")
-                    print(f"Upgrade failed on {hostname}")
-                    state_data[hostname]['upgrade_status'] = 'failed'
-                    continue
-
-                # Reconnect after reboot (wait for device to come back)
+                print(f"Installing upgrade on {hostname} with image {image_path}...")
+                print(f"Using manual upgrade for {hostname}...")
                 try:
-                    dev.close()
-                    dev = Device(host=hostname, user=username, password=password)
-                    dev.open(timeout=300)
-                    logger.info(f"Reconnected to {hostname} after reboot")
-                except ConnectError as e:
-                    logger.error(f"Failed to reconnect to {hostname} after reboot: {e}")
-                    print(f"Failed to reconnect to {hostname} after reboot: {e}")
-                    state_data[hostname]['upgrade_status'] = 'failed_reconnect'
+                    with dev:
+                        result = dev.cli(
+                            f"request system software add {image_path} no-validate",
+                            warning=False
+                        )
+                        if "error" in result.lower() or "failed" in result.lower():
+                            raise ValueError(f"Manual upgrade failed: {result}")
+                    logger.info(f"Manual upgrade initiated on {hostname}")
+                    print(f"Manual upgrade initiated on {hostname}")
+                except Exception as e:
+                    logger.error(f"Manual upgrade failed on {hostname}: {e}")
+                    print(f"Manual upgrade failed on {hostname}: {e}")
+                    status['error'] = str(e)
+                    upgrade_status.append(status)
                     continue
 
-                # Capture post-upgrade state
-                state_data[hostname]['post_upgrade'] = capture_device_state(dev, hostname)
-                logger.info(f"Post-upgrade state captured for {hostname}")
-                state_data[hostname]['upgrade_status'] = 'successful'
+                # Perform reboot
+                try:
+                    with dev:
+                        dev.cli("request system reboot", warning=False)
+                    logger.info(f"Reboot initiated on {hostname}")
+                    print(f"Reboot initiated on {hostname}")
+                except Exception as e:
+                    logger.error(f"Reboot failed on {hostname}: {e}")
+                    print(f"Reboot failed on {hostname}: {e}")
+                    status['error'] = f"Reboot failed: {e}"
+                    upgrade_status.append(status)
+                    continue
 
-                # Compare states
-                differences = compare_states(state_data[hostname]['pre_upgrade'], state_data[hostname]['post_upgrade'])
-                state_data[hostname]['differences'] = differences
-                if differences:
-                    logger.info(f"State differences found for {hostname}: {differences}")
-                    print(f"\nState differences for {hostname}:")
-                    for key, diff in differences.items():
-                        print(f"{key.replace('_', ' ').title()}:")
-                        print(f"  Pre: {diff['pre'][:100]}...")
-                        print(f"  Post: {diff['post'][:100]}...")
-                        print(f"  Note: {diff['note']}")
+                # Wait for reboot and reconnect
+                print(f"Device {hostname} is rebooting. Waiting for reconnection...")
+                time.sleep(120)
+                dev.close()
+                max_attempts = 5
+                for attempt in range(max_attempts):
+                    try:
+                        dev = Device(host=hostname, user=username, password=password)
+                        dev.open(timeout=300)
+                        logger.info(f"Reconnected to {hostname} after reboot")
+                        print(f"Reconnected to {hostname} after reboot")
+                        break
+                    except ConnectError as e:
+                        logger.warning(f"Reconnect attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}")
+                        print(f"Reconnect attempt {attempt + 1}/{max_attempts} failed for {hostname}. Retrying...")
+                        time.sleep(60)
                 else:
-                    logger.info(f"No state differences for {hostname}")
-                    print(f"No state differences for {hostname}")
+                    logger.error(f"Failed to reconnect to {hostname} after {max_attempts} attempts")
+                    print(f"Error: Failed to reconnect to {hostname} after reboot")
+                    status['error'] = "Reconnect failure"
+                    upgrade_status.append(status)
+                    continue
+
+                # Probe device after reboot
+                if probe_device(dev, hostname, username, password):
+                    logger.info(f"Post-upgrade probe successful for {hostname}")
+                    print(f"Upgrade and reboot completed successfully for {hostname}")
+                    status['success'] = True
+                    upgrade_status.append(status)
+                else:
+                    logger.error(f"Post-upgrade probe failed for {hostname}")
+                    print(f"Warning: Post-upgrade probe failed for {hostname}")
+                    status['error'] = "Post-upgrade probe failure"
+                    upgrade_status.append(status)
 
             except Exception as e:
                 logger.error(f"Error upgrading {hostname}: {e}")
                 print(f"Error upgrading {hostname}: {e}")
-                state_data[hostname]['upgrade_status'] = f'failed: {str(e)}'
-
-        # Save state data to JSON
-        try:
-            with open(state_file, 'w') as f:
-                json.dump(state_data, f, indent=2)
-            logger.info(f"Saved state data to {state_file}")
-            print(f"Saved state data to {state_file}")
-        except Exception as e:
-            logger.error(f"Error saving state file {state_file}: {e}")
-            print(f"Error saving state file {state_file}: {e}")
+                status['error'] = str(e)
+                upgrade_status.append(status)
 
         disconnect_from_hosts(connections)
-        logger.info("Code upgrade action completed")
-        print("DEBUG: Code upgrade completed")
+
+        # Summarize upgrade status
+        successful = [s for s in upgrade_status if s['success']]
+        failed = [s for s in upgrade_status if not s['success']]
+        logger.info(f"Upgrade summary: {len(successful)} successful, {len(failed)} failed")
+        print("\nUpgrade Summary:")
+        print(f"Successful: {len(successful)} device(s)")
+        for s in successful:
+            print(f"  - {s['hostname']}")
+        print(f"Failed: {len(failed)} device(s)")
+        for s in failed:
+            print(f"  - {s['hostname']}: {s['error']}")
+
+        if failed:
+            logger.warning("Code upgrade process completed with failures")
+            print("Code upgrade process completed with failures.")
+        else:
+            logger.info("Code upgrade process completed successfully")
+            print("Code upgrade process completed successfully.")
 
     except KeyboardInterrupt:
         logger.info("Code upgrade interrupted by user (Ctrl+C)")

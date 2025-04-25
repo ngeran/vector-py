@@ -4,7 +4,7 @@ import time
 from typing import List, Dict
 from jnpr.junos import Device
 from jnpr.junos.utils.sw import SW
-from jnpr.junos.exception import ConnectError
+from jnpr.junos.exception import ConnectError, RpcTimeoutError
 from scripts.utils import load_yaml_file, save_yaml_file
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
 
@@ -214,15 +214,41 @@ def check_disk_space(dev: Device, hostname: str) -> bool:
 
 def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
     """Check if there is a pending install on the device."""
+    logger.debug(f"Starting pending install check on {hostname}")
     try:
         with dev:
             dev.timeout = 300  # Set timeout for this command
+            logger.debug(f"Executing 'request system software add {image_path} validate' on {hostname}")
             result = dev.cli(f"request system software add {image_path} validate", warning=False)
+            logger.debug(f"Pending install check result on {hostname}: {result}")
             if "There is already an install pending" in result or "Another package installation in progress" in result:
                 logger.error(f"Pending install detected on {hostname}")
-                print(f"Error: Pending install detected on {hostname}. Please run 'request system reboot' to complete or 'request system software rollback' to cancel.")
-                return True
+                print(f"Error: Pending install detected on {hostname}.")
+                # Prompt user for action
+                choice = input("Resolve pending install? (1: Reboot, 2: Rollback, 3: Skip): ").strip()
+                logger.info(f"User chose pending install action: {choice}")
+                if choice == '1':
+                    print(f"Initiating reboot on {hostname}...")
+                    dev.cli("request system reboot", warning=False)
+                    logger.info(f"Reboot initiated on {hostname} to resolve pending install")
+                    print(f"Please wait 5-10 minutes for {hostname} to reboot, then rerun the script.")
+                    return True
+                elif choice == '2':
+                    print(f"Initiating rollback on {hostname}...")
+                    dev.cli("request system software rollback", warning=False)
+                    logger.info(f"Rollback initiated on {hostname} to resolve pending install")
+                    print(f"Rollback completed on {hostname}. Proceeding with upgrade.")
+                    return False
+                else:
+                    logger.info(f"User chose to skip pending install on {hostname}")
+                    print(f"Skipping upgrade for {hostname} due to pending install.")
+                    return True
+            logger.debug(f"No pending install detected on {hostname}")
             return False
+    except RpcTimeoutError as e:
+        logger.error(f"Timeout checking pending install on {hostname}: {e}")
+        print(f"Error: Timeout checking pending install on {hostname}: {e}")
+        return True
     except Exception as e:
         logger.warning(f"Could not check pending install on {hostname}: {e}. Proceeding with caution.")
         print(f"Warning: Could not check pending install on {hostname}: {e}. Proceeding with caution.")
@@ -230,7 +256,7 @@ def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
 
 def progress_callback(dev: Device, report: str) -> None:
     """Callback function to report progress during software installation."""
-    logger.info(f"Progress on {dev.hostname}: {report}")
+    logger.debug(f"Progress on {dev.hostname}: {report}")
     print(f"Progress on {dev.hostname}: {report}")
 
 def code_upgrade():
@@ -327,14 +353,13 @@ def code_upgrade():
 
                 # Check for pending install
                 if check_pending_install(dev, image_path, hostname):
-                    logger.error(f"Skipping upgrade for {hostname} due to pending install")
-                    print(f"Skipping upgrade for {hostname} due to pending install")
+                    logger.error(f"Skipping upgrade for {hostname} due to unresolved pending install")
                     status['error'] = "Pending install"
                     upgrade_status.append(status)
                     continue
 
                 # Perform upgrade using SW class
-                logger.info(f"Starting upgrade on {hostname}")
+                logger.debug(f"Starting software upgrade on {hostname} with image {image_path}")
                 print(f"Installing upgrade on {hostname} with image {image_path}...")
                 try:
                     sw = SW(dev)
@@ -343,12 +368,19 @@ def code_upgrade():
                         validate=False,
                         no_copy=True,  # Assume image is already on device
                         progress=progress_callback,
-                        timeout=600  # Extended timeout for installation
+                        timeout=1200  # Extended timeout for installation
                     )
+                    logger.debug(f"Software install result on {hostname}: {ok}")
                     if not ok:
                         raise ValueError("Software installation failed")
                     logger.info(f"Software upgrade completed on {hostname}")
                     print(f"Software upgrade completed on {hostname}")
+                except RpcTimeoutError as e:
+                    logger.error(f"Timeout during software upgrade on {hostname}: {e}")
+                    print(f"Error: Timeout during software upgrade on {hostname}: {e}")
+                    status['error'] = f"Timeout: {e}"
+                    upgrade_status.append(status)
+                    continue
                 except Exception as e:
                     logger.error(f"Software upgrade failed on {hostname}: {e}")
                     print(f"Software upgrade failed on {hostname}: {e}")
@@ -358,6 +390,7 @@ def code_upgrade():
 
                 # Perform reboot
                 try:
+                    logger.debug(f"Initiating reboot on {hostname}")
                     sw.reboot()
                     logger.info(f"Reboot initiated on {hostname}")
                     print(f"Reboot initiated on {hostname}")

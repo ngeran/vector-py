@@ -2519,3 +2519,6 @@ b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:
 2025-04-25 17:49:46,348 - INFO - [host 172.27.200.201 session-id 1650] Requesting 'ExecuteRpc'
 2025-04-25 17:49:46,448 - INFO - [host 172.27.200.201 session-id 1650] Sending:
 b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:59763b93-6abc-4b85-bcdd-4ea2e6f78d7e"><command format="text">request system software add /var/tmp/junos-srxsme-12.1X46-D86-domestic.tgz validate</command></nc:rpc>]]>]]>'
+2025-04-25 17:54:46,348 - INFO - [host 172.27.200.201 session-id 1650] Requesting 'CloseSession'
+2025-04-25 17:54:46,349 - INFO - [host 172.27.200.201 session-id 1650] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:e73fea4f-7d1d-42ce-b3a5-af0ac0dbe7c0"><nc:close-session/></nc:rpc>]]>]]>'

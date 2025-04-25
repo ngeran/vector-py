@@ -3,6 +3,7 @@ import logging
 import time
 from typing import List, Dict
 from jnpr.junos import Device
+from jnpr.junos.utils.sw import SW
 from jnpr.junos.exception import ConnectError
 from scripts.utils import load_yaml_file, save_yaml_file
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
@@ -227,6 +228,11 @@ def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
         print(f"Warning: Could not check pending install on {hostname}: {e}. Proceeding with caution.")
         return False
 
+def progress_callback(dev: Device, report: str) -> None:
+    """Callback function to report progress during software installation."""
+    logger.info(f"Progress on {dev.hostname}: {report}")
+    print(f"Progress on {dev.hostname}: {report}")
+
 def code_upgrade():
     """Perform code upgrade on selected devices with probing and user messages."""
     upgrade_status = []
@@ -327,31 +333,32 @@ def code_upgrade():
                     upgrade_status.append(status)
                     continue
 
-                # Perform upgrade
+                # Perform upgrade using SW class
                 logger.info(f"Starting upgrade on {hostname}")
                 print(f"Installing upgrade on {hostname} with image {image_path}...")
-                print(f"Using manual upgrade for {hostname}...")
                 try:
-                    with dev:
-                        result = dev.cli(
-                            f"request system software add {image_path} no-validate",
-                            warning=False
-                        )
-                        if "error" in result.lower() or "failed" in result.lower():
-                            raise ValueError(f"Manual upgrade failed: {result}")
-                    logger.info(f"Manual upgrade initiated on {hostname}")
-                    print(f"Manual upgrade initiated on {hostname}")
+                    sw = SW(dev)
+                    ok = sw.install(
+                        package=image_path,
+                        validate=False,
+                        no_copy=True,  # Assume image is already on device
+                        progress=progress_callback,
+                        timeout=600  # Extended timeout for installation
+                    )
+                    if not ok:
+                        raise ValueError("Software installation failed")
+                    logger.info(f"Software upgrade completed on {hostname}")
+                    print(f"Software upgrade completed on {hostname}")
                 except Exception as e:
-                    logger.error(f"Manual upgrade failed on {hostname}: {e}")
-                    print(f"Manual upgrade failed on {hostname}: {e}")
+                    logger.error(f"Software upgrade failed on {hostname}: {e}")
+                    print(f"Software upgrade failed on {hostname}: {e}")
                     status['error'] = str(e)
                     upgrade_status.append(status)
                     continue
 
                 # Perform reboot
                 try:
-                    with dev:
-                        dev.cli("request system reboot", warning=False)
+                    sw.reboot()
                     logger.info(f"Reboot initiated on {hostname}")
                     print(f"Reboot initiated on {hostname}")
                 except Exception as e:

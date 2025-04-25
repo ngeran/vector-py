@@ -256,7 +256,7 @@ def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
 
 def progress_callback(dev: Device, report: str) -> None:
     """Callback function to report progress during software installation."""
-    logger.debug(f"Progress on {dev.hostname}: {report}")
+    logger.info(f"Progress on {dev.hostname}: {report}")
     print(f"Progress on {dev.hostname}: {report}")
 
 def code_upgrade():
@@ -363,6 +363,7 @@ def code_upgrade():
                 print(f"Installing upgrade on {hostname} with image {image_path}...")
                 try:
                     sw = SW(dev)
+                    logger.debug(f"SW.install parameters: package={image_path}, validate=False, no_copy=True, timeout=1200")
                     ok = sw.install(
                         package=image_path,
                         validate=False,
@@ -375,6 +376,37 @@ def code_upgrade():
                         raise ValueError("Software installation failed")
                     logger.info(f"Software upgrade completed on {hostname}")
                     print(f"Software upgrade completed on {hostname}")
+                except TypeError as e:
+                    logger.error(f"TypeError during software upgrade on {hostname}: {e}")
+                    print(f"Error: TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method...")
+                    # Fallback to CLI method
+                    try:
+                        result = dev.cli(f"request system software add {image_path} no-validate", warning=False, timeout=1200)
+                        logger.debug(f"CLI upgrade result on {hostname}: {result}")
+                        if "error" in result.lower() or "failed" in result.lower():
+                            if "Could not format alternate root" in result:
+                                logger.error(f"Storage failure on {hostname}: {result}")
+                                print(f"Error: Storage failure on {hostname}: {result}")
+                                print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
+                                status['error'] = "Storage failure: Could not format alternate root"
+                            else:
+                                logger.error(f"CLI upgrade failed on {hostname}: {result}")
+                                print(f"Error: CLI upgrade failed on {hostname}: {result}")
+                                status['error'] = f"CLI upgrade failed: {result}"
+                            upgrade_status.append(status)
+                            continue
+                        logger.info(f"CLI software upgrade completed on {hostname}")
+                        print(f"CLI software upgrade completed on {hostname}")
+                    except Exception as cli_e:
+                        logger.error(f"CLI upgrade failed on {hostname}: {cli_e}")
+                        print(f"Error: CLI upgrade failed on {hostname}: {cli_e}")
+                        if "Could not format alternate root" in str(cli_e):
+                            print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
+                            status['error'] = "Storage failure: Could not format alternate root"
+                        else:
+                            status['error'] = f"CLI upgrade failed: {cli_e}"
+                        upgrade_status.append(status)
+                        continue
                 except RpcTimeoutError as e:
                     logger.error(f"Timeout during software upgrade on {hostname}: {e}")
                     print(f"Error: Timeout during software upgrade on {hostname}: {e}")
@@ -383,8 +415,12 @@ def code_upgrade():
                     continue
                 except Exception as e:
                     logger.error(f"Software upgrade failed on {hostname}: {e}")
-                    print(f"Software upgrade failed on {hostname}: {e}")
-                    status['error'] = str(e)
+                    print(f"Error: Software upgrade failed on {hostname}: {e}")
+                    if "Could not format alternate root" in str(e):
+                        print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
+                        status['error'] = "Storage failure: Could not format alternate root"
+                    else:
+                        status['error'] = str(e)
                     upgrade_status.append(status)
                     continue
 

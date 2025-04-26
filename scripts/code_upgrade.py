@@ -1,15 +1,25 @@
-import os
 import logging
-import time
+import os
 import subprocess
-from typing import List, Dict
+import time
+from typing import Dict, List
+
 from jnpr.junos import Device
+from jnpr.junos.exception import (
+    AuthenticationError,
+    ConnectError,
+    ConnectRefusedError,
+    ConnectTimeoutError,
+    ProbeError,
+    RpcError,
+)
 from jnpr.junos.utils.sw import SW
-from jnpr.junos.exception import ConnectError, RpcError
-from scripts.utils import load_yaml_file, save_yaml_file
+
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
+from scripts.utils import load_yaml_file, save_yaml_file
 
 logger = logging.getLogger(__name__)
+
 
 def display_vendors(vendors: List[Dict]) -> int:
     """Display a menu of vendors and return the user's choice."""
@@ -28,7 +38,9 @@ def display_vendors(vendors: List[Dict]) -> int:
             logger.info(f"Raw vendor input received: '{choice}'")
             if not choice:
                 logger.error("Empty input received")
-                print(f"Invalid choice. Please enter a number between 1 and {len(vendors)}")
+                print(
+                    f"Invalid choice. Please enter a number between 1 and {len(vendors)}"
+                )
                 retries += 1
                 continue
             choice = int(choice)
@@ -44,7 +56,9 @@ def display_vendors(vendors: List[Dict]) -> int:
             retries += 1
         except EOFError:
             logger.error("EOF received during input")
-            print(f"Input interrupted. Please enter a number between 1 and {len(vendors)}")
+            print(
+                f"Input interrupted. Please enter a number between 1 and {len(vendors)}"
+            )
             retries += 1
         except KeyboardInterrupt:
             logger.info("Vendor selection interrupted by user (Ctrl+C)")
@@ -53,6 +67,7 @@ def display_vendors(vendors: List[Dict]) -> int:
     logger.error(f"Max retries ({max_retries}) reached in display_vendors")
     print("Too many invalid attempts. Exiting.")
     return None
+
 
 def display_products(products: List[Dict]) -> int:
     """Display a menu of products and return the user's choice."""
@@ -71,7 +86,9 @@ def display_products(products: List[Dict]) -> int:
             logger.info(f"Raw product input received: '{choice}'")
             if not choice:
                 logger.error("Empty input received")
-                print(f"Invalid choice. Please enter a number between 1 and {len(products)}")
+                print(
+                    f"Invalid choice. Please enter a number between 1 and {len(products)}"
+                )
                 retries += 1
                 continue
             choice = int(choice)
@@ -79,15 +96,21 @@ def display_products(products: List[Dict]) -> int:
                 logger.info(f"Valid product choice selected: {choice}")
                 return choice - 1
             logger.error(f"Choice out of range: {choice}")
-            print(f"Invalid choice. Please enter a number between 1 and {len(products)}")
+            print(
+                f"Invalid choice. Please enter a number between 1 and {len(products)}"
+            )
             retries += 1
         except ValueError:
             logger.error(f"Non-numeric input: '{choice}'")
-            print(f"Invalid choice. Please enter a number between 1 and {len(products)}")
+            print(
+                f"Invalid choice. Please enter a number between 1 and {len(products)}"
+            )
             retries += 1
         except EOFError:
             logger.error("EOF received during input")
-            print(f"Input interrupted. Please enter a number between 1 and {len(products)}")
+            print(
+                f"Input interrupted. Please enter a number between 1 and {len(products)}"
+            )
             retries += 1
         except KeyboardInterrupt:
             logger.info("Product selection interrupted by user (Ctrl+C)")
@@ -97,9 +120,10 @@ def display_products(products: List[Dict]) -> int:
     print("Too many invalid attempts. Exiting.")
     return None
 
+
 def display_releases(product: Dict) -> Dict:
     """Display available releases for a product and return the selected release dictionary."""
-    releases = product.get('releases', [])
+    releases = product.get("releases", [])
     if not releases:
         logger.error(f"No releases found for product {product['product']}")
         print(f"Error: No releases found for product {product['product']}")
@@ -119,23 +143,33 @@ def display_releases(product: Dict) -> Dict:
             logger.info(f"Raw release input received: '{choice}'")
             if not choice:
                 logger.error("Empty input received")
-                print(f"Invalid choice. Please enter a number between 1 and {len(releases)}")
+                print(
+                    f"Invalid choice. Please enter a number between 1 and {len(releases)}"
+                )
                 retries += 1
                 continue
             choice = int(choice)
             if 1 <= choice <= len(releases):
-                logger.info(f"Valid release choice selected: {releases[choice - 1]['release']}")
+                logger.info(
+                    f"Valid release choice selected: {releases[choice - 1]['release']}"
+                )
                 return releases[choice - 1]
             logger.error(f"Choice out of range: {choice}")
-            print(f"Invalid choice. Please enter a number between 1 and {len(releases)}")
+            print(
+                f"Invalid choice. Please enter a number between 1 and {len(releases)}"
+            )
             retries += 1
         except ValueError:
             logger.error(f"Non-numeric input: '{choice}'")
-            print(f"Invalid choice. Please enter a number between 1 and {len(releases)}")
+            print(
+                f"Invalid choice. Please enter a number between 1 and {len(releases)}"
+            )
             retries += 1
         except EOFError:
             logger.error("EOF received during input")
-            print(f"Input interrupted. Please enter a number between 1 and {len(releases)}")
+            print(
+                f"Input interrupted. Please enter a number between 1 and {len(releases)}"
+            )
             retries += 1
         except KeyboardInterrupt:
             logger.info("Release selection interrupted by user (Ctrl+C)")
@@ -145,19 +179,23 @@ def display_releases(product: Dict) -> Dict:
     print("Too many invalid attempts. Exiting.")
     return None
 
+
 def get_host_ips() -> List[str]:
     """Prompt user to read hosts from upgrade_hosts.yml or enter IPs manually."""
     host_ips = []
-    upgrade_hosts_file = os.path.join(os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"), 'data/upgrade_hosts.yml')
+    upgrade_hosts_file = os.path.join(
+        os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"),
+        "data/upgrade_hosts.yml",
+    )
 
     try:
         choice = input("Read hosts from upgrade_hosts.yml? (y/n): ").strip().lower()
         logger.info(f"User chose to read from file: {choice}")
 
-        if choice == 'y' and os.path.exists(upgrade_hosts_file):
+        if choice == "y" and os.path.exists(upgrade_hosts_file):
             try:
                 hosts_data = load_yaml_file(upgrade_hosts_file)
-                host_ips = hosts_data.get('hosts', [])
+                host_ips = hosts_data.get("hosts", [])
                 logger.info(f"Loaded hosts from {upgrade_hosts_file}: {host_ips}")
                 print(f"Loaded hosts: {host_ips}")
             except Exception as e:
@@ -168,7 +206,7 @@ def get_host_ips() -> List[str]:
             ip = input("Enter a host IP (or press Enter to finish): ").strip()
             if not ip:
                 break
-            if '.' in ip and all(part.isdigit() for part in ip.split('.')):
+            if "." in ip and all(part.isdigit() for part in ip.split(".")):
                 host_ips.append(ip)
                 logger.info(f"Added host IP: {ip}")
             else:
@@ -177,7 +215,7 @@ def get_host_ips() -> List[str]:
 
         if host_ips:
             try:
-                save_yaml_file(upgrade_hosts_file, {'hosts': host_ips})
+                save_yaml_file(upgrade_hosts_file, {"hosts": host_ips})
                 logger.info(f"Saved hosts to {upgrade_hosts_file}: {host_ips}")
                 print(f"Saved hosts to {upgrade_hosts_file}")
             except Exception as e:
@@ -189,6 +227,7 @@ def get_host_ips() -> List[str]:
         logger.info("Host input interrupted by user (Ctrl+C)")
         print("\nProgram interrupted by user. Exiting.")
         return []
+
 
 def get_credentials() -> tuple:
     """Prompt user for username and password."""
@@ -202,10 +241,11 @@ def get_credentials() -> tuple:
         print("\nProgram interrupted by user. Exiting.")
         return "", ""
 
+
 def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
     """Check if the upgrade image exists on the device."""
     try:
-        image_name = image_path.split('/')[-1]
+        image_name = image_path.split("/")[-1]
         result = dev.cli("file list /var/tmp/", warning=False)
         if image_name in result.split():
             logger.info(f"Image {image_path} found on {hostname}")
@@ -219,43 +259,67 @@ def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
         print(f"❌ Error checking image on {hostname}: {e}")
         return False
 
+
 def check_current_version(dev: Device, hostname: str, target_version: str) -> bool:
     """Check current Junos version and warn about downgrade."""
     logger.info(f"Checking current version on {hostname}")
     print(f"Checking current version on {hostname}...")
     try:
-        current_version = dev.facts.get('version')
+        current_version = dev.facts.get("version")
         if not current_version:
-            logger.warning(f"No version found in facts on {hostname}. Falling back to CLI.")
+            logger.warning(
+                f"No version found in facts on {hostname}. Falling back to CLI."
+            )
             version_output = dev.cli("show version", warning=False)
             for line in version_output.splitlines():
                 if "JUNOS Software Release" in line:
-                    current_version = line.split('[')[-1].strip(']').strip()
+                    current_version = line.split("[")[-1].strip("]").strip()
                     break
         if current_version:
             logger.info(f"Current Junos version on {hostname}: {current_version}")
             print(f"✅ Current Junos version on {hostname}: {current_version}")
             if current_version == target_version:
-                logger.info(f"{hostname} already on target version {target_version}. Skipping upgrade.")
-                print(f"✅ {hostname} already on target version {target_version}. Skipping upgrade.")
+                logger.info(
+                    f"{hostname} already on target version {target_version}. Skipping upgrade."
+                )
+                print(
+                    f"✅ {hostname} already on target version {target_version}. Skipping upgrade."
+                )
                 return False
-            current_parts = [int(x) if x.isdigit() else x for x in current_version.replace('-', '.').split('.')]
-            target_parts = [int(x) if x.isdigit() else x for x in target_version.replace('-', '.').split('.')]
+            current_parts = [
+                int(x) if x.isdigit() else x
+                for x in current_version.replace("-", ".").split(".")
+            ]
+            target_parts = [
+                int(x) if x.isdigit() else x
+                for x in target_version.replace("-", ".").split(".")
+            ]
             if current_parts > target_parts:
-                logger.warning(f"Selected version {target_version} is older than current {current_version} on {hostname}")
-                print(f"⚠️ Warning: Selected version {target_version} is older than current {current_version} on {hostname}.")
+                logger.warning(
+                    f"Selected version {target_version} is older than current {current_version} on {hostname}"
+                )
+                print(
+                    f"⚠️ Warning: Selected version {target_version} is older than current {current_version} on {hostname}."
+                )
                 choice = input("Proceed with downgrade? (y/n): ").strip().lower()
-                if choice != 'y':
+                if choice != "y":
                     logger.info(f"User chose to skip downgrade on {hostname}")
                     print(f"Skipping upgrade for {hostname} to avoid downgrade.")
                     return False
         return True
     except Exception as e:
-        logger.warning(f"Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
-        print(f"⚠️ Warning: Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
+        logger.warning(
+            f"Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade."
+        )
+        print(
+            f"⚠️ Warning: Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade."
+        )
         return True
 
-def probe_device(hostname: str, username: str, password: str, max_wait: int = 900, interval: int = 60) -> bool:
+
+def probe_device(
+    hostname: str, username: str, password: str, max_wait: int = 900, interval: int = 60
+) -> bool:
     """Probe device availability using ping and SSH until it responds or times out."""
     logger.info(f"Probing {hostname} for availability post-reboot")
     print(f"Probing {hostname} for availability post-reboot...")
@@ -264,124 +328,198 @@ def probe_device(hostname: str, username: str, password: str, max_wait: int = 90
         try:
             # Check ping
             ping_result = subprocess.run(
-                ['ping', '-c', '1', '-W', '2', hostname],
+                ["ping", "-c", "1", "-W", "2", hostname],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                text=True
+                text=True,
             )
             if ping_result.returncode != 0:
                 logger.debug(f"Ping to {hostname} failed: {ping_result.stderr}")
-                print(f"⚠️ {hostname} not yet reachable via ping. Retrying in {interval} seconds...")
+                print(
+                    f"⚠️ {hostname} not yet reachable via ping. Retrying in {interval} seconds..."
+                )
                 time.sleep(interval)
                 continue
 
             # Check SSH service
-            ssh_command = f"ssh -o ConnectTimeout=10 -o StrictHostKeyChecking=no {username}@{hostname} \"show version\""
+            ssh_command = f'ssh -o ConnectTimeout=10 -o StrictHostKeyChecking=no {username}@{hostname} "show version"'
             ssh_result = subprocess.run(
                 ssh_command,
                 shell=True,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                timeout=15
+                timeout=15,
             )
             if ssh_result.returncode == 0:
                 logger.info(f"{hostname} is reachable and SSH service is up")
                 print(f"✅ {hostname} is reachable and SSH service is up")
                 return True
             logger.debug(f"SSH to {hostname} failed: {ssh_result.stderr}")
-            print(f"⚠️ {hostname} pingable but SSH not ready. Retrying in {interval} seconds...")
+            print(
+                f"⚠️ {hostname} pingable but SSH not ready. Retrying in {interval} seconds..."
+            )
         except Exception as e:
             logger.debug(f"Probe to {hostname} failed: {e}")
-            print(f"⚠️ {hostname} not yet fully reachable. Retrying in {interval} seconds...")
+            print(
+                f"⚠️ {hostname} not yet fully reachable. Retrying in {interval} seconds..."
+            )
         time.sleep(interval)
     logger.error(f"{hostname} did not become reachable within {max_wait} seconds")
     print(f"❌ {hostname} did not become reachable within {max_wait} seconds")
     return False
 
-def verify_version(hostname: str, username: str, password: str, target_version: str, max_attempts: int = 5, retry_interval: int = 60) -> tuple:
-    """Verify device version using dev.facts['version'] with fallback to ssh command."""
-    logger.info(f"Verifying version on {hostname}")
-    print(f"Verifying version on {hostname}...")
 
-    # Add initial delay to ensure device services are up
-    time.sleep(30)
+def verify_version(
+    hostname: str,
+    username: str,
+    password: str,
+    target_version: str,
+    max_attempts: int = 30,
+    retry_interval: int = 30,
+) -> tuple:
+    """
+    Connects to a device, retrieves version via PyEZ facts, and compares to the target.
+    Includes connection retries, mimicking the script's post-reboot check.
 
-    # Try PyEZ dev.facts['version'] with retries
+    Args:
+        hostname: Device IP address or hostname.
+        username: Login username.
+        password: Login password.
+        target_version: The desired JUNOS version string.
+        max_attempts: Maximum number of connection/verification attempts.
+        retry_interval: Seconds to wait between retry attempts.
+
+    Returns:
+        tuple: (bool: True if version matches target, False otherwise,
+                str: Detected version string or None if detection failed,
+                str: Error message if verification failed, None otherwise)
+    """
+    logger.info(
+        f"Attempting to verify version on {hostname} against target '{target_version}'"
+    )
+    print(
+        f"Attempting to verify version on {hostname} against target '{target_version}'..."
+    )
+
+    last_exception = None  # Store the last error encountered for final reporting
+
     for attempt in range(max_attempts):
-        new_dev = None
+        dev = None
         try:
-            new_dev = Device(host=hostname, user=username, password=password)
-            if new_dev is None:
-                raise Exception("Failed to create Device object")
-            new_dev.timeout = 600
-            new_dev.open(timeout=300)
-            logger.info(f"Connected to {hostname} for version verification (attempt {attempt + 1}/{max_attempts})")
-            print(f"✅ Connected to {hostname} for version verification")
+            print(f"Attempt {attempt + 1}/{max_attempts}: Connecting to {hostname}...")
+            logger.info(
+                f"Attempt {attempt + 1}/{max_attempts}: Connecting to {hostname}..."
+            )
 
-            current_version = new_dev.facts.get('version')
+            # 1. Connect to the device
+            dev = Device(host=hostname, user=username, passwd=password)
+            dev.open()
+
+            # 2. Explicitly check connection status after open() returns
+            if not dev.connected:
+                logger.error(
+                    f"Attempt {attempt + 1}: Connection to {hostname} reported as not connected after open()."
+                )
+                raise ConnectError(
+                    f"{hostname}: Connection failed (connected flag is False after open)"
+                )
+
+            print(f"✅ Successfully connected to {hostname} (Attempt {attempt + 1})")
+            logger.info(
+                f"✅ Successfully connected to {hostname} (Attempt {attempt + 1})"
+            )
+
+            # 3. Get Version using Facts
+            logger.debug(f"Retrieving facts from {hostname}")
+            facts = dev.facts
+            current_version = facts.get("version")
+
             if current_version:
-                logger.info(f"Version on {hostname}: {current_version} (via facts)")
-                print(f"✅ Version on {hostname}: {current_version}")
-                return current_version == target_version, current_version, None
-            else:
-                logger.warning(f"No version found in facts on {hostname}. Falling back to CLI.")
-                version_output = new_dev.cli("show version", warning=False)
-                for line in version_output.splitlines():
-                    if "JUNOS Software Release" in line:
-                        current_version = line.split('[')[-1].strip(']').strip()
-                        break
-                if current_version:
-                    logger.info(f"Version on {hostname}: {current_version} (via CLI)")
-                    print(f"✅ Version on {hostname}: {current_version}")
-                    return current_version == target_version, current_version, None
+                logger.info(
+                    f"Version found on {hostname}: {current_version} (via facts)"
+                )
+                print(f"✅ Version on {hostname}: {current_version} (via facts)")
+
+                # 4. Compare version
+                match = current_version == target_version
+                if match:
+                    print(
+                        f"✅ Version {current_version} matches target {target_version}."
+                    )
+                    logger.info(
+                        f"Version {current_version} matches target {target_version}."
+                    )
                 else:
-                    logger.error(f"No version found in output on {hostname}")
-                    return False, None, "No version found in output"
-        except Exception as e:
-            logger.warning(f"Version verification attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}")
-            print(f"⚠️ Version verification attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}. Retrying in {retry_interval} seconds...")
-            if attempt < max_attempts - 1:
-                time.sleep(retry_interval)
-        finally:
-            if new_dev and hasattr(new_dev, 'connected') and new_dev.connected:
-                new_dev.close()
-
-    # Fallback to ssh command
-    logger.info(f"Falling back to ssh command for version verification on {hostname}")
-    print(f"⚠️ Falling back to ssh command for version verification on {hostname}")
-    try:
-        ssh_command = f"ssh -o ConnectTimeout=10 -o StrictHostKeyChecking=no {username}@{hostname} \"show version\""
-        result = subprocess.run(
-            ssh_command,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            timeout=30
-        )
-        if result.returncode == 0:
-            output = result.stdout
-            current_version = None
-            for line in output.splitlines():
-                if "JUNOS Software Release" in line:
-                    current_version = line.split('[')[-1].strip(']').strip()
-                    break
-            if current_version:
-                logger.info(f"Version on {hostname}: {current_version} (via ssh)")
-                print(f"✅ Version on {hostname}: {current_version}")
-                return current_version == target_version, current_version, None
+                    print(
+                        f"❌ Version mismatch: Found {current_version}, Target {target_version}."
+                    )
+                    logger.warning(
+                        f"Version mismatch on {hostname}: Found {current_version}, Target {target_version}."
+                    )
+                return match, current_version, None
             else:
-                logger.error(f"No version found in ssh output on {hostname}")
-                return False, None, "No version found in ssh output"
+                # If facts were retrieved but 'version' key is missing
+                err_msg = "Version key not found in device facts."
+                logger.warning(f"{err_msg} on {hostname} (Attempt {attempt + 1})")
+                last_exception = ValueError(err_msg)
+
+        except ConnectRefusedError as e:
+            last_exception = e
+            logger.warning(
+                f"Attempt {attempt + 1} failed: Connection refused by {hostname}. Device likely still booting or NETCONF not ready."
+            )
+            print("❌ Connection refused. Retrying...")
+            dev = None
+        except (
+            ConnectError,
+            ConnectTimeoutError,
+            ProbeError,
+            AuthenticationError,
+        ) as e:
+            last_exception = e
+            logger.warning(
+                f"PyEZ Connection/Auth Attempt {attempt + 1} failed for {hostname}: {type(e).__name__} - {e}"
+            )
+            print(
+                f"⚠️ PyEZ Connection/Auth Attempt {attempt + 1} failed: {type(e).__name__}. Retrying..."
+            )
+            dev = None
+        except RpcError as e:
+            last_exception = e
+            logger.warning(
+                f"PyEZ RPC Error Attempt {attempt + 1} failed for {hostname}: {type(e).__name__} - {e}"
+            )
+            print(f"⚠️ PyEZ RPC Error on Attempt {attempt + 1}. Retrying...")
+        except Exception as e:
+            last_exception = e
+            logger.error(
+                f"Unexpected Exception during PyEZ Attempt {attempt + 1} for {hostname}: {type(e).__name__} - {e}",
+                exc_info=True,
+            )
+            print(f"⚠️ Unexpected Exception on Attempt {attempt + 1}: {e}. Retrying...")
+        finally:
+            if dev and hasattr(dev, "connected") and dev.connected:
+                logger.debug(
+                    f"Closing PyEZ connection to {hostname} after attempt {attempt + 1}"
+                )
+                dev.close()
+
+        if attempt < max_attempts - 1:
+            logger.info(
+                f"Waiting {retry_interval} seconds before next attempt ({attempt + 2}/{max_attempts}) to verify {hostname}"
+            )
+            print(f"Retrying in {retry_interval} seconds...")
+            time.sleep(retry_interval)
         else:
-            logger.error(f"SSH command failed on {hostname}: {result.stderr}")
-            print(f"❌ SSH command failed on {hostname}: {result.stderr}")
-            return False, None, f"SSH command failed: {result.stderr}"
-    except Exception as e:
-        logger.error(f"Failed to verify version via ssh on {hostname}: {e}")
-        print(f"❌ Failed to verify version via ssh on {hostname}: {e}")
-        return False, None, f"Failed to verify via ssh: {e}"
+            logger.error(
+                f"All {max_attempts} verification attempts failed for {hostname}. Last recorded error: {last_exception}"
+            )
+            print(f"❌ All {max_attempts} verification attempts failed for {hostname}.")
+
+    error_message = f"Failed to connect and verify version on {hostname} after {max_attempts} attempts. Last error: {str(last_exception)}"
+    return False, None, error_message
+
 
 def code_upgrade():
     """Perform code upgrade on selected devices."""
@@ -391,13 +529,16 @@ def code_upgrade():
         print("Starting code upgrade process...")
 
         # Load upgrade_data.yml
-        upgrade_data_file = os.path.join(os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"), 'data/upgrade_data.yml')
+        upgrade_data_file = os.path.join(
+            os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"),
+            "data/upgrade_data.yml",
+        )
         upgrade_data = load_yaml_file(upgrade_data_file)
         if not upgrade_data:
             logger.error("Failed to load upgrade_data.yml")
             print("❌ Error: Failed to load upgrade_data.yml")
             return
-        vendors = upgrade_data.get('products', [])
+        vendors = upgrade_data.get("products", [])
         logger.info(f"Loaded vendors: {[v['vendor-name'] for v in vendors]}")
 
         # Display vendor menu
@@ -411,7 +552,7 @@ def code_upgrade():
 
         # Aggregate products from switches, firewalls, and routers
         products = []
-        for device_type in ['switches', 'firewalls', 'routers']:
+        for device_type in ["switches", "firewalls", "routers"]:
             products.extend(selected_vendor.get(device_type, []))
         logger.info(f"Loaded products: {[p['product'] for p in products]}")
 
@@ -459,10 +600,10 @@ def code_upgrade():
 
         # Perform upgrade
         image_path = f"/var/tmp/{selected_release['os']}"
-        target_version = selected_release['release']
+        target_version = selected_release["release"]
         for dev in connections:
             hostname = dev.hostname
-            status = {'hostname': hostname, 'success': False, 'error': None}
+            status = {"hostname": hostname, "success": False, "error": None}
             try:
                 # Set timeouts
                 dev.timeout = 600
@@ -472,55 +613,63 @@ def code_upgrade():
 
                 # Check image existence
                 if not check_image_exists(dev, image_path, hostname):
-                    logger.error(f"Skipping upgrade for {hostname} due to missing image")
+                    logger.error(
+                        f"Skipping upgrade for {hostname} due to missing image"
+                    )
                     print(f"❌ Skipping upgrade for {hostname} due to missing image")
-                    status['error'] = "Missing image"
+                    status["error"] = "Missing image"
                     upgrade_status.append(status)
                     dev.close()
                     continue
 
                 # Check current version
                 if not check_current_version(dev, hostname, target_version):
-                    status['success'] = True
+                    status["success"] = True
                     upgrade_status.append(status)
                     dev.close()
                     continue
 
                 # Perform upgrade
                 sw = SW(dev)
-                print(f"Installing software with validation (no reboot) on {hostname}...")
+                print(
+                    f"Installing software with validation (no reboot) on {hostname}..."
+                )
                 try:
-                    success = sw.install(package=image_path, validate=True, no_copy=True, progress=True)
+                    success = sw.install(
+                        package=image_path, validate=True, no_copy=True, progress=True
+                    )
                     if success:
                         print("✅ Installation validated successfully. Rebooting...")
                         sw.reboot()
                         logger.info(f"Reboot initiated on {hostname}")
                         print(f"✅ Reboot initiated on {hostname}")
                     else:
-                        print("❌ Installation did not complete successfully. No reboot issued.")
+                        print(
+                            "❌ Installation did not complete successfully. No reboot issued."
+                        )
                         logger.error(f"Software upgrade failed on {hostname}")
-                        status['error'] = "Installation failed"
+                        status["error"] = "Installation failed"
                         upgrade_status.append(status)
                         dev.close()
                         continue
                 except ConnectError as e:
                     logger.error(f"Connection error on {hostname}: {e}")
                     print(f"❌ Connection error: {e}")
-                    status['error'] = f"Connection error: {e}"
+                    status["error"] = f"Connection error: {e}"
                     upgrade_status.append(status)
                     dev.close()
                     continue
                 except RpcError as e:
                     logger.error(f"RPC error during install on {hostname}: {e}")
                     print(f"❌ RPC error during install: {e}")
-                    status['error'] = f"RPC error: {e}"
+                    status["error"] = f"RPC error: {e}"
                     upgrade_status.append(status)
                     dev.close()
                     continue
                 except Exception as e:
                     logger.error(f"Unexpected error on {hostname}: {e}")
                     print(f"❌ Unexpected error: {e}")
-                    status['error'] = f"Unexpected error: {e}"
+                    status["error"] = f"Unexpected error: {e}"
                     upgrade_status.append(status)
                     dev.close()
                     continue
@@ -532,29 +681,39 @@ def code_upgrade():
                     dev.close()
 
                 # Probe device until available
-                if not probe_device(hostname, username, password, max_wait=900, interval=60):
-                    logger.error(f"Failed to confirm {hostname} availability after reboot")
+                if not probe_device(
+                    hostname, username, password, max_wait=900, interval=60
+                ):
+                    logger.error(
+                        f"Failed to confirm {hostname} availability after reboot"
+                    )
                     print(f"❌ Failed to confirm {hostname} availability after reboot")
-                    status['error'] = "Device not reachable after reboot"
+                    status["error"] = "Device not reachable after reboot"
                     upgrade_status.append(status)
                     continue
 
                 # Verify version
-                success, current_version, error = verify_version(hostname, username, password, target_version)
+                success, current_version, error = verify_version(
+                    hostname, username, password, target_version
+                )
                 if success:
-                    logger.info(f"Upgrade successful on {hostname}. Version: {current_version}")
-                    print(f"✅ Upgrade successful on {hostname}. Version: {current_version}")
-                    status['success'] = True
+                    logger.info(
+                        f"Upgrade successful on {hostname}. Version: {current_version}"
+                    )
+                    print(
+                        f"✅ Upgrade successful on {hostname}. Version: {current_version}"
+                    )
+                    status["success"] = True
                 else:
                     logger.error(f"Version verification failed on {hostname}: {error}")
                     print(f"❌ Version verification failed on {hostname}: {error}")
-                    status['error'] = f"Version verification failed: {error}"
+                    status["error"] = f"Version verification failed: {error}"
                 upgrade_status.append(status)
 
             except Exception as e:
                 logger.error(f"Error upgrading {hostname}: {e}")
                 print(f"❌ Error upgrading {hostname}: {e}")
-                status['error'] = str(e)
+                status["error"] = str(e)
                 upgrade_status.append(status)
                 if dev.connected:
                     dev.close()
@@ -562,9 +721,11 @@ def code_upgrade():
         disconnect_from_hosts(connections)
 
         # Summarize upgrade status
-        successful = [s for s in upgrade_status if s['success']]
-        failed = [s for s in upgrade_status if not s['success']]
-        logger.info(f"Upgrade summary: {len(successful)} successful, {len(failed)} failed")
+        successful = [s for s in upgrade_status if s["success"]]
+        failed = [s for s in upgrade_status if not s["success"]]
+        logger.info(
+            f"Upgrade summary: {len(successful)} successful, {len(failed)} failed"
+        )
         print("\nUpgrade Summary:")
         print(f"Successful: {len(successful)} device(s)")
         for s in successful:

@@ -1,6 +1,7 @@
 import os
 import logging
 import time
+import re
 from typing import List, Dict
 from jnpr.junos import Device
 from jnpr.junos.utils.sw import SW
@@ -9,6 +10,49 @@ from scripts.utils import load_yaml_file, save_yaml_file
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
 
 logger = logging.getLogger(__name__)
+
+def display_vendors(vendors: List[Dict]) -> int:
+    """Display a menu of vendors and return the user's choice."""
+    print("\nSelect a vendor:")
+    print("----------------------------------------")
+    print("| Option | Vendor                  |")
+    print("----------------------------------------")
+    for i, vendor in enumerate(vendors, 1):
+        print(f"| {i:<6} | {vendor['vendor-name']:<22} |")
+    print("----------------------------------------")
+    max_retries = 5
+    retries = 0
+    while retries < max_retries:
+        try:
+            choice = input(f"Select a vendor (1-{len(vendors)}): ").strip()
+            logger.info(f"Raw vendor input received: '{choice}'")
+            if not choice:
+                logger.error("Empty input received")
+                print(f"Invalid choice. Please enter a number between 1 and {len(vendors)}")
+                retries += 1
+                continue
+            choice = int(choice)
+            if 1 <= choice <= len(vendors):
+                logger.info(f"Valid vendor choice selected: {choice}")
+                return choice - 1
+            logger.error(f"Choice out of range: {choice}")
+            print(f"Invalid choice. Please enter a number between 1 and {len(vendors)}")
+            retries += 1
+        except ValueError:
+            logger.error(f"Non-numeric input: '{choice}'")
+            print(f"Invalid choice. Please enter a number between 1 and {len(vendors)}")
+            retries += 1
+        except EOFError:
+            logger.error("EOF received during input")
+            print(f"Input interrupted. Please enter a number between 1 and {len(vendors)}")
+            retries += 1
+        except KeyboardInterrupt:
+            logger.info("Vendor selection interrupted by user (Ctrl+C)")
+            print("\nProgram interrupted by user. Exiting.")
+            return None
+    logger.error(f"Max retries ({max_retries}) reached in display_vendors")
+    print("Too many invalid attempts. Exiting.")
+    return None
 
 def display_products(products: List[Dict]) -> int:
     """Display a menu of products and return the user's choice."""
@@ -53,15 +97,19 @@ def display_products(products: List[Dict]) -> int:
     print("Too many invalid attempts. Exiting.")
     return None
 
-def display_releases(product: Dict) -> str:
-    """Display available releases for a product and return the selected release."""
-    releases = [product['release']]
+def display_releases(product: Dict) -> Dict:
+    """Display available releases for a product and return the selected release dictionary."""
+    releases = product.get('releases', [])
+    if not releases:
+        logger.error(f"No releases found for product {product['product']}")
+        print(f"Error: No releases found for product {product['product']}")
+        return None
     print("\nAvailable releases:")
     print("----------------------------------------")
     print("| Option | Release                 |")
     print("----------------------------------------")
     for i, release in enumerate(releases, 1):
-        print(f"| {i:<6} | {release:<22} |")
+        print(f"| {i:<6} | {release['release']:<22} |")
     print("----------------------------------------")
     max_retries = 5
     retries = 0
@@ -76,7 +124,7 @@ def display_releases(product: Dict) -> str:
                 continue
             choice = int(choice)
             if 1 <= choice <= len(releases):
-                logger.info(f"Valid release choice selected: {choice}")
+                logger.info(f"Valid release choice selected: {releases[choice - 1]['release']}")
                 return releases[choice - 1]
             logger.error(f"Choice out of range: {choice}")
             print(f"Invalid choice. Please enter a number between 1 and {len(releases)}")
@@ -192,19 +240,82 @@ def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
         return False
 
 def check_disk_space(dev: Device, hostname: str) -> bool:
-    """Check if the device has sufficient disk space for the upgrade."""
+    """Check if the device has sufficient disk space for the upgrade in /var/tmp and /var or equivalents."""
     try:
         with dev:
             result = dev.cli("show system storage", warning=False)
+            logger.debug(f"Raw show system storage output for {hostname}:\n{result}")
+            var_tmp_space = None
+            var_space = None
+            # Regex to match filesystem lines: Filesystem, Size, Used, Avail, Capacity, Mounted on
+            pattern = re.compile(r'^(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\d+%)\s+(\S+)$')
+
             for line in result.splitlines():
-                if "/var/tmp" in line:
-                    fields = line.split()
-                    available_space = int(fields[3])  # Available space in KB
-                    if available_space < 100000:  # Require at least 100 MB
-                        logger.error(f"Insufficient disk space on {hostname}: {available_space} KB available")
-                        print(f"Error: Insufficient disk space on {hostname}: {available_space} KB available")
-                        return False
-            logger.info(f"Sufficient disk space on {hostname}")
+                line = line.strip()
+                logger.debug(f"Processing line: '{line}'")
+                if not line or line.startswith('Filesystem'):
+                    continue
+                match = pattern.match(line)
+                if not match:
+                    logger.debug(f"Line does not match expected format: '{line}'")
+                    continue
+                filesystem, size, used, avail, capacity, mount = match.groups()
+                logger.debug(f"Parsed: filesystem={filesystem}, size={size}, used={used}, avail={avail}, capacity={capacity}, mount={mount}")
+
+                # Convert avail to KB (handle units: K, M, G)
+                try:
+                    if avail.endswith('G'):
+                        avail_kb = int(float(avail[:-1]) * 1024 * 1024)  # GB to KB
+                    elif avail.endswith('M'):
+                        avail_kb = int(float(avail[:-1]) * 1024)  # MB to KB
+                    elif avail.endswith('K'):
+                        avail_kb = int(float(avail[:-1]))
+                    else:
+                        avail_kb = int(float(avail))  # Assume KB if no unit
+                    logger.debug(f"Converted avail '{avail}' to {avail_kb} KB")
+                except (ValueError, TypeError) as e:
+                    logger.warning(f"Could not parse avail value '{avail}' for {hostname}: {e}")
+                    continue
+
+                # SRX-specific filesystems
+                if filesystem == '/cf/var':
+                    var_space = avail_kb
+                    logger.debug(f"Set var_space for /cf/var: {var_space} KB")
+                elif filesystem == '/config':
+                    var_tmp_space = avail_kb
+                    logger.debug(f"Set var_tmp_space for /config: {var_tmp_space} KB")
+                # Fallback for non-SRX devices
+                elif filesystem == '/var/tmp':
+                    var_tmp_space = avail_kb
+                    logger.debug(f"Set var_tmp_space for /var/tmp: {var_tmp_space} KB")
+                elif filesystem == '/var' or filesystem.endswith('/var'):
+                    var_space = avail_kb
+                    logger.debug(f"Set var_space for {filesystem}: {var_space} KB")
+
+            logger.debug(f"Final values: var_space={var_space}, var_tmp_space={var_tmp_space}")
+
+            # Allow upgrade if either filesystem has enough space
+            if var_space is None and var_tmp_space is None:
+                logger.error(f"Could not determine disk space for any relevant filesystems on {hostname}")
+                print(f"Error: Could not determine disk space for /var/tmp, /var, /cf/var, or /config on {hostname}")
+                print("Recommendation: Run 'show system storage' and verify /cf/var, /config, /var, or /var/tmp.")
+                return False
+
+            # Check if at least one filesystem has enough space
+            sufficient_space = False
+            if var_space is not None and var_space >= 100000:  # 100 MB in KB
+                sufficient_space = True
+                logger.info(f"Sufficient disk space in /var or /cf/var on {hostname}: {var_space} KB")
+            if var_tmp_space is not None and var_tmp_space >= 100000:
+                sufficient_space = True
+                logger.info(f"Sufficient disk space in /var/tmp or /config on {hostname}: {var_tmp_space} KB")
+
+            if not sufficient_space:
+                logger.error(f"Insufficient disk space on {hostname}: var_space={var_space} KB, var_tmp_space={var_tmp_space} KB")
+                print(f"Error: Insufficient disk space on {hostname}: /var or /cf/var={var_space} KB, /var/tmp or /config={var_tmp_space} KB")
+                print("Recommendation: Run 'request system storage cleanup' or manually remove files from /cf/var or /var.")
+                return False
+
             print(f"Sufficient disk space on {hostname}")
             return True
     except Exception as e:
@@ -217,14 +328,13 @@ def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
     logger.debug(f"Starting pending install check on {hostname}")
     try:
         with dev:
-            dev.timeout = 300  # Set timeout for this command
+            dev.timeout = 300
             logger.debug(f"Executing 'request system software add {image_path} validate' on {hostname}")
             result = dev.cli(f"request system software add {image_path} validate", warning=False)
             logger.debug(f"Pending install check result on {hostname}: {result}")
             if "There is already an install pending" in result or "Another package installation in progress" in result:
                 logger.error(f"Pending install detected on {hostname}")
                 print(f"Error: Pending install detected on {hostname}.")
-                # Prompt user for action
                 choice = input("Resolve pending install? (1: Reboot, 2: Rollback, 3: Skip): ").strip()
                 logger.info(f"User chose pending install action: {choice}")
                 if choice == '1':
@@ -273,7 +383,22 @@ def code_upgrade():
             logger.error("Failed to load upgrade_data.yml")
             print("Error: Failed to load upgrade_data.yml")
             return
-        products = upgrade_data.get('products', [])[0].get('switches', [])
+        vendors = upgrade_data.get('products', [])
+        logger.info(f"Loaded vendors: {[v['vendor-name'] for v in vendors]}")
+
+        # Display vendor menu
+        vendor_idx = display_vendors(vendors)
+        if vendor_idx is None:
+            logger.error("No vendor selected")
+            return
+        selected_vendor = vendors[vendor_idx]
+        logger.info(f"Selected vendor: {selected_vendor['vendor-name']}")
+        print(f"Selected vendor: {selected_vendor['vendor-name']}")
+
+        # Aggregate products from switches, firewalls, and routers
+        products = []
+        for device_type in ['switches', 'firewalls', 'routers']:
+            products.extend(selected_vendor.get(device_type, []))
         logger.info(f"Loaded products: {[p['product'] for p in products]}")
 
         # Display product menu
@@ -290,8 +415,8 @@ def code_upgrade():
         if selected_release is None:
             logger.error("No release selected")
             return
-        logger.info(f"Selected release: {selected_release}")
-        print(f"Selected release: {selected_release}")
+        logger.info(f"Selected release: {selected_release['release']}")
+        print(f"Selected release: {selected_release['release']}")
 
         # Get host IPs
         host_ips = get_host_ips()
@@ -319,13 +444,13 @@ def code_upgrade():
         logger.info(f"Connected to devices: {[dev.hostname for dev in connections]}")
 
         # Perform upgrade
-        image_path = f"/var/tmp/{selected_product['os']}"
+        image_path = f"/var/tmp/{selected_release['os']}"
         for dev in connections:
             hostname = dev.hostname
             status = {'hostname': hostname, 'success': False, 'error': None}
             try:
                 # Increase command timeout
-                dev.timeout = 300  # Set timeout for CLI commands
+                dev.timeout = 300
 
                 # Probe device before upgrade
                 if not probe_device(dev, hostname, username, password):
@@ -367,9 +492,9 @@ def code_upgrade():
                     ok = sw.install(
                         package=image_path,
                         validate=False,
-                        no_copy=True,  # Assume image is already on device
+                        no_copy=True,
                         progress=progress_callback,
-                        timeout=1200  # Extended timeout for installation
+                        timeout=1200
                     )
                     logger.debug(f"Software install result on {hostname}: {ok}")
                     if not ok:
@@ -379,7 +504,6 @@ def code_upgrade():
                 except TypeError as e:
                     logger.error(f"TypeError during software upgrade on {hostname}: {e}")
                     print(f"Error: TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method...")
-                    # Fallback to CLI method
                     try:
                         result = dev.cli(f"request system software add {image_path} no-validate", warning=False, timeout=1200)
                         logger.debug(f"CLI upgrade result on {hostname}: {result}")
@@ -389,6 +513,11 @@ def code_upgrade():
                                 print(f"Error: Storage failure on {hostname}: {result}")
                                 print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
                                 status['error'] = "Storage failure: Could not format alternate root"
+                            elif "Not enough space in /var" in result:
+                                logger.error(f"Insufficient disk space in /var on {hostname}: {result}")
+                                print(f"Error: Insufficient disk space in /var on {hostname}: {result}")
+                                print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
+                                status['error'] = "Insufficient disk space in /var"
                             else:
                                 logger.error(f"CLI upgrade failed on {hostname}: {result}")
                                 print(f"Error: CLI upgrade failed on {hostname}: {result}")
@@ -400,9 +529,13 @@ def code_upgrade():
                     except Exception as cli_e:
                         logger.error(f"CLI upgrade failed on {hostname}: {cli_e}")
                         print(f"Error: CLI upgrade failed on {hostname}: {cli_e}")
-                        if "Could not format alternate root" in str(cli_e):
+                        error_msg = str(cli_e)
+                        if "Could not format alternate root" in error_msg:
                             print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
                             status['error'] = "Storage failure: Could not format alternate root"
+                        elif "Not enough space in /var" in error_msg:
+                            print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
+                            status['error'] = "Insufficient disk space in /var"
                         else:
                             status['error'] = f"CLI upgrade failed: {cli_e}"
                         upgrade_status.append(status)
@@ -416,9 +549,13 @@ def code_upgrade():
                 except Exception as e:
                     logger.error(f"Software upgrade failed on {hostname}: {e}")
                     print(f"Error: Software upgrade failed on {hostname}: {e}")
-                    if "Could not format alternate root" in str(e):
+                    error_msg = str(e)
+                    if "Could not format alternate root" in error_msg:
                         print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
                         status['error'] = "Storage failure: Could not format alternate root"
+                    elif "Not enough space in /var" in error_msg:
+                        print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
+                        status['error'] = "Insufficient disk space in /var"
                     else:
                         status['error'] = str(e)
                     upgrade_status.append(status)

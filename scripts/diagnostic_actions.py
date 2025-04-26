@@ -40,7 +40,11 @@ def ping_hosts(
         # Use provided connections if available; otherwise, connect
         if connections is None:
             logger.info("No connections provided, creating new connections")
-            connections = connect_to_hosts(username, password, host_ips)
+            connections = []
+            # The issue might be here:
+            conn_list = connect_to_hosts(host_ips, username, password)
+            if conn_list:
+                connections.extend(conn_list)
             local_connections = connections
         if not connections:
             logger.error("No devices connected for ping verification")

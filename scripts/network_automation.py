@@ -1,146 +1,120 @@
-import os
-import yaml
-from typing import List, Dict
-from scripts.actions import execute_actions
-from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
-from scripts.utils import load_yaml_file
 import logging
-from logging.handlers import RotatingFileHandler
-import sys
-import termios
+import os
+from scripts.actions import ping_hosts, get_hosts, run_monitor_routes_action
+from scripts.interface_actions import configure_interfaces as configure_interface
+from scripts.utils import load_yaml_file
 
-# Setup logging
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='network_automation.log'
+)
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
 
-# Ensure log directory exists
-log_dir = "/home/nikos/github/ngeran/vector-py"
-os.makedirs(log_dir, exist_ok=True)
-
-# Console handler (WARNING and above)
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.WARNING)
-console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-console_handler.setFormatter(console_formatter)
-
-# File handler (INFO and above)
-log_file = os.path.join(log_dir, "network_automation.log")
-file_handler = RotatingFileHandler(log_file, maxBytes=10*1024*1024, backupCount=5)
-file_handler.setLevel(logging.INFO)
-file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-file_handler.setFormatter(file_formatter)
-
-# Add handlers
-logger.addHandler(console_handler)
-logger.addHandler(file_handler)
-
-# Suppress ncclient logs
-logging.getLogger("ncclient").setLevel(logging.WARNING)
-
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-def is_interactive():
-    """Check if the script is running interactively (connected to a terminal)."""
-    try:
-        return os.isatty(sys.stdin.fileno())
-    except (AttributeError, termios.error):
-        return False
-
-def display_menu(actions: List[Dict]):
-    """Display the action selection menu."""
-    print("\nSelect an action:")
-    print("-" * 40)
+def display_menu(actions):
+    """Display a menu of actions and return the user's choice."""
+    print("Select an action:")
+    print("----------------------------------------")
     print("| Option | Action                  |")
-    print("-" * 40)
+    print("----------------------------------------")
     for i, action in enumerate(actions, 1):
-        print(f"| {i:<6} | {action['display_name']:<22} |")
-    print("-" * 40)
+        display_name = action.get('display_name', action['name'])
+        print(f"| {i:<6} | {display_name:<22} |")
+    print("----------------------------------------")
+    max_retries = 5
+    retries = 0
+    while retries < max_retries:
+        try:
+            raw_input = input(f"Enter your choice (1-{len(actions)}): ").strip()
+            logger.info(f"Raw input received: '{raw_input}'")
+            if not raw_input:
+                logger.error("Empty input received")
+                print(f"Invalid choice. Please enter a number between 1 and {len(actions)}")
+                retries += 1
+                continue
+            choice = int(raw_input)
+            if 1 <= choice <= len(actions):
+                logger.info(f"Valid choice selected: {choice}")
+                return choice
+            logger.error(f"Choice out of range: {choice}")
+            print(f"Invalid choice. Please enter a number between 1 and {len(actions)}")
+            retries += 1
+        except ValueError:
+            logger.error(f"Non-numeric input: '{raw_input}'")
+            print(f"Invalid choice. Please enter a number between 1 and {len(actions)}")
+            retries += 1
+        except EOFError:
+            logger.error("EOF received during input")
+            print(f"Input interrupted. Please enter a number between 1 and {len(actions)}")
+            retries += 1
+    logger.error(f"Max retries ({max_retries}) reached in display_menu")
+    print("Too many invalid attempts. Exiting.")
+    return None
 
-def update_hosts_data(template_file: str):
-    """Update hosts_data.yml with the selected template file."""
-    hosts_data_file = os.path.join(SCRIPT_DIR, "../data/hosts_data.yml")
-    hosts_data = load_yaml_file(hosts_data_file)
-    if not hosts_data:
-        logger.error("Failed to load hosts_data.yml.")
-        return False
-    if template_file:
-        hosts_data['template_file'] = template_file
-    else:
-        hosts_data.pop('template_file', None)
+def main(action_name=None):
+    """Main function to execute network automation actions."""
     try:
-        with open(hosts_data_file, 'w') as f:
-            yaml.safe_dump(hosts_data, f)
-        logger.info(f"Updated hosts_data.yml with template: {template_file or 'none'}")
-        return True
+        logger.info(f"Executing action: {action_name}")
+        if not action_name:
+            logger.error("No action name provided")
+            print("Error: No action name provided")
+            return
+
+        # Load actions to get template_file
+        actions_file = os.path.join(os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"), 'data/actions.yml')
+        actions_data = load_yaml_file(actions_file)
+        action_info = next((a for a in actions_data.get('actions', []) if a['name'] == action_name), {})
+
+        # Get hosts data
+        host_ips, hosts, username, password = get_hosts()
+
+        # Import connect_to_hosts and disconnect_from_hosts here
+        from scripts.connect_to_hosts import connect_to_hosts
+        from scripts.actions import disconnect_from_hosts
+
+        # Map action names to functions
+        action_map = {
+            'ping': lambda: ping_hosts(
+                username=username,
+                password=password,
+                host_ips=host_ips,
+                hosts=hosts,
+                connect_to_hosts=connect_to_hosts,
+                disconnect_from_hosts=disconnect_from_hosts
+            ),
+            'interfaces': lambda: configure_interface(
+                username=username,
+                password=password,
+                host_ips=host_ips,
+                hosts=hosts,
+                connect_to_hosts=connect_to_hosts,
+                disconnect_from_hosts=disconnect_from_hosts,
+                connections=None
+            ),
+            'route_monitor': lambda: run_monitor_routes_action(
+                username=username,
+                password=password,
+                host_ips=host_ips,
+                hosts=hosts,
+                connect_to_hosts=connect_to_hosts,
+                disconnect_from_hosts=disconnect_from_hosts
+            )
+        }
+
+        action_func = action_map.get(action_name)
+        if not action_func:
+            logger.error(f"Unknown action: {action_name}")
+            print(f"Error: Unknown action {action_name}")
+            return
+
+        # Execute the action
+        action_func()
+        logger.info(f"Completed action: {action_name}")
+
     except Exception as e:
-        logger.error(f"Error updating hosts_data.yml: {e}")
-        return False
-
-def main():
-    """Main function for network automation."""
-    actions_file = os.path.join(SCRIPT_DIR, "../data/actions.yml")
-    hosts_data_file = os.path.join(SCRIPT_DIR, "../data/hosts_data.yml")
-
-    actions_data = load_yaml_file(actions_file)
-    actions = actions_data.get('actions', [])
-    if not actions:
-        logger.error("No actions defined in actions.yml.")
-        sys.exit(1)
-
-    hosts_data = load_yaml_file(hosts_data_file)
-    if not hosts_data:
-        logger.error("Failed to load hosts_data.yml.")
-        sys.exit(1)
-
-    username = hosts_data.get('username')
-    password = hosts_data.get('password')
-    hosts = hosts_data.get('hosts', [])
-    host_ips = [host['ip_address'] for host in hosts]
-    if not host_ips:
-        logger.error("No hosts defined in hosts_data.yml.")
-        sys.exit(1)
-
-    # Only display menu if running interactively
-    if is_interactive():
-        display_menu(actions)
-
-    # Read choice from stdin (piped from launcher.py or interactive)
-    try:
-        choice = sys.stdin.read().strip() if not is_interactive() else input(f"Enter your choice (1-{len(actions)}): ")
-        logger.info(f"Received choice: {choice}")
-        choice = int(choice)
-        if 1 <= choice <= len(actions):
-            action = actions[choice - 1]
-            template_file = action.get('template_file')
-            action_name = action.get('name')
-            if update_hosts_data(template_file):
-                execute_actions(
-                    actions=[action_name],
-                    username=username,
-                    password=password,
-                    host_ips=host_ips,
-                    hosts=hosts,
-                    connect_to_hosts=connect_to_hosts,
-                    disconnect_from_hosts=disconnect_from_hosts
-                )
-            else:
-                logger.error("Failed to update hosts_data.yml. Aborting.")
-                print("Failed to update hosts_data.yml. Aborting.")
-                sys.exit(1)
-        else:
-            logger.error(f"Invalid choice: {choice}. Must be between 1 and {len(actions)}.")
-            print(f"Invalid choice: {choice}. Please select between 1 and {len(actions)}.")
-            sys.exit(1)
-        logger.info("Action completed, exiting")
-        sys.exit(0)  # Explicitly exit after success
-    except ValueError:
-        logger.error(f"Invalid input: {choice}. Must be a number.")
-        print("Invalid input. Please enter a number.")
-        sys.exit(1)
-    except Exception as e:
-        logger.error(f"Error during execution: {e}")
-        print(f"Error during execution: {e}")
-        sys.exit(1)
+        logger.error(f"Error in main: {e}")
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,9 @@
 actions:
   - name: ping
-    function: scripts.diagnostic_actions.ping_hosts
+    display_name: Ping Hosts
   - name: interfaces
-    function: scripts.interface_actions.configure_interfaces
+    display_name: Configure Interfaces
   - name: route_monitor
-    function: scripts.route_monitor.monitor_routes
+    display_name: Monitor Routing Tables
+  - name: code_upgrade
+    display_name: Code Upgrade

@@ -1,171 +1,140 @@
+import sys
 import os
-import subprocess
-import yaml
 import logging
-from logging.handlers import RotatingFileHandler
-from typing import List, Dict
 
-# Setup logging
+# Set the project directory and add it to sys.path before imports
+project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if project_dir not in sys.path:
+    sys.path.insert(0, project_dir)
+
+# Configure logging early for debugging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename=os.path.join(project_dir, 'network_automation.log')
+)
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+logger.info(f"sys.path: {sys.path}")
 
-# Ensure log directory exists
-log_dir = "/home/nikos/github/network-automation-launcher"
-os.makedirs(log_dir, exist_ok=True)
+# Module-level imports at the top
+try:
+    from scripts.network_automation import main as network_automation_main
+    from scripts.utils import load_yaml_file
+    from scripts.code_upgrade import code_upgrade
+except ImportError as e:
+    logger.error(f"Import error: {e}")
+    raise
 
-# Console handler (WARNING and above)
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.WARNING)
-console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-console_handler.setFormatter(console_formatter)
-
-# File handler (INFO and above)
-log_file = os.path.join(log_dir, "network_automation.log")
-file_handler = RotatingFileHandler(log_file, maxBytes=10*1024*1024, backupCount=5)
-file_handler.setLevel(logging.INFO)
-file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-file_handler.setFormatter(file_formatter)
-
-# Add handlers
-logger.addHandler(console_handler)
-logger.addHandler(file_handler)
-
-# Path to the vector-py project
-VECTOR_PY_DIR = "/home/nikos/github/ngeran/vector-py"
-ACTIONS_FILE = os.path.join(VECTOR_PY_DIR, "data", "actions.yml")
-HOSTS_DATA_FILE = os.path.join(VECTOR_PY_DIR, "data", "hosts_data.yml")
-MAIN_PY = os.path.join(VECTOR_PY_DIR, "main.py")
-
-def load_yaml_file(file_path: str) -> Dict:
-    """Load a YAML file and return its contents."""
-    if not os.path.exists(file_path):
-        logger.error(f"YAML file not found: {file_path}")
-        return {}
-    try:
-        with open(file_path, 'r') as f:
-            data = yaml.safe_load(f)
-            if data is None:
-                logger.error(f"YAML file {file_path} is empty or invalid")
-                return {}
-            logger.info(f"Loaded YAML file: {file_path}")
-            return data
-    except Exception as e:
-        logger.error(f"Error loading YAML file {file_path}: {e}")
-        return {}
-
-def display_menu(actions: List[Dict]):
-    """Display the action selection menu."""
-    print("\nSelect an action:")
-    print("-" * 40)
+def display_menu(actions):
+    """Display a menu of actions and return the user's choice."""
+    print("Select an action:")
+    print("----------------------------------------")
     print("| Option | Action                  |")
-    print("-" * 40)
+    print("----------------------------------------")
     for i, action in enumerate(actions, 1):
-        print(f"| {i:<6} | {action['display_name']:<22} |")
-    print("-" * 40)
+        display_name = action.get('display_name', action['name'])
+        print(f"| {i:<6} | {display_name:<22} |")
+    print("----------------------------------------")
+    max_retries = 5
+    retries = 0
+    while retries < max_retries:
+        try:
+            raw_input = input(f"Enter your choice (1-{len(actions)}): ").strip()
+            logger.info(f"Raw input received: '{raw_input}'")
+            if not raw_input:
+                logger.error("Empty input received")
+                print(f"Invalid choice. Please enter a number between 1 and {len(actions)}")
+                retries += 1
+                continue
+            choice = int(raw_input)
+            if 1 <= choice <= len(actions):
+                logger.info(f"Valid choice selected: {choice}")
+                return choice
+            logger.error(f"Choice out of range: {choice}")
+            print(f"Invalid choice. Please enter a number between 1 and {len(actions)}")
+            retries += 1
+        except ValueError:
+            logger.error(f"Non-numeric input: '{raw_input}'")
+            print(f"Invalid choice. Please enter a number between 1 and {len(actions)}")
+            retries += 1
+        except EOFError:
+            logger.error("EOF received during input")
+            print(f"Input interrupted. Please enter a number between 1 and {len(actions)}")
+            retries += 1
+        except KeyboardInterrupt:
+            logger.info("Program interrupted by user (Ctrl+C)")
+            print("\nProgram interrupted by user. Exiting.")
+            sys.exit(0)
+    logger.error(f"Max retries ({max_retries}) reached in display_menu")
+    print("Too many invalid attempts. Exiting.")
+    return None
 
-def update_hosts_data(template_file: str, action_name: str):
-    """Update hosts_data.yml with the selected template file."""
-    if not os.path.exists(HOSTS_DATA_FILE):
-        logger.error(f"hosts_data.yml not found at {HOSTS_DATA_FILE}")
-        return False
-    hosts_data = load_yaml_file(HOSTS_DATA_FILE)
-    if not hosts_data:
-        logger.error("Failed to load hosts_data.yml")
-        return False
-    if template_file:
-        hosts_data['template_file'] = template_file
-    else:
-        hosts_data.pop('template_file', None)
-    try:
-        with open(HOSTS_DATA_FILE, 'w') as f:
-            yaml.safe_dump(hosts_data, f)
-        logger.info(f"Updated hosts_data.yml with template: {template_file or 'none'} for action: {action_name}")
-        return True
-    except PermissionError as e:
-        logger.error(f"Permission denied writing to {HOSTS_DATA_FILE}: {e}")
-        return False
-    except Exception as e:
-        logger.error(f"Error updating {HOSTS_DATA_FILE}: {e}")
-        return False
-
-def execute_main_py(choice: int):
-    """Execute main.py with the selected choice."""
-    if not os.path.exists(MAIN_PY):
-        logger.error(f"main.py not found at {MAIN_PY}")
-        return False
-    try:
-        logger.info(f"Executing main.py with choice {choice}")
-        process = subprocess.run(
-            ["python", MAIN_PY],
-            input=str(choice),
-            text=True,
-            capture_output=True,
-            cwd=VECTOR_PY_DIR,
-            timeout=60
-        )
-        # Filter out menu and INFO logs from stdout
-        output_lines = [
-            line for line in process.stdout.split('\n')
-            if not (line.startswith(('Select an action:', '---', '| Option', 'Enter your choice')) or 'INFO:' in line)
-        ]
-        print('\n'.join(output_lines))
-        # Log stderr only for WARNING and ERROR
-        if process.stderr:
-            stderr_lines = [line for line in process.stderr.split('\n') if 'WARNING' in line or 'ERROR' in line]
-            if stderr_lines:
-                logger.error(f"main.py errors: {''.join(stderr_lines)}")
-        if process.returncode != 0:
-            logger.error(f"main.py exited with code {process.returncode}")
-            return False
-        return True
-    except subprocess.TimeoutExpired:
-        logger.error("main.py timed out after 60 seconds")
-        print("main.py timed out after 60 seconds")
-        return False
-    except Exception as e:
-        logger.error(f"Error executing main.py: {e}")
-        print(f"Error executing main.py: {e}")
-        return False
+def display_execution_mode_menu():
+    """Display execution mode menu and return the user's choice."""
+    print("\nChoose execution mode:")
+    print("1. Execute locally")
+    print("2. Push to GitHub")
+    max_retries = 5
+    retries = 0
+    while retries < max_retries:
+        try:
+            choice = input("Enter your choice (1-2): ").strip()
+            logger.info(f"Raw mode input received: '{choice}'")
+            if choice in ['1', '2']:
+                logger.info(f"Valid execution mode selected: {choice}")
+                return int(choice)
+            logger.error(f"Invalid execution mode: {choice}")
+            print("Invalid choice. Please enter 1 or 2.")
+            retries += 1
+        except EOFError:
+            logger.error("EOF received during execution mode input")
+            print("Input interrupted. Please enter 1 or 2.")
+            retries += 1
+        except KeyboardInterrupt:
+            logger.info("Program interrupted by user (Ctrl+C)")
+            print("\nProgram interrupted by user. Exiting.")
+            sys.exit(0)
+    logger.error(f"Max retries ({max_retries}) reached in display_execution_mode_menu")
+    print("Too many invalid attempts. Exiting.")
+    return None
 
 def main():
-    """Main function for the launcher."""
-    logger.info("Starting network automation launcher")
-
-    if not os.path.exists(ACTIONS_FILE):
-        logger.error(f"actions.yml not found at {ACTIONS_FILE}")
-        return
-
-    actions_data = load_yaml_file(ACTIONS_FILE)
-    actions = actions_data.get('actions', [])
-
-    if not actions:
-        logger.error("No actions defined in actions.yml")
-        return
-
-    display_menu(actions)
+    """Main function to launch network automation tasks."""
     try:
-        choice = input(f"Enter your choice (1-{len(actions)}): ")
-        choice = int(choice)
-        if 1 <= choice <= len(actions):
-            action = actions[choice - 1]
-            template_file = action.get('template_file')
-            action_name = action.get('name')
-            if update_hosts_data(template_file, action_name):
-                if execute_main_py(choice):
-                    logger.info("Action completed successfully")
-                else:
-                    logger.error("Action failed or encountered an error")
-                    print("Action failed or encountered an error.")
+        actions_file = os.path.join(project_dir, 'data/action_map.yml')
+        actions = load_yaml_file(actions_file).get('actions', [])
+
+        choice = display_menu(actions)
+        if choice is None:
+            logger.error("No valid action selected")
+            return
+
+        selected_action = actions[choice - 1]
+        action_name = selected_action['name']
+        logger.info(f"Selected action: {action_name}")
+
+        execution_mode = display_execution_mode_menu()
+        if execution_mode is None:
+            logger.error("No valid execution mode selected")
+            return
+
+        if execution_mode == 1:
+            logger.info(f"Executing action {action_name} locally")
+            if action_name == 'code_upgrade':
+                code_upgrade()
             else:
-                logger.error("Failed to update hosts_data.yml. Aborting")
-                print("Failed to update hosts_data.yml. Aborting.")
+                network_automation_main(action_name)
         else:
-            print(f"Invalid choice. Please select between 1 and {len(actions)}.")
-    except ValueError:
-        print("Invalid input. Please enter a number.")
+            logger.info(f"Pushing action {action_name} to GitHub")
+            print("GitHub push not implemented yet.")
+
     except KeyboardInterrupt:
-        logger.info("Exiting launcher")
-        print("\nExiting launcher.")
+        logger.info("Program interrupted by user (Ctrl+C)")
+        print("\nProgram interrupted by user. Exiting.")
+        sys.exit(0)
+    except Exception as e:
+        logger.error(f"Error in launcher: {e}")
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()

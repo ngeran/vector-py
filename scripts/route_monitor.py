@@ -1,8 +1,9 @@
 import os
 from datetime import datetime
 import logging
-from typing import List, Dict
+from typing import List, Dict, Callable
 from jnpr.junos import Device
+from jnpr.junos.exception import ConnectError
 
 logger = logging.getLogger(__name__)
 
@@ -11,8 +12,8 @@ def monitor_routes(
     password: str,
     host_ips: List[str],
     hosts: List[Dict],
-    connect_to_hosts: callable,
-    disconnect_from_hosts: callable,
+    connect_to_hosts: Callable,  # Expecting the function as an argument
+    disconnect_from_hosts: Callable,  # Expecting the function as an argument
     connections: List[Device] = None
 ):
     """Monitor routing tables on devices and generate a summary report."""
@@ -20,11 +21,19 @@ def monitor_routes(
     report_dir = os.path.join(os.path.dirname(__file__), '../reports')
     os.makedirs(report_dir, exist_ok=True)
 
+    local_connections = [] # Keep track of connections made here
     try:
         # Use provided connections
         if connections is None:
             logger.info("No connections provided, creating new connections")
-            connections = connect_to_hosts(username, password, host_ips)
+            try:
+                connections = connect_to_hosts(host_ips, username, password)  # Use the passed function
+                local_connections = connections # Store connections made in this function
+            except ConnectError as e:
+                logger.error(f"Failed to connect to hosts: {e}")
+                print(f"Failed to connect to hosts: {e}")
+                return  # IMPORTANT: Exit if connection fails
+
         if not connections:
             logger.error("No devices connected for route monitoring")
             print("No devices connected for route monitoring.")
@@ -77,10 +86,10 @@ def monitor_routes(
         # Generate report
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         report = f"Routing Table Summary - {timestamp}\n{'-'*80}\n"
-        report += "| Host          | BGP   | OSPF  | LDP   | MPLS  | Added | Removed | Flapped |\n"
-        report += "|---------------|-------|-------|-------|-------|-------|---------|---------|\n"
+        report += "| Host            | BGP    | OSPF   | LDP    | MPLS   | Added | Removed | Flapped |\n"
+        report += "|----------------|--------|--------|--------|--------|-------|---------|---------|\n"
         for entry in summary:
-            report += f"| {entry['host']:<13} | {entry['bgp']:<5} | {entry['ospf']:<5} | {entry['ldp']:<5} | {entry['mpls']:<5} | {entry['added']:<5} | {entry['removed']:<7} | {entry['flapped']:<7} |\n"
+            report += f"| {entry['host']:<13} | {entry['bgp']:<6} | {entry['ospf']:<6} | {entry['ldp']:<6} | {entry['mpls']:<6} | {entry['added']:<5} | {entry['removed']:<7} | {entry['flapped']:<7} |\n"
         report += "-" * 80 + "\n"
 
         report_file = os.path.join(report_dir, f"route_monitor_{timestamp}.txt")
@@ -92,7 +101,8 @@ def monitor_routes(
     except Exception as e:
         logger.error(f"Error in monitor_routes: {e}")
         print(f"Error in monitor_routes: {e}")
+        raise  # Re-raise the exception to be caught in actions.py
     finally:
-        # Rely on actions.py to disconnect
-        pass
-    logger.info("Finished monitor_routes")
+        if local_connections: # Disconnect only connections made in this function
+           disconnect_from_hosts(local_connections) # Use the passed function
+        logger.info("Finished monitor_routes")

@@ -255,28 +255,45 @@ def check_current_version(dev: Device, hostname: str, target_version: str) -> bo
         print(f"⚠️ Warning: Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
         return True
 
-def probe_device(hostname: str, max_wait: int = 900, interval: int = 60) -> bool:
-    """Probe device availability using ping until it responds or times out."""
+def probe_device(hostname: str, username: str, password: str, max_wait: int = 900, interval: int = 60) -> bool:
+    """Probe device availability using ping and SSH until it responds or times out."""
     logger.info(f"Probing {hostname} for availability post-reboot")
     print(f"Probing {hostname} for availability post-reboot...")
     start_time = time.time()
     while time.time() - start_time < max_wait:
         try:
-            result = subprocess.run(
+            # Check ping
+            ping_result = subprocess.run(
                 ['ping', '-c', '1', '-W', '2', hostname],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True
             )
-            if result.returncode == 0:
-                logger.info("{hostname} is reachable")
-                print(f"✅ {hostname} is reachable")
+            if ping_result.returncode != 0:
+                logger.debug(f"Ping to {hostname} failed: {ping_result.stderr}")
+                print(f"⚠️ {hostname} not yet reachable via ping. Retrying in {interval} seconds...")
+                time.sleep(interval)
+                continue
+
+            # Check SSH service
+            ssh_command = f"ssh -o ConnectTimeout=10 -o StrictHostKeyChecking=no {username}@{hostname} \"show version\""
+            ssh_result = subprocess.run(
+                ssh_command,
+                shell=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                timeout=15
+            )
+            if ssh_result.returncode == 0:
+                logger.info(f"{hostname} is reachable and SSH service is up")
+                print(f"✅ {hostname} is reachable and SSH service is up")
                 return True
-            logger.debug(f"Ping to {hostname} failed: {result.stderr}")
-            print(f"⚠️ {hostname} not yet reachable. Retrying in {interval} seconds...")
+            logger.debug(f"SSH to {hostname} failed: {ssh_result.stderr}")
+            print(f"⚠️ {hostname} pingable but SSH not ready. Retrying in {interval} seconds...")
         except Exception as e:
-            logger.debug(f"Ping to {hostname} failed: {e}")
-            print(f"⚠️ {hostname} not yet reachable. Retrying in {interval} seconds...")
+            logger.debug(f"Probe to {hostname} failed: {e}")
+            print(f"⚠️ {hostname} not yet fully reachable. Retrying in {interval} seconds...")
         time.sleep(interval)
     logger.error(f"{hostname} did not become reachable within {max_wait} seconds")
     print(f"❌ {hostname} did not become reachable within {max_wait} seconds")
@@ -287,11 +304,16 @@ def verify_version(hostname: str, username: str, password: str, target_version: 
     logger.info(f"Verifying version on {hostname}")
     print(f"Verifying version on {hostname}...")
 
+    # Add initial delay to ensure device services are up
+    time.sleep(30)
+
     # Try PyEZ dev.facts['version'] with retries
     for attempt in range(max_attempts):
         new_dev = None
         try:
             new_dev = Device(host=hostname, user=username, password=password)
+            if new_dev is None:
+                raise Exception("Failed to create Device object")
             new_dev.timeout = 600
             new_dev.open(timeout=300)
             logger.info(f"Connected to {hostname} for version verification (attempt {attempt + 1}/{max_attempts})")
@@ -322,14 +344,14 @@ def verify_version(hostname: str, username: str, password: str, target_version: 
             if attempt < max_attempts - 1:
                 time.sleep(retry_interval)
         finally:
-            if new_dev and new_dev.connected:
+            if new_dev and hasattr(new_dev, 'connected') and new_dev.connected:
                 new_dev.close()
 
     # Fallback to ssh command
     logger.info(f"Falling back to ssh command for version verification on {hostname}")
     print(f"⚠️ Falling back to ssh command for version verification on {hostname}")
     try:
-        ssh_command = f"ssh {username}@{hostname} \"show version\""
+        ssh_command = f"ssh -o ConnectTimeout=10 -o StrictHostKeyChecking=no {username}@{hostname} \"show version\""
         result = subprocess.run(
             ssh_command,
             shell=True,
@@ -510,7 +532,7 @@ def code_upgrade():
                     dev.close()
 
                 # Probe device until available
-                if not probe_device(hostname, max_wait=900, interval=60):
+                if not probe_device(hostname, username, password, max_wait=900, interval=60):
                     logger.error(f"Failed to confirm {hostname} availability after reboot")
                     print(f"❌ Failed to confirm {hostname} availability after reboot")
                     status['error'] = "Device not reachable after reboot"

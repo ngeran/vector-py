@@ -6,7 +6,6 @@ from typing import Dict, List
 
 from jnpr.junos import Device
 from jnpr.junos.exception import (
-    AuthenticationError,
     ConnectError,
     ConnectRefusedError,
     ConnectTimeoutError,
@@ -475,7 +474,6 @@ def verify_version(
             ConnectError,
             ConnectTimeoutError,
             ProbeError,
-            AuthenticationError,
         ) as e:
             last_exception = e
             logger.warning(

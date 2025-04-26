@@ -1,6 +1,7 @@
 import os
 import logging
 import time
+import subprocess
 from typing import List, Dict
 from jnpr.junos import Device
 from jnpr.junos.utils.sw import SW
@@ -254,6 +255,72 @@ def check_current_version(dev: Device, hostname: str, target_version: str) -> bo
         print(f"⚠️ Warning: Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
         return True
 
+def probe_device(hostname: str, max_wait: int = 900, interval: int = 60) -> bool:
+    """Probe device availability using ping until it responds or times out."""
+    logger.info(f"Probing {hostname} for availability post-reboot")
+    print(f"Probing {hostname} for availability post-reboot...")
+    start_time = time.time()
+    while time.time() - start_time < max_wait:
+        try:
+            # Use ping to check if device is reachable
+            result = subprocess.run(
+                ['ping', '-c', '1', '-W', '2', hostname],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True
+            )
+            if result.returncode == 0:
+                logger.info(f"{hostname} is reachable")
+                print(f"✅ {hostname} is reachable")
+                return True
+            logger.debug(f"Ping to {hostname} failed: {result.stderr}")
+            print(f"⚠️ {hostname} not yet reachable. Retrying in {interval} seconds...")
+        except Exception as e:
+            logger.debug(f"Ping to {hostname} failed: {e}")
+            print(f"⚠️ {hostname} not yet reachable. Retrying in {interval} seconds...")
+        time.sleep(interval)
+    logger.error(f"{hostname} did not become reachable within {max_wait} seconds")
+    print(f"❌ {hostname} did not become reachable within {max_wait} seconds")
+    return False
+
+def verify_version(hostname: str, username: str, password: str, target_version: str, max_attempts: int = 5, retry_interval: int = 60) -> tuple:
+    """Verify device version with retries to handle transient SSH issues."""
+    logger.info(f"Verifying version on {hostname}")
+    print(f"Verifying version on {hostname}...")
+    for attempt in range(max_attempts):
+        new_dev = None
+        try:
+            new_dev = Device(host=hostname, user=username, password=password)
+            new_dev.timeout = 600
+            new_dev.open(timeout=300)
+            logger.info(f"Connected to {hostname} for version verification (attempt {attempt + 1}/{max_attempts})")
+            print(f"✅ Connected to {hostname} for version verification")
+
+            version_output = new_dev.cli("show version", warning=False)
+            current_version = None
+            for line in version_output.splitlines():
+                if "JUNOS Software Release" in line:
+                    current_version = line.split('[')[-1].strip(']').strip()
+                    break
+            if current_version:
+                logger.info(f"Version on {hostname}: {current_version}")
+                print(f"✅ Version on {hostname}: {current_version}")
+                return current_version == target_version, current_version, None
+            else:
+                logger.error(f"No version found in output on {hostname}")
+                return False, None, "No version found in output"
+        except Exception as e:
+            logger.warning(f"Version verification attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}")
+            print(f"⚠️ Version verification attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}. Retrying in {retry_interval} seconds...")
+            if attempt < max_attempts - 1:
+                time.sleep(retry_interval)
+        finally:
+            if new_dev and new_dev.connected:
+                new_dev.close()
+    logger.error(f"Failed to verify version on {hostname} after {max_attempts} attempts")
+    print(f"❌ Failed to verify version on {hostname} after {max_attempts} attempts")
+    return False, None, "Failed to connect after retries"
+
 def code_upgrade():
     """Perform code upgrade on selected devices."""
     upgrade_status = []
@@ -396,63 +463,31 @@ def code_upgrade():
                     dev.close()
                     continue
 
-                # Wait for reboot and reconnect
-                print(f"Device {hostname} is rebooting. Waiting for reconnection...")
-                time.sleep(120)
+                # Wait for reboot and probe device
+                print(f"Device {hostname} is rebooting. Waiting for availability...")
+                time.sleep(60)  # Initial delay to allow reboot to start
                 if dev.connected:
                     dev.close()
 
-                # Attempt to reconnect and verify version
-                max_attempts = 5
-                new_dev = None
-                for attempt in range(max_attempts):
-                    try:
-                        new_dev = Device(host=hostname, user=username, password=password)
-                        new_dev.timeout = 600
-                        new_dev.open(timeout=300)
-                        logger.info(f"Reconnected to {hostname} after reboot")
-                        print(f"✅ Reconnected to {hostname} after reboot")
-                        break
-                    except ConnectError as e:
-                        logger.warning(f"Reconnect attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}")
-                        print(f"⚠️ Reconnect attempt {attempt + 1}/{max_attempts} failed for {hostname}. Retrying...")
-                        time.sleep(60)
+                # Probe device until available
+                if not probe_device(hostname, max_wait=900, interval=60):
+                    logger.error(f"Failed to confirm {hostname} availability after reboot")
+                    print(f"❌ Failed to confirm {hostname} availability after reboot")
+                    status['error'] = "Device not reachable after reboot"
+                    upgrade_status.append(status)
+                    continue
+
+                # Verify version
+                success, current_version, error = verify_version(hostname, username, password, target_version)
+                if success:
+                    logger.info(f"Upgrade successful on {hostname}. Version: {current_version}")
+                    print(f"✅ Upgrade successful on {hostname}. Version: {current_version}")
+                    status['success'] = True
                 else:
-                    logger.error(f"Failed to reconnect to {hostname} after {max_attempts} attempts")
-                    print(f"⚠️ Warning: Failed to reconnect to {hostname} after {max_attempts} attempts. Attempting manual version check...")
-
-                # Verify version even if reconnection failed
-                try:
-                    if not new_dev or not new_dev.connected:
-                        new_dev = Device(host=hostname, user=username, password=password)
-                        new_dev.timeout = 600
-                        new_dev.open(timeout=300)
-                        logger.info(f"Manual reconnection to {hostname} for version check")
-                        print(f"✅ Manual reconnection to {hostname} for version check")
-
-                    version_output = new_dev.cli("show version", warning=False)
-                    current_version = None
-                    for line in version_output.splitlines():
-                        if "JUNOS Software Release" in line:
-                            current_version = line.split('[')[-1].strip(']').strip()
-                            break
-                    if current_version == target_version:
-                        logger.info(f"Upgrade successful on {hostname}. Version: {current_version}")
-                        print(f"✅ Upgrade successful on {hostname}. Version: {current_version}")
-                        status['success'] = True
-                    else:
-                        logger.error(f"Version mismatch on {hostname}. Expected {target_version}, got {current_version}")
-                        print(f"❌ Version mismatch on {hostname}. Expected {target_version}, got {current_version}")
-                        status['error'] = f"Version mismatch: {current_version}"
-                    upgrade_status.append(status)
-                except Exception as e:
-                    logger.error(f"Failed to verify version on {hostname}: {e}")
-                    print(f"❌ Failed to verify version on {hostname}: {e}")
-                    status['error'] = f"Version verification failed: {e}"
-                    upgrade_status.append(status)
-                finally:
-                    if new_dev and new_dev.connected:
-                        new_dev.close()
+                    logger.error(f"Version verification failed on {hostname}: {error}")
+                    print(f"❌ Version verification failed on {hostname}: {error}")
+                    status['error'] = f"Version verification failed: {error}"
+                upgrade_status.append(status)
 
             except Exception as e:
                 logger.error(f"Error upgrading {hostname}: {e}")

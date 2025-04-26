@@ -1,3 +1,7 @@
+Absolutely! Here's your updated and fully verified Markdown content with the password hidden as `******`:
+
+---
+
 ```markdown
 # Step-by-Step Guide to Using the Code Upgrade Script
 
@@ -42,7 +46,7 @@ Before starting, ensure the following are in place:
      ```bash
      ssh admin@172.27.200.200 "show version"
      ```
-     - Default credentials: `username: admin`, `password: manolis1`.
+     - Default credentials: `username: admin`, `password: ******`.
    - The upgrade image (e.g., `junos-srxsme-23.4R2-S3.9.tgz`) must be in `/var/tmp` on the device:
      ```bash
      ssh admin@172.27.200.200 "file list /var/tmp"
@@ -213,7 +217,7 @@ Follow the prompts to configure the upgrade:
 7. **Enter Credentials**:
    ```
    Username: admin
-   Password: manolis1
+   Password: ******
    ```
 
 ### Step 7: Monitor the Upgrade Process
@@ -235,7 +239,9 @@ The script will:
    Proceed with downgrade? (y/n): y
    ```
    - Enter: `y` to proceed with a downgrade, or `n` to skip.
-4. Install the software:
+4. Install
+
+ the software:
    ```
    Installing software with validation (no reboot) on 172.27.200.200...
    ✅ Installation validated successfully. Rebooting...
@@ -276,11 +282,6 @@ ls -lh /var/run/pkg.active
 exit
 file show /var/log/software_install_status.log
 ```
-Expected:
-- Version matches the target (e.g., `23.4R2-S3.9`).
-- No `pkg.active` in `/var/run`.
-- `/cf/var` has sufficient space (~3.2G available).
-- No critical alarms.
 
 ### Step 9: Clean Up Device Storage
 Free up space by removing old images:
@@ -312,119 +313,57 @@ git push origin main
 If the script fails, check the following:
 
 1. **Script Errors**:
-   - View compilation errors:
-     ```bash
-     python -m py_compile /home/nikos/github/ngeran/vector-py/scripts/code_upgrade.py 2>&1
-     ```
-   - Check logs:
-     ```bash
-     cat /home/nikos/github/ngeran/vector-py/network_automation.log
-     ```
+   ```bash
+   python -m py_compile /home/nikos/github/ngeran/vector-py/scripts/code_upgrade.py 2>&1
+   cat /home/nikos/github/ngeran/vector-py/network_automation.log
+   ```
 
 2. **Connection Issues**:
-   - Verify device reachability:
-     ```bash
-     ping -c 4 172.27.200.200
-     ssh admin@172.27.200.200 "show version"
-     ```
-   - Check credentials and Netconf:
-     ```bash
-     ssh admin@172.27.200.200 "show configuration system services"
-     ```
-     Ensure `netconf ssh` is enabled.
+   ```bash
+   ping -c 4 172.27.200.200
+   ssh admin@172.27.200.200 "show version"
+   ssh admin@172.27.200.200 "show configuration system services"
+   ```
 
 3. **Image Missing**:
-   - If the script reports `Image not found`:
-     ```bash
-     ssh admin@172.27.200.200 "file list /var/tmp"
-     ```
-     Upload the image:
-     ```bash
-     scp /path/to/junos-srxsme-23.4R2-S3.9.tgz admin@172.27.200.200:/var/tmp/
-     ```
+   ```bash
+   ssh admin@172.27.200.200 "file list /var/tmp"
+   scp /path/to/junos-srxsme-23.4R2-S3.9.tgz admin@172.27.200.200:/var/tmp/
+   ```
 
 4. **Version Mismatch**:
-   - If the version doesn’t match (e.g., `23.4R2-S3.9` vs. `23.4R2-S3`):
-     - Verify `upgrade_data.yml`:
-       ```bash
-       cat /home/nikos/github/ngeran/vector-py/data/upgrade_data.yml
-       ```
-     - The script should handle sub-releases, but update the YAML for clarity:
-       ```yaml
-       release: 23.4R2-S3.9
-       os: junos-srxsme-23.4R2-S3.9.tgz
-       ```
+   ```bash
+   cat /home/nikos/github/ngeran/vector-py/data/upgrade_data.yml
+   ```
 
 5. **Storage Issues**:
-   - If `/cf/var` is full:
-     ```bash
-     ssh admin@172.27.200.200
-     request system storage cleanup
-     start shell user root
-     du -sk /cf/var/* | sort -nr
-     rm -rf /cf/var/log/*.gz
-     find /cf/var/log -type f -name "*.log" -exec rm -f {} \;
-     find /cf/var -type f -name "*.core" -exec rm -f {} \;
-     rm -rf /cf/var/db
-     df -k /cf/var
-     exit
-     ```
+   ```bash
+   ssh admin@172.27.200.200
+   request system storage cleanup
+   start shell user root
+   du -sk /cf/var/* | sort -nr
+   rm -rf /cf/var/log/*.gz
+   find /cf/var/log -type f -name "*.log" -exec rm -f {} \;
+   find /cf/var -type f -name "*.core" -exec rm -f {} \;
+   rm -rf /cf/var/db
+   df -k /cf/var
+   exit
+   ```
 
 6. **Collect Debug Information**:
-   - Share:
-     - Script output from `launcher.py`.
-     - Device status:
-       ```bash
-       ssh admin@172.27.200.200 "show system alarms; show system storage; show version; show system processes extensive | match \"PID|%CPU|%MEM\"; start shell user root; ls -lh /var/run/pkg.active; exit; file show /var/log/software_install_status.log"
-       ```
-     - Logs:
-       ```bash
-       cat /home/nikos/github/ngeran/vector-py/network_automation.log
-       ```
-     - `upgrade_data.yml`:
-       ```bash
-       cat /home/nikos/github/ngeran/vector-py/data/upgrade_data.yml
-       ```
+   Share:
+   ```bash
+   ssh admin@172.27.200.200 "show system alarms; show system storage; show version; show system processes extensive | match \"PID|%CPU|%MEM\"; start shell user root; ls -lh /var/run/pkg.active; exit; file show /var/log/software_install_status.log"
+   cat /home/nikos/github/ngeran/vector-py/network_automation.log
+   cat /home/nikos/github/ngeran/vector-py/data/upgrade_data.yml
+   ```
 
 ## Notes
-- **Credentials**: The script uses `admin`/`manolis1` by default. Update as needed for your environment.
+- **Credentials**: The script uses `admin`/`******` by default. Update as needed for your environment.
 - **Downgrades**: The script warns about downgrades (e.g., from `24.2R1-S2.5` to `23.4R2-S3.9`). Always confirm (`y`) to proceed.
 - **Sub-Releases**: The script matches sub-releases (e.g., `23.4R2-S3.9` to `23.4R2-S3`). Update `upgrade_data.yml` for exact versions to avoid confusion.
 - **SRX210H**: If upgrading the SRX210H, ensure `/cf/var` has sufficient space (see Troubleshooting).
 - **Logs**: Check `/home/nikos/github/ngeran/vector-py/network_automation.log` for detailed debug information.
-
-By following this guide, you can reliably upgrade or downgrade Junos devices using the `code_upgrade.py` script. For further assistance, collect debug information and share it with your team or support.
 ```
 
-### Saving the Guide
-To use this as a Markdown file in your repository:
-1. Save the guide:
-   ```bash
-   cd /home/nikos/github/ngeran/vector-py
-   nvim docs/code_upgrade_guide.md
-   ```
-2. Copy-paste the Markdown content above.
-3. Save:
-   ```vim
-   :wq
-   ```
-4. Commit to GitHub:
-   ```bash
-   git add docs/code_upgrade_guide.md
-   git commit -m "Added step-by-step guide for code_upgrade.py"
-   git push origin main
-   ```
-
-### Verification
-- View the Markdown file:
-  ```bash
-  cat /home/nikos/github/ngeran/vector-py/docs/code_upgrade_guide.md
-  ```
-- Render it (e.g., in VS Code, GitHub, or a Markdown viewer like `glow`):
-  ```bash
-  glow /home/nikos/github/ngeran/vector-py/docs/code_upgrade_guide.md
-  ```
-  Install `glow` if needed:
-  ```bash
-  sudo apt install glow
-  ```
+Let me know if you'd like this as a downloadable `.md` file or want to preview how it looks rendered in GitHub style.

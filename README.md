@@ -1,12 +1,17 @@
 Vector-Py: Juniper Network Automation Toolkit
-vector-py is a Python-based automation toolkit for managing Juniper Networks devices (SRX, EX, MX, ACX). It provides a menu-driven interface to perform tasks such as pinging hosts, configuring interfaces, monitoring routing tables, and upgrading device software. The toolkit uses junos-eznc for device interactions and supports both local execution and GitHub integration.
-This README focuses on the Code Upgrade feature, which automates software upgrades for Juniper devices, ensuring reliable installation, validation, and version verification.
+vector-py is a Python-based automation toolkit for managing Juniper Networks devices (SRX, EX, MX, ACX). It provides a menu-driven interface to perform tasks such as pinging hosts, configuring interfaces, monitoring routing tables, and upgrading device software. The toolkit uses junos-eznc (PyEZ) for device interactions and supports both local execution and GitHub integration.
+This README focuses on the Code Upgrade feature, which automates software upgrades for Juniper devices, ensuring reliable installation, validation, and version verification with robust fallback mechanisms.
 Features
 
 Menu-Driven Interface: Select vendors, products, and software releases interactively.
 Automated Upgrades: Installs and validates Juniper Junos software with automatic reboot and version verification.
-Robust Error Handling: Handles connection issues, RPC errors, and transient SSH failures.
-Device Probing: Waits for devices to become available post-reboot using ping-based probing.
+Robust Version Verification:
+Uses dev.facts['version'] from PyEZ for reliable version retrieval.
+Falls back to ssh <username>@<device-ip> "show version" if PyEZ fails.
+
+
+Device Probing: Waits for devices to become available post-reboot using ping-based probing (60-second intervals).
+Robust Error Handling: Handles connection issues, RPC errors, and transient SSH failures with retries.
 Logging: Detailed logs for debugging, stored in network_automation.log.
 GitHub Integration: Option to push changes to a GitHub repository.
 
@@ -15,6 +20,7 @@ Prerequisites
 System:
 Linux (e.g., Ubuntu/Debian) with Python 3.7+.
 ping utility (sudo apt-get install iputils-ping).
+SSH client installed (openssh-client).
 
 
 Python Packages:pip install jnpr.junos pyyaml
@@ -23,7 +29,7 @@ Python Packages:pip install jnpr.junos pyyaml
 Juniper Devices:
 SSH enabled with credentials (username/password).
 Sufficient storage on /cf/var or /var/tmp (e.g., >500 MB for SRX320, >100 MB for SRX210H).
-Upgrade images (e.g., junos-srxsme-24.2R1-S2.5.tgz) pre-uploaded to /var/tmp.
+Upgrade images (e.g., junos-srxsme-23.4R2-S3.9.tgz) pre-uploaded to /var/tmp.
 
 
 Repository Setup:
@@ -42,7 +48,7 @@ cd vector-py
 
 
 Install Dependencies:pip install jnpr.junos pyyaml
-sudo apt-get install iputils-ping
+sudo apt-get install iputils-ping openssh-client
 
 
 Set Environment Variable:export VECTOR_PY_DIR=$PWD
@@ -129,11 +135,11 @@ df -k /cf/var
 
 
 Upload Upgrade Image:
-Transfer the image to /var/tmp:scp junos-srxsme-24.2R1-S2.5.tgz admin@<device-ip>:/var/tmp/
+Transfer the image to /var/tmp:scp junos-srxsme-23.4R2-S3.9.tgz admin@<device-ip>:/var/tmp/
 
 
 Verify:ssh admin@<device-ip> "file list /var/tmp"
-file checksum md5 /var/tmp/junos-srxsme-24.2R1-S2.5.tgz
+file checksum md5 /var/tmp/junos-srxsme-23.4R2-S3.9.tgz
 
 
 
@@ -202,7 +208,7 @@ Select product (e.g., SRX320):Select a product:
 Select a product (1-6): 3
 
 
-Select release (e.g., 24.2R1-S2):Available releases:
+Select release (e.g., 23.4R2-S3):Available releases:
 ----------------------------------------
 | Option | Release                 |
 ----------------------------------------
@@ -210,7 +216,7 @@ Select release (e.g., 24.2R1-S2):Available releases:
 | 2      | 23.4R2-S4              |
 | 3      | 24.2R1-S2              |
 ----------------------------------------
-Select a release (1-3): 3
+Select a release (1-3): 1
 
 
 Enter host IPs:Read hosts from upgrade_hosts.yml? (y/n): n
@@ -225,11 +231,11 @@ Password: <password>
 The script will:
 Connect to the device.
 Verify the image exists in /var/tmp.
-Check the current version and warn about downgrades.
+Check the current version using dev.facts['version'] (or CLI fallback) and warn about downgrades.
 Install and validate the software.
 Reboot the device.
 Probe for availability (up to 15 minutes, checking every 60 seconds).
-Verify the version (up to 5 attempts, retrying every 60 seconds).
+Verify the version using dev.facts['version'] (with CLI and SSH fallbacks, up to 5 attempts, retrying every 60 seconds).
 Display a summary:Upgrade Summary:
 Successful: 1 device(s)
   - 172.27.200.200
@@ -262,9 +268,11 @@ df -k /cf/var
 Troubleshooting
 
 Error: 'NoneType' object has no attribute 'timeout':
-Ensure the device’s SSH service is stable post-reboot.
+The script now falls back to ssh if PyEZ fails. Verify SSH access:ssh admin@<device-ip> "show version"
+
+
 Check /var/log/sshd on the device for SSH issues.
-Increase max_wait or max_attempts in code_upgrade.py.
+Increase max_attempts or retry_interval in verify_version.
 
 
 Error: Device not reachable after reboot:
@@ -272,6 +280,13 @@ Verify network connectivity:ping <device-ip>
 
 
 Check device logs:ssh admin@<device-ip> "show log messages | last"
+
+
+
+
+Error: SSH command failed:
+Ensure SSH keys are set up or password authentication is enabled.
+Test manually:ssh admin@<device-ip> "show version"
 
 
 

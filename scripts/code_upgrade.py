@@ -211,10 +211,9 @@ def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
             logger.info(f"Image {image_path} found on {hostname}")
             print(f"✅ Image {image_path} found on {hostname}")
             return True
-        else:
-            logger.error(f"Image {image_path} not found on {hostname}")
-            print(f"❌ Image {image_path} not found on {hostname}")
-            return False
+        logger.error(f"Image {image_path} not found on {hostname}")
+        print(f"❌ Image {image_path} not found on {hostname}")
+        return False
     except Exception as e:
         logger.error(f"Error checking image on {hostname}: {e}")
         print(f"❌ Error checking image on {hostname}: {e}")
@@ -225,13 +224,14 @@ def check_current_version(dev: Device, hostname: str, target_version: str) -> bo
     logger.info(f"Checking current version on {hostname}")
     print(f"Checking current version on {hostname}...")
     try:
-        version_output = dev.cli("show version", warning=False)
-        logger.debug(f"Version output for {hostname}: {version_output}")
-        current_version = None
-        for line in version_output.splitlines():
-            if "JUNOS Software Release" in line:
-                current_version = line.split('[')[-1].strip(']').strip()
-                break
+        current_version = dev.facts.get('version')
+        if not current_version:
+            logger.warning(f"No version found in facts on {hostname}. Falling back to CLI.")
+            version_output = dev.cli("show version", warning=False)
+            for line in version_output.splitlines():
+                if "JUNOS Software Release" in line:
+                    current_version = line.split('[')[-1].strip(']').strip()
+                    break
         if current_version:
             logger.info(f"Current Junos version on {hostname}: {current_version}")
             print(f"✅ Current Junos version on {hostname}: {current_version}")
@@ -262,7 +262,6 @@ def probe_device(hostname: str, max_wait: int = 900, interval: int = 60) -> bool
     start_time = time.time()
     while time.time() - start_time < max_wait:
         try:
-            # Use ping to check if device is reachable
             result = subprocess.run(
                 ['ping', '-c', '1', '-W', '2', hostname],
                 stdout=subprocess.PIPE,
@@ -270,7 +269,7 @@ def probe_device(hostname: str, max_wait: int = 900, interval: int = 60) -> bool
                 text=True
             )
             if result.returncode == 0:
-                logger.info(f"{hostname} is reachable")
+                logger.info("{hostname} is reachable")
                 print(f"✅ {hostname} is reachable")
                 return True
             logger.debug(f"Ping to {hostname} failed: {result.stderr}")
@@ -284,9 +283,11 @@ def probe_device(hostname: str, max_wait: int = 900, interval: int = 60) -> bool
     return False
 
 def verify_version(hostname: str, username: str, password: str, target_version: str, max_attempts: int = 5, retry_interval: int = 60) -> tuple:
-    """Verify device version with retries to handle transient SSH issues."""
+    """Verify device version using dev.facts['version'] with fallback to ssh command."""
     logger.info(f"Verifying version on {hostname}")
     print(f"Verifying version on {hostname}...")
+
+    # Try PyEZ dev.facts['version'] with retries
     for attempt in range(max_attempts):
         new_dev = None
         try:
@@ -296,19 +297,25 @@ def verify_version(hostname: str, username: str, password: str, target_version: 
             logger.info(f"Connected to {hostname} for version verification (attempt {attempt + 1}/{max_attempts})")
             print(f"✅ Connected to {hostname} for version verification")
 
-            version_output = new_dev.cli("show version", warning=False)
-            current_version = None
-            for line in version_output.splitlines():
-                if "JUNOS Software Release" in line:
-                    current_version = line.split('[')[-1].strip(']').strip()
-                    break
+            current_version = new_dev.facts.get('version')
             if current_version:
-                logger.info(f"Version on {hostname}: {current_version}")
+                logger.info(f"Version on {hostname}: {current_version} (via facts)")
                 print(f"✅ Version on {hostname}: {current_version}")
                 return current_version == target_version, current_version, None
             else:
-                logger.error(f"No version found in output on {hostname}")
-                return False, None, "No version found in output"
+                logger.warning(f"No version found in facts on {hostname}. Falling back to CLI.")
+                version_output = new_dev.cli("show version", warning=False)
+                for line in version_output.splitlines():
+                    if "JUNOS Software Release" in line:
+                        current_version = line.split('[')[-1].strip(']').strip()
+                        break
+                if current_version:
+                    logger.info(f"Version on {hostname}: {current_version} (via CLI)")
+                    print(f"✅ Version on {hostname}: {current_version}")
+                    return current_version == target_version, current_version, None
+                else:
+                    logger.error(f"No version found in output on {hostname}")
+                    return False, None, "No version found in output"
         except Exception as e:
             logger.warning(f"Version verification attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}")
             print(f"⚠️ Version verification attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}. Retrying in {retry_interval} seconds...")
@@ -317,9 +324,42 @@ def verify_version(hostname: str, username: str, password: str, target_version: 
         finally:
             if new_dev and new_dev.connected:
                 new_dev.close()
-    logger.error(f"Failed to verify version on {hostname} after {max_attempts} attempts")
-    print(f"❌ Failed to verify version on {hostname} after {max_attempts} attempts")
-    return False, None, "Failed to connect after retries"
+
+    # Fallback to ssh command
+    logger.info(f"Falling back to ssh command for version verification on {hostname}")
+    print(f"⚠️ Falling back to ssh command for version verification on {hostname}")
+    try:
+        ssh_command = f"ssh {username}@{hostname} \"show version\""
+        result = subprocess.run(
+            ssh_command,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=30
+        )
+        if result.returncode == 0:
+            output = result.stdout
+            current_version = None
+            for line in output.splitlines():
+                if "JUNOS Software Release" in line:
+                    current_version = line.split('[')[-1].strip(']').strip()
+                    break
+            if current_version:
+                logger.info(f"Version on {hostname}: {current_version} (via ssh)")
+                print(f"✅ Version on {hostname}: {current_version}")
+                return current_version == target_version, current_version, None
+            else:
+                logger.error(f"No version found in ssh output on {hostname}")
+                return False, None, "No version found in ssh output"
+        else:
+            logger.error(f"SSH command failed on {hostname}: {result.stderr}")
+            print(f"❌ SSH command failed on {hostname}: {result.stderr}")
+            return False, None, f"SSH command failed: {result.stderr}"
+    except Exception as e:
+        logger.error(f"Failed to verify version via ssh on {hostname}: {e}")
+        print(f"❌ Failed to verify version via ssh on {hostname}: {e}")
+        return False, None, f"Failed to verify via ssh: {e}"
 
 def code_upgrade():
     """Perform code upgrade on selected devices."""

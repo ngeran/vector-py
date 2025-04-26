@@ -458,3 +458,135 @@ b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns
 2025-04-26 06:43:12,229 - INFO - Disconnected from 172.27.200.200
 2025-04-26 06:43:12,229 - INFO - Upgrade summary: 0 successful, 1 failed
 2025-04-26 06:43:12,229 - WARNING - Code upgrade process completed with failures
+2025-04-26 09:02:15,492 - INFO - sys.path: ['/home/nikos/github/ngeran/vector-py', '/home/nikos/github/ngeran/vector-py/network-automation-launcher', '/usr/lib/python313.zip', '/usr/lib/python3.13', '/usr/lib/python3.13/lib-dynload', '/usr/lib/python3.13/site-packages']
+2025-04-26 09:02:15,687 - ERROR - Import error: No module named 'telnetlib'
+2025-04-26 09:09:29,799 - INFO - sys.path: ['/home/nikos/github/ngeran/vector-py', '/home/nikos/github/ngeran/vector-py/network-automation-launcher', '/usr/lib/python313.zip', '/usr/lib/python3.13', '/usr/lib/python3.13/lib-dynload', '/usr/lib/python3.13/site-packages']
+2025-04-26 09:09:33,082 - INFO - Raw input received: '4'
+2025-04-26 09:09:33,083 - INFO - Valid choice selected: 4
+2025-04-26 09:09:33,083 - INFO - Selected action: code_upgrade
+2025-04-26 09:09:38,509 - INFO - Raw mode input received: '1'
+2025-04-26 09:09:38,509 - INFO - Valid execution mode selected: 1
+2025-04-26 09:09:38,509 - INFO - Executing action code_upgrade locally
+2025-04-26 09:09:38,509 - INFO - Starting code_upgrade action
+2025-04-26 09:09:38,514 - INFO - Loaded vendors: ['JUNIPER']
+2025-04-26 09:09:40,051 - INFO - Raw vendor input received: '1'
+2025-04-26 09:09:40,051 - INFO - Valid vendor choice selected: 1
+2025-04-26 09:09:40,051 - INFO - Selected vendor: JUNIPER
+2025-04-26 09:09:40,051 - INFO - Loaded products: ['EX4600', 'EX4400', 'SRX320', 'SRX210H', 'MX-SERIES', 'ACX']
+2025-04-26 09:09:42,388 - INFO - Raw product input received: '3'
+2025-04-26 09:09:42,388 - INFO - Valid product choice selected: 3
+2025-04-26 09:09:42,388 - INFO - Selected product: SRX320
+2025-04-26 09:09:45,158 - INFO - Raw release input received: '1'
+2025-04-26 09:09:45,158 - INFO - Valid release choice selected: 23.4R2-S3
+2025-04-26 09:09:45,158 - INFO - Selected release: 23.4R2-S3
+2025-04-26 09:09:47,215 - INFO - User chose to read from file: n
+2025-04-26 09:09:56,977 - INFO - Added host IP: 172.27.200.200
+2025-04-26 09:09:57,802 - INFO - Saved hosts to /home/nikos/github/ngeran/vector-py/data/upgrade_hosts.yml: ['172.27.200.200']
+2025-04-26 09:09:57,802 - INFO - Host IPs: ['172.27.200.200']
+2025-04-26 09:10:04,246 - INFO - Received credentials - username: admin
+2025-04-26 09:10:04,246 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-26 09:10:05,362 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-26 09:10:06,386 - INFO - Authentication (password) successful!
+2025-04-26 09:10:06,600 - INFO - [host 172.27.200.200 session 0x799247bf4d70] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-26 09:10:10,597 - INFO - [host 172.27.200.200 session 0x799247bf4d70] Received message from host
+2025-04-26 09:10:10,598 - INFO - [host 172.27.200.200 session-id 7139] initialized: session-id=7139 | server_capabilities=<dict_keyiterator object at 0x799247bf9bc0>
+2025-04-26 09:10:10,598 - INFO - Connected to 172.27.200.200
+2025-04-26 09:10:10,598 - INFO - Connected to devices: ['172.27.200.200']
+2025-04-26 09:10:10,598 - INFO - Probing device 172.27.200.200
+2025-04-26 09:10:11,404 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-26 09:10:12,223 - INFO - Authentication (password) successful!
+2025-04-26 09:10:12,411 - INFO - [host 172.27.200.200 session 0x799247b9b110] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-26 09:10:16,424 - INFO - [host 172.27.200.200 session 0x799247b9b110] Received message from host
+2025-04-26 09:10:16,424 - INFO - [host 172.27.200.200 session-id 7150] initialized: session-id=7150 | server_capabilities=<dict_keyiterator object at 0x799247bfa020>
+2025-04-26 09:10:16,424 - INFO - [host 172.27.200.200 session-id 7150] Requesting 'ExecuteRpc'
+2025-04-26 09:10:16,524 - INFO - [host 172.27.200.200 session-id 7150] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:1c5bba57-9671-4c93-a6aa-102ccb362c3b"><command format="text">show version</command></nc:rpc>]]>]]>'
+2025-04-26 09:10:17,652 - INFO - [host 172.27.200.200 session-id 7150] Received message from host
+2025-04-26 09:10:17,653 - INFO - [host 172.27.200.200 session-id 7150] Requesting 'CloseSession'
+2025-04-26 09:10:17,753 - INFO - [host 172.27.200.200 session-id 7150] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:8df85e98-6acc-4db5-9e79-5205ba1a6788"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-26 09:10:17,784 - INFO - [host 172.27.200.200 session-id 7150] Received message from host
+2025-04-26 09:10:17,785 - INFO - Device 172.27.200.200 is reachable and responsive
+2025-04-26 09:10:17,785 - INFO - Checking health of 172.27.200.200
+2025-04-26 09:10:18,573 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-26 09:10:19,596 - INFO - Authentication (password) successful!
+2025-04-26 09:10:19,760 - INFO - [host 172.27.200.200 session 0x799247a41090] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-26 09:10:23,828 - INFO - [host 172.27.200.200 session 0x799247a41090] Received message from host
+2025-04-26 09:10:23,829 - INFO - [host 172.27.200.200 session-id 7171] initialized: session-id=7171 | server_capabilities=<dict_keyiterator object at 0x799247bfbfb0>
+2025-04-26 09:10:23,829 - INFO - [host 172.27.200.200 session-id 7171] Requesting 'ExecuteRpc'
+2025-04-26 09:10:23,929 - INFO - [host 172.27.200.200 session-id 7171] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:8dfe9311-df77-498a-8056-0e576886db5b"><command format="text">show system processes extensive | match "PID|%CPU|%MEM"</command></nc:rpc>]]>]]>'
+2025-04-26 09:10:25,955 - INFO - [host 172.27.200.200 session-id 7171] Received message from host
+2025-04-26 09:10:25,956 - WARNING - Could not parse resource usage on 172.27.200.200
+2025-04-26 09:10:25,956 - INFO - [host 172.27.200.200 session-id 7171] Requesting 'CloseSession'
+2025-04-26 09:10:26,055 - INFO - [host 172.27.200.200 session-id 7171] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:784b12e2-e73a-4667-8134-b48d5485bb17"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-26 09:10:26,065 - INFO - [host 172.27.200.200 session-id 7171] Received message from host
+2025-04-26 09:10:26,867 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-26 09:10:27,892 - INFO - Authentication (password) successful!
+2025-04-26 09:10:28,058 - INFO - [host 172.27.200.200 session 0x799247a42350] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-26 09:10:32,298 - INFO - [host 172.27.200.200 session 0x799247a42350] Received message from host
+2025-04-26 09:10:32,298 - INFO - [host 172.27.200.200 session-id 7188] initialized: session-id=7188 | server_capabilities=<dict_keyiterator object at 0x799247a392b0>
+2025-04-26 09:10:32,298 - INFO - [host 172.27.200.200 session-id 7188] Requesting 'ExecuteRpc'
+2025-04-26 09:10:32,398 - INFO - [host 172.27.200.200 session-id 7188] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:fa1ad23e-ba79-4c19-8a68-4d419f9eb7b5"><command format="text">show version</command></nc:rpc>]]>]]>'
+2025-04-26 09:10:33,426 - INFO - [host 172.27.200.200 session-id 7188] Received message from host
+2025-04-26 09:10:33,427 - INFO - Current Junos version on 172.27.200.200: 24.2R1-S2.5
+2025-04-26 09:10:33,427 - WARNING - Selected version 23.4R2-S3 is older than current 24.2R1-S2.5 on 172.27.200.200
+2025-04-26 09:10:48,359 - INFO - [host 172.27.200.200 session-id 7188] Requesting 'CloseSession'
+2025-04-26 09:10:48,388 - INFO - [host 172.27.200.200 session-id 7188] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:4a2146fc-34ba-48c1-9d40-e84f7a7a185d"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-26 09:10:48,429 - INFO - [host 172.27.200.200 session-id 7188] Received message from host
+2025-04-26 09:10:49,293 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-26 09:10:50,536 - INFO - Authentication (password) successful!
+2025-04-26 09:10:50,695 - INFO - [host 172.27.200.200 session 0x799247a41a90] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-26 09:10:54,651 - INFO - [host 172.27.200.200 session 0x799247a41a90] Received message from host
+2025-04-26 09:10:54,651 - INFO - [host 172.27.200.200 session-id 7228] initialized: session-id=7228 | server_capabilities=<dict_keyiterator object at 0x799247a3a7a0>
+2025-04-26 09:10:54,651 - INFO - [host 172.27.200.200 session-id 7228] Requesting 'ExecuteRpc'
+2025-04-26 09:10:54,751 - INFO - [host 172.27.200.200 session-id 7228] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:1acf7830-bd91-4e38-9b36-31551d96c883"><command format="text">file list /var/tmp/</command></nc:rpc>]]>]]>'
+2025-04-26 09:10:55,878 - INFO - [host 172.27.200.200 session-id 7228] Received message from host
+2025-04-26 09:10:55,879 - INFO - Image /var/tmp/junos-srxsme-23.4R2-S3.9.tgz found on 172.27.200.200
+2025-04-26 09:10:55,879 - INFO - [host 172.27.200.200 session-id 7228] Requesting 'CloseSession'
+2025-04-26 09:10:55,979 - INFO - [host 172.27.200.200 session-id 7228] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:b235a9ba-a15e-4c50-af4b-f77e777f07b4"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-26 09:10:55,989 - INFO - [host 172.27.200.200 session-id 7228] Received message from host
+2025-04-26 09:10:56,870 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-26 09:10:57,894 - INFO - Authentication (password) successful!
+2025-04-26 09:10:58,095 - INFO - [host 172.27.200.200 session 0x799247a42ad0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-26 09:11:02,504 - INFO - [host 172.27.200.200 session 0x799247a42ad0] Received message from host
+2025-04-26 09:11:02,505 - INFO - [host 172.27.200.200 session-id 7243] initialized: session-id=7243 | server_capabilities=<dict_keyiterator object at 0x799247a3bdd0>
+2025-04-26 09:11:02,505 - INFO - [host 172.27.200.200 session-id 7243] Requesting 'ExecuteRpc'
+2025-04-26 09:11:02,605 - INFO - [host 172.27.200.200 session-id 7243] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:2edd45ad-64a1-4fe5-b5b6-3b8402a8d3c4"><command format="text">show system processes | match package</command></nc:rpc>]]>]]>'
+2025-04-26 09:11:04,594 - INFO - [host 172.27.200.200 session-id 7243] Received message from host
+2025-04-26 09:11:04,595 - INFO - [host 172.27.200.200 session-id 7243] Requesting 'CloseSession'
+2025-04-26 09:11:04,694 - INFO - [host 172.27.200.200 session-id 7243] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:c0c8b4fc-0409-44c1-9677-f68993c5b579"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-26 09:11:04,705 - INFO - [host 172.27.200.200 session-id 7243] Received message from host
+2025-04-26 09:11:04,706 - ERROR - TypeError during software upgrade on 172.27.200.200: argument of type 'NoneType' is not iterable. Falling back to CLI method...
+2025-04-26 09:11:04,706 - WARNING - ConnectClosedError on attempt 1/3 for 172.27.200.200: ConnectClosedError(172.27.200.200)
+2025-04-26 09:11:35,593 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-26 09:11:36,602 - INFO - Authentication (password) successful!
+2025-04-26 09:11:36,780 - INFO - [host 172.27.200.200 session 0x799247a42fd0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-26 09:11:40,911 - INFO - [host 172.27.200.200 session 0x799247a42fd0] Received message from host
+2025-04-26 09:11:40,912 - INFO - [host 172.27.200.200 session-id 7278] initialized: session-id=7278 | server_capabilities=<dict_keyiterator object at 0x799247a21300>
+2025-04-26 09:11:40,912 - INFO - [host 172.27.200.200 session-id 7278] Requesting 'ExecuteRpc'
+2025-04-26 09:11:41,012 - INFO - [host 172.27.200.200 session-id 7278] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:f7343dc6-ae12-48a6-a2a6-8d9080ea1abc"><command format="text">request system software add /var/tmp/junos-srxsme-23.4R2-S3.9.tgz no-validate</command></nc:rpc>]]>]]>'
+2025-04-26 09:12:10,913 - ERROR - CLI upgrade failed on 172.27.200.200: RpcTimeoutError(host: 172.27.200.200, cmd: command, timeout: 30)
+2025-04-26 09:12:10,913 - ERROR - CLI upgrade failed on 172.27.200.200: RpcTimeoutError(host: 172.27.200.200, cmd: command, timeout: 30)
+2025-04-26 09:12:10,913 - INFO - Disconnecting from 1 connections
+2025-04-26 09:12:10,913 - INFO - [host 172.27.200.200 session-id 7278] Requesting 'CloseSession'
+2025-04-26 09:12:10,960 - INFO - [host 172.27.200.200 session-id 7278] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:316bbe12-af29-4acd-a213-d7d20cea2834"><nc:close-session/></nc:rpc>]]>]]>'
+2025-04-26 09:12:40,914 - ERROR - Failed to disconnect from 172.27.200.200: RpcTimeoutError(host: 172.27.200.200, cmd: close, timeout: 30)
+2025-04-26 09:12:40,914 - INFO - Upgrade summary: 0 successful, 1 failed
+2025-04-26 09:12:40,914 - WARNING - Code upgrade process completed with failures

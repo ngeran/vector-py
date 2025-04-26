@@ -1,14 +1,17 @@
-import os
 import logging
+import os
 import time
-from typing import List, Dict
+from typing import Dict, List
+
 from jnpr.junos import Device
+from jnpr.junos.exception import ConnectClosedError, ConnectError, RpcTimeoutError
 from jnpr.junos.utils.sw import SW
-from jnpr.junos.exception import ConnectError, RpcTimeoutError, ConnectClosedError
-from scripts.utils import load_yaml_file, save_yaml_file
+
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
+from scripts.utils import load_yaml_file, save_yaml_file
 
 logger = logging.getLogger(__name__)
+
 
 def display_vendors(vendors: List[Dict]) -> int:
     """Display a menu of vendors and return the user's choice."""
@@ -27,7 +30,9 @@ def display_vendors(vendors: List[Dict]) -> int:
             logger.info(f"Raw vendor input received: '{choice}'")
             if not choice:
                 logger.error("Empty input received")
-                print(f"Invalid choice. Please enter a number between 1 and {len(vendors)}")
+                print(
+                    f"Invalid choice. Please enter a number between 1 and {len(vendors)}"
+                )
                 retries += 1
                 continue
             choice = int(choice)
@@ -43,7 +48,9 @@ def display_vendors(vendors: List[Dict]) -> int:
             retries += 1
         except EOFError:
             logger.error("EOF received during input")
-            print(f"Input interrupted. Please enter a number between 1 and {len(vendors)}")
+            print(
+                f"Input interrupted. Please enter a number between 1 and {len(vendors)}"
+            )
             retries += 1
         except KeyboardInterrupt:
             logger.info("Vendor selection interrupted by user (Ctrl+C)")
@@ -52,6 +59,7 @@ def display_vendors(vendors: List[Dict]) -> int:
     logger.error(f"Max retries ({max_retries}) reached in display_vendors")
     print("Too many invalid attempts. Exiting.")
     return None
+
 
 def display_products(products: List[Dict]) -> int:
     """Display a menu of products and return the user's choice."""
@@ -70,7 +78,9 @@ def display_products(products: List[Dict]) -> int:
             logger.info(f"Raw product input received: '{choice}'")
             if not choice:
                 logger.error("Empty input received")
-                print(f"Invalid choice. Please enter a number between 1 and {len(products)}")
+                print(
+                    f"Invalid choice. Please enter a number between 1 and {len(products)}"
+                )
                 retries += 1
                 continue
             choice = int(choice)
@@ -78,15 +88,21 @@ def display_products(products: List[Dict]) -> int:
                 logger.info(f"Valid product choice selected: {choice}")
                 return choice - 1
             logger.error(f"Choice out of range: {choice}")
-            print(f"Invalid choice. Please enter a number between 1 and {len(products)}")
+            print(
+                f"Invalid choice. Please enter a number between 1 and {len(products)}"
+            )
             retries += 1
         except ValueError:
             logger.error(f"Non-numeric input: '{choice}'")
-            print(f"Invalid choice. Please enter a number between 1 and {len(products)}")
+            print(
+                f"Invalid choice. Please enter a number between 1 and {len(products)}"
+            )
             retries += 1
         except EOFError:
             logger.error("EOF received during input")
-            print(f"Input interrupted. Please enter a number between 1 and {len(products)}")
+            print(
+                f"Input interrupted. Please enter a number between 1 and {len(products)}"
+            )
             retries += 1
         except KeyboardInterrupt:
             logger.info("Product selection interrupted by user (Ctrl+C)")
@@ -96,9 +112,10 @@ def display_products(products: List[Dict]) -> int:
     print("Too many invalid attempts. Exiting.")
     return None
 
+
 def display_releases(product: Dict) -> Dict:
     """Display available releases for a product and return the selected release dictionary."""
-    releases = product.get('releases', [])
+    releases = product.get("releases", [])
     if not releases:
         logger.error(f"No releases found for product {product['product']}")
         print(f"Error: No releases found for product {product['product']}")
@@ -118,23 +135,33 @@ def display_releases(product: Dict) -> Dict:
             logger.info(f"Raw release input received: '{choice}'")
             if not choice:
                 logger.error("Empty input received")
-                print(f"Invalid choice. Please enter a number between 1 and {len(releases)}")
+                print(
+                    f"Invalid choice. Please enter a number between 1 and {len(releases)}"
+                )
                 retries += 1
                 continue
             choice = int(choice)
             if 1 <= choice <= len(releases):
-                logger.info(f"Valid release choice selected: {releases[choice - 1]['release']}")
+                logger.info(
+                    f"Valid release choice selected: {releases[choice - 1]['release']}"
+                )
                 return releases[choice - 1]
             logger.error(f"Choice out of range: {choice}")
-            print(f"Invalid choice. Please enter a number between 1 and {len(releases)}")
+            print(
+                f"Invalid choice. Please enter a number between 1 and {len(releases)}"
+            )
             retries += 1
         except ValueError:
             logger.error(f"Non-numeric input: '{choice}'")
-            print(f"Invalid choice. Please enter a number between 1 and {len(releases)}")
+            print(
+                f"Invalid choice. Please enter a number between 1 and {len(releases)}"
+            )
             retries += 1
         except EOFError:
             logger.error("EOF received during input")
-            print(f"Input interrupted. Please enter a number between 1 and {len(releases)}")
+            print(
+                f"Input interrupted. Please enter a number between 1 and {len(releases)}"
+            )
             retries += 1
         except KeyboardInterrupt:
             logger.info("Release selection interrupted by user (Ctrl+C)")
@@ -144,19 +171,23 @@ def display_releases(product: Dict) -> Dict:
     print("Too many invalid attempts. Exiting.")
     return None
 
+
 def get_host_ips() -> List[str]:
     """Prompt user to read hosts from upgrade_hosts.yml or enter IPs manually."""
     host_ips = []
-    upgrade_hosts_file = os.path.join(os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"), 'data/upgrade_hosts.yml')
+    upgrade_hosts_file = os.path.join(
+        os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"),
+        "data/upgrade_hosts.yml",
+    )
 
     try:
         choice = input("Read hosts from upgrade_hosts.yml? (y/n): ").strip().lower()
         logger.info(f"User chose to read from file: {choice}")
 
-        if choice == 'y' and os.path.exists(upgrade_hosts_file):
+        if choice == "y" and os.path.exists(upgrade_hosts_file):
             try:
                 hosts_data = load_yaml_file(upgrade_hosts_file)
-                host_ips = hosts_data.get('hosts', [])
+                host_ips = hosts_data.get("hosts", [])
                 logger.info(f"Loaded hosts from {upgrade_hosts_file}: {host_ips}")
                 print(f"Loaded hosts: {host_ips}")
             except Exception as e:
@@ -167,7 +198,7 @@ def get_host_ips() -> List[str]:
             ip = input("Enter a host IP (or press Enter to finish): ").strip()
             if not ip:
                 break
-            if '.' in ip and all(part.isdigit() for part in ip.split('.')):
+            if "." in ip and all(part.isdigit() for part in ip.split(".")):
                 host_ips.append(ip)
                 logger.info(f"Added host IP: {ip}")
             else:
@@ -176,7 +207,7 @@ def get_host_ips() -> List[str]:
 
         if host_ips:
             try:
-                save_yaml_file(upgrade_hosts_file, {'hosts': host_ips})
+                save_yaml_file(upgrade_hosts_file, {"hosts": host_ips})
                 logger.info(f"Saved hosts to {upgrade_hosts_file}: {host_ips}")
                 print(f"Saved hosts to {upgrade_hosts_file}")
             except Exception as e:
@@ -189,6 +220,7 @@ def get_host_ips() -> List[str]:
         print("\nProgram interrupted by user. Exiting.")
         return []
 
+
 def get_credentials() -> tuple:
     """Prompt user for username and password."""
     try:
@@ -200,6 +232,7 @@ def get_credentials() -> tuple:
         logger.info("Credential input interrupted by user (Ctrl+C)")
         print("\nProgram interrupted by user. Exiting.")
         return "", ""
+
 
 def probe_device(dev: Device, hostname: str, username: str, password: str) -> bool:
     """Probe the device to check if it's reachable and responsive."""
@@ -219,13 +252,16 @@ def probe_device(dev: Device, hostname: str, username: str, password: str) -> bo
         logger.error(f"Failed to probe {hostname}: {e}")
         return False
 
+
 def check_device_health(dev: Device, hostname: str) -> bool:
     """Check device CPU and memory usage before upgrade."""
     print(f"Checking health of {hostname}...")
     logger.info(f"Checking health of {hostname}")
     try:
         with dev:
-            result = dev.cli("show system processes extensive | match \"PID|%CPU|%MEM\"", warning=False)
+            result = dev.cli(
+                'show system processes extensive | match "PID|%CPU|%MEM"', warning=False
+            )
             logger.debug(f"Health check output for {hostname}: {result}")
             cpu_usage = None
             mem_usage = None
@@ -243,24 +279,31 @@ def check_device_health(dev: Device, hostname: str) -> bool:
                 logger.info(f"{hostname} CPU: {cpu_usage}%, Memory: {mem_usage}%")
                 print(f"{hostname} CPU: {cpu_usage}%, Memory: {mem_usage}%")
                 if cpu_usage > 80 or mem_usage > 80:
-                    logger.warning(f"High resource usage on {hostname}: CPU {cpu_usage}%, Memory {mem_usage}%")
-                    print(f"Warning: High resource usage on {hostname}. Consider rebooting.")
+                    logger.warning(
+                        f"High resource usage on {hostname}: CPU {cpu_usage}%, Memory {mem_usage}%"
+                    )
+                    print(
+                        f"Warning: High resource usage on {hostname}. Consider rebooting."
+                    )
                     return False
                 return True
             else:
                 logger.warning(f"Could not parse resource usage on {hostname}")
-                print(f"Warning: Could not parse resource usage on {hostname}. Proceeding with caution.")
+                print(
+                    f"Warning: Could not parse resource usage on {hostname}. Proceeding with caution."
+                )
                 return True
     except Exception as e:
         logger.error(f"Failed to check health on {hostname}: {e}")
         print(f"Error checking health on {hostname}: {e}. Proceeding with caution.")
         return True
 
+
 def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
     """Check if the upgrade image exists on the device."""
     try:
         with dev:
-            image_name = image_path.split('/')[-1]
+            image_name = image_path.split("/")[-1]
             result = dev.cli("file list /var/tmp/", warning=False)
             if image_name in result.split():
                 logger.info(f"Image {image_path} found on {hostname}")
@@ -275,30 +318,41 @@ def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
         print(f"Error checking image on {hostname}: {e}")
         return False
 
+
 def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
     """Check if there is a pending or active install on the device."""
     logger.debug(f"Starting pending install check on {hostname}")
     try:
         with dev:
             dev.timeout = 30
-            logger.debug(f"Executing 'show system processes | match package' on {hostname}")
+            logger.debug(
+                f"Executing 'show system processes | match package' on {hostname}"
+            )
             result = dev.cli("show system processes | match package", warning=False)
             logger.debug(f"Process check result on {hostname}: {result}")
             if "package -X update" in result:
                 logger.error(f"Active install process detected on {hostname}")
                 print(f"Error: Active install process detected on {hostname}.")
-                choice = input("Resolve pending install? (1: Reboot, 2: Rollback, 3: Skip): ").strip()
+                choice = input(
+                    "Resolve pending install? (1: Reboot, 2: Rollback, 3: Skip): "
+                ).strip()
                 logger.info(f"User chose pending install action: {choice}")
-                if choice == '1':
+                if choice == "1":
                     print(f"Initiating reboot on {hostname}...")
                     dev.cli("request system reboot", warning=False)
-                    logger.info(f"Reboot initiated on {hostname} to resolve pending install")
-                    print(f"Please wait 5-10 minutes for {hostname} to reboot, then rerun the script.")
+                    logger.info(
+                        f"Reboot initiated on {hostname} to resolve pending install"
+                    )
+                    print(
+                        f"Please wait 5-10 minutes for {hostname} to reboot, then rerun the script."
+                    )
                     return True
-                elif choice == '2':
+                elif choice == "2":
                     print(f"Initiating rollback on {hostname}...")
                     dev.cli("request system software rollback", warning=False)
-                    logger.info(f"Rollback initiated on {hostname} to resolve pending install")
+                    logger.info(
+                        f"Rollback initiated on {hostname} to resolve pending install"
+                    )
                     print(f"Rollback completed on {hostname}. Proceeding with upgrade.")
                     return False
                 else:
@@ -308,17 +362,25 @@ def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
             logger.debug(f"No active install process detected on {hostname}")
             return False
     except RpcTimeoutError as e:
-        logger.warning(f"Timeout checking pending install on {hostname}: {e}. Assuming active install.")
-        print(f"Warning: Timeout checking pending install on {hostname}: {e}. Assuming active install.")
-        choice = input("Resolve pending install? (1: Reboot, 2: Rollback, 3: Skip): ").strip()
+        logger.warning(
+            f"Timeout checking pending install on {hostname}: {e}. Assuming active install."
+        )
+        print(
+            f"Warning: Timeout checking pending install on {hostname}: {e}. Assuming active install."
+        )
+        choice = input(
+            "Resolve pending install? (1: Reboot, 2: Rollback, 3: Skip): "
+        ).strip()
         logger.info(f"User chose pending install action: {choice}")
-        if choice == '1':
+        if choice == "1":
             print(f"Initiating reboot on {hostname}...")
             dev.cli("request system reboot", warning=False)
             logger.info(f"Reboot initiated on {hostname} to resolve pending install")
-            print(f"Please wait 5-10 minutes for {hostname} to reboot, then rerun the script.")
+            print(
+                f"Please wait 5-10 minutes for {hostname} to reboot, then rerun the script."
+            )
             return True
-        elif choice == '2':
+        elif choice == "2":
             print(f"Initiating rollback on {hostname}...")
             dev.cli("request system software rollback", warning=False)
             logger.info(f"Rollback initiated on {hostname} to resolve pending install")
@@ -329,28 +391,44 @@ def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
             print(f"Skipping upgrade for {hostname} due to pending install.")
             return True
     except Exception as e:
-        logger.warning(f"Could not check pending install on {hostname}: {e}. Proceeding with caution.")
-        print(f"Warning: Could not check pending install on {hostname}: {e}. Proceeding with caution.")
+        logger.warning(
+            f"Could not check pending install on {hostname}: {e}. Proceeding with caution."
+        )
+        print(
+            f"Warning: Could not check pending install on {hostname}: {e}. Proceeding with caution."
+        )
         return False
+
 
 def progress_callback(dev: Device, report: str) -> None:
     """Callback function to report progress during software installation."""
     logger.info(f"Progress on {dev.hostname}: {report}")
     print(f"Progress on {dev.hostname}: {report}")
 
-def attempt_cli_upgrade(dev: Device, image_path: str, hostname: str, max_retries: int = 3) -> tuple:
+
+def attempt_cli_upgrade(
+    dev: Device, image_path: str, hostname: str, max_retries: int = 3
+) -> tuple:
     """Attempt CLI upgrade with retries for connection issues."""
     for attempt in range(max_retries):
         try:
-            logger.debug(f"CLI upgrade attempt {attempt + 1}/{max_retries} on {hostname}")
-            result = dev.cli(f"request system software add {image_path} no-validate", warning=False)
+            logger.debug(
+                f"CLI upgrade attempt {attempt + 1}/{max_retries} on {hostname}"
+            )
+            result = dev.cli(
+                f"request system software add {image_path} no-validate", warning=False
+            )
             logger.debug(f"CLI upgrade result on {hostname}: {result}")
             if "error" in result.lower() or "failed" in result.lower():
                 return False, result
             return True, result
         except ConnectClosedError as e:
-            logger.warning(f"ConnectClosedError on attempt {attempt + 1}/{max_retries} for {hostname}: {e}")
-            print(f"Warning: Connection closed on attempt {attempt + 1}/{max_retries} for {hostname}. Retrying...")
+            logger.warning(
+                f"ConnectClosedError on attempt {attempt + 1}/{max_retries} for {hostname}: {e}"
+            )
+            print(
+                f"Warning: Connection closed on attempt {attempt + 1}/{max_retries} for {hostname}. Retrying..."
+            )
             if attempt < max_retries - 1:
                 time.sleep(30)
                 try:
@@ -367,6 +445,7 @@ def attempt_cli_upgrade(dev: Device, image_path: str, hostname: str, max_retries
             return False, str(e)
     return False, "Max retries reached for CLI upgrade"
 
+
 def code_upgrade():
     """Perform code upgrade on selected devices with probing and user messages."""
     upgrade_status = []
@@ -375,13 +454,16 @@ def code_upgrade():
         print("Starting code upgrade process...")
 
         # Load upgrade_data.yml
-        upgrade_data_file = os.path.join(os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"), 'data/upgrade_data.yml')
+        upgrade_data_file = os.path.join(
+            os.getenv("VECTOR_PY_DIR", "/home/nikos/github/ngeran/vector-py"),
+            "data/upgrade_data.yml",
+        )
         upgrade_data = load_yaml_file(upgrade_data_file)
         if not upgrade_data:
             logger.error("Failed to load upgrade_data.yml")
             print("Error: Failed to load upgrade_data.yml")
             return
-        vendors = upgrade_data.get('products', [])
+        vendors = upgrade_data.get("products", [])
         logger.info(f"Loaded vendors: {[v['vendor-name'] for v in vendors]}")
 
         # Display vendor menu
@@ -395,7 +477,7 @@ def code_upgrade():
 
         # Aggregate products from switches, firewalls, and routers
         products = []
-        for device_type in ['switches', 'firewalls', 'routers']:
+        for device_type in ["switches", "firewalls", "routers"]:
             products.extend(selected_vendor.get(device_type, []))
         logger.info(f"Loaded products: {[p['product'] for p in products]}")
 
@@ -443,27 +525,31 @@ def code_upgrade():
 
         # Perform upgrade
         image_path = f"/var/tmp/{selected_release['os']}"
-        target_version = selected_release['release']
+        target_version = selected_release["release"]
         for dev in connections:
             hostname = dev.hostname
-            status = {'hostname': hostname, 'success': False, 'error': None}
+            status = {"hostname": hostname, "success": False, "error": None}
             try:
                 # Increase command timeout
                 dev.timeout = 600
 
                 # Probe device before upgrade
                 if not probe_device(dev, hostname, username, password):
-                    logger.error(f"Skipping upgrade for {hostname} due to probe failure")
+                    logger.error(
+                        f"Skipping upgrade for {hostname} due to probe failure"
+                    )
                     print(f"Skipping upgrade for {hostname} due to probe failure")
-                    status['error'] = "Probe failure"
+                    status["error"] = "Probe failure"
                     upgrade_status.append(status)
                     continue
 
                 # Check device health
                 if not check_device_health(dev, hostname):
-                    logger.error(f"Skipping upgrade for {hostname} due to high resource usage")
+                    logger.error(
+                        f"Skipping upgrade for {hostname} due to high resource usage"
+                    )
                     print(f"Skipping upgrade for {hostname} due to high resource usage")
-                    status['error'] = "High resource usage"
+                    status["error"] = "High resource usage"
                     upgrade_status.append(status)
                     continue
 
@@ -475,64 +561,106 @@ def code_upgrade():
                         current_version = None
                         for line in version_output.splitlines():
                             if "JUNOS Software Release" in line:
-                                current_version = line.split('[')[-1].strip(']').strip()
+                                current_version = line.split("[")[-1].strip("]").strip()
                                 break
                         if current_version:
-                            logger.info(f"Current Junos version on {hostname}: {current_version}")
-                            print(f"Current Junos version on {hostname}: {current_version}")
+                            logger.info(
+                                f"Current Junos version on {hostname}: {current_version}"
+                            )
+                            print(
+                                f"Current Junos version on {hostname}: {current_version}"
+                            )
                             if current_version == target_version:
-                                logger.info(f"{hostname} already on target version {target_version}. Skipping upgrade.")
-                                print(f"{hostname} already on target version {target_version}. Skipping upgrade.")
-                                status['success'] = True
+                                logger.info(
+                                    f"{hostname} already on target version {target_version}. Skipping upgrade."
+                                )
+                                print(
+                                    f"{hostname} already on target version {target_version}. Skipping upgrade."
+                                )
+                                status["success"] = True
                                 upgrade_status.append(status)
                                 continue
                             # Warn about potential downgrade
-                            current_parts = [int(x) if x.isdigit() else x for x in current_version.replace('-', '.').split('.')]
-                            target_parts = [int(x) if x.isdigit() else x for x in target_version.replace('-', '.').split('.')]
+                            current_parts = [
+                                int(x) if x.isdigit() else x
+                                for x in current_version.replace("-", ".").split(".")
+                            ]
+                            target_parts = [
+                                int(x) if x.isdigit() else x
+                                for x in target_version.replace("-", ".").split(".")
+                            ]
                             if current_parts > target_parts:
-                                logger.warning(f"Selected version {target_version} is older than current {current_version} on {hostname}")
-                                print(f"Warning: Selected version {target_version} is older than current {current_version} on {hostname}.")
-                                choice = input("Proceed with downgrade? (y/n): ").strip().lower()
-                                if choice != 'y':
-                                    logger.info(f"User chose to skip downgrade on {hostname}")
-                                    print(f"Skipping upgrade for {hostname} to avoid downgrade.")
-                                    status['success'] = True
+                                logger.warning(
+                                    f"Selected version {target_version} is older than current {current_version} on {hostname}"
+                                )
+                                print(
+                                    f"Warning: Selected version {target_version} is older than current {current_version} on {hostname}."
+                                )
+                                choice = (
+                                    input("Proceed with downgrade? (y/n): ")
+                                    .strip()
+                                    .lower()
+                                )
+                                if choice != "y":
+                                    logger.info(
+                                        f"User chose to skip downgrade on {hostname}"
+                                    )
+                                    print(
+                                        f"Skipping upgrade for {hostname} to avoid downgrade."
+                                    )
+                                    status["success"] = True
                                     upgrade_status.append(status)
                                     continue
                         else:
-                            logger.warning(f"Could not determine Junos version on {hostname}")
-                            print(f"Warning: Could not determine Junos version on {hostname}")
+                            logger.warning(
+                                f"Could not determine Junos version on {hostname}"
+                            )
+                            print(
+                                f"Warning: Could not determine Junos version on {hostname}"
+                            )
                 except Exception as e:
-                    logger.warning(f"Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
-                    print(f"Warning: Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
+                    logger.warning(
+                        f"Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade."
+                    )
+                    print(
+                        f"Warning: Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade."
+                    )
 
                 # Check if image exists
                 if not check_image_exists(dev, image_path, hostname):
-                    logger.error(f"Skipping upgrade for {hostname} due to missing image")
+                    logger.error(
+                        f"Skipping upgrade for {hostname} due to missing image"
+                    )
                     print(f"Skipping upgrade for {hostname} due to missing image")
-                    status['error'] = "Missing image"
+                    status["error"] = "Missing image"
                     upgrade_status.append(status)
                     continue
 
                 # Check for pending install
                 if check_pending_install(dev, image_path, hostname):
-                    logger.error(f"Skipping upgrade for {hostname} due to unresolved pending install")
-                    status['error'] = "Pending install"
+                    logger.error(
+                        f"Skipping upgrade for {hostname} due to unresolved pending install"
+                    )
+                    status["error"] = "Pending install"
                     upgrade_status.append(status)
                     continue
 
                 # Perform upgrade using SW class
-                logger.debug(f"Starting software upgrade on {hostname} with image {image_path}")
+                logger.debug(
+                    f"Starting software upgrade on {hostname} with image {image_path}"
+                )
                 print(f"Installing upgrade on {hostname} with image {image_path}...")
                 try:
                     sw = SW(dev)
-                    logger.debug(f"SW.install parameters: package={image_path}, validate=False, no_copy=True, timeout=900")
+                    logger.debug(
+                        f"SW.install parameters: package={image_path}, validate=False, no_copy=True, timeout=900"
+                    )
                     ok = sw.install(
                         package=image_path,
-                        validate=False,
+                        validate=True,
                         no_copy=True,
                         progress=progress_callback,
-                        timeout=900
+                        timeout=900,
                     )
                     logger.debug(f"Software install result on {hostname}: {ok}")
                     if not ok:
@@ -540,8 +668,12 @@ def code_upgrade():
                     logger.info(f"Software upgrade completed on {hostname}")
                     print(f"Software upgrade completed on {hostname}")
                 except TypeError as e:
-                    logger.error(f"TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method...")
-                    print(f"Error: TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method...")
+                    logger.error(
+                        f"TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method..."
+                    )
+                    print(
+                        f"Error: TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method..."
+                    )
                     try:
                         # Attempt CLI upgrade with retries
                         success, result = attempt_cli_upgrade(dev, image_path, hostname)
@@ -549,22 +681,42 @@ def code_upgrade():
                             if "Could not format alternate root" in result:
                                 logger.error(f"Storage failure on {hostname}: {result}")
                                 print(f"Error: Storage failure on {hostname}: {result}")
-                                print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
-                                status['error'] = "Storage failure: Could not format alternate root"
+                                print(
+                                    "Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support."
+                                )
+                                status["error"] = (
+                                    "Storage failure: Could not format alternate root"
+                                )
                             elif "Not enough space in /var" in result:
-                                logger.error(f"Insufficient disk space in /var on {hostname}: {result}")
-                                print(f"Error: Insufficient disk space in /var on {hostname}: {result}")
-                                print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
-                                status['error'] = "Insufficient disk space in /var"
+                                logger.error(
+                                    f"Insufficient disk space in /var on {hostname}: {result}"
+                                )
+                                print(
+                                    f"Error: Insufficient disk space in /var on {hostname}: {result}"
+                                )
+                                print(
+                                    "Recommendation: Run 'request system storage cleanup' or manually remove files from /var."
+                                )
+                                status["error"] = "Insufficient disk space in /var"
                             elif "Another package installation in progress" in result:
-                                logger.error(f"Active install in progress on {hostname}: {result}")
-                                print(f"Error: Active install in progress on {hostname}: {result}")
-                                print("Recommendation: Reboot the device or wait for the current install to complete.")
-                                status['error'] = "Active install in progress"
+                                logger.error(
+                                    f"Active install in progress on {hostname}: {result}"
+                                )
+                                print(
+                                    f"Error: Active install in progress on {hostname}: {result}"
+                                )
+                                print(
+                                    "Recommendation: Reboot the device or wait for the current install to complete."
+                                )
+                                status["error"] = "Active install in progress"
                             else:
-                                logger.error(f"CLI upgrade failed on {hostname}: {result}")
-                                print(f"Error: CLI upgrade failed on {hostname}: {result}")
-                                status['error'] = f"CLI upgrade failed: {result}"
+                                logger.error(
+                                    f"CLI upgrade failed on {hostname}: {result}"
+                                )
+                                print(
+                                    f"Error: CLI upgrade failed on {hostname}: {result}"
+                                )
+                                status["error"] = f"CLI upgrade failed: {result}"
                             upgrade_status.append(status)
                             continue
                         logger.info(f"CLI software upgrade completed on {hostname}")
@@ -574,22 +726,30 @@ def code_upgrade():
                         print(f"Error: CLI upgrade failed on {hostname}: {cli_e}")
                         error_msg = str(cli_e)
                         if "Could not format alternate root" in error_msg:
-                            print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
-                            status['error'] = "Storage failure: Could not format alternate root"
+                            print(
+                                "Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support."
+                            )
+                            status["error"] = (
+                                "Storage failure: Could not format alternate root"
+                            )
                         elif "Not enough space in /var" in error_msg:
-                            print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
-                            status['error'] = "Insufficient disk space in /var"
+                            print(
+                                "Recommendation: Run 'request system storage cleanup' or manually remove files from /var."
+                            )
+                            status["error"] = "Insufficient disk space in /var"
                         elif "Another package installation in progress" in error_msg:
-                            print("Recommendation: Reboot the device or wait for the current install to complete.")
-                            status['error'] = "Active install in progress"
+                            print(
+                                "Recommendation: Reboot the device or wait for the current install to complete."
+                            )
+                            status["error"] = "Active install in progress"
                         else:
-                            status['error'] = f"CLI upgrade failed: {cli_e}"
+                            status["error"] = f"CLI upgrade failed: {cli_e}"
                         upgrade_status.append(status)
                         continue
                 except RpcTimeoutError as e:
                     logger.error(f"Timeout during software upgrade on {hostname}: {e}")
                     print(f"Error: Timeout during software upgrade on {hostname}: {e}")
-                    status['error'] = f"Timeout: {e}"
+                    status["error"] = f"Timeout: {e}"
                     upgrade_status.append(status)
                     continue
                 except Exception as e:
@@ -597,16 +757,24 @@ def code_upgrade():
                     print(f"Error: Software upgrade failed on {hostname}: {e}")
                     error_msg = str(e)
                     if "Could not format alternate root" in error_msg:
-                        print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
-                        status['error'] = "Storage failure: Could not format alternate root"
+                        print(
+                            "Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support."
+                        )
+                        status["error"] = (
+                            "Storage failure: Could not format alternate root"
+                        )
                     elif "Not enough space in /var" in error_msg:
-                        print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
-                        status['error'] = "Insufficient disk space in /var"
+                        print(
+                            "Recommendation: Run 'request system storage cleanup' or manually remove files from /var."
+                        )
+                        status["error"] = "Insufficient disk space in /var"
                     elif "Another package installation in progress" in error_msg:
-                        print("Recommendation: Reboot the device or wait for the current install to complete.")
-                        status['error'] = "Active install in progress"
+                        print(
+                            "Recommendation: Reboot the device or wait for the current install to complete."
+                        )
+                        status["error"] = "Active install in progress"
                     else:
-                        status['error'] = str(e)
+                        status["error"] = str(e)
                     upgrade_status.append(status)
                     continue
 
@@ -619,7 +787,7 @@ def code_upgrade():
                 except Exception as e:
                     logger.error(f"Reboot failed on {hostname}: {e}")
                     print(f"Reboot failed on {hostname}: {e}")
-                    status['error'] = f"Reboot failed: {e}"
+                    status["error"] = f"Reboot failed: {e}"
                     upgrade_status.append(status)
                     continue
 
@@ -636,13 +804,19 @@ def code_upgrade():
                         print(f"Reconnected to {hostname} after reboot")
                         break
                     except ConnectError as e:
-                        logger.warning(f"Reconnect attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}")
-                        print(f"Reconnect attempt {attempt + 1}/{max_attempts} failed for {hostname}. Retrying...")
+                        logger.warning(
+                            f"Reconnect attempt {attempt + 1}/{max_attempts} failed for {hostname}: {e}"
+                        )
+                        print(
+                            f"Reconnect attempt {attempt + 1}/{max_attempts} failed for {hostname}. Retrying..."
+                        )
                         time.sleep(60)
                 else:
-                    logger.error(f"Failed to reconnect to {hostname} after {max_attempts} attempts")
+                    logger.error(
+                        f"Failed to reconnect to {hostname} after {max_attempts} attempts"
+                    )
                     print(f"Error: Failed to reconnect to {hostname} after reboot")
-                    status['error'] = "Reconnect failure"
+                    status["error"] = "Reconnect failure"
                     upgrade_status.append(status)
                     continue
 
@@ -650,26 +824,28 @@ def code_upgrade():
                 if probe_device(dev, hostname, username, password):
                     logger.info(f"Post-upgrade probe successful for {hostname}")
                     print(f"Upgrade and reboot completed successfully for {hostname}")
-                    status['success'] = True
+                    status["success"] = True
                     upgrade_status.append(status)
                 else:
                     logger.error(f"Post-upgrade probe failed for {hostname}")
                     print(f"Warning: Post-upgrade probe failed for {hostname}")
-                    status['error'] = "Post-upgrade probe failure"
+                    status["error"] = "Post-upgrade probe failure"
                     upgrade_status.append(status)
 
             except Exception as e:
                 logger.error(f"Error upgrading {hostname}: {e}")
                 print(f"Error upgrading {hostname}: {e}")
-                status['error'] = str(e)
+                status["error"] = str(e)
                 upgrade_status.append(status)
 
         disconnect_from_hosts(connections)
 
         # Summarize upgrade status
-        successful = [s for s in upgrade_status if s['success']]
-        failed = [s for s in upgrade_status if not s['success']]
-        logger.info(f"Upgrade summary: {len(successful)} successful, {len(failed)} failed")
+        successful = [s for s in upgrade_status if s["success"]]
+        failed = [s for s in upgrade_status if not s["success"]]
+        logger.info(
+            f"Upgrade summary: {len(successful)} successful, {len(failed)} failed"
+        )
         print("\nUpgrade Summary:")
         print(f"Successful: {len(successful)} device(s)")
         for s in successful:

@@ -1,329 +1,430 @@
-Vector-Py: Juniper Network Automation Toolkit
-vector-py is a Python-based automation toolkit for managing Juniper Networks devices (SRX, EX, MX, ACX). It provides a menu-driven interface to perform tasks such as pinging hosts, configuring interfaces, monitoring routing tables, and upgrading device software. The toolkit uses junos-eznc (PyEZ) for device interactions and supports both local execution and GitHub integration.
-This README focuses on the Code Upgrade feature, which automates software upgrades for Juniper devices, ensuring reliable installation, validation, and version verification with robust fallback mechanisms.
-Features
+```markdown
+# Step-by-Step Guide to Using the Code Upgrade Script
 
-Menu-Driven Interface: Select vendors, products, and software releases interactively.
-Automated Upgrades: Installs and validates Juniper Junos software with automatic reboot and version verification.
-Robust Version Verification:
-Uses dev.facts['version'] from PyEZ for reliable version retrieval.
-Falls back to ssh <username>@<device-ip> "show version" if PyEZ fails.
+This guide provides detailed instructions for using the `code_upgrade.py` script to upgrade or downgrade the Junos OS on Juniper devices, such as the SRX320 or SRX210H. The script is located in the `/home/nikos/github/ngeran/vector-py` repository and automates the process of selecting a vendor, product, release, and target devices, then performing the software installation, reboot, and version verification.
 
+## Prerequisites
 
-Device Probing: Waits for devices to become available post-reboot using ping-based probing (60-second intervals).
-Robust Error Handling: Handles connection issues, RPC errors, and transient SSH failures with retries.
-Logging: Detailed logs for debugging, stored in network_automation.log.
-GitHub Integration: Option to push changes to a GitHub repository.
+Before starting, ensure the following are in place:
 
-Prerequisites
+1. **Environment Setup**:
+   - The script is located in `/home/nikos/github/ngeran/vector-py/scripts/code_upgrade.py`.
+   - The repository contains:
+     - `data/upgrade_data.yml`: Defines vendors, products, and available releases.
+     - `data/upgrade_hosts.yml`: Stores host IPs (optional).
+     - `network-automation-launcher/launcher.py`: The entry point for running the script.
+   - Verify the repository:
+     ```bash
+     cd /home/nikos/github/ngeran/vector-py
+     ls -l scripts/code_upgrade.py data/upgrade_data.yml network-automation-launcher/launcher.py
+     ```
 
-System:
-Linux (e.g., Ubuntu/Debian) with Python 3.7+.
-ping utility (sudo apt-get install iputils-ping).
-SSH client installed (openssh-client).
+2. **Dependencies**:
+   - Install required Python packages:
+     ```bash
+     pip install junos-eznc pyyaml
+     ```
+   - Verify:
+     ```bash
+     pip show junos-eznc pyyaml
+     ```
+   - Ensure `python3` is installed:
+     ```bash
+     python3 --version
+     ```
 
+3. **Device Preparation**:
+   - Ensure the target device (e.g., SRX320 at `172.27.200.200`) is reachable:
+     ```bash
+     ping -c 4 172.27.200.200
+     ```
+   - Verify SSH access:
+     ```bash
+     ssh admin@172.27.200.200 "show version"
+     ```
+     - Default credentials: `username: admin`, `password: manolis1`.
+   - The upgrade image (e.g., `junos-srxsme-23.4R2-S3.9.tgz`) must be in `/var/tmp` on the device:
+     ```bash
+     ssh admin@172.27.200.200 "file list /var/tmp"
+     ```
+     If missing, upload it:
+     ```bash
+     scp /path/to/junos-srxsme-23.4R2-S3.9.tgz admin@172.27.200.200:/var/tmp/
+     ```
+   - Check available storage:
+     ```bash
+     ssh admin@172.27.200.200 "show system storage"
+     ```
+     Ensure `/cf/var` has at least 500 MB free.
 
-Python Packages:pip install jnpr.junos pyyaml
+4. **Network Access**:
+   - The host running the script must have SSH access to the target device(s).
+   - Ensure no firewall rules block SSH (port 22) or Netconf (port 830).
 
+5. **Git Repository**:
+   - Ensure the repository is up to date:
+     ```bash
+     cd /home/nikos/github/ngeran/vector-py
+     git pull origin main
+     ```
 
-Juniper Devices:
-SSH enabled with credentials (username/password).
-Sufficient storage on /cf/var or /var/tmp (e.g., >500 MB for SRX320, >100 MB for SRX210H).
-Upgrade images (e.g., junos-srxsme-23.4R2-S3.9.tgz) pre-uploaded to /var/tmp.
+## Step-by-Step Instructions
 
+### Step 1: Navigate to the Repository
+Change to the project directory:
+```bash
+cd /home/nikos/github/ngeran/vector-py
+```
 
-Repository Setup:
-Clone the repository:git clone https://github.com/ngeran/vector-py.git
-cd vector-py
+### Step 2: Clear Python Cache
+Remove any cached Python files to avoid conflicts:
+```bash
+find /home/nikos/github/ngeran/vector-py -name '*.pyc' -delete
+rm -rf /home/nikos/github/ngeran/vector-py/scripts/__pycache__
+rm -rf /home/nikos/github/ngeran/vector-py/network-automation-launcher/__pycache__
+```
 
+### Step 3: Verify Script Syntax
+Ensure the script has no syntax errors:
+```bash
+python -m py_compile /home/nikos/github/ngeran/vector-py/scripts/code_upgrade.py
+```
+If errors occur, view details:
+```bash
+python -m py_compile /home/nikos/github/ngeran/vector-py/scripts/code_upgrade.py 2>&1
+```
+Fix any issues in `scripts/code_upgrade.py` using a text editor (e.g., `nvim`).
 
-Ensure data/upgrade_data.yml and data/upgrade_hosts.yml are configured (see Configuration).
+### Step 4: Verify `upgrade_data.yml`
+Check that the `upgrade_data.yml` file contains the correct product and release information:
+```bash
+cat /home/nikos/github/ngeran/vector-py/data/upgrade_data.yml
+```
+Example entry for SRX320:
+```yaml
+- vendor-name: JUNIPER
+  firewalls:
+    - product: SRX320
+      releases:
+        - release: 23.4R2-S3.9
+          os: junos-srxsme-23.4R2-S3.9.tgz
+        - release: 24.2R1-S2.5
+          os: junos-srxsme-24.2R1-S2.5.tgz
+```
+If the desired release or image is missing, edit the file:
+```bash
+nvim /home/nikos/github/ngeran/vector-py/data/upgrade_data.yml
+```
+Save changes:
+```vim
+:wq
+```
 
+### Step 5: Run the Script
+Launch the script using the launcher:
+```bash
+python network-automation-launcher/launcher.py
+```
 
+### Step 6: Select Options
+Follow the prompts to configure the upgrade:
 
-Installation
+1. **Select Action**:
+   ```
+   Select an action:
+   ----------------------------------------
+   | Option | Action                  |
+   ----------------------------------------
+   | 1      | Ping Hosts             |
+   | 2      | Configure Interfaces   |
+   | 3      | Monitor Routing Tables |
+   | 4      | Code Upgrade           |
+   ----------------------------------------
+   Enter your choice (1-4):
+   ```
+   - Enter: `4` (Code Upgrade).
 
-Clone the Repository:git clone https://github.com/ngeran/vector-py.git
-cd vector-py
+2. **Choose Execution Mode**:
+   ```
+   Choose execution mode:
+   1. Execute locally
+   2. Push to GitHub
+   Enter your choice (1-2):
+   ```
+   - Enter: `1` (Execute locally).
 
+3. **Select Vendor**:
+   ```
+   Select a vendor:
+   ----------------------------------------
+   | Option | Vendor                  |
+   ----------------------------------------
+   | 1      | JUNIPER                |
+   ----------------------------------------
+   Select a vendor (1-1):
+   ```
+   - Enter: `1` (JUNIPER).
 
-Install Dependencies:pip install jnpr.junos pyyaml
-sudo apt-get install iputils-ping openssh-client
+4. **Select Product**:
+   ```
+   Select a product:
+   ----------------------------------------
+   | Option | Product                 |
+   ----------------------------------------
+   | 1      | EX4600                 |
+   | 2      | EX4400                 |
+   | 3      | SRX320                 |
+   | 4      | SRX210H                |
+   | 5      | MX-SERIES              |
+   | 6      | ACX                    |
+   ----------------------------------------
+   Select a product (1-6):
+   ```
+   - Enter: `3` (SRX320) or `4` (SRX210H), depending on the target device.
 
+5. **Select Release**:
+   ```
+   Available releases:
+   ----------------------------------------
+   | Option | Release                 |
+   ----------------------------------------
+   | 1      | 23.4R2-S3              |
+   | 2      | 23.4R2-S4              |
+   | 3      | 24.2R1-S2              |
+   ----------------------------------------
+   Select a release (1-3):
+   ```
+   - Enter: `1` (23.4R2-S3) or another release as needed.
+   - Note: The script matches sub-releases (e.g., `23.4R2-S3.9` matches `23.4R2-S3`).
 
-Set Environment Variable:export VECTOR_PY_DIR=$PWD
+6. **Specify Hosts**:
+   ```
+   Read hosts from upgrade_hosts.yml? (y/n):
+   ```
+   - Enter: `n` (to manually enter IPs) or `y` (to load from `upgrade_hosts.yml`).
+   - If `n`, enter IPs:
+     ```
+     Enter a host IP (or press Enter to finish): 172.27.200.200
+     Enter a host IP (or press Enter to finish):
+     ```
+     - Press Enter when done.
+   - The script saves IPs to `upgrade_hosts.yml`.
 
-Add to ~/.bashrc for persistence:echo "export VECTOR_PY_DIR=$PWD" >> ~/.bashrc
-source ~/.bashrc
+7. **Enter Credentials**:
+   ```
+   Username: admin
+   Password: manolis1
+   ```
 
+### Step 7: Monitor the Upgrade Process
+The script will:
+1. Connect to the device(s):
+   ```
+   Connecting to devices...
+   ✅ Successfully logged in to 172.27.200.200
+   ```
+2. Check for the image:
+   ```
+   ✅ Image /var/tmp/junos-srxsme-23.4R2-S3.9.tgz found on 172.27.200.200
+   ```
+3. Verify the current version and warn about downgrades:
+   ```
+   Checking current version on 172.27.200.200...
+   ✅ Current Junos version on 172.27.200.200: 24.2R1-S2.5
+   ⚠️ Warning: Selected version 23.4R2-S3 is older than current 24.2R1-S2.5 on 172.27.200.200.
+   Proceed with downgrade? (y/n): y
+   ```
+   - Enter: `y` to proceed with a downgrade, or `n` to skip.
+4. Install the software:
+   ```
+   Installing software with validation (no reboot) on 172.27.200.200...
+   ✅ Installation validated successfully. Rebooting...
+   ✅ Reboot initiated on 172.27.200.200
+   ```
+5. Wait for the device to reboot and become reachable:
+   ```
+   Device 172.27.200.200 is rebooting. Waiting for availability...
+   Probing 172.27.200.200 for availability post-reboot...
+   ✅ 172.27.200.200 is reachable and PyEZ connection is up
+   ```
+6. Verify the version:
+   ```
+   Attempting to verify version on 172.27.200.200 against target '23.4R2-S3'...
+   ✅ Version on 172.27.200.200: 23.4R2-S3.9 (via facts)
+   ✅ Version 23.4R2-S3.9 matches target 23.4R2-S3.
+   ✅ Upgrade successful on 172.27.200.200. Version: 23.4R2-S3.9
+   ```
+7. Display the summary:
+   ```
+   Upgrade Summary:
+   Successful: 1 device(s)
+     - 172.27.200.200
+   Failed: 0 device(s)
+   Code upgrade process completed successfully.
+   ```
 
-Verify Setup:python -m py_compile network-automation-launcher/launcher.py
-python -m py_compile scripts/code_upgrade.py
-
-
-
-Configuration
-
-upgrade_data.yml:
-Located in data/upgrade_data.yml.
-Defines vendors, products, and releases. Example:products:
-  - vendor-name: JUNIPER
-    switches:
-      - product: EX4600
-        releases:
-          - release: 23.4R2-S3
-            os: junos-ex-23.4R2-S3.9.tgz
-      - product: EX4400
-        releases:
-          - release: 23.4R2-S3
-            os: junos-ex-23.4R2-S3.9.tgz
-    firewalls:
-      - product: SRX320
-        releases:
-          - release: 23.4R2-S3
-            os: junos-srxsme-23.4R2-S3.9.tgz
-          - release: 23.4R2-S4
-            os: junos-srxsme-23.4R2-S4.2.tgz
-          - release: 24.2R1-S2
-            os: junos-srxsme-24.2R1-S2.5.tgz
-      - product: SRX210H
-        releases:
-          - release: 12.1X46-D86
-            os: junos-srxsme-12.1X46-D86-domestic.tgz
-    routers:
-      - product: MX-SERIES
-        releases:
-          - release: 23.4R2-S3
-            os: junos-mx-23.4R2-S3.9.tgz
-      - product: ACX
-        releases:
-          - release: 23.4R2-S3
-            os: junos-acx-23.4R2-S3.9.tgz
-
-
-Add new products or releases as needed.
-
-
-upgrade_hosts.yml:
-Located in data/upgrade_hosts.yml.
-Stores target device IPs. Example:hosts:
-  - 172.27.200.200
-  - 172.27.200.201
-
-
-Updated automatically when entering IPs manually.
-
-
-
-Usage
-Preparing Devices
-
-Verify Device Storage:ssh admin@<device-ip>
-show system storage
-df -k /cf/var /var/tmp
-
-
-Ensure sufficient space (e.g., >500 MB for SRX320, >100 MB for SRX210H).
-Clean up if needed:request system storage cleanup
-start shell user root
-rm -rf /cf/var/log/*.gz
-rm -rf /cf/var/tmp/*.tgz  # Keep target image
-find /cf/var/log -type f -name "*.log" -exec rm -f {} \;
-df -k /cf/var
-
-
-
-
-Upload Upgrade Image:
-Transfer the image to /var/tmp:scp junos-srxsme-23.4R2-S3.9.tgz admin@<device-ip>:/var/tmp/
-
-
-Verify:ssh admin@<device-ip> "file list /var/tmp"
-file checksum md5 /var/tmp/junos-srxsme-23.4R2-S3.9.tgz
-
-
-
-
-Check Device Health:ssh admin@<device-ip>
+### Step 8: Post-Upgrade Verification
+Verify the device’s stability:
+```bash
+ssh admin@172.27.200.200
 show system alarms
+show system storage
+show version
 show system processes extensive | match "PID|%CPU|%MEM"
 start shell user root
 ls -lh /var/run/pkg.active
-rm -f /var/run/pkg.active  # If exists
 exit
+file show /var/log/software_install_status.log
+```
+Expected:
+- Version matches the target (e.g., `23.4R2-S3.9`).
+- No `pkg.active` in `/var/run`.
+- `/cf/var` has sufficient space (~3.2G available).
+- No critical alarms.
 
-
-
-Running the Script
-
-Navigate to Repository:cd /home/nikos/github/ngeran/vector-py
-
-
-Clear Python Cache:find . -name '*.pyc' -delete
-rm -rf scripts/__pycache__ network-automation-launcher/__pycache__
-
-
-Run the Launcher:python network-automation-launcher/launcher.py
-
-
-Perform Code Upgrade:
-Select Code Upgrade:Select an action:
-----------------------------------------
-| Option | Action                  |
-----------------------------------------
-| 1      | Ping Hosts             |
-| 2      | Configure Interfaces   |
-| 3      | Monitor Routing Tables |
-| 4      | Code Upgrade           |
-----------------------------------------
-Enter your choice (1-4): 4
-
-
-Choose execution mode:Choose execution mode:
-1. Execute locally
-2. Push to GitHub
-Enter your choice (1-2): 1
-
-
-Select vendor (e.g., JUNIPER):Select a vendor:
-----------------------------------------
-| Option | Vendor                  |
-----------------------------------------
-| 1      | JUNIPER                |
-----------------------------------------
-Select a vendor (1-1): 1
-
-
-Select product (e.g., SRX320):Select a product:
-----------------------------------------
-| Option | Product                 |
-----------------------------------------
-| 1      | EX4600                 |
-| 2      | EX4400                 |
-| 3      | SRX320                 |
-| 4      | SRX210H                |
-| 5      | MX-SERIES              |
-| 6      | ACX                    |
-----------------------------------------
-Select a product (1-6): 3
-
-
-Select release (e.g., 23.4R2-S3):Available releases:
-----------------------------------------
-| Option | Release                 |
-----------------------------------------
-| 1      | 23.4R2-S3              |
-| 2      | 23.4R2-S4              |
-| 3      | 24.2R1-S2              |
-----------------------------------------
-Select a release (1-3): 1
-
-
-Enter host IPs:Read hosts from upgrade_hosts.yml? (y/n): n
-Enter a host IP (or press Enter to finish): 172.27.200.200
-Enter a host IP (or press Enter to finish):
-
-
-Enter credentials:Username: admin
-Password: <password>
-
-
-The script will:
-Connect to the device.
-Verify the image exists in /var/tmp.
-Check the current version using dev.facts['version'] (or CLI fallback) and warn about downgrades.
-Install and validate the software.
-Reboot the device.
-Probe for availability (up to 15 minutes, checking every 60 seconds).
-Verify the version using dev.facts['version'] (with CLI and SSH fallbacks, up to 5 attempts, retrying every 60 seconds).
-Display a summary:Upgrade Summary:
-Successful: 1 device(s)
-  - 172.27.200.200
-Failed: 0 device(s)
-Code upgrade process completed successfully.
-
-
-
-
-
-
-
-Post-Upgrade Cleanup
-
-Remove Old Images:ssh admin@<device-ip>
-start shell user root
-rm -f /cf/var/tmp/<old-image>.tgz
-df -k /cf/var
-exit
+### Step 9: Clean Up Device Storage
+Free up space by removing old images:
+```bash
+ssh admin@172.27.200.200
 request system storage cleanup
-
-
-Verify Device:ssh admin@<device-ip>
-show version
-show system alarms
-df -k /cf/var
-
-
-
-Troubleshooting
-
-Error: 'NoneType' object has no attribute 'timeout':
-The script now falls back to ssh if PyEZ fails. Verify SSH access:ssh admin@<device-ip> "show version"
-
-
-Check /var/log/sshd on the device for SSH issues.
-Increase max_attempts or retry_interval in verify_version.
-
-
-Error: Device not reachable after reboot:
-Verify network connectivity:ping <device-ip>
-
-
-Check device logs:ssh admin@<device-ip> "show log messages | last"
-
-
-
-
-Error: SSH command failed:
-Ensure SSH keys are set up or password authentication is enabled.
-Test manually:ssh admin@<device-ip> "show version"
-
-
-
-
-Storage Issues:
-If /cf/var is full:ssh admin@<device-ip>
 start shell user root
-find /cf/var -type f -name "*.core" -exec rm -f {} \;
-rm -rf /cf/var/db
+ls -lh /cf/var/tmp
+rm -f /cf/var/tmp/junos-srxsme-<old-version>.tgz  # e.g., junos-srxsme-24.2R1-S2.5.tgz
 df -k /cf/var
-
-
-
-
-Logs:
-Check detailed logs:cat /home/nikos/github/ngeran/vector-py/network_automation.log
-
-
-
-
-
-Manual Fallback
-If the script fails:
-ssh admin@<device-ip>
-request system software add /var/tmp/<image>.tgz no-validate reboot
-
-For SRX210H with storage issues:
-ssh admin@<device-ip>
-start shell user root
-mv /cf/var/tmp/<image>.tgz /mfs/
 exit
-request system software add /mfs/<image>.tgz no-validate reboot
+```
+Verify `/cf/var` has at least 500 MB free:
+```bash
+ssh admin@172.27.200.200 "show system storage"
+```
 
-Contributing
+### Step 10: Commit Changes to GitHub
+If you modified `upgrade_data.yml` or the script, commit the changes:
+```bash
+cd /home/nikos/github/ngeran/vector-py
+git add scripts/code_upgrade.py data/upgrade_data.yml
+git commit -m "Completed code upgrade for SRX320 to 23.4R2-S3.9"
+git push origin main
+```
 
-Submit issues or pull requests to https://github.com/ngeran/vector-py.
-Ensure code follows PEP 8 and includes logging.
+## Troubleshooting
 
-License
-MIT License. See LICENSE for details.
+If the script fails, check the following:
+
+1. **Script Errors**:
+   - View compilation errors:
+     ```bash
+     python -m py_compile /home/nikos/github/ngeran/vector-py/scripts/code_upgrade.py 2>&1
+     ```
+   - Check logs:
+     ```bash
+     cat /home/nikos/github/ngeran/vector-py/network_automation.log
+     ```
+
+2. **Connection Issues**:
+   - Verify device reachability:
+     ```bash
+     ping -c 4 172.27.200.200
+     ssh admin@172.27.200.200 "show version"
+     ```
+   - Check credentials and Netconf:
+     ```bash
+     ssh admin@172.27.200.200 "show configuration system services"
+     ```
+     Ensure `netconf ssh` is enabled.
+
+3. **Image Missing**:
+   - If the script reports `Image not found`:
+     ```bash
+     ssh admin@172.27.200.200 "file list /var/tmp"
+     ```
+     Upload the image:
+     ```bash
+     scp /path/to/junos-srxsme-23.4R2-S3.9.tgz admin@172.27.200.200:/var/tmp/
+     ```
+
+4. **Version Mismatch**:
+   - If the version doesn’t match (e.g., `23.4R2-S3.9` vs. `23.4R2-S3`):
+     - Verify `upgrade_data.yml`:
+       ```bash
+       cat /home/nikos/github/ngeran/vector-py/data/upgrade_data.yml
+       ```
+     - The script should handle sub-releases, but update the YAML for clarity:
+       ```yaml
+       release: 23.4R2-S3.9
+       os: junos-srxsme-23.4R2-S3.9.tgz
+       ```
+
+5. **Storage Issues**:
+   - If `/cf/var` is full:
+     ```bash
+     ssh admin@172.27.200.200
+     request system storage cleanup
+     start shell user root
+     du -sk /cf/var/* | sort -nr
+     rm -rf /cf/var/log/*.gz
+     find /cf/var/log -type f -name "*.log" -exec rm -f {} \;
+     find /cf/var -type f -name "*.core" -exec rm -f {} \;
+     rm -rf /cf/var/db
+     df -k /cf/var
+     exit
+     ```
+
+6. **Collect Debug Information**:
+   - Share:
+     - Script output from `launcher.py`.
+     - Device status:
+       ```bash
+       ssh admin@172.27.200.200 "show system alarms; show system storage; show version; show system processes extensive | match \"PID|%CPU|%MEM\"; start shell user root; ls -lh /var/run/pkg.active; exit; file show /var/log/software_install_status.log"
+       ```
+     - Logs:
+       ```bash
+       cat /home/nikos/github/ngeran/vector-py/network_automation.log
+       ```
+     - `upgrade_data.yml`:
+       ```bash
+       cat /home/nikos/github/ngeran/vector-py/data/upgrade_data.yml
+       ```
+
+## Notes
+- **Credentials**: The script uses `admin`/`manolis1` by default. Update as needed for your environment.
+- **Downgrades**: The script warns about downgrades (e.g., from `24.2R1-S2.5` to `23.4R2-S3.9`). Always confirm (`y`) to proceed.
+- **Sub-Releases**: The script matches sub-releases (e.g., `23.4R2-S3.9` to `23.4R2-S3`). Update `upgrade_data.yml` for exact versions to avoid confusion.
+- **SRX210H**: If upgrading the SRX210H, ensure `/cf/var` has sufficient space (see Troubleshooting).
+- **Logs**: Check `/home/nikos/github/ngeran/vector-py/network_automation.log` for detailed debug information.
+
+By following this guide, you can reliably upgrade or downgrade Junos devices using the `code_upgrade.py` script. For further assistance, collect debug information and share it with your team or support.
+```
+
+### Saving the Guide
+To use this as a Markdown file in your repository:
+1. Save the guide:
+   ```bash
+   cd /home/nikos/github/ngeran/vector-py
+   nvim docs/code_upgrade_guide.md
+   ```
+2. Copy-paste the Markdown content above.
+3. Save:
+   ```vim
+   :wq
+   ```
+4. Commit to GitHub:
+   ```bash
+   git add docs/code_upgrade_guide.md
+   git commit -m "Added step-by-step guide for code_upgrade.py"
+   git push origin main
+   ```
+
+### Verification
+- View the Markdown file:
+  ```bash
+  cat /home/nikos/github/ngeran/vector-py/docs/code_upgrade_guide.md
+  ```
+- Render it (e.g., in VS Code, GitHub, or a Markdown viewer like `glow`):
+  ```bash
+  glow /home/nikos/github/ngeran/vector-py/docs/code_upgrade_guide.md
+  ```
+  Install `glow` if needed:
+  ```bash
+  sudo apt install glow
+  ```

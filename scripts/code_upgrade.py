@@ -1,7 +1,6 @@
 import os
 import logging
 import time
-import re
 from typing import List, Dict
 from jnpr.junos import Device
 from jnpr.junos.utils.sw import SW
@@ -239,90 +238,6 @@ def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
         print(f"Error checking image on {hostname}: {e}")
         return False
 
-def check_disk_space(dev: Device, hostname: str) -> bool:
-    """Check if the device has sufficient disk space for the upgrade in /var/tmp and /var or equivalents."""
-    try:
-        with dev:
-            result = dev.cli("show system storage", warning=False)
-            logger.debug(f"Raw show system storage output for {hostname}:\n{result}")
-            var_tmp_space = None
-            var_space = None
-            # Regex to match filesystem lines: Filesystem, Size, Used, Avail, Capacity, Mounted on
-            pattern = re.compile(r'^(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\d+%)\s+(\S+)$')
-
-            for line in result.splitlines():
-                line = line.strip()
-                logger.debug(f"Processing line: '{line}'")
-                if not line or line.startswith('Filesystem'):
-                    continue
-                match = pattern.match(line)
-                if not match:
-                    logger.debug(f"Line does not match expected format: '{line}'")
-                    continue
-                filesystem, size, used, avail, capacity, mount = match.groups()
-                logger.debug(f"Parsed: filesystem={filesystem}, size={size}, used={used}, avail={avail}, capacity={capacity}, mount={mount}")
-
-                # Convert avail to KB (handle units: K, M, G)
-                try:
-                    if avail.endswith('G'):
-                        avail_kb = int(float(avail[:-1]) * 1024 * 1024)  # GB to KB
-                    elif avail.endswith('M'):
-                        avail_kb = int(float(avail[:-1]) * 1024)  # MB to KB
-                    elif avail.endswith('K'):
-                        avail_kb = int(float(avail[:-1]))
-                    else:
-                        avail_kb = int(float(avail))  # Assume KB if no unit
-                    logger.debug(f"Converted avail '{avail}' to {avail_kb} KB")
-                except (ValueError, TypeError) as e:
-                    logger.warning(f"Could not parse avail value '{avail}' for {hostname}: {e}")
-                    continue
-
-                # SRX-specific filesystems
-                if filesystem == '/cf/var':
-                    var_space = avail_kb
-                    logger.debug(f"Set var_space for /cf/var: {var_space} KB")
-                elif filesystem == '/config':
-                    var_tmp_space = avail_kb
-                    logger.debug(f"Set var_tmp_space for /config: {var_tmp_space} KB")
-                # Fallback for non-SRX devices
-                elif filesystem == '/var/tmp':
-                    var_tmp_space = avail_kb
-                    logger.debug(f"Set var_tmp_space for /var/tmp: {var_tmp_space} KB")
-                elif filesystem == '/var' or filesystem.endswith('/var'):
-                    var_space = avail_kb
-                    logger.debug(f"Set var_space for {filesystem}: {var_space} KB")
-
-            logger.debug(f"Final values: var_space={var_space}, var_tmp_space={var_tmp_space}")
-
-            # Allow upgrade if either filesystem has enough space
-            if var_space is None and var_tmp_space is None:
-                logger.error(f"Could not determine disk space for any relevant filesystems on {hostname}")
-                print(f"Error: Could not determine disk space for /var/tmp, /var, /cf/var, or /config on {hostname}")
-                print("Recommendation: Run 'show system storage' and verify /cf/var, /config, /var, or /var/tmp.")
-                return False
-
-            # Check if at least one filesystem has enough space
-            sufficient_space = False
-            if var_space is not None and var_space >= 100000:  # 100 MB in KB
-                sufficient_space = True
-                logger.info(f"Sufficient disk space in /var or /cf/var on {hostname}: {var_space} KB")
-            if var_tmp_space is not None and var_tmp_space >= 100000:
-                sufficient_space = True
-                logger.info(f"Sufficient disk space in /var/tmp or /config on {hostname}: {var_tmp_space} KB")
-
-            if not sufficient_space:
-                logger.error(f"Insufficient disk space on {hostname}: var_space={var_space} KB, var_tmp_space={var_tmp_space} KB")
-                print(f"Error: Insufficient disk space on {hostname}: /var or /cf/var={var_space} KB, /var/tmp or /config={var_tmp_space} KB")
-                print("Recommendation: Run 'request system storage cleanup' or manually remove files from /cf/var or /var.")
-                return False
-
-            print(f"Sufficient disk space on {hostname}")
-            return True
-    except Exception as e:
-        logger.error(f"Error checking disk space on {hostname}: {e}")
-        print(f"Error checking disk space on {hostname}: {e}")
-        return False
-
 def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
     """Check if there is a pending install on the device."""
     logger.debug(f"Starting pending install check on {hostname}")
@@ -465,14 +380,6 @@ def code_upgrade():
                     logger.error(f"Skipping upgrade for {hostname} due to missing image")
                     print(f"Skipping upgrade for {hostname} due to missing image")
                     status['error'] = "Missing image"
-                    upgrade_status.append(status)
-                    continue
-
-                # Check disk space
-                if not check_disk_space(dev, hostname):
-                    logger.error(f"Skipping upgrade for {hostname} due to insufficient disk space")
-                    print(f"Skipping upgrade for {hostname} due to insufficient disk space")
-                    status['error'] = "Insufficient disk space"
                     upgrade_status.append(status)
                     continue
 

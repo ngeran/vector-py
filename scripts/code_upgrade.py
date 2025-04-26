@@ -224,7 +224,7 @@ def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
     try:
         with dev:
             image_name = image_path.split('/')[-1]
-            result = dev.cli("file list /var/tmp/", warning=False)
+            result = dev.cli(f"file list /var/tmp/", warning=False)
             if image_name in result.split():
                 logger.info(f"Image {image_path} found on {hostname}")
                 print(f"Image {image_path} found on {hostname}")
@@ -239,11 +239,37 @@ def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
         return False
 
 def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
-    """Check if there is a pending install on the device."""
+    """Check if there is a pending or active install on the device."""
     logger.debug(f"Starting pending install check on {hostname}")
     try:
         with dev:
-            dev.timeout = 300
+            dev.timeout = 60  # Shorter timeout for quick check
+            logger.debug(f"Executing 'show system software information' on {hostname}")
+            result = dev.cli("show system software information", warning=False)
+            logger.debug(f"Software information result on {hostname}: {result}")
+            if "installation in progress" in result.lower() or "pending" in result.lower():
+                logger.error(f"Active or pending install detected on {hostname}")
+                print(f"Error: Active or pending install detected on {hostname}.")
+                choice = input("Resolve pending install? (1: Reboot, 2: Rollback, 3: Skip): ").strip()
+                logger.info(f"User chose pending install action: {choice}")
+                if choice == '1':
+                    print(f"Initiating reboot on {hostname}...")
+                    dev.cli("request system reboot", warning=False)
+                    logger.info(f"Reboot initiated on {hostname} to resolve pending install")
+                    print(f"Please wait 5-10 minutes for {hostname} to reboot, then rerun the script.")
+                    return True
+                elif choice == '2':
+                    print(f"Initiating rollback on {hostname}...")
+                    dev.cli("request system software rollback", warning=False)
+                    logger.info(f"Rollback initiated on {hostname} to resolve pending install")
+                    print(f"Rollback completed on {hostname}. Proceeding with upgrade.")
+                    return False
+                else:
+                    logger.info(f"User chose to skip pending install on {hostname}")
+                    print(f"Skipping upgrade for {hostname} due to pending install.")
+                    return True
+
+            # Fallback to validate command
             logger.debug(f"Executing 'request system software add {image_path} validate' on {hostname}")
             result = dev.cli(f"request system software add {image_path} validate", warning=False)
             logger.debug(f"Pending install check result on {hostname}: {result}")
@@ -271,9 +297,46 @@ def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
             logger.debug(f"No pending install detected on {hostname}")
             return False
     except RpcTimeoutError as e:
-        logger.error(f"Timeout checking pending install on {hostname}: {e}")
-        print(f"Error: Timeout checking pending install on {hostname}: {e}")
-        return True
+        logger.warning(f"Timeout checking pending install on {hostname}: {e}. Retrying once...")
+        print(f"Warning: Timeout checking pending install on {hostname}: {e}. Retrying...")
+        time.sleep(10)
+        try:
+            with dev:
+                dev.timeout = 60
+                logger.debug(f"Retry: Executing 'show system software information' on {hostname}")
+                result = dev.cli("show system software information", warning=False)
+                logger.debug(f"Retry software information result on {hostname}: {result}")
+                if "installation in progress" in result.lower() or "pending" in result.lower():
+                    logger.error(f"Active or pending install detected on {hostname}")
+                    print(f"Error: Active or pending install detected on {hostname}.")
+                    choice = input("Resolve pending install? (1: Reboot, 2: Rollback, 3: Skip): ").strip()
+                    logger.info(f"User chose pending install action: {choice}")
+                    if choice == '1':
+                        print(f"Initiating reboot on {hostname}...")
+                        dev.cli("request system reboot", warning=False)
+                        logger.info(f"Reboot initiated on {hostname} to resolve pending install")
+                        print(f"Please wait 5-10 minutes for {hostname} to reboot, then rerun the script.")
+                        return True
+                    elif choice == '2':
+                        print(f"Initiating rollback on {hostname}...")
+                        dev.cli("request system software rollback", warning=False)
+                        logger.info(f"Rollback initiated on {hostname} to resolve pending install")
+                        print(f"Rollback completed on {hostname}. Proceeding with upgrade.")
+                        return False
+                    else:
+                        logger.info(f"User chose to skip pending install on {hostname}")
+                        print(f"Skipping upgrade for {hostname} due to pending install.")
+                        return True
+                logger.debug(f"No pending install detected on {hostname} after retry")
+                return False
+        except RpcTimeoutError as e:
+            logger.error(f"Retry failed for pending install check on {hostname}: {e}")
+            print(f"Error: Retry failed for pending install check on {hostname}: {e}. Skipping upgrade.")
+            return True
+        except Exception as e:
+            logger.warning(f"Retry failed for pending install check on {hostname}: {e}. Proceeding with caution.")
+            print(f"Warning: Retry failed for pending install check on {hostname}: {e}. Proceeding with caution.")
+            return False
     except Exception as e:
         logger.warning(f"Could not check pending install on {hostname}: {e}. Proceeding with caution.")
         print(f"Warning: Could not check pending install on {hostname}: {e}. Proceeding with caution.")
@@ -360,6 +423,7 @@ def code_upgrade():
 
         # Perform upgrade
         image_path = f"/var/tmp/{selected_release['os']}"
+        target_version = selected_release['release']
         for dev in connections:
             hostname = dev.hostname
             status = {'hostname': hostname, 'success': False, 'error': None}
@@ -374,6 +438,45 @@ def code_upgrade():
                     status['error'] = "Probe failure"
                     upgrade_status.append(status)
                     continue
+
+                # Check current Junos version
+                try:
+                    with dev:
+                        version_output = dev.cli("show version", warning=False)
+                        logger.debug(f"Version output for {hostname}: {version_output}")
+                        current_version = None
+                        for line in version_output.splitlines():
+                            if "JUNOS Software Release" in line:
+                                current_version = line.split('[')[-1].strip(']').strip()
+                                break
+                        if current_version:
+                            logger.info(f"Current Junos version on {hostname}: {current_version}")
+                            print(f"Current Junos version on {hostname}: {current_version}")
+                            if current_version == target_version:
+                                logger.info(f"{hostname} already on target version {target_version}. Skipping upgrade.")
+                                print(f"{hostname} already on target version {target_version}. Skipping upgrade.")
+                                status['success'] = True
+                                upgrade_status.append(status)
+                                continue
+                            # Warn about potential downgrade
+                            current_parts = [int(x) if x.isdigit() else x for x in current_version.replace('-', '.').split('.')]
+                            target_parts = [int(x) if x.isdigit() else x for x in target_version.replace('-', '.').split('.')]
+                            if current_parts > target_parts:
+                                logger.warning(f"Selected version {target_version} is older than current {current_version} on {hostname}")
+                                print(f"Warning: Selected version {target_version} is older than current {current_version} on {hostname}.")
+                                choice = input("Proceed with downgrade? (y/n): ").strip().lower()
+                                if choice != 'y':
+                                    logger.info(f"User chose to skip downgrade on {hostname}")
+                                    print(f"Skipping upgrade for {hostname} to avoid downgrade.")
+                                    status['success'] = True
+                                    upgrade_status.append(status)
+                                    continue
+                        else:
+                            logger.warning(f"Could not determine Junos version on {hostname}")
+                            print(f"Warning: Could not determine Junos version on {hostname}")
+                except Exception as e:
+                    logger.warning(f"Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
+                    print(f"Warning: Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
 
                 # Check if image exists
                 if not check_image_exists(dev, image_path, hostname):
@@ -395,13 +498,13 @@ def code_upgrade():
                 print(f"Installing upgrade on {hostname} with image {image_path}...")
                 try:
                     sw = SW(dev)
-                    logger.debug(f"SW.install parameters: package={image_path}, validate=False, no_copy=True, timeout=1200")
+                    logger.debug(f"SW.install parameters: package={image_path}, validate=False, no_copy=True, timeout=600")
                     ok = sw.install(
                         package=image_path,
                         validate=False,
                         no_copy=True,
                         progress=progress_callback,
-                        timeout=1200
+                        timeout=600  # Reduced timeout
                     )
                     logger.debug(f"Software install result on {hostname}: {ok}")
                     if not ok:
@@ -412,18 +515,18 @@ def code_upgrade():
                     logger.error(f"TypeError during software upgrade on {hostname}: {e}")
                     print(f"Error: TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method...")
                     try:
-                        result = dev.cli(f"request system software add {image_path} no-validate", warning=False, timeout=1200)
+                        result = dev.cli(f"request system software add {image_path} no-validate", warning=False, timeout=600)
                         logger.debug(f"CLI upgrade result on {hostname}: {result}")
                         if "error" in result.lower() or "failed" in result.lower():
                             if "Could not format alternate root" in result:
                                 logger.error(f"Storage failure on {hostname}: {result}")
                                 print(f"Error: Storage failure on {hostname}: {result}")
-                                print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
+                                print(f"Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
                                 status['error'] = "Storage failure: Could not format alternate root"
                             elif "Not enough space in /var" in result:
                                 logger.error(f"Insufficient disk space in /var on {hostname}: {result}")
                                 print(f"Error: Insufficient disk space in /var on {hostname}: {result}")
-                                print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
+                                print(f"Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
                                 status['error'] = "Insufficient disk space in /var"
                             else:
                                 logger.error(f"CLI upgrade failed on {hostname}: {result}")
@@ -438,10 +541,10 @@ def code_upgrade():
                         print(f"Error: CLI upgrade failed on {hostname}: {cli_e}")
                         error_msg = str(cli_e)
                         if "Could not format alternate root" in error_msg:
-                            print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
+                            print(f"Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
                             status['error'] = "Storage failure: Could not format alternate root"
                         elif "Not enough space in /var" in error_msg:
-                            print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
+                            print(f"Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
                             status['error'] = "Insufficient disk space in /var"
                         else:
                             status['error'] = f"CLI upgrade failed: {cli_e}"
@@ -458,10 +561,10 @@ def code_upgrade():
                     print(f"Error: Software upgrade failed on {hostname}: {e}")
                     error_msg = str(e)
                     if "Could not format alternate root" in error_msg:
-                        print("Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
+                        print(f"Recommendation: Check disk health with 'show system storage' and 'show system alarms'. Consider USB recovery or Juniper support.")
                         status['error'] = "Storage failure: Could not format alternate root"
                     elif "Not enough space in /var" in error_msg:
-                        print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
+                        print(f"Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
                         status['error'] = "Insufficient disk space in /var"
                     else:
                         status['error'] = str(e)

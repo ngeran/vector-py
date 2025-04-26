@@ -243,13 +243,13 @@ def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
     logger.debug(f"Starting pending install check on {hostname}")
     try:
         with dev:
-            dev.timeout = 30  # Reduced timeout
-            logger.debug(f"Executing 'show system software information' on {hostname}")
-            result = dev.cli("show system software information", warning=False)
-            logger.debug(f"Software information result on {hostname}: {result}")
-            if "installation in progress" in result.lower() or "pending" in result.lower() or "package -X update" in result.lower():
-                logger.error(f"Active or pending install detected on {hostname}")
-                print(f"Error: Active or pending install detected on {hostname}.")
+            dev.timeout = 30
+            logger.debug(f"Executing 'show system processes | match package' on {hostname}")
+            result = dev.cli("show system processes | match package", warning=False)
+            logger.debug(f"Process check result on {hostname}: {result}")
+            if "package -X update" in result:
+                logger.error(f"Active install process detected on {hostname}")
+                print(f"Error: Active install process detected on {hostname}.")
                 choice = input("Resolve pending install? (1: Reboot, 2: Rollback, 3: Skip): ").strip()
                 logger.info(f"User chose pending install action: {choice}")
                 if choice == '1':
@@ -268,7 +268,7 @@ def check_pending_install(dev: Device, image_path: str, hostname: str) -> bool:
                     logger.info(f"User chose to skip pending install on {hostname}")
                     print(f"Skipping upgrade for {hostname} due to pending install.")
                     return True
-            logger.debug(f"No pending install detected on {hostname}")
+            logger.debug(f"No active install process detected on {hostname}")
             return False
     except RpcTimeoutError as e:
         logger.warning(f"Timeout checking pending install on {hostname}: {e}. Assuming active install.")
@@ -429,7 +429,7 @@ def code_upgrade():
                             logger.warning(f"Could not determine Junos version on {hostname}")
                             print(f"Warning: Could not determine Junos version on {hostname}")
                 except Exception as e:
-                    logger.warning(f"Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
+                    logger.warning(f"Failed to check Wunos version on {hostname}: {e}. Proceeding with upgrade.")
                     print(f"Warning: Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
 
                 # Check if image exists
@@ -466,10 +466,10 @@ def code_upgrade():
                     logger.info(f"Software upgrade completed on {hostname}")
                     print(f"Software upgrade completed on {hostname}")
                 except TypeError as e:
-                    logger.error(f"TypeError during software upgrade on {hostname}: {e}")
+                    logger.error(f"TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method...")
                     print(f"Error: TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method...")
                     try:
-                        result = dev.cli(f"request system software add {image_path} no-validate", warning=False, timeout=600)
+                        result = dev.cli(f"request system software add {image_path} no-validate", warning=False)
                         logger.debug(f"CLI upgrade result on {hostname}: {result}")
                         if "error" in result.lower() or "failed" in result.lower():
                             if "Could not format alternate root" in result:
@@ -482,6 +482,11 @@ def code_upgrade():
                                 print(f"Error: Insufficient disk space in /var on {hostname}: {result}")
                                 print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
                                 status['error'] = "Insufficient disk space in /var"
+                            elif "Another package installation in progress" in result:
+                                logger.error(f"Active install in progress on {hostname}: {result}")
+                                print(f"Error: Active install in progress on {hostname}: {result}")
+                                print("Recommendation: Reboot the device or wait for the current install to complete.")
+                                status['error'] = "Active install in progress"
                             else:
                                 logger.error(f"CLI upgrade failed on {hostname}: {result}")
                                 print(f"Error: CLI upgrade failed on {hostname}: {result}")
@@ -500,6 +505,9 @@ def code_upgrade():
                         elif "Not enough space in /var" in error_msg:
                             print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
                             status['error'] = "Insufficient disk space in /var"
+                        elif "Another package installation in progress" in error_msg:
+                            print("Recommendation: Reboot the device or wait for the current install to complete.")
+                            status['error'] = "Active install in progress"
                         else:
                             status['error'] = f"CLI upgrade failed: {cli_e}"
                         upgrade_status.append(status)
@@ -520,6 +528,9 @@ def code_upgrade():
                     elif "Not enough space in /var" in error_msg:
                         print("Recommendation: Run 'request system storage cleanup' or manually remove files from /var.")
                         status['error'] = "Insufficient disk space in /var"
+                    elif "Another package installation in progress" in error_msg:
+                        print("Recommendation: Reboot the device or wait for the current install to complete.")
+                        status['error'] = "Active install in progress"
                     else:
                         status['error'] = str(e)
                     upgrade_status.append(status)

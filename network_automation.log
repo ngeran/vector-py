@@ -1107,3 +1107,102 @@ b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns
 2025-04-26 14:08:34,675 - INFO - Disconnected from 172.27.200.200
 2025-04-26 14:08:34,675 - INFO - Upgrade summary: 0 successful, 1 failed
 2025-04-26 14:08:34,675 - WARNING - Code upgrade process completed with failures
+2025-04-26 14:15:01,274 - INFO - sys.path: ['/home/nikos/github/ngeran/vector-py', '/home/nikos/github/ngeran/vector-py/network-automation-launcher', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python312.zip', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/lib-dynload', '/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/site-packages', '/nix/store/j5xprw4y675sh3rrgnrbdwm3rpgl0lw2-python3-3.12.9-env/lib/python3.12/site-packages']
+2025-04-26 14:15:03,022 - INFO - Raw input received: '4'
+2025-04-26 14:15:03,022 - INFO - Valid choice selected: 4
+2025-04-26 14:15:03,022 - INFO - Selected action: code_upgrade
+2025-04-26 14:15:04,296 - INFO - Raw mode input received: '1'
+2025-04-26 14:15:04,296 - INFO - Valid execution mode selected: 1
+2025-04-26 14:15:04,296 - INFO - Executing action code_upgrade locally
+2025-04-26 14:15:04,296 - INFO - Starting code_upgrade action
+2025-04-26 14:15:04,298 - INFO - Loaded vendors: ['JUNIPER']
+2025-04-26 14:15:05,491 - INFO - Raw vendor input received: '1'
+2025-04-26 14:15:05,491 - INFO - Valid vendor choice selected: 1
+2025-04-26 14:15:05,491 - INFO - Selected vendor: JUNIPER
+2025-04-26 14:15:05,491 - INFO - Loaded products: ['EX4600', 'EX4400', 'SRX320', 'SRX210H', 'MX-SERIES', 'ACX']
+2025-04-26 14:15:07,325 - INFO - Raw product input received: '3'
+2025-04-26 14:15:07,325 - INFO - Valid product choice selected: 3
+2025-04-26 14:15:07,325 - INFO - Selected product: SRX320
+2025-04-26 14:15:09,274 - INFO - Raw release input received: '1'
+2025-04-26 14:15:09,274 - INFO - Valid release choice selected: 23.4R2-S3
+2025-04-26 14:15:09,274 - INFO - Selected release: 23.4R2-S3
+2025-04-26 14:15:12,856 - INFO - User chose to read from file: n
+2025-04-26 14:15:18,529 - INFO - Added host IP: 172.27.200.200
+2025-04-26 14:15:20,183 - INFO - Saved hosts to /home/nikos/github/ngeran/vector-py/data/upgrade_hosts.yml: ['172.27.200.200']
+2025-04-26 14:15:20,183 - INFO - Host IPs: ['172.27.200.200']
+2025-04-26 14:15:26,281 - INFO - Received credentials - username: admin
+2025-04-26 14:15:26,281 - INFO - Connecting to host 172.27.200.200 with username admin
+2025-04-26 14:15:27,031 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-26 14:15:28,052 - INFO - Authentication (password) successful!
+2025-04-26 14:15:28,140 - INFO - [host 172.27.200.200 session 0x7f4c0b7b7a40] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-26 14:15:32,151 - INFO - [host 172.27.200.200 session 0x7f4c0b7b7a40] Received message from host
+2025-04-26 14:15:32,152 - INFO - [host 172.27.200.200 session-id 2965] initialized: session-id=2965 | server_capabilities=<dict_keyiterator object at 0x7f4c0b241a30>
+2025-04-26 14:15:32,152 - INFO - Connected to 172.27.200.200
+2025-04-26 14:15:32,152 - INFO - Connected to devices: ['172.27.200.200']
+2025-04-26 14:15:33,065 - INFO - Connected (version 2.0, client OpenSSH_7.9)
+2025-04-26 14:15:34,065 - INFO - Authentication (password) successful!
+2025-04-26 14:15:34,264 - INFO - [host 172.27.200.200 session 0x7f4c0b2221e0] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:hello xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><nc:capabilities><nc:capability>urn:ietf:params:netconf:base:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:base:1.1</nc:capability><nc:capability>urn:ietf:params:netconf:capability:writable-running:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:candidate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:confirmed-commit:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:startup:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:url:1.0?scheme=http,ftp,file,https,sftp</nc:capability><nc:capability>urn:ietf:params:netconf:capability:validate:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:xpath:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:notification:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:interleave:1.0</nc:capability><nc:capability>urn:ietf:params:netconf:capability:with-defaults:1.0</nc:capability></nc:capabilities></nc:hello>]]>]]>'
+2025-04-26 14:15:38,604 - INFO - [host 172.27.200.200 session 0x7f4c0b2221e0] Received message from host
+2025-04-26 14:15:38,604 - INFO - [host 172.27.200.200 session-id 2977] initialized: session-id=2977 | server_capabilities=<dict_keyiterator object at 0x7f4c0b240fe0>
+2025-04-26 14:15:38,604 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:38,704 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:dcdb7e86-dbfd-42ce-8d9f-079932d323d8"><command format="text">file list /var/tmp/</command></nc:rpc>]]>]]>'
+2025-04-26 14:15:39,865 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:15:39,865 - INFO - Image /var/tmp/junos-srxsme-23.4R2-S3.9.tgz found on 172.27.200.200
+2025-04-26 14:15:39,865 - INFO - Checking current version on 172.27.200.200
+2025-04-26 14:15:39,865 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:39,965 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:790aaf77-fbce-4018-82a7-d25e14702733"><command>show version invoke-on all-routing-engines</command></nc:rpc>]]>]]>'
+2025-04-26 14:15:40,156 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:15:40,156 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:40,256 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:ac2eb285-70c4-49e3-89b3-b4301bfb9814"><file-show><filename>/usr/share/cevo/cevo_version</filename></file-show></nc:rpc>]]>]]>'
+2025-04-26 14:15:40,349 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:15:40,350 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:40,450 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:fe6999f9-a452-475a-b59d-70d573984362"><get-interface-information><routing-instance>__juniper_private1__</routing-instance><terse/></get-interface-information></nc:rpc>]]>]]>'
+2025-04-26 14:15:41,733 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:15:41,734 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:41,833 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:af1ec272-6bb2-49b0-be2e-c544b7239b91"><file-show><filename>/etc/hosts.junos</filename></file-show></nc:rpc>]]>]]>'
+2025-04-26 14:15:45,039 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:15:45,046 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:45,139 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:dbe6331d-7fbc-4105-be2d-196d0c1045b7"><get-chassis-cluster-status/></nc:rpc>]]>]]>'
+2025-04-26 14:15:45,296 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:15:45,297 - INFO - Current Junos version on 172.27.200.200: 24.2R1-S2.5
+2025-04-26 14:15:45,297 - WARNING - Selected version 23.4R2-S3 is older than current 24.2R1-S2.5 on 172.27.200.200
+2025-04-26 14:15:54,584 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:54,631 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:4f501384-eb7f-41ed-bb7a-c20b80d40882"><get-route-engine-information/></nc:rpc>]]>]]>'
+2025-04-26 14:15:54,653 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:15:54,654 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:54,753 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:85e58cec-d0df-41b9-92e0-1e85cd66cfe2"><get-virtual-chassis-information/></nc:rpc>]]>]]>'
+2025-04-26 14:15:54,778 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:15:54,778 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:54,878 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:4362c046-aedd-4f69-a389-8d276220deb0"><request-package-checks-pending-install/></nc:rpc>]]>]]>'
+2025-04-26 14:15:54,886 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:15:54,887 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:15:54,987 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:b277d1cc-cc13-45d1-98a7-36a3174c4e28"><request-package-validate><package-name>/var/tmp/junos-srxsme-23.4R2-S3.9.tgz</package-name></request-package-validate></nc:rpc>]]>]]>'
+2025-04-26 14:25:10,914 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:25:10,914 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:25:11,014 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:ee2cd78b-5b7d-438c-b66e-fdf8106a2527"><request-package-add><no-validate/><package-name>/var/tmp/junos-srxsme-23.4R2-S3.9.tgz</package-name></request-package-add></nc:rpc>]]>]]>'
+2025-04-26 14:31:02,761 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:31:02,761 - INFO - [host 172.27.200.200 session-id 2977] Requesting 'ExecuteRpc'
+2025-04-26 14:31:02,861 - INFO - [host 172.27.200.200 session-id 2977] Sending:
+b'<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:2e44e4f9-ffa2-47ef-b01d-ce3626ae32e5"><request-reboot><in>0</in></request-reboot></nc:rpc>]]>]]>'
+2025-04-26 14:31:03,076 - INFO - [host 172.27.200.200 session-id 2977] Received message from host
+2025-04-26 14:31:03,076 - INFO - Reboot initiated on 172.27.200.200
+2025-04-26 14:32:03,077 - INFO - Probing 172.27.200.200 for availability post-reboot
+2025-04-26 14:48:02,377 - ERROR - 172.27.200.200 did not become reachable within 900 seconds
+2025-04-26 14:48:02,377 - ERROR - Failed to confirm 172.27.200.200 availability after reboot
+2025-04-26 14:48:02,377 - INFO - Disconnecting from 1 connections
+2025-04-26 14:48:02,377 - INFO - Disconnected from 172.27.200.200
+2025-04-26 14:48:02,377 - INFO - Upgrade summary: 0 successful, 1 failed
+2025-04-26 14:48:02,377 - WARNING - Code upgrade process completed with failures

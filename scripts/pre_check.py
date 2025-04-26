@@ -35,15 +35,15 @@ def check_junos_eznc_version() -> Tuple[bool, str]:
         return False, f"Unexpected error checking junos-eznc: {e}"
 
 def verify_code_upgrade_script() -> Tuple[bool, str]:
-    """Verify code_upgrade.py exists and has the expected health check function."""
+    """Verify code_upgrade.py exists and has the expected image check function."""
     script_path = '/home/nikos/github/ngeran/vector-py/scripts/code_upgrade.py'
     try:
         if not os.path.exists(script_path):
             return False, f"code_upgrade.py not found at {script_path}"
         with open(script_path, 'r') as f:
             content = f.read()
-            if 'def check_device_health' not in content:
-                return False, f"code_upgrade.py at {script_path} is outdated (missing check_device_health)"
+            if 'def check_image_exists' not in content:
+                return False, f"code_upgrade.py at {script_path} is outdated (missing check_image_exists)"
         return True, f"code_upgrade.py verified at {script_path}"
     except Exception as e:
         logger.error(f"Error verifying code_upgrade.py: {e}")
@@ -72,7 +72,7 @@ def stabilize_srx320() -> List[Tuple[str, str]]:
         ("request system reboot", "Reboot SRX320 to clear resource exhaustion"),
         ("echo 'Wait 5-10 minutes, then reconnect'", "Reminder to wait for reboot"),
         ("ssh admin@172.27.200.200", "Reconnect to SRX320"),
-        ("show version", "Confirm version is 24.2R1-S2.5"),
+        ("show version", "Confirm version is 24.2R1-S2.5 or 23.4R2-S3.9"),
         ("show system processes | match package", "Ensure no active install processes"),
         ("show system alarms", "Verify no new alarms"),
         ("show system storage", "Confirm ~3.2G available on /cf/var"),
@@ -151,7 +151,7 @@ def capture_upgrade_steps() -> None:
     script_ok, script_msg = verify_code_upgrade_script()
     steps.append(("", script_msg, "Verify code_upgrade.py"))
     if not script_ok:
-        steps.append(("", "echo	len:\nEnsure code_upgrade.py is updated with artifact ID 24b56648-b4e1-485c-ae2d-c4e3de3c60cc", "Update script if outdated"))
+        steps.append(("", "echo 'Ensure code_upgrade.py is updated with artifact ID 24b56648-b4e1-485c-ae2d-c4e3de3c60cc'", "Update script if outdated"))
 
     steps.append(("", "cd /home/nikos/github/ngeran/vector-py", "Navigate to project directory"))
     for cmd in clear_python_cache():
@@ -167,7 +167,7 @@ def capture_upgrade_steps() -> None:
     for cmd, desc in cleanup_srx210h():
         steps.append(("", cmd, desc))
 
-    # Section 4: Run launcher.py
+    # Section 4: Run Upgrade Script
     steps.append(("Run Upgrade Script", "", ""))
     steps.append(("", "cd /home/nikos/github/ngeran/vector-py", "Navigate to project directory"))
     steps.append(("", "python network-automation-launcher/launcher.py", "Run launcher.py"))

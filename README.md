@@ -1,7 +1,3 @@
-Absolutely! Here's your updated and fully verified Markdown content with the password hidden as `******`:
-
----
-
 ```markdown
 # Step-by-Step Guide to Using the Code Upgrade Script
 
@@ -365,5 +361,3 @@ If the script fails, check the following:
 - **SRX210H**: If upgrading the SRX210H, ensure `/cf/var` has sufficient space (see Troubleshooting).
 - **Logs**: Check `/home/nikos/github/ngeran/vector-py/network_automation.log` for detailed debug information.
 ```
-
-Let me know if you'd like this as a downloadable `.md` file or want to preview how it looks rendered in GitHub style.

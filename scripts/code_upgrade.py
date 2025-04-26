@@ -4,7 +4,7 @@ import time
 from typing import List, Dict
 from jnpr.junos import Device
 from jnpr.junos.utils.sw import SW
-from jnpr.junos.exception import ConnectError, RpcTimeoutError
+from jnpr.junos.exception import ConnectError, RpcTimeoutError, ConnectClosedError
 from scripts.utils import load_yaml_file, save_yaml_file
 from scripts.connect_to_hosts import connect_to_hosts, disconnect_from_hosts
 
@@ -219,6 +219,43 @@ def probe_device(dev: Device, hostname: str, username: str, password: str) -> bo
         logger.error(f"Failed to probe {hostname}: {e}")
         return False
 
+def check_device_health(dev: Device, hostname: str) -> bool:
+    """Check device CPU and memory usage before upgrade."""
+    print(f"Checking health of {hostname}...")
+    logger.info(f"Checking health of {hostname}")
+    try:
+        with dev:
+            result = dev.cli("show system processes extensive | match \"PID|%CPU|%MEM\"", warning=False)
+            logger.debug(f"Health check output for {hostname}: {result}")
+            cpu_usage = None
+            mem_usage = None
+            for line in result.splitlines():
+                if "%CPU" in line:
+                    continue
+                fields = line.split()
+                if fields and fields[0].isdigit():
+                    try:
+                        cpu_usage = float(fields[4]) if len(fields) > 4 else None
+                        mem_usage = float(fields[5]) if len(fields) > 5 else None
+                    except (ValueError, IndexError):
+                        pass
+            if cpu_usage is not None and mem_usage is not None:
+                logger.info(f"{hostname} CPU: {cpu_usage}%, Memory: {mem_usage}%")
+                print(f"{hostname} CPU: {cpu_usage}%, Memory: {mem_usage}%")
+                if cpu_usage > 80 or mem_usage > 80:
+                    logger.warning(f"High resource usage on {hostname}: CPU {cpu_usage}%, Memory {mem_usage}%")
+                    print(f"Warning: High resource usage on {hostname}. Consider rebooting.")
+                    return False
+                return True
+            else:
+                logger.warning(f"Could not parse resource usage on {hostname}")
+                print(f"Warning: Could not parse resource usage on {hostname}. Proceeding with caution.")
+                return True
+    except Exception as e:
+        logger.error(f"Failed to check health on {hostname}: {e}")
+        print(f"Error checking health on {hostname}: {e}. Proceeding with caution.")
+        return True
+
 def check_image_exists(dev: Device, image_path: str, hostname: str) -> bool:
     """Check if the upgrade image exists on the device."""
     try:
@@ -300,6 +337,35 @@ def progress_callback(dev: Device, report: str) -> None:
     """Callback function to report progress during software installation."""
     logger.info(f"Progress on {dev.hostname}: {report}")
     print(f"Progress on {dev.hostname}: {report}")
+
+def attempt_cli_upgrade(dev: Device, image_path: str, hostname: str, max_retries: int = 3) -> tuple:
+    """Attempt CLI upgrade with retries for connection issues."""
+    for attempt in range(max_retries):
+        try:
+            logger.debug(f"CLI upgrade attempt {attempt + 1}/{max_retries} on {hostname}")
+            result = dev.cli(f"request system software add {image_path} no-validate", warning=False)
+            logger.debug(f"CLI upgrade result on {hostname}: {result}")
+            if "error" in result.lower() or "failed" in result.lower():
+                return False, result
+            return True, result
+        except ConnectClosedError as e:
+            logger.warning(f"ConnectClosedError on attempt {attempt + 1}/{max_retries} for {hostname}: {e}")
+            print(f"Warning: Connection closed on attempt {attempt + 1}/{max_retries} for {hostname}. Retrying...")
+            if attempt < max_retries - 1:
+                time.sleep(30)
+                try:
+                    dev.close()
+                    dev.open(timeout=300)
+                except Exception as reconnect_e:
+                    logger.error(f"Reconnect failed for {hostname}: {reconnect_e}")
+                    print(f"Error: Reconnect failed for {hostname}: {reconnect_e}")
+                    return False, str(reconnect_e)
+            else:
+                return False, str(e)
+        except Exception as e:
+            logger.error(f"CLI upgrade failed on {hostname}: {e}")
+            return False, str(e)
+    return False, "Max retries reached for CLI upgrade"
 
 def code_upgrade():
     """Perform code upgrade on selected devices with probing and user messages."""
@@ -383,13 +449,21 @@ def code_upgrade():
             status = {'hostname': hostname, 'success': False, 'error': None}
             try:
                 # Increase command timeout
-                dev.timeout = 300
+                dev.timeout = 600
 
                 # Probe device before upgrade
                 if not probe_device(dev, hostname, username, password):
                     logger.error(f"Skipping upgrade for {hostname} due to probe failure")
                     print(f"Skipping upgrade for {hostname} due to probe failure")
                     status['error'] = "Probe failure"
+                    upgrade_status.append(status)
+                    continue
+
+                # Check device health
+                if not check_device_health(dev, hostname):
+                    logger.error(f"Skipping upgrade for {hostname} due to high resource usage")
+                    print(f"Skipping upgrade for {hostname} due to high resource usage")
+                    status['error'] = "High resource usage"
                     upgrade_status.append(status)
                     continue
 
@@ -429,7 +503,7 @@ def code_upgrade():
                             logger.warning(f"Could not determine Junos version on {hostname}")
                             print(f"Warning: Could not determine Junos version on {hostname}")
                 except Exception as e:
-                    logger.warning(f"Failed to check Wunos version on {hostname}: {e}. Proceeding with upgrade.")
+                    logger.warning(f"Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
                     print(f"Warning: Failed to check Junos version on {hostname}: {e}. Proceeding with upgrade.")
 
                 # Check if image exists
@@ -452,13 +526,13 @@ def code_upgrade():
                 print(f"Installing upgrade on {hostname} with image {image_path}...")
                 try:
                     sw = SW(dev)
-                    logger.debug(f"SW.install parameters: package={image_path}, validate=False, no_copy=True, timeout=600")
+                    logger.debug(f"SW.install parameters: package={image_path}, validate=False, no_copy=True, timeout=900")
                     ok = sw.install(
                         package=image_path,
                         validate=False,
                         no_copy=True,
                         progress=progress_callback,
-                        timeout=600
+                        timeout=900
                     )
                     logger.debug(f"Software install result on {hostname}: {ok}")
                     if not ok:
@@ -469,9 +543,9 @@ def code_upgrade():
                     logger.error(f"TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method...")
                     print(f"Error: TypeError during software upgrade on {hostname}: {e}. Falling back to CLI method...")
                     try:
-                        result = dev.cli(f"request system software add {image_path} no-validate", warning=False)
-                        logger.debug(f"CLI upgrade result on {hostname}: {result}")
-                        if "error" in result.lower() or "failed" in result.lower():
+                        # Attempt CLI upgrade with retries
+                        success, result = attempt_cli_upgrade(dev, image_path, hostname)
+                        if not success:
                             if "Could not format alternate root" in result:
                                 logger.error(f"Storage failure on {hostname}: {result}")
                                 print(f"Error: Storage failure on {hostname}: {result}")

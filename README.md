@@ -1,5 +1,3 @@
----
-
 ```markdown
 # Step-by-Step Guide to Using the Code Upgrade Script
 

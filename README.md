@@ -1,4 +1,4 @@
-# Step-by-Step Guide to Using the Code Upgrade Script
+## Step-by-Step Guide to Using the Code Upgrade Script
 
 This guide provides detailed instructions for using the `code_upgrade.py` script to upgrade or downgrade the Junos OS on Juniper devices, such as the SRX320 or SRX210H. The script is located in the `/home/nikos/github/ngeran/vector-py` repository and automates the process of selecting a vendor, product, release, and target devices, then performing the software installation, reboot, and version verification.
 
